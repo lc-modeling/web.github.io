@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Welcome to L&C Modeling Academy, where aspiring models come to fulfill their dreams. Our academy offers comprehensive training programs led by industry professionals, covering everything from runway techniques to portfolio development. With a focus on individual growth and empowerment, we strive to prepare our students for success in the competitive world of modeling. Join us today to start your journey towards a successful modeling career!">
+ 
+    <title>L&C MODELING ACADEMY</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gloock&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="icone.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="base.css" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    
+    <style>
+
+.intro-section {
+            position: relative;
+            width: 100%;
+            height: 100vh; /* Adjust the height as needed */
+            overflow: hidden; /* Ensure the image doesn't overflow its container */
+        }
+
+        .intro-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('helii.png'); /* Add the path to your background image */
+            background-size: cover;
+            background-position: center;
+            -webkit-animation: kenburns-top 8000ms ease-in-out infinite alternate both;
+                    animation: kenburns-top 5000ms ease-in-out infinite alternate both;
+        }
+
+        @-webkit-keyframes kenburns-top {
+            0% {
+                -webkit-transform: scale(1) translateY(0);
+                        transform: scale(1) translateY(0);
+                -webkit-transform-origin: 50% 16%;
+                        transform-origin: 50% 16%;
+            }
+            100% {
+                -webkit-transform: scale(1.25) translateY(-15px);
+                        transform: scale(1.25) translateY(-15px);
+                -webkit-transform-origin: top;
+                        transform-origin: top;
+            }
+        }
+        @keyframes kenburns-top {
+            0% {
+                -webkit-transform: scale(1) translateY(0);
+                        transform: scale(1) translateY(0);
+                -webkit-transform-origin: 50% 16%;
+                        transform-origin: 50% 16%;
+            }
+            100% {
+                -webkit-transform: scale(1.25) translateY(-15px);
+                        transform: scale(1.25) translateY(-15px);
+                -webkit-transform-origin: top;
+                        transform-origin: top;
+            }
+        }
+
+        .intro-section .content {
+            position: absolute;
+            top: 50%;
+            right: 10%;
+            transform: translateY(-50%);
+            color: white;
+            text-align: right;
+            font-family: Arial, sans-serif;
+            z-index: 1; /* Ensure the content is above the background */
+        }
+
+        .headings__main {
+            font-size: 3rem;
+        }
+
+        .headings_subtitle {
+            font-size: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .intro-section .content {
+                top: 50%;
+                left: 50%;
+                right: auto;
+                transform: translate(-50%, -50%);
+                text-align: center;
+            }
+          }
+
+
+          .empty-section {
+            width: 100%;
+            height: 5vh; /* Adjust the height as needed */
+            padding: 10px; /* Add padding around the section */
+            box-sizing: border-box; /* Ensure padding is included in the element's total width and height */
+            background-color: #f0f0f0; /* Optional: Background color to visualize the section */
+        } 
+    </style>
+    <script>
+      document.documentElement.className = "js";
+    </script>
+  </head>
+  <body class="demo-1 loading">
+    <div data-debug>
+      <div></div>
+    </div>
+    <main>
+      <header>
+        <div class="container">
+          <h2><span>L&C</span> MODELING</h2>
+          <nav>
+            <a class="oxygen-light" href="#home">Home</a>
+            <a class="oxygen-light" href="#about">About us</a>
+            <a class="oxygen-light" href="#blogs">Blog Post</a>
+            <a class="oxygen-light" href="#contact">Contact Us</a>
+          </nav>
+          <button class="hamburger">
+            <div class="bar"></div>
+          </button>
+        </div>
+      </header>
+      <nav class="mobile-nav">
+        <a class="oxygen-light" href="#home">Home</a>
+            <a class="oxygen-light" href="#about">About us</a>
+            <a class="oxygen-light" href="#blogs">Blog Post</a>
+            <a class="oxygen-light" href="#contact">Contact Us</a>
+      </nav>
+
+      <div class="intro-section">
+        <div class="content" id="home">
+            
+          <div class="headings" style="color: whitesmoke;">
+            <h1 class="headings__main gloock-regular">L&C</h1>
+            <h1 class="headings__main gloock-regular">MODELING</h1>
+            <h5 class="headings_subtitle gloock-regular">ACADEMY</h5><br>
+
+            <h4 class="oxygen-bold" style="size: 50px;">BEST MODELING SCHOOL IN KENYA</h4>
+          </div>
+        </div>
+    </div>
+
+
+    <div class="empty-section"></div>
+
+
+    
+
+
+        
+            <section id="about" class="home-section">
+              <div class="home-overlay">
+                <div class="home-content">
+                  <h1 class="headings__main gloock-regular">L&C </h1><h1 class="headings_subtitle gloock-regular"> Modeling Academy</h1><br>
+                  <p class="headings__main gloock-regular">At L&C Modeling Academy, we nurture aspiring models and provide them with the skills <br>
+                     and confidence needed to thrive in the industry. Our courses are designed <br>
+                     to equip you with the fundamentals of modeling and help you develop your unique style.</p>
+
+                     <br>
+                     <p  class="headings__main gloock-regular">At L&C modeling school Kenya; We advocate for equality, diversity, and togetherness.</p>
+                </div>
+              </div>
+            </section>
+
+           <!--...  <br>
+
+            <section id="home" class="home">
+              <div class="content">
+                <div class="scene">
+                  <div class="group">
+                    <div class="card">
+                      <br>
+                      <div class="card__img" style="background-image: url(26.jpg)"></div>
+                    </div>
+                    <div class="card">
+                      <div class="card__img" style="background-image: url(2.jpg)"></div>
+                    </div>
+                    <div class="card">
+                      <div class="card__img" style="background-image: url(3.jpg)"></div>
+                    </div>
+                    <div class="card">
+                      <div class="card__img" style="background-image: url(4.jpg)"></div>
+                    </div>
+                    <div class="card">
+                      <div class="card__img" style="background-image: url(5.jpg)"></div>
+                    </div>
+                    <div class="card">
+                      <div class="card__img" style="background-image: url(6.jpg)"></div>
+                    </div>
+                    <div class="card">
+                      <div class="card__img" style="background-image: url(7.jpg)"></div>
+                    </div>
+                    <div class="card">
+                      <div class="card__img" style="background-image: url(8.jpg)"></div>
+                    </div>
+      
+                    <div class="card">
+                      <div class="card__img" style="background-image: url(9.jpg)"></div>
+                    </div>
+                  </div>
+                </div>
+      
+                <div class="headings">
+                  <h1 class="headings__main gloock-regular">L&C</h1>
+                  <h1 class="headings__main gloock-regular">MODELING</h1>
+                  <h5 class="headings_subtitle gloock-regular">ACADEMY</h5>
+                </div>
+              </div>
+            </section>
+
+
+
+  -->
+
+            <section class="about-us">
+              <h2 class="section__title" style="color: rgb(162, 233, 129);">About Us</h2><br />
+              <div class="container">
+                 
+                  <p class="oxygen-bold">L&C Modeling School is a modeling training and development academy founded in 2022 by Linkosiclothing. L&C is the most affordable, rewarding, and best modeling school located in Nairobi, Kenya. We empower and train both genders from the age of 12 years and above.</p>
+                   <p class="oxygen-bold">Are you an aspiring model looking for an affordable and best modeling school in Nairobi, Kenya? Then here is the right place to start your journey in modeling. Our platform is accessible to all those with modeling dreams. Register today with us and become your dream.</p>
+                 
+                   <section  id="blogs" class="blog-preview-section">
+            
+            
+                    <h1 class="section__title" style="color: rgb(182, 149, 91);">Our Style</h1><br />
+                        <button class="arrow left" onclick="scrollLeft()">&#10094;</button>
+                        <div class="blog-preview-container" id="blogPreviewContainer">
+                            <div class="blog-preview-card">
+                             <div class="image">
+                          <img src="b.jpg" alt="Modeling Image 2">
+                      </div>
+                            </div>
+                            <div class="blog-preview-card">
+                                <div class="image">
+                          <img src="a.jpg" alt="Modeling Image 1">
+                      </div>
+                            </div>
+                            <div class="blog-preview-card">
+                              <div class="image">
+                                <img src="c.webp" alt="Modeling Image 2">
+                            </div>
+                            </div>
+                            <div class="blog-preview-card">
+                              <div class="image">
+                                <img src="14.jpg" alt="Modeling Image 2">
+                            </div>
+                            </div>
+                            <div class="blog-preview-card">
+                              <div class="image">
+                                <img src="e.jpg" alt="Modeling Image 2">
+                            </div>
+                            </div>
+                            <div class="blog-preview-card">
+                              <div class="image">
+                                <img src="f.jpg" alt="Modeling Image 2">
+                            </div>
+                            </div>
+                            <div class="blog-preview-card">
+                              <div class="image">
+                                <img src="g.jpg" alt="Modeling Image 2">
+                            </div>
+                            </div>
+                            <div class="blog-preview-card">
+                              <div class="image">
+                                <img src="29.jpg" alt="Modeling Image 2">
+                            </div>
+                            </div>
+
+                            <div class="blog-preview-card">
+                              <div class="image">
+                                <img src="23.jpg" alt="Modeling Image 2">
+                            </div>
+                            </div>
+
+                        </div>
+                        <button class="arrow right" onclick="scrollRight()">&#10095;</button>
+                        <div class="pagination-dots" id="paginationDots"></div>
+                    </section>
+            
+                   <p class="oxygen-bold">We don't have restrictions towards your body type. We are committed and devoted to helping you grow your talent in modeling to a top professional level. Enroll with L&C modeling school today!</p>
+      
+                    
+              </div>
+          </section>
+        
+          <h1 class="section__title" style="color: rgb(179, 115, 132);">Featured Blog Posts</h1><br />
+
+
+          <br>
+          <section  id="blogs" class="blog-preview-section">
+            
+            <div class="slider-container">
+              <div class="slider">
+                  <div class="slider-item">
+                      <img src="13.jpg" alt="Image 1">
+                      <div class="slider-content">
+                          <h3>WE are scouting</h3>
+                          <p>Become the next top model in kenya</p>
+                          <a href="https://www.instagram.com/lc_modeling_school?igsh=MXhzZmtrd3h2NmE2eA==">View Article</a>
+                      </div>
+                  </div>
+                  <div class="slider-item">
+                      <img src="11.jpg" alt="Image 2">
+                      <div class="slider-content">
+                          <h3>modelling career</h3>
+                          <p>dive into the world of lc modelling </p>
+                          <a href="https://www.instagram.com/lc_modeling_school?igsh=MXhzZmtrd3h2NmE2eA==">View Article</a>
+                      </div>
+                  </div>
+                  <div class="slider-item">
+                      <img src="14.jpg" alt="Image 3">
+                      <div class="slider-content">
+                          <h3>l&c</h3>
+                          <p>which type of modelling do you want </p>
+                          <a href="https://www.instagram.com/lc_modeling_school?igsh=MXhzZmtrd3h2NmE2eA==">View Article</a>
+                      </div>
+                  </div>
+    
+    
+                  <div class="slider-item">
+                    <img src="15.jpg" alt="Image 3">
+                    <div class="slider-content">
+                        <h3>fashion & lifestyle</h3>
+                        <p>become a world class model </p>
+                        <a href="https://www.instagram.com/lc_modeling_school?igsh=MXhzZmtrd3h2NmE2eA==">View Article</a>
+                    </div>
+                </div>
+    
+    
+                <div class="slider-item">
+                  <img src="31.jpg" alt="Image 3">
+                  <div class="slider-content">
+                      <h3>the future of modelling</h3>
+                      <p>become a pro model</p>
+                      <a href="https://www.instagram.com/lc_modeling_school?igsh=MXhzZmtrd3h2NmE2eA==">View Article</a>
+                  </div>
+              </div>
+
+
+              <div class="slider-item">
+                <img src="16.jpg" alt="Image 3">
+                <div class="slider-content">
+                    <h3>model career</h3>
+                    <p>want to start a career in modeling</p>
+                    <a href="https://www.instagram.com/lc_modeling_school?igsh=MXhzZmtrd3h2NmE2eA==">View Article</a>
+                </div>
+            </div>
+
+            <div class="slider-item">
+              <img src="22.jpg" alt="Image 3">
+              <div class="slider-content">
+                  <h3>miss south sudan</h3>
+                  <p>become a pro model</p>
+                  <a href="https://www.instagram.com/lc_modeling_school?igsh=MXhzZmtrd3h2NmE2eA==">View Article</a>
+              </div>
+          </div>
+
+          <div class="slider-item">
+            <img src="32.jpg" alt="Image 3">
+            <div class="slider-content">
+                <h3>grow big now</h3>
+                <p>models preview intro</p>
+                <a href="https://www.instagram.com/lc_modeling_school?igsh=MXhzZmtrd3h2NmE2eA==">View Article</a>
+            </div>
+        </div>
+    
+              </div>
+              <div class="slider-arrow slider-arrow-left" onclick="moveLeft()">&lt;</div>
+              <div class="slider-arrow slider-arrow-right" onclick="moveRight()">&gt;</div>
+          </div>
+      
+        </section>
+
+
+
+        <section class="video-section">
+
+          <h1 class="section__title" style="color: rgb(145, 124, 87);">Story</h1><br />
+
+          <div class="video-container">
+              <iframe class="responsive-iframe" width="560" height="315" src="https://www.youtube.com/embed/gUrXL12ls8s?si=1FkUlvVmokSlAmHA&autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+      </section>
+      
+       
+
+
+
+
+
+
+        
+
+        <section id="contact" class="contact-section">
+          <div class="section-content">
+              <h2 class="section__title">Join Us<br /> Today</h2>
+              <div class="contact-info">
+                  <h2>Contact Us</h2>
+                  <p>Feel free to reach out to us for any inquiries.</p>
+                  <div class="social-icons">
+                      <a href="https://www.facebook.com/profile.php?id=100088956974742&mibextid=ZbWKwL" class="icon-link">
+                          <img src="facebook.png" alt="Facebook">
+                          <span class="icon-name">Facebook</span>
+                      </a>
+                      <a href="https://www.youtube.com/@Lc_Modeling_Academy" class="icon-link">
+                          <img src="youtube.png" alt="YouTube">
+                          <span class="icon-name">YouTube</span>
+                      </a>
+                      <a href="http://tiktok.com/@lc.modeling.school" class="icon-link">
+                          <img src="social-media.png" alt="TikTok">
+                          <span class="icon-name">TikTok</span>
+                      </a>
+                      <a href="https://x.com/lcmodeling8" class="icon-link">
+                          <img src="logos.png" alt="Twitter">
+                          <span class="icon-name">X</span>
+                      </a>
+                      <a href="https://www.instagram.com/lc_modeling_school?igsh=MXhzZmtrd3h2NmE2eA==" class="icon-link">
+                          <img src="instagram.png" alt="Instagram">
+                          <span class="icon-name">Instagram</span>
+                      </a>
+                      <a href="https://ke.linkedin.com/company/l-c-modeling-company-academy" class="icon-link">
+                          <img src="linkedin (1).png" alt="LinkedIn">
+                          <span class="icon-name">LinkedIn</span>
+                      </a>
+                      <a href="tel:+254702066492" class="icon-link">
+                        <img src="call.png" alt="Phone">
+                        <span class="icon-name">call me</span>
+                      </a>
+                  </div>
+                  <div class="contact-buttons" >
+                      <a href="mailto:Linkosiclothing@gmail.com" style="white-space: 20px;" class="btn-email" style="background-color: rgb(182, 51, 72);" >Email</a> <br>
+                      
+                      <a href="https://wa.me/+254702066492" class="btn-whatsapp" style="background-color: rgb(23, 206, 23);">WhatsApp</a>
+                  </div>
+              </div>
+          </div>
+        
+      </section>
+  
+      <footer class="footer">
+     <div class="logo-img">
+        <img  style="max-width: 50%;" src="lclogo1.jpg" alt="Logo">
+      
+      </div>
+        <h2><span>L&C</span> MODELING</h2>
+
+          <p>Follow us on social media</p>
+          <div class="social-icons">
+              <a href="https://www.facebook.com/profile.php?id=100088956974742&mibextid=ZbWKwL" class="icon-link">
+                  <img src="facebook.png" alt="Facebook">
+              </a>
+              <a href="https://www.youtube.com/@Lc_Modeling_Academy" class="icon-link">
+                  <img src="youtube.png" alt="YouTube">
+              </a>
+              <a href="http://tiktok.com/@lc.modeling.school" class="icon-link">
+                  <img src="social-media.png" alt="TikTok">
+              </a>
+              <a href="https://x.com/lcmodeling8" class="icon-link">
+                  <img src="logos.png" alt="Twitter">
+              </a>
+              <a href="https://www.instagram.com/lc_modeling_school?igsh=MXhzZmtrd3h2NmE2eA==" class="icon-link">
+                  <img src="instagram.png" alt="Instagram">
+              </a>
+              <a href="https://ke.linkedin.com/company/l-c-modeling-company-academy" class="icon-link">
+                  <img src="linkedin (1).png" alt="LinkedIn">
+              </a>
+          </div>
+
+          <br>
+          <p class="design-credit">
+
+          </p>
+      </footer>
+
+
+
+        
+        
+    </main>
+
+    <script src="js/gsap.min.js"></script>
+    <script src="js/imagesloaded.pkgd.min.js"></script>
+    <script type="module" src="js/index.js"></script>
+    <script>
+      window.onload = function () {
+	window.addEventListener('scroll', function (e) {
+		if (window.pageYOffset > 100) {
+			document.querySelector("header").classList.add('is-scrolling');
+		} else {
+			document.querySelector("header").classList.remove('is-scrolling');
+		}
+	});
+
+	const menu_btn = document.querySelector('.hamburger');
+	const mobile_menu = document.querySelector('.mobile-nav');
+
+	menu_btn.addEventListener('click', function () {
+		menu_btn.classList.toggle('is-active');
+		mobile_menu.classList.toggle('is-active');
+	});
+}
+
+
+
+
+///==================================================================================
+
+
+
+const header = document.querySelector('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('is-scrolling');
+            } else {
+                header.classList.remove('is-scrolling');
+            }
+        });
+
+        document.querySelector('.hamburger').addEventListener('click', function () {
+            this.classList.toggle('is-active');
+        });
+
+
+///=========================================================================================
+
+
+
+const container = document.getElementById('blogPreviewContainer');
+        const paginationDotsContainer = document.getElementById('paginationDots');
+        let scrollAmount = 0;
+        let startX;
+        let scrollLeftPos;
+
+        function createPaginationDots() {
+            const numberOfDots = Math.ceil(container.children.length / 3);
+            for (let i = 0; i < numberOfDots; i++) {
+                const dot = document.createElement('div');
+                dot.classList.add('pagination-dot');
+                dot.addEventListener('click', () => goToPage(i));
+                paginationDotsContainer.appendChild(dot);
+            }
+            updatePaginationDots();
+        }
+
+        function updatePaginationDots() {
+            const dots = paginationDotsContainer.children;
+            const activeIndex = Math.round(scrollAmount / container.clientWidth);
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].classList.toggle('active', i === activeIndex);
+            }
+        }
+
+        function goToPage(pageIndex) {
+            const width = container.clientWidth;
+            scrollAmount = width * pageIndex;
+            container.style.transform = `translateX(-${scrollAmount}px)`;
+            updatePaginationDots();
+        }
+
+        function scrollLeft() {
+            const width = container.clientWidth;
+            scrollAmount = Math.max(scrollAmount - width, 0);
+            container.style.transform = `translateX(-${scrollAmount}px)`;
+            updatePaginationDots();
+        }
+
+        function scrollRight() {
+            const width = container.clientWidth;
+            const maxScroll = container.scrollWidth - width;
+            scrollAmount = Math.min(scrollAmount + width, maxScroll);
+            container.style.transform = `translateX(-${scrollAmount}px)`;
+            updatePaginationDots();
+        }
+
+        container.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].pageX;
+            scrollLeftPos = scrollAmount;
+        });
+
+        container.addEventListener('touchmove', (e) => {
+            const x = e.touches[0].pageX;
+            const walk = startX - x;
+            const width = container.clientWidth;
+            const maxScroll = container.scrollWidth - width;
+            scrollAmount = Math.max(0, Math.min(maxScroll, scrollLeftPos + walk));
+            container.style.transform = `translateX(-${scrollAmount}px)`;
+            updatePaginationDots();
+        });
+
+        createPaginationDots();
+
+
+////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+let currentIndex = 0;
+
+function moveLeft() {
+    const slider = document.querySelector('.slider');
+    const items = document.querySelectorAll('.slider-item');
+    if (currentIndex > 0) {
+        currentIndex--;
+    } else {
+        currentIndex = items.length - 1;
+    }
+    updateSlider();
+}
+
+function moveRight() {
+    const slider = document.querySelector('.slider');
+    const items = document.querySelectorAll('.slider-item');
+    if (currentIndex < items.length - 1) {
+        currentIndex++;
+    } else {
+        currentIndex = 0;
+    }
+    updateSlider();
+}
+
+function updateSlider() {
+    const slider = document.querySelector('.slider');
+    const items = document.querySelectorAll('.slider-item');
+    const totalWidth = items[0].clientWidth * currentIndex;
+    slider.style.transform = `translateX(-${totalWidth}px)`;
+}
+
+window.addEventListener('resize', updateSlider);
+
+
+
+
+
+
+
+    </script>
+  </body>
+</html>
