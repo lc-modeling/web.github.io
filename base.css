@@ -388,20 +388,25 @@ a:focus-visible {
 
 .headings {
   text-align: center;
-  position: relative;
+  position: relative; /* Ensure it's relative to its parent */
   z-index: 10;
   color: var(--color-title);
   text-transform: uppercase;
+  top: 45%; /* Move down slightly */
+  transform: translateY(-50%); /* Center it vertically */
 }
 
 .headings__main {
   line-height: 0.5;
-  font-size: clamp(2.5rem, 1.59rem + 3.883vw, 6.25rem);
+  
+  font-family: "Oxygen", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .headings_subtitle {
   line-height: 0.5;
-  font-size: clamp(1rem, 0.757rem + 1.036vw, 2rem);
+  font-size: clamp(0.8rem, 0.6rem + 0.8vw, 1.5rem); /* Reduced font size */
 }
 
 @media screen and (min-width: 53em) {
@@ -1046,113 +1051,147 @@ header.is-scrolling .container {
 
 
 /*=============================================================*/
-
 .contact-section {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  background: linear-gradient(to right, #ffafbd, #ffc3a0);
-  padding: 50px;
-  border-radius: 10px;
-  margin: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.section-content {
-  flex: 1;
-  padding: 20px;
+  background-color: transparent;
+  color: var(--color-title);
+  padding: 2rem;
+  text-align: center;
 }
 
 .section__title {
-  font-size: 36px;
-  margin-bottom: 20px;
-  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--color-title);
+}
+
+.contact-info {
+  background: transparent; /* Semi-transparent background */
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 600px; /* Max width for the form */
+  margin: 0 auto; /* Center the form */
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.form-group label {
+  margin-bottom: 0.5rem;
   color: #fff;
 }
 
-.contact-info h2 {
-  font-size: 28px;
-  margin-bottom: 10px;
+.form-group input,.text,
+.form-group select {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  background: transparent;
   color: #fff;
 }
 
-.contact-info p {
-  font-size: 18px;
-  margin-bottom: 20px;
+.form-group select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: rgba(0, 0, 0, 0.8);
   color: #fff;
+}
+
+.form-group select option {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+}
+
+.btn-submit {
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--color-title);
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-submit:hover {
+  background-color: #fff;
+  color: var(--color-title);
 }
 
 .social-icons {
-  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap; /* Allows wrapping for smaller screens */
 }
 
-.icon-link {
-  display: inline-block;
-  margin: 10px 15px;
-  text-decoration: none;
-  color: #fff;
-  text-align: center;
-}
-
-.icon-link img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s;
-}
-
-.icon-link:hover img {
-  transform: scale(1.1);
-}
-
-.icon-name {
-  display: block;
-  font-size: 16px;
-  margin-top: 5px;
+.social-icons .icon-link img {
+  width: 24px;
+  height: 24px;
 }
 
 .contact-buttons {
-  margin-top: 20px;
+  margin-top: 1rem;
 }
 
 .btn-email,
 .btn-whatsapp {
   display: inline-block;
-  padding: 12px 25px;
-  margin-right: 10px;
-  border: none;
+  margin: 0.5rem 0;
+  padding: 0.75rem 2rem;
   border-radius: 5px;
   color: #fff;
-  background-color: #007bff;
   text-decoration: none;
   transition: background-color 0.3s;
 }
 
+.btn-email {
+  background-color: rgb(182, 51, 72);
+}
+
+
+
 .btn-email:hover,
 .btn-whatsapp:hover {
-  background-color: #0056b3;
+  background-color: #fff;
+  color: var(--color-title);
 }
 
-.contact-image {
-  flex: 1;
-  text-align: center;
-  position: relative;
+@media (max-width: 768px) {
+  .contact-info {
+    padding: 1rem;
+  }
+
+  .btn-submit, .btn-email, .btn-whatsapp {
+    padding: 0.5rem 1rem;
+  }
+
+  .form-group input,
+  .form-group select {
+    padding: 0.5rem;
+  }
+
+  .text{
+    width: 100%;
+  }
 }
 
-.contact-image img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s;
-}
 
-.contact-image img:hover {
-  transform: scale(1.05);
-}
 
+
+
+/*=============================================================*/
 .footer {
   background: #333;
   color: #fff;
@@ -1462,19 +1501,124 @@ header.is-scrolling .container {
 
 
 
+.programs-section {
+  background-color:transparent;
+  color: #ffffff;
+  padding: 2rem;
+  text-align: center;
+}
+
+.section__title {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+
+}
+
+.program-card {
+  background: #3405df;
+  padding: 1.5rem;
+  border-radius: 10px;
+  margin: 1rem 0;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(17, 16, 17, 0.1);
+  transition: transform 0.3s;
+}
+
+.program-card:hover {
+  transform: scale(1.02);
+}
+
+.program-card h3 {
+  margin: 0;
+  font-size: 1.75rem;
+  color: #fcf7f7;
+}
+
+.program-summary {
+  font-size: 1rem;
+  color: #fbfd5f;
+  margin: 0.5rem 0 1rem;
+}
+
+.program-details {
+  display: none;
+  text-align: left;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #bbddff;
+}
+
+.program-details.active {
+  display: block;
+}
+
+.program-details p {
+  margin: 0.5rem 0;
+}
+
+.program-details ul {
+  padding-left: 1.5rem;
+}
+
+.program-details ul li {
+  list-style-type: disc;
+  margin: 0.5rem 0;
+}
+
+@media (min-width: 768px) {
+  .programs-section {
+      padding: 4rem;
+  }
+
+  .program-card {
+      margin: 1.5rem 0;
+  }
+
+  .program-details p {
+      margin: 1rem 0;
+  }
+
+  .program-details ul li {
+      margin: 1rem 0;
+  }
+}
+
+    
 
 
 
 
+.download-buttons {
+  margin-top: 20px; /* Adjust spacing as needed */
+  text-align: center; /* Center align the buttons */
+}
 
+.download-buttons .btn-download {
+  display: inline-block;
+  background-color: rgb(23, 63, 5);
+  color: rgb(255, 255, 255);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-right: 10px; /* Add some spacing between buttons */
+  text-decoration: none; /* Remove underline from links */
+}
 
+.download-buttons .btn-download:hover {
+  background-color: #153a37; /* Darker background on hover */
+}
 
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .download-buttons {
+      display: block; /* Stack buttons vertically on small screens */
+      text-align: center;
+  }
 
-
-
-
-
-
-
-
-
+  .download-buttons .btn-download {
+      width: 100%; /* Full width buttons on small screens */
+      margin-bottom: 10px; /* Add spacing between buttons */
+  }
+}

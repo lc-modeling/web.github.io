@@ -35,11 +35,11 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('helii.png'); /* Add the path to your background image */
+            background-image: url('mordern.png'); 
             background-size: cover;
             background-position: center;
-            -webkit-animation: kenburns-top 8000ms ease-in-out infinite alternate both;
-                    animation: kenburns-top 5000ms ease-in-out infinite alternate both;
+           /* Add the path to your background image -webkit-animation: kenburns-top 8000ms ease-in-out infinite alternate both;
+                    animation: kenburns-top 5000ms ease-in-out infinite alternate both;*/ 
         }
 
         @-webkit-keyframes kenburns-top {
@@ -125,7 +125,10 @@
             <a class="oxygen-light" href="#home">Home</a>
             <a class="oxygen-light" href="#about">About us</a>
             <a class="oxygen-light" href="#blogs">Blog Post</a>
-            <a class="oxygen-light" href="#contact">Contact Us</a>
+            <a class="oxygen-light" href="register.html#about">Programmes</a>
+            <a class="oxygen-light" href="#contact">Contact</a>
+            <a class="oxygen-light" href="register.html">Enroll</a>
+            
           </nav>
           <button class="hamburger">
             <div class="bar"></div>
@@ -137,6 +140,8 @@
             <a class="oxygen-light" href="#about">About us</a>
             <a class="oxygen-light" href="#blogs">Blog Post</a>
             <a class="oxygen-light" href="#contact">Contact Us</a>
+            <a class="oxygen-light" href="register.html#about">Programmes</a> 
+            <a class="oxygen-light" href="#home">Enroll</a>
       </nav>
 
       <div class="intro-section">
@@ -145,7 +150,7 @@
           <div class="headings" style="color: whitesmoke;">
             <h1 class="headings__main gloock-regular">L&C</h1>
             <h1 class="headings__main gloock-regular">MODELING</h1>
-            <h5 class="headings_subtitle gloock-regular">ACADEMY</h5><br>
+            <h5 class="headings_subtitle gloock-regular">ACADEMY</h5>
 
             <h4 class="oxygen-bold" style="size: 50px;">BEST MODELING SCHOOL IN KENYA</h4>
           </div>
@@ -153,7 +158,7 @@
     </div>
 
 
-    <div class="empty-section"></div>
+    <!--<div class="empty-section"></div>-->
 
 
     
@@ -164,12 +169,12 @@
               <div class="home-overlay">
                 <div class="home-content">
                   <h1 class="headings__main gloock-regular">L&C </h1><h1 class="headings_subtitle gloock-regular"> Modeling Academy</h1><br>
-                  <p class="headings__main gloock-regular">At L&C Modeling Academy, we nurture aspiring models and provide them with the skills <br>
+                  <p class="oxygen-light">At L&C Modeling Academy, we nurture aspiring models and provide them with the skills <br>
                      and confidence needed to thrive in the industry. Our courses are designed <br>
                      to equip you with the fundamentals of modeling and help you develop your unique style.</p>
 
                      <br>
-                     <p  class="headings__main gloock-regular">At L&C modeling school Kenya; We advocate for equality, diversity, and togetherness.</p>
+                     <p  class="oxygen-light">At L&C modeling school Kenya We advocate for equality, diversity, and togetherness.</p>
                 </div>
               </div>
             </section>
@@ -228,13 +233,13 @@
               <h2 class="section__title" style="color: rgb(162, 233, 129);">About Us</h2><br />
               <div class="container">
                  
-                  <p class="oxygen-bold">L&C Modeling School is a modeling training and development academy founded in 2022 by Linkosiclothing. L&C is the most affordable, rewarding, and best modeling school located in Nairobi, Kenya. We empower and train both genders from the age of 12 years and above.</p>
-                   <p class="oxygen-bold">Are you an aspiring model looking for an affordable and best modeling school in Nairobi, Kenya? Then here is the right place to start your journey in modeling. Our platform is accessible to all those with modeling dreams. Register today with us and become your dream.</p>
+                  <p class="oxygen-light">L&C Modeling School is a modeling training and development academy founded in 2022 by Linkosiclothing. L&C is the most affordable, rewarding, and best modeling school located in Nairobi, Kenya. We empower and train both genders from the age of 12 years and above.</p>
+                   <p class="oxygen-ligh">Are you an aspiring model looking for an affordable and best modeling school in Nairobi, Kenya? Then here is the right place to start your journey in modeling. Our platform is accessible to all those with modeling dreams. Register today with us and become your dream.</p>
                  
                    <section  id="blogs" class="blog-preview-section">
             
             
-                    <h1 class="section__title" style="color: rgb(182, 149, 91);">Our Style</h1><br />
+                    <h1 class="section__title" style="color: rgb(141, 123, 91);">Our Style</h1><br />
                         <button class="arrow left" onclick="scrollLeft()">&#10094;</button>
                         <div class="blog-preview-container" id="blogPreviewContainer">
                             <div class="blog-preview-card">
@@ -286,21 +291,103 @@
 
                         </div>
                         <button class="arrow right" onclick="scrollRight()">&#10095;</button>
+                        
                         <div class="pagination-dots" id="paginationDots"></div>
                     </section>
             
-                   <p class="oxygen-bold">We don't have restrictions towards your body type. We are committed and devoted to helping you grow your talent in modeling to a top professional level. Enroll with L&C modeling school today!</p>
+                   <p class="oxygen-light">We don't have restrictions towards your body type. We are committed and devoted to helping you grow your talent in modeling to a top professional level. Enroll with L&C modeling school today!</p>
       
                     
               </div>
           </section>
         
-          <h1 class="section__title" style="color: rgb(179, 115, 132);">Featured Blog Posts</h1><br />
 
+
+          <section id="programs" class="programs-section">
+            <div class="section-content">
+                <h2 class="section__title" style="color: azure;" >Programs</h2>
+                <div class="program-card" onclick="toggleCard('pageantry')">
+                    <h3>Pageantry</h3>
+                    <p class="program-summary">Shape, groom, and prepare girls and women into confident models and beauty queens.</p>
+                    <div class="program-details" id="pageantry">
+                        <p>Our beauty Pageantry shapes, grooms, and prepares girls and women into gorgeous, confident, and promising models, beauty queens, and divers.</p>
+                        <p>We build our students' confidence, leadership skills, and mold them to become good role models to society, by helping them come up with impactful projects that contribute to the growth of society.</p>
+                        <p>For children pageantry, we empower them to be confident in front of a large crowd by giving them a pageantry experience through the Miss L&C competition that happens annually. The class is open to every girl and woman aged 12 and above.</p>
+                        <ul>
+                            <li><strong>Art of Communication:</strong> Essential interview skills, speech enhancement, mic utility, etc.</li>
+                            <li><strong>Ramp Walk:</strong> Posture, pose, stage presence, etc.</li>
+                            <li><strong>Fitness & Diet:</strong> Diet/Nutrition, exercise routine.</li>
+                            <li><strong>Camera Facing Technique & Portfolio Assistance:</strong> Modeling techniques, practice photoshoot session.</li>
+                            <li><strong>Makeup Lessons:</strong> How to do makeup for various assignments.</li>
+                            <li><strong>Table Etiquette:</strong> Eating style, table setting, napkin etiquette.</li>
+                            <li><strong>Social Graces:</strong> Social etiquette, personal hygiene.</li>
+                            <li><strong>Power Dressing Lessons:</strong> Styling tips for your body type, accessorizing.</li>
+                            <li><strong>Pageantry Q&A Preparation:</strong> Question handling, personalizing answers.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="program-card" onclick="toggleCard('runway-modeling')">
+                    <h3>Runway Modeling</h3>
+                    <p class="program-summary">Learn to walk confidently on the runway and perfect your modeling skills.</p>
+                    <div class="program-details" id="runway-modeling">
+                        <p>A first show starts with a great walk. Our runway classes offer a positive mindset and wellness as the foundation of the models. Students have a fundamental skill to learn with passion and persistence, allowing them to reach their full potential.</p>
+                        <ul>
+                            <li>How to walk confidently on the runway</li>
+                            <li>How to perfect your posture</li>
+                            <li>How to make great portfolio pictures</li>
+                            <li>How to pose on the runway</li>
+                            <li>How to control your facial expressions</li>
+                            <li>How to make a great facial impression at castings</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="program-card" onclick="toggleCard('commercial-modeling')">
+                    <h3>Commercial Modeling</h3>
+                    <p class="program-summary">Break into the modeling world regardless of your body type.</p>
+                    <div class="program-details" id="commercial-modeling">
+                        <p>Commercial modeling embraces all looks, ages, and body shapes for advertising, campaign, and product marketing. It is a rewarding field within the fashion industry that offers individuals an opportunity to be the face of a product and connect with consumers on a visual emotional level.</p>
+                        <ul>
+                            <li>How to build your portfolio</li>
+                            <li>How to create a presence on social media</li>
+                            <li>Fitness and diet</li>
+                            <li>Camera facing technique</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="program-card" onclick="toggleCard('etiquette-classes')">
+                    <h3>Etiquette Classes</h3>
+                    <p class="program-summary">Learn essential etiquette skills for any social context.</p>
+                    <div class="program-details" id="etiquette-classes">
+                        <p>Etiquette is a life skill and not a complicated rule. Our etiquette classes teach you to apply etiquette to any social context, equipping you with the skills to communicate appropriately in any medium. Our straightforward and practical programs will make your future interactions with others more effective and enjoyable.</p>
+                        <ul>
+                            <li>Dining etiquette</li>
+                            <li>Image consultancy, including style and beauty</li>
+                            <li>Elegant social skills</li>
+                            <li>Graceful movement: sitting, standing, and walking</li>
+                            <li>How to gain confidence in any social situation</li>
+                            <li>Conversation etiquette at any social events</li>
+                            <li>Mastering effective eye contact</li>
+                            <li>Social media, email, and phone manners</li>
+                            <li>How to deal with bad manners</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <script>
+            function toggleCard(id) {
+                var element = document.getElementById(id);
+                element.classList.toggle('active');
+            }
+        </script>
+        
+          
+          
 
           <br>
           <section  id="blogs" class="blog-preview-section">
-            
+            <h1 class="section__title" style="color: rgb(238, 226, 205);">Featured Blog posts</h1><br />
             <div class="slider-container">
               <div class="slider">
                   <div class="slider-item">
@@ -377,8 +464,8 @@
         </div>
     
               </div>
-              <div class="slider-arrow slider-arrow-left" onclick="moveLeft()">&lt;</div>
-              <div class="slider-arrow slider-arrow-right" onclick="moveRight()">&gt;</div>
+              <div class="slider-arrow slider-arrow-left" onclick="moveLeft()">&#10094;</div>
+              <div class="slider-arrow slider-arrow-right" onclick="moveRight()">&#10095;</div>
           </div>
       
         </section>
@@ -394,90 +481,135 @@
           </div>
       </section>
       
-       
+      <section id="contact" class="contact-section">
+        <div class="section-content">
+            <h2 class="section__title" style="color: aquamarine;">Get in Touch</h2>
+            <div class="contact-info">
+                <h2 style="color: azure;">Contact Us </h2>
+                <p style="color: aliceblue;">We would love to hear from you. Please fill out the form below for any inquiries.</p>
+                <form id="contact-form" class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Full Name:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telephone">Telephone No:</label>
+                        <input type="tel" id="telephone" name="telephone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message:</label>
+                        <textarea class="text" name="user_project" id="message" placeholder="Write your message"></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">Submit</button>
+                </form>
+                <br>
+                
+                <div class="contact-buttons">
+                    <h2 class="section__title" style="color: aquamarine;">Register and enroll for classes</h2>
+                    <br>
+                    <a href="register.html" style="background-color: rgb(0, 0, 255); outline: none;" class="btn-submit">Register</a>
+                </div>
 
-
+                <br><!-- Download Buttons -->
+                <div class="download-buttons">
+                    <a href="courses.docx" download class="btn-download">Download Course Outline</a>
+                    <a href="programs .docx" download class="btn-download">Download Registration Form</a>
+                </div>
+                
+                
+                <p class="section__title" style="color: rgb(190, 181, 149);">Check out our socials</p>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/profile.php?id=100088956974742&mibextid=ZbWKwL" class="icon-link">
+                        <img src="facebook.png" alt="Facebook">
+                    </a>
+                    <a href="https://www.youtube.com/@Lc_Modeling_Academy" class="icon-link">
+                        <img src="youtube.png" alt="YouTube">
+                    </a>
+                    <a href="http://tiktok.com/@lc.modeling.school" class="icon-link">
+                        <img src="social-media.png" alt="TikTok">
+                    </a>
+                    <a href="https://x.com/lcmodeling8" class="icon-link">
+                        <img src="logos.png" alt="Twitter">
+                    </a>
+                    <a href="https://www.instagram.com/lc_modeling_school?igsh=MXhzZmtrd3h2NmE2eA==" class="icon-link">
+                        <img src="instagram.png" alt="Instagram">
+                    </a>
+                    <a href="https://pin.it/bCh9xEAnd" class="icon-link">
+                        <img src="Pinterest.svg" alt="Pinterest">
+                    </a>
+                    <a href="https://ke.linkedin.com/company/l-c-modeling-company-academy" class="icon-link">
+                        <img src="linkedin (1).png" alt="LinkedIn">
+                    </a>
+                    <a href="tel:+254702066492" class="icon-link">
+                        <img src="Round Blue Phone.png" alt="Phone">
+                    </a>
+                    <a href="mailto:Linkosiclothing@gmail.com" class="icon-link">
+                        <img src="GMail New Icon.svg" alt="Email">
+                    </a>
+                    <a href="https://wa.me/+254702066492" class="icon-link">
+                        <img src="logo.png" alt="WhatsApp">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+      
 
 
 
 
         
 
-        <section id="contact" class="contact-section">
-          <div class="section-content">
-              <h2 class="section__title">Join Us<br /> Today</h2>
-              <div class="contact-info">
-                  <h2>Contact Us</h2>
-                  <p>Feel free to reach out to us for any inquiries.</p>
-                  <div class="social-icons">
-                      <a href="https://www.facebook.com/profile.php?id=100088956974742&mibextid=ZbWKwL" class="icon-link">
-                          <img src="facebook.png" alt="Facebook">
-                          <span class="icon-name">Facebook</span>
-                      </a>
-                      <a href="https://www.youtube.com/@Lc_Modeling_Academy" class="icon-link">
-                          <img src="youtube.png" alt="YouTube">
-                          <span class="icon-name">YouTube</span>
-                      </a>
-                      <a href="http://tiktok.com/@lc.modeling.school" class="icon-link">
-                          <img src="social-media.png" alt="TikTok">
-                          <span class="icon-name">TikTok</span>
-                      </a>
-                      <a href="https://x.com/lcmodeling8" class="icon-link">
-                          <img src="logos.png" alt="Twitter">
-                          <span class="icon-name">X</span>
-                      </a>
-                      <a href="https://www.instagram.com/lc_modeling_school?igsh=MXhzZmtrd3h2NmE2eA==" class="icon-link">
-                          <img src="instagram.png" alt="Instagram">
-                          <span class="icon-name">Instagram</span>
-                      </a>
-                      <a href="https://ke.linkedin.com/company/l-c-modeling-company-academy" class="icon-link">
-                          <img src="linkedin (1).png" alt="LinkedIn">
-                          <span class="icon-name">LinkedIn</span>
-                      </a>
-                      <a href="tel:+254702066492" class="icon-link">
-                        <img src="call.png" alt="Phone">
-                        <span class="icon-name">call us</span>
-                      </a>
-                  </div>
-                  <div class="contact-buttons" >
-                      <a href="mailto:Linkosiclothing@gmail.com" style="white-space: 20px;" class="btn-email" style="background-color: rgb(182, 51, 72);" >Email</a> <br>
-                      
-                      <a href="https://wa.me/+254702066492" class="btn-whatsapp" style="background-color: rgb(23, 206, 23);">WhatsApp</a>
-                  </div>
-              </div>
-          </div>
-        
-      </section>
+      
   
       <footer class="footer">
-     <div class="logo-img">
-        <img  style="max-width: 50%;" src="lclogo1.jpg" alt="Logo">
-      
-      </div>
+    
         <h2><span>L&C</span> MODELING</h2>
 
           <p>Follow us on social media</p>
           <div class="social-icons">
-              <a href="https://www.facebook.com/profile.php?id=100088956974742&mibextid=ZbWKwL" class="icon-link">
-                  <img src="facebook.png" alt="Facebook">
-              </a>
-              <a href="https://www.youtube.com/@Lc_Modeling_Academy" class="icon-link">
-                  <img src="youtube.png" alt="YouTube">
-              </a>
-              <a href="http://tiktok.com/@lc.modeling.school" class="icon-link">
-                  <img src="social-media.png" alt="TikTok">
-              </a>
-              <a href="https://x.com/lcmodeling8" class="icon-link">
-                  <img src="logos.png" alt="Twitter">
-              </a>
-              <a href="https://www.instagram.com/lc_modeling_school?igsh=MXhzZmtrd3h2NmE2eA==" class="icon-link">
-                  <img src="instagram.png" alt="Instagram">
-              </a>
-              <a href="https://ke.linkedin.com/company/l-c-modeling-company-academy" class="icon-link">
-                  <img src="linkedin (1).png" alt="LinkedIn">
-              </a>
-          </div>
+            <a href="https://www.facebook.com/profile.php?id=100088956974742&mibextid=ZbWKwL" class="icon-link">
+              <img src="facebook.png" alt="Facebook">
+            </a>
+            <a href="https://www.youtube.com/@Lc_Modeling_Academy" class="icon-link">
+              <img src="youtube.png" alt="YouTube">
+            </a>
+            <a href="http://tiktok.com/@lc.modeling.school" class="icon-link">
+              <img src="social-media.png" alt="TikTok">
+            </a>
+            <a href="https://x.com/lcmodeling8" class="icon-link">
+              <img src="logos.png" alt="Twitter">
+            </a>
+            <a href="https://www.instagram.com/lc_modeling_school?igsh=MXhzZmtrd3h2NmE2eA==" class="icon-link">
+              <img src="instagram.png" alt="Instagram">
+            </a>
+          
+          </a>
+            <a href="https://pin.it/bCh9xEAnd" class="icon-link">
+              <img src="Pinterest.svg" alt="Phone">
+            </a>
+            <a href="https://ke.linkedin.com/company/l-c-modeling-company-academy" class="icon-link">
+              <img src="linkedin (1).png" alt="LinkedIn">
+            </a>
+            <a href="tel:+254702066492" class="icon-link">
+              <img src="Round Blue Phone.png" alt="Phone">
+        
 
+            <a href="mailto:Linkosiclothing@gmail.com" class="icon-link">
+              <img src="GMail New Icon.svg" alt="Phone">
+            </a> 
+            
+            <a href="https://wa.me/+254702066492" class="icon-link">
+              <img src="logo.png" alt="Phone">
+            </a>
+            
+          </div>
+         
           <br>
           <p class="design-credit">
 
@@ -489,6 +621,16 @@
         
         
     </main>
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script type="text/javascript">
+   (function(){
+      emailjs.init({
+        publicKey: "dsXzYWYxtQEg1cUPx",
+      });
+   })();
+</script>
 
     <script src="js/gsap.min.js"></script>
     <script src="js/imagesloaded.pkgd.min.js"></script>
@@ -644,6 +786,54 @@ window.addEventListener('resize', updateSlider);
 
 
 
+
+////////////////////////////////////////////////////////////////////////////
+
+(function() {
+        emailjs.init("dsXzYWYxtQEg1cUPx"); // Initialize EmailJS with your public key
+    })();
+
+    document.getElementById('contact-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        // Collect form data
+        var formData = {
+            from_name: document.getElementById('name').value,
+            email: document.getElementById('email').value,
+            telephone: document.getElementById('telephone').value,
+            message: document.getElementById('message').value
+        };
+
+        // Define the email template parameters
+        var templateParams = {
+            to_name: "Recipient", // Change this if you have a specific recipient in mind
+            from_name: formData.from_name,
+            email: formData.email,
+            telephone: formData.telephone,
+            message: formData.message
+        };
+
+        // Send the email using EmailJS
+        emailjs.send('service_hw70pzw', 'template_rqn75wb', templateParams)
+            .then(function(response) {
+                console.log('SUCCESS!', response.status, response.text);
+
+                // Clear the form
+                document.getElementById('contact-form').reset();
+
+                // Display the success message
+                var successMessage = document.getElementById('success-message');
+                successMessage.style.display = 'block';
+
+                // Hide the success message after 5 seconds
+                setTimeout(function() {
+                    successMessage.style.display = 'none';
+                }, 5000);
+            }, function(error) {
+                console.log('FAILED...', error);
+                alert('Failed to send your message. Please try again.');
+            });
+    });
 
 
 
