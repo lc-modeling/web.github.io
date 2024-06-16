@@ -1193,7 +1193,7 @@ header.is-scrolling .container {
 
 /*=============================================================*/
 .footer {
-  background: #333;
+  background:black;
   color: #fff;
   padding: 40px 20px;
   text-align: center;
@@ -1236,7 +1236,39 @@ header.is-scrolling .container {
   margin-top: 20px;
 }
 
-
+.footer {
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+  position: relative;
+  width: 100%;
+}
+.footer h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+.footer .partnership-logos, .footer .sponsor-logos {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.footer .partnership-logos img, .footer .sponsor-logos img {
+  width: 90px;
+  height: 90px;
+  margin: 10px;
+}
+.footer .website-logo {
+  width: 100px;
+  height: auto;
+  margin-top: 20px;
+}
+@media (max-width: 768px) {
+  .footer .partnership-logos img, .footer .sponsor-logos img {
+      width: 60px;
+      height: 60px;
+  }
+}
 
 
 

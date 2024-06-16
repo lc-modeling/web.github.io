@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <style>
+        .hidden {
+            display: none;
+        }
+        .visible {
+            display: block;
+        }
+        .login-form, .content {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .login-form input, .login-form button {
+            width: 100%;
+            margin: 5px 0;
+            padding: 10px;
+        }
+        .logout-button {
+            margin: 20px;
+            padding: 10px;
+            background-color: #f00;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div id="login-form" class="login-form visible">
+    <h2>Admin Login</h2>
+    <input type="text" id="username" placeholder="Email or Username" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <button onclick="login()">Login</button>
+    <div id="login-error" class="hidden">You are not authorized to access this page. If you think this is an error, please contact the administrators for authorization.</div>
+</div>
+
+<div id="content" class="content hidden">
+    <h2>Welcome to our Admin Page</h2>
+    <p>Protected content goes here...</p>
+    <button class="logout-button" onclick="logout()">Logout</button>
+</div>
+
+<script>
+    const correctUsername = "admin";
+    const correctPassword = "LCmodelin(1234)";
+
+    function login() {
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        if ((username === "admin" || username === "admin@example.com") && password === correctPassword) {
+            sessionStorage.setItem('isAuthenticated', 'true');
+            showContent();
+        } else {
+            document.getElementById('login-error').classList.remove('hidden');
+        }
+    }
+
+    function logout() {
+        sessionStorage.removeItem('isAuthenticated');
+        showLoginForm();
+    }
+
+    function showContent() {
+        document.getElementById('login-form').classList.add('hidden');
+        document.getElementById('content').classList.remove('hidden');
+    }
+
+    function showLoginForm() {
+        document.getElementById('login-form').classList.remove('hidden');
+        document.getElementById('content').classList.add('hidden');
+    }
+
+    window.onload = function() {
+        if (sessionStorage.getItem('isAuthenticated') === 'true') {
+            showContent();
+        } else {
+            showLoginForm();
+        }
+    }
+</script>
+
+</body>
+</html>
