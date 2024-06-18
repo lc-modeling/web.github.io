@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Signup Form</title>
+    <style>
+        :root {
+            --color-bg: #000;
+            --color-text: #fff;
+            --color-header: #222;
+            --color-tab-active: #7aff85;
+            --color-tab-inactive: linear-gradient(135deg, rgb(90, 147, 226) 0%, rgb(14, 30, 50) 100%);
+            --color-form-bg: #222;
+            --color-input-bg: rgba(9, 15, 19, 0.8);
+            --color-submit-bg: #2d0f96;
+            --color-submit-hover: green;
+        }
+
+        body {
+            background-color: white;
+            color: var(--color-text);
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            padding-top: 100px;
+        }
+
+        .form-wrapper {
+            background-color: var(--color-form-bg);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            width: 400px;
+            overflow: hidden;
+        }
+
+        .tab-bar {
+            display: flex;
+            justify-content: space-around;
+            background-color: var(--color-tab-inactive);
+            padding: 10px 0;
+        }
+
+        .tab {
+            cursor: pointer;
+            padding: 10px 20px;
+            transition: background-color 0.3s;
+        }
+
+        .tab.active {
+            background-color: var(--color-tab-active);
+        }
+
+        .form-container {
+            padding: 20px;
+            display: none;
+            background: linear-gradient(135deg, rgb(224, 105, 214) 0%, rgb(61, 87, 233) 50%, rgb(159, 58, 117) 100%);
+        }
+
+        .form-container.active {
+            display: block;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .form-group label {
+            margin-bottom: 0.5rem;
+            color: var(--color-text);
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid var(--color-text);
+            border-radius: 5px;
+            background: var(--color-input-bg);
+            color: var(--color-text);
+        }
+
+        .form-group select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        }
+
+        .form-group select option {
+            background-color: var(--color-input-bg);
+            color: var(--color-text);
+        }
+
+        .btn-submit {
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 5px;
+            background-color: var(--color-submit-bg);
+            color: var(--color-text);
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            align-self: center;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--color-submit-hover);
+            color: var(--color-submit-bg);
+        }
+
+        #success-message {
+            display: none;
+            color: #0f0;
+            text-align: center;
+        }
+
+      /*=============================================================*/
+.footer {
+  background:black;
+  color: #fff;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.footer a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.footer p {
+  margin: 10px 0;
+}
+
+.footer .social-icons {
+  margin: 20px 0;
+}
+
+.footer .social-icons .icon-link {
+  margin: 0 10px;
+}
+
+.footer .icon-link img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s;
+}
+
+.footer .icon-link:hover img {
+  transform: scale(1.1);
+}
+
+.footer .design-credit {
+  margin-top: 20px;
+}
+
+.footer {
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+  position: relative;
+  width: 100%;
+}
+.footer h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+.footer .partnership-logos, .footer .sponsor-logos {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.footer .partnership-logos img, .footer .sponsor-logos img {
+  width: 90px;
+  height: 90px;
+  margin: 10px;
+}
+.footer .website-logo {
+  width: 100px;
+  height: auto;
+  margin-top: 20px;
+}
+@media (max-width: 768px) {
+  .footer .partnership-logos img, .footer .sponsor-logos img {
+      width: 60px;
+      height: 60px;
+  }
+}
+
+
+    </style>
+</head>
+<body>
+ 
+    <div class="container">
+        <div class="form-wrapper">
+            <div class="tab-bar">
+                <div class="tab active" id="login-tab">Login</div>
+                <div class="tab" id="signup-tab">Sign Up</div>
+            </div>
+            <div class="form-container active" id="login-form">
+                <form id="login">
+                    <div class="form-group">
+                        <label for="username-email">Username or Email:</label>
+                        <input type="text" id="username-email" name="username-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <button type="submit" style="position: center;" class="btn-submit">Login</button>
+                </form>
+            </div>
+            <div class="form-container" id="signup-form">
+                <form id="contact-form" class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Full Name:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telephone">Telephone No:</label>
+                        <input type="tel" id="telephone" name="telephone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="membership">Options:</label>
+                        <select id="membership" name="membership" required>
+                            <option value="Membership">Membership</option>
+                            <option value="Sponsorship">Sponsorship</option>
+                            <option value="Partnership">Partnership</option>
+                            <option value="Student Sign Up">Student Sign Up</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-submit">Submit</button>
+                </form>
+            </div>
+            <div id="success-message">Thank you for signing up!</div>
+        </div>
+    </div>
+
+
+    <br>
+
+    <br>
+
+    <footer class="footer">
+        <h2><span>L&C</span> MODELING</h2>
+      
+        <p class="design-credit">L&C MODELING SCHOOL IS REGULATED BY LINKOSICLOTHING</p>
+        
+        
+        <div class="partnership-logos">
+            <img src="lc foundation.jpg" alt="Partner 1">
+            <img src="sponsor2.png" alt="Partner 2">
+            <img src="also.jpg" alt="Partner 2"> 
+        </div>
+        <p> Our Patners & sponsors</p>
+      
+  
+        <p>&copy; 2024 L&C Modeling. All rights reserved.</p>
+        
+    </footer>
+  
+          
+
+
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        (function() {
+            emailjs.init("dsXzYWYxtQEg1cUPx");
+        })();
+
+        const loginTab = document.getElementById('login-tab');
+        const signupTab = document.getElementById('signup-tab');
+        const loginForm = document.getElementById('login-form');
+        const signupForm = document.getElementById('signup-form');
+
+        loginTab.addEventListener('click', () => {
+            loginTab.classList.add('active');
+            signupTab.classList.remove('active');
+            loginForm.classList.add('active');
+            signupForm.classList.remove('active');
+        });
+
+        signupTab.addEventListener('click', () => {
+            signupTab.classList.add('active');
+            loginTab.classList.remove('active');
+            signupForm.classList.add('active');
+            loginForm.classList.remove('active');
+        });
+
+        document.getElementById('login').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const usernameEmail = document.getElementById('username-email').value;
+            const password = document.getElementById('password').value;
+
+            const validUsers = [
+                { email: 'user1@example.com', password: 'password1' },
+                { email: 'user2@example.com', password: 'password2' }
+            ];
+
+            const user = validUsers.find(user => (user.email === usernameEmail) && (user.password === password));
+
+            if (user) {
+                window.location.href = 'admin.html'; // Change this to your desired HTML file
+            } else {
+                alert('Invalid username or password');
+            }
+        });
+
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const membership = document.getElementById('membership').value;
+
+            const formData = {
+                from_name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                telephone: document.getElementById('telephone').value,
+                message: `Selected option: ${membership}`
+            };
+
+            const templateParams = {
+                to_name: "Recipient",
+                from_name: formData.from_name,
+                email: formData.email,
+                telephone: formData.telephone,
+                message: formData.message
+            };
+
+            emailjs.send('service_hw70pzw', 'template_rqn75wb', templateParams)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    document.getElementById('contact-form').reset();
+                    const successMessage = document.getElementById('success-message');
+                    successMessage.style.display = 'block';
+                    setTimeout(function() {
+                        successMessage.style.display = 'none';
+                    }, 5000);
+                }, function(error) {
+                    console.log('FAILED...', error);
+                    alert('Failed to send your message. Please try again.');
+                });
+        });
+
+        const header = document.querySelector('.main-header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('is-scrolling');
+            } else {
+                header.classList.remove('is-scrolling');
+            }
+        });
+
+        document.querySelector('.hamburger').addEventListener('click', function () {
+            this.classList.toggle('is-active');
+            document.querySelector('.mobile-nav').classList.toggle('is-active');
+        });
+    </script>
+</body>
+</html>

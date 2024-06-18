@@ -18,7 +18,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="base.css" />
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
-    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
     <style>
 
 .intro-section {
@@ -128,6 +130,8 @@
             <a class="oxygen-light" href="register.html#about">Programmes</a>
             <a class="oxygen-light" href="#contact">Contact</a>
             <a class="oxygen-light" href="register.html">Enroll</a>
+            <a class="oxygen-light" href="#home-coaching">home coaching </a>
+            <a class="oxygen-light" href="loginform.html">sign in</a>
             
           </nav>
           <button class="hamburger">
@@ -142,17 +146,18 @@
             <a class="oxygen-light" href="#contact">Contact Us</a>
             <a class="oxygen-light" href="register.html#about">Programmes</a> 
             <a class="oxygen-light" href="#home">Enroll</a>
+            <a class="oxygen-light" href="#home-coaching">Home coaching</a>
+            <a class="oxygen-light" href="loginform.html">sign in</a>
       </nav>
 
       <div class="intro-section">
         <div class="content" id="home">
             
           <div class="headings" style="color: whitesmoke;">
-            <h1 class="headings__main gloock-regular">L&C</h1>
-            <h1 class="headings__main gloock-regular">MODELING</h1>
-            <h5 class="headings_subtitle gloock-regular">ACADEMY</h5>
+            <h1 class="outfit">L&C MODELING ACADEMY</h1>
+           
 
-            <h4 class="oxygen-bold" style="size: 50px;">BEST MODELING SCHOOL IN KENYA</h4>
+            <h4 class="" style="size: 50px;">BEST MODELING SCHOOL IN KENYA</h4>
           </div>
         </div>
     </div>
@@ -305,7 +310,25 @@
 
           <section id="programs" class="programs-section">
             <div class="section-content">
-                <h2 class="section__title" style="color: azure;" >Programs</h2>
+                <h2 id="home-coaching" class="section__title" style="color: azure;" >Programs</h2>
+                <div class="program-card" onclick="toggleCard('home-coaching')">
+                  <h3>Home Coaching for Modeling School</h3>
+                  <p class="program-summary">Personalized home coaching sessions to excel in modeling.</p>
+                  <div class="program-details" id="home-coaching">
+                      <p>Our home coaching program is tailored to help aspiring models develop their skills in the comfort of their own home. These sessions are designed to provide one-on-one training that covers all aspects of modeling, ensuring comprehensive development.</p>
+                      <ul>
+                          <li>Runway walking techniques and posture</li>
+                          <li>Facial expressions and posing</li>
+                          <li>Personalized image consultancy</li>
+                          <li>Developing a signature style</li>
+                          <li>Building confidence and presence</li>
+                          <li>Understanding and navigating the modeling industry</li>
+                          <li>Professional portfolio development</li>
+                          <li>Nutrition and fitness for models</li>
+                          <li>Effective communication and networking skills</li>
+                      </ul>
+                  </div>
+              </div>
                 <div class="program-card" onclick="toggleCard('pageantry')">
                     <h3>Pageantry</h3>
                     <p class="program-summary">Shape, groom, and prepare girls and women into confident models and beauty queens.</p>
@@ -504,7 +527,7 @@
                         <label for="message">Message:</label>
                         <textarea class="text" name="user_project" id="message" placeholder="Write your message"></textarea>
                     </div>
-                    <button type="submit" class="btn-submit">Submit</button>
+                    <button type="submit" style="background-color: rgb(10, 54, 30);" class="btn-submit">Submit</button>
                 </form>
                 <br>
                 
@@ -518,6 +541,7 @@
                 <div class="download-buttons">
                     <a href="programs .docx" download class="btn-download">Download Course Outline</a>
                     <a href="courses.docx" download class="btn-download">Download Registration Form</a>
+                    <a href="homecoaching.docx" download class="btn-download">Home coaching Registration Form</a>
                 </div>
                 
                 
@@ -578,8 +602,8 @@
       </div>
       <p> Our Patners & sponsors</p>
     
+      <p>&copy; 2024 L&C Modeling. All rights reserved.</p>
 
- <p> All rights reserved  &copy;L&C 2024  </p>
   </footer>
 
         
