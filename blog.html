@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LC School Blog</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: "Outfit", sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      background: #fff;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .header {
+      background-color: #061320;
+      color: #fff;
+      padding: 20px;
+      text-align: left;
+      font-size: 32px;
+      font-weight: 700;
+    }
+    .intro-text {
+      text-align: center;
+      margin: 20px 0;
+      font-size: 18px;
+      color: #666;
+    }
+    .post {
+      margin-bottom: 40px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid #cfcfcf;
+    }
+    .post img {
+      max-width: 90%;
+      height: auto;
+      display: block;
+      margin: 10px 0;
+    }
+    .post h2 {
+      color: #333;
+      font-size: 24px;
+      margin: 10px 0;
+    }
+    .post p {
+      color: #666;
+      margin: 10px 0;
+    }
+    .separator {
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(to right, #00c6ff, #0072ff);
+      margin: 20px 0;
+      position: relative;
+    }
+    .dots {
+      text-align: center;
+      margin: 10px 0;
+    }
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      display: inline-block;
+      margin: 0 5px;
+      cursor: pointer;
+      transition: transform 0.3s, background-color 0.3s;
+    }
+    .dot.green {
+      background-color: #00c6ff;
+    }
+    .dot.blue {
+      background-color: #0072ff;
+    }
+    .dot:hover {
+      transform: scale(1.2);
+      background-color: #0056b3;
+    }
+    .footer {
+      background:black;
+      color: #fff;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .footer a {
+      color: #007bff;
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+    .footer p {
+      margin: 10px 0;
+    }
+    .footer .social-icons {
+      margin: 20px 0;
+    }
+    .footer .social-icons .icon-link {
+      margin: 0 10px;
+    }
+    .footer .icon-link img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s;
+    }
+    .footer .icon-link:hover img {
+      transform: scale(1.1);
+    }
+    .footer .design-credit {
+      margin-top: 20px;
+    }
+    .footer {
+      background-color: black;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+      position: relative;
+      width: 100%;
+    }
+    .footer h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    .footer .partnership-logos, .footer .sponsor-logos {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .footer .partnership-logos img, .footer .sponsor-logos img {
+      width: 90px;
+      height: 90px;
+      margin: 10px;
+    }
+    .footer .website-logo {
+      width: 100px;
+      height: auto;
+      margin-top: 20px;
+    }
+    @media (max-width: 768px) {
+      .footer .partnership-logos img, .footer .sponsor-logos img {
+          width: 60px;
+          height: 60px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    L&C Modeling
+  </header>
+  <div class="intro-text">
+    Welcome to L&C Modeling School Blog! Discover the latest trends in modeling, tips from industry experts, and stories from our talented students. Stay tuned for updates and insights into the glamorous world of modeling.
+  </div>
+  <div class="container" id="blog-container">
+    <!-- Blog posts will be appended here -->
+  </div>
+  <footer class="footer">
+    <h2><span>L&C</span> MODELING</h2>
+    <p class="design-credit">L&C MODELING SCHOOL IS REGULATED BY LINKOSICLOTHING</p>
+    <div class="partnership-logos">
+      <img src="lc foundation.jpg" alt="Partner 1">
+      <img src="sponsor2.png" alt="Partner 2">
+      <img src="also.jpg" alt="Partner 2"> 
+    </div>
+    <p>Our Partners & sponsors</p>
+    <p>&copy; 2024 L&C Modeling. All rights reserved.</p>
+  </footer>
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyAxauEEtqkuJOWA9HRe1jpT_wCXH62nksM",
+      authDomain: "schoolcms-77713.firebaseapp.com",
+      projectId: "schoolcms-77713",
+      storageBucket: "schoolcms-77713.appspot.com",
+      messagingSenderId: "757700374571",
+      appId: "1:757700374571:web:a86b334d619cf160fa7a6e"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const firestore = getFirestore(app);
+
+    // Function to fetch and display blog posts
+    async function displayBlogPosts() {
+      const blogRef = collection(firestore, "lcschoolblog");
+      const blogContainer = document.getElementById('blog-container');
+      const blogSnapshot = await getDocs(blogRef);
+
+      blogSnapshot.forEach(doc => {
+        const postData = doc.data();
+        const postElement = document.createElement('div');
+        postElement.className = 'post';
+
+        let contentHtml = '';
+        postData.content.forEach(contentItem => {
+          if (contentItem.value) {
+            contentHtml += `<p>${contentItem.value}</p>`;
+          }
+        });
+
+        postElement.innerHTML = `
+          <h2>${postData.name}</h2>
+          <img src="${postData.header_image}" alt="${postData.name}">
+          ${contentHtml}
+          <div class="separator"></div>
+          <div class="dots">
+            <span class="dot green"></span>
+            <span class="dot blue"></span>
+          </div>
+        `;
+
+        blogContainer.appendChild(postElement);
+      });
+    }
+
+    // Fetch and display the blog posts on page load
+    displayBlogPosts();
+  </script>
+</body>
+</html>

@@ -3,365 +3,376 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Processing Form</title>
-
+    <title>LC Modeling School Admin Dashboard</title>
     <style>
         body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
-header {
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-    text-align: center;
-}
-
-header img {
-    max-width: 150px;
-}
-
-h1, h2 {
-    margin: 0;
-}
-
-form {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 100px;
-}
-
-form section {
-    margin-bottom: 20px;
-}
-
-label {
-    font-weight: bold;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-textarea,
-select {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    box-sizing: border-box;
-}
-
-button {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-}
-
-footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 10px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
-/* CSS for styling the table */
-#order-list {
-    margin-top: 100px;
-    margin-bottom: 100px; 
-
-}
-#order-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-#order-table th, #order-table td {
-    border: 1px solid #dddddd;
-    padding: 8px;
-    text-align: left;
-}
-#order-table th {
-    background-color: #f2f2f2;
-}
-.edit-btn {
-    padding: 5px 10px;
-    margin-right: 5px;
-    cursor: pointer;
-    border: none;
-    background-color: #007bff;
-    color: #ffffff;
-    border-radius: 3px;
-    transition: background-color 0.3s;
-}
-.delete-btn{
-    background-color: red;
-    padding: 5px 10px;
-    margin-right: 5px;
-    cursor: pointer;
-    border: none;
-    color: #ffffff;
-    border-radius: 3px;
-    transition: background-color 0.3s;
-}
-
-.edit-btn:hover, .delete-btn:hover {
-    background-color: #1eb300;
-}
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .menu-toggle {
+            display: none;
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .sidebar {
+            width: 200px;
+            background-color: #333;
+            position: fixed;
+            height: 100%;
+            top: 0;
+            left: 0;
+            padding-top: 60px;
+            overflow: auto;
+        }
+        .sidebar a {
+            padding: 15px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+        }
+        .sidebar a:hover {
+            background-color: #575757;
+        }
+        .content {
+            margin-left: 220px;
+            padding: 20px;
+        }
+        .card {
+            background-color: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .card h3 {
+            margin-top: 0;
+        }
+        .analytics {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .analytics .card {
+            flex: 1;
+            margin: 10px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px 0;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #dddddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .edit-btn, .delete-btn {
+            padding: 5px 10px;
+            margin-right: 5px;
+            cursor: pointer;
+            border: none;
+            color: white;
+            border-radius: 3px;
+            transition: background-color 0.3s;
+        }
+        .edit-btn {
+            background-color: #007bff;
+        }
+        .delete-btn {
+            background-color: red;
+        }
+        .edit-btn:hover, .delete-btn:hover {
+            opacity: 0.8;
+        }
+        .form-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .form-container > div {
+            flex: 1;
+            min-width: 200px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        input, textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        textarea {
+            resize: vertical;
+        }
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                display: none;
+            }
+            .sidebar a {
+                float: left;
+            }
+            .content {
+                margin-left: 0;
+            }
+            .analytics .card {
+                flex: 1 1 100%;
+            }
+            table {
+                display: block;
+                width: 100%;
+                overflow-x: auto;
+            }
+            table, th, td {
+                display: block;
+                width: 100%;
+            }
+            th, td {
+                padding: 10px;
+            }
+            th {
+                background-color: #f2f2f2;
+            }
+            tbody tr {
+                display: flex;
+                flex-wrap: wrap;
+                border: 1px solid #ddd;
+                margin-bottom: 10px;
+                border-radius: 5px;
+                overflow: hidden;
+            }
+            tbody tr td {
+                flex: 1 1 100%;
+                padding: 10px;
+            }
+        }
     </style>
 </head>
-
 <body>
-    <header>
-        <img src="logo.png" alt="Your Business Logo">
-        <h1>Order Processing Form</h1>
-    </header>
-    <form id="order-form">
-        <section class="customer-info">
-            <h2>Customer Information</h2>
-            <div>
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
+
+    <div class="header">
+        <h1>LC Modeling School Admin Dashboard</h1>
+        <div class="menu-toggle" onclick="toggleSidebar()">☰ Menu</div>
+    </div>
+
+    <div class="sidebar">
+        <a href="#dashboard">Dashboard</a>
+        <a href="#analytics">Analytics</a>
+        <a href="https://app.firecms.co/p/schoolcms-77713/c/lcschoolblog">Update Blog</a>
+        <a href="#students">Manage Students</a>
+        <a href="#settings">Settings</a>
+        <a href="index.html">Logout</a>
+    </div>
+
+    <div class="content">
+        <div id="dashboard" class="card">
+            <h3>Welcome, Admin!</h3>
+            <p>Use the links on the sidebar to manage the LC Modeling School website.</p>
+        </div>
+
+        <div id="analytics" class="analytics">
+            <div class="card">
+                <h3>Student Enrollments</h3>
+                <p id="student-enrollments">Loading...</p>
             </div>
-            <div>
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
+            <div class="card">
+                <h3>Courses Completed</h3>
+                <p id="courses-completed">Loading...</p>
             </div>
-            <div>
-                <label for="phone">Phone:</label>
-                <input type="tel" id="phone" name="phone" required>
+            <div class="card">
+                <h3>Active Blog Posts</h3>
+                <p id="active-blog-posts">Loading...</p>
             </div>
-            <div>
-                <label for="address">Address:</label>
-                <textarea id="address" name="address" required></textarea>
-            </div>
-        </section>
-        <section class="order-details">
-            <h2>Order Details</h2>
-            <div>
-                <label for="product">Product Name:</label>
-                <input type="text" id="product" name="product" required>
-            </div>
-            <div>
-                <label for="quantity">Quantity:</label>
-                <input type="number" id="quantity" name="quantity" required>
-            </div>
-            <div>
-                <label for="delivery-date">Delivery Date:</label>
-                <input type="date" id="delivery-date" name="delivery-date" required>
-            </div>
-            <div>
-                <label for="instructions">Special Instructions:</label>
-                <textarea id="instructions" name="instructions"></textarea>
-            </div>
-        </section>
-        <section class="additional-options">
-            <h2>Additional Options</h2>
-            <div>
-                <input type="checkbox" id="rush-order" name="rush-order">
-                <label for="rush-order">Rush Order</label>
-            </div>
-            <div>
-                <label for="payment-method">Payment Method:</label>
-                <select id="payment-method" name="payment-method">
-                    <option value="credit-card">Credit Card</option>
-                    <option value="paypal">PayPal</option>
-                    <option value="bank-transfer">Bank Transfer</option>
-                </select>
-            </div>
-            <div>
-                <label>Shipping Method:</label>
-                <div>
-                    <input type="radio" id="standard-shipping" name="shipping-method" value="standard" checked>
-                    <label for="standard-shipping">Standard</label>
+        </div>
+
+        <div id="students" class="card">
+            <h3>Manage Students</h3>
+            <form id="student-form">
+                <div class="form-container">
+                    <div>
+                        <label for="student-name">Student Name:</label>
+                        <input type="text" id="student-name" name="student-name" required>
+                    </div>
+                    <div>
+                        <label for="student-email">Email:</label>
+                        <input type="email" id="student-email" name="student-email" required>
+                    </div>
+                    <div>
+                        <label for="student-phone">Phone:</label>
+                        <input type="tel" id="student-phone" name="student-phone" required>
+                    </div>
                 </div>
-                <div>
-                    <input type="radio" id="express-shipping" name="shipping-method" value="express">
-                    <label for="express-shipping">Express</label>
+                <div class="form-container">
+                    <div>
+                        <label for="student-address">Address:</label>
+                        <textarea id="student-address" name="student-address" required></textarea>
+                    </div>
                 </div>
-            </div>
-        </section>
-        <button type="submit">Submit Order</button>
-    </form>
+                <button style="background-color: #4CAF50;" type="submit">Enroll Student</button>
+            </form>
+            <h3>Enrolled Students</h3>
+            <table id="students-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Students will be dynamically added here -->
+                </tbody>
+            </table>
+        </div>
 
+        <div id="settings" class="card">
+            <h3>blogs update</h3>
+            <p>Update your blog  and posts settings.</p>
+            <a href="https://app.firecms.co/p/schoolcms-77713/c/lcschoolblog" class="btn">update</a>
+        </div>
+    </div>
 
-    <section id="order-list">
-        <h1 style="text-align-last: center ; size: 50px; margin-bottom: 20px;"><strong>Current Orders</strong></h1>
-        <table id="order-table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Address</th>
-                    <th>Product</th>
-                    <th>Quantity</th>
-                    <th>Delivery Date</th>
-                    <th>Instructions</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Orders will be dynamically added here -->
-            </tbody>
-        </table>
-        
-    </section>
-    
-
-
-
-
-</section>
-<br>
-<br>
-
-
-<br>
-
-
-    
-    
-    <footer>
-        <p>&copy; 2024 Fun Factory. All rights reserved.</p>
-    </footer>
-    
     <!-- Firebase scripts -->
-   
-<!-- Firebase scripts -->
-<script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
-    import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-database.js";
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
+        import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-database.js";
 
-   
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyC1Mr82Gq9W8ede84OsnqgDx5saAuN6QII",
+            authDomain: "lcmodelingcms.firebaseapp.com",
+            projectId: "lcmodelingcms",
+            storageBucket: "lcmodelingcms.appspot.com",
+            messagingSenderId: "928501733809",
+            appId: "1:928501733809:web:5dd437ee264debdf708590"
+        };
 
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
 
-  // Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyC1Mr82Gq9W8ede84OsnqgDx5saAuN6QII",
-    authDomain: "lcmodelingcms.firebaseapp.com",
-    projectId: "lcmodelingcms",
-    storageBucket: "lcmodelingcms.appspot.com",
-    messagingSenderId: "928501733809",
-    appId: "1:928501733809:web:5dd437ee264debdf708590"
-  };
+        // Enroll student form submission
+        document.getElementById("student-form").addEventListener("submit", function (event) {
+            event.preventDefault();
+            const name = document.getElementById("student-name").value;
+            const email = document.getElementById("student-email").value;
+            const phone = document.getElementById("student-phone").value;
+            const address = document.getElementById("student-address").value;
 
-
-
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-
-    // Get a reference to the database service
-    const db = getDatabase(app);
-
-    // Submit form data to Firebase on form submit
-    document.getElementById("order-form").addEventListener("submit", function(event) {
-        event.preventDefault(); // Prevent default form submission
-
-        // Get form data
-        const formData = new FormData(this);
-
-        // Convert form data to JSON object
-        const formDataObject = {};
-        formData.forEach(function(value, key) {
-            formDataObject[key] = value;
-        });
-
-        // Push data to Firebase database
-        push(ref(db, "orders"), formDataObject)
-            .then(function() {
-                alert("Order submitted successfully!");
-                // Optionally, reset the form after successful submission
-                document.getElementById("order-form").reset();
-            })
-            .catch(function(error) {
-                console.error("Error adding document: ", error);
+            push(ref(db, 'students'), {
+                name: name,
+                email: email,
+                phone: phone,
+                address: address
             });
-    });
 
-    // Reference to the orders collection in the database
-    const ordersRef = ref(db, 'orders');
-
-    // Function to render orders data in the table
-    function renderOrders(orders) {
-        const tableBody = document.querySelector('#order-table tbody');
-        tableBody.innerHTML = ''; // Clear existing table rows
-
-        orders.forEach(order => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${order.name}</td>
-                <td>${order.email}</td>
-                <td>${order.phone}</td>
-                <td>${order.address}</td>
-                <td>${order.product}</td>
-                <td>${order.quantity}</td>
-                <td>${order['delivery-date']}</td>
-                <td>${order.instructions}</td>
-                <td>
-                    <button class="edit-btn" data-key="${order['.key']}">Update</button>
-                    <button class="delete-btn" data-key="${order['.key']}">Delete</button>
-                </td>
-            `;
-            tableBody.appendChild(row);
+            document.getElementById("student-form").reset();
         });
 
-        // Add event listeners for edit and delete buttons
-        document.querySelectorAll('.edit-btn').forEach(button => {
-            button.addEventListener('click', handleEditOrder);
-        });
-
-        document.querySelectorAll('.delete-btn').forEach(button => {
-            button.addEventListener('click', handleDeleteOrder);
-        });
-    }
-
-    // Listen for changes in the database and update the table in real-time
-    onValue(ordersRef, snapshot => {
-        const ordersData = snapshot.val();
-        const ordersArray = ordersData ? Object.values(ordersData) : [];
-        renderOrders(ordersArray);
-    });
-
-    // Function to handle edit order button click
-    function handleEditOrder(event) {
-        const orderId = event.target.dataset.key;
-        // Implement logic to handle editing the order with orderId
-        alert("Order was updated " + orderId);
-    }
-
-    // Function to handle delete order button click
-    // Function to handle delete order button click
-function handleDeleteOrder(event) {
-    const orderId = event.target.dataset.key;
-    // Confirmation dialog before deleting
-    if (confirm("Are you sure you want to delete this order?")) {
-        const orderRef = ref(db, `orders/${orderId}`);
-        remove(orderRef)
-            .then(() => {
-                // Remove the row from the table
-                const row = event.target.closest("tr");
-                row.remove();
-                alert("Order deleted successfully!");
-            })
-            .catch((error) => {
-                console.error("Error deleting order:", error);
+        // Render students in table
+        function renderStudents(students) {
+            const tableBody = document.querySelector("#students-table tbody");
+            tableBody.innerHTML = '';
+            students.forEach(student => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${student.name}</td>
+                    <td>${student.email}</td>
+                    <td>${student.phone}</td>
+                    <td>${student.address}</td>
+                    <td>
+                        <button class="edit-btn" data-key="${student['.key']}">Edit</button>
+                        <button class="delete-btn" data-key="${student['.key']}">Delete</button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
             });
-    }
-}
+            // Attach event listeners for edit and delete buttons
+            document.querySelectorAll('.edit-btn').forEach(btn => btn.addEventListener('click', handleEditStudent));
+            document.querySelectorAll('.delete-btn').forEach(btn => btn.addEventListener('click', handleDeleteStudent));
+        }
 
-</script>
+        // Fetch and display students data
+        const studentsRef = ref(db, 'students');
+        onValue(studentsRef, snapshot => {
+            const studentsData = snapshot.val();
+            const studentsArray = studentsData ? Object.entries(studentsData).map(([key, value]) => ({ ...value, '.key': key })) : [];
+            renderStudents(studentsArray);
+        });
 
+        // Edit student functionality
+        function handleEditStudent(event) {
+            const studentId = event.target.dataset.key;
+            alert(`Edit functionality to be implemented for student ID: ${studentId}`);
+        }
 
-<!-- Existing Firebase script -->
+        // Delete student functionality
+        function handleDeleteStudent(event) {
+            const studentId = event.target.dataset.key;
+            if (confirm("Are you sure you want to delete this student?")) {
+                remove(ref(db, `students/${studentId}`))
+                    .then(() => alert("Student deleted successfully!"))
+                    .catch(error => console.error("Error deleting student: ", error));
+            }
+        }
+
+        // Fetch and display analytics data
+        const analyticsData = {
+            "student-enrollments": ref(db, 'analytics/student-enrollments'),
+            "courses-completed": ref(db, 'analytics/courses-completed'),
+            "active-blog-posts": ref(db, 'analytics/active-blog-posts')
+        };
+
+        Object.keys(analyticsData).forEach(key => {
+            onValue(analyticsData[key], snapshot => {
+                document.getElementById(key).innerText = snapshot.val() || '0';
+            });
+        });
+
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            sidebar.style.display = sidebar.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
+
 </body>
 </html>
