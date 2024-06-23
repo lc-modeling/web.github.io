@@ -1663,3 +1663,23 @@ header.is-scrolling .container {
       margin-bottom: 10px; /* Add spacing between buttons */
   }
 }
+
+
+
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.icon-link {
+  color: white;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+.icon-link:hover {
+  color: #0abaff; /* Bluish color on hover */
+}

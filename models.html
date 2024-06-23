@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L&C Modeling School</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="base.css">
+    <link rel="icon" href="lc ffot.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+
+
+.social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .icon-link {
+            color: rgb(9, 1, 15);
+            font-size: 15px;
+            text-decoration: none;
+        }
+
+        .icon-link:hover {
+            color: #0abaff; /* Bluish color on hover */
+        }
+
+        /* General Styles */
+        body {
+            font-family: "Outfit", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 300;
+            font-style: normal;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            color: #333;
+        }
+
+        .custom-section {
+            padding: 20px;
+            background: #fff;
+            margin: 20px auto;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .custom-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .custom-form label {
+            margin-top: 10px;
+            width: 100%;
+            text-align: left;
+        }
+
+        .custom-form input, .custom-form select, .custom-form textarea {
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .custom-form button {
+            padding: 10px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 5px;
+            background: #333;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .custom-form button:hover {
+            background: #555;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .custom-section {
+                margin: 10px;
+                padding: 10px;
+                width: 90%;
+            }
+        }
+
+
+
+
+
+
+
+
+        .intro-section {
+            position: relative;
+            width: 100%;
+            height: 100vh; /* Adjust the height as needed */
+            overflow: hidden; /* Ensure the image doesn't overflow its container */
+        }
+
+        .intro-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('musa.png'); 
+            background-size: cover;
+            background-position: center;
+           /* Add the path to your background image -webkit-animation: kenburns-top 8000ms ease-in-out infinite alternate both;
+                    animation: kenburns-top 5000ms ease-in-out infinite alternate both;*/ 
+        }
+
+        @-webkit-keyframes kenburns-top {
+            0% {
+                -webkit-transform: scale(1) translateY(0);
+                        transform: scale(1) translateY(0);
+                -webkit-transform-origin: 50% 16%;
+                        transform-origin: 50% 16%;
+            }
+            100% {
+                -webkit-transform: scale(1.25) translateY(-15px);
+                        transform: scale(1.25) translateY(-15px);
+                -webkit-transform-origin: top;
+                        transform-origin: top;
+            }
+        }
+        @keyframes kenburns-top {
+            0% {
+                -webkit-transform: scale(1) translateY(0);
+                        transform: scale(1) translateY(0);
+                -webkit-transform-origin: 50% 16%;
+                        transform-origin: 50% 16%;
+            }
+            100% {
+                -webkit-transform: scale(1.25) translateY(-15px);
+                        transform: scale(1.25) translateY(-15px);
+                -webkit-transform-origin: top;
+                        transform-origin: top;
+            }
+        }
+
+        .intro-section .content {
+            position: absolute;
+            top: 50%;
+            right: 10%;
+            transform: translateY(-50%);
+            color: white;
+            text-align: right;
+            font-family: Arial, sans-serif;
+            z-index: 1; /* Ensure the content is above the background */
+        }
+
+        .headings__main {
+            font-size: 3rem;
+        }
+
+        .headings_subtitle {
+            font-size: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .intro-section .content {
+                top: 50%;
+                left: 50%;
+                right: auto;
+                transform: translate(-50%, -50%);
+                text-align: center;
+            }
+          }
+
+
+          .empty-section {
+            width: 100%;
+            height: 5vh; /* Adjust the height as needed */
+            padding: 10px; /* Add padding around the section */
+            box-sizing: border-box; /* Ensure padding is included in the element's total width and height */
+            background-color: #f0f0f0; /* Optional: Background color to visualize the section */
+        } 
+
+
+
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+          <h2><span>L&C</span> MODELING</h2>
+          <nav>
+            <a class="oxygen-light" href="index.html">Home</a>
+            <a class="oxygen-light" href="blog.html">Blog Post</a>
+            <a class="oxygen-light" href="register.html#about">Programmes</a>
+            <a class="oxygen-light" href="#contact">Contact</a>
+            <a class="oxygen-light" href="register.html">Enroll</a>
+            <a class="oxygen-light" href="homecoaching.html">home coaching </a>
+            <a class="oxygen-light" href="models.html">Get scouted</a>
+            <a class="oxygen-light" href="#book-our-models">Book our Models</a>
+            <a class="oxygen-light" href="loginform.html">sign in</a>
+            
+          </nav>
+          <button class="hamburger">
+            <div class="bar"></div>
+          </button>
+        </div>
+      </header>
+      <nav class="mobile-nav">
+        <a class="oxygen-light" href="index.html">Home</a>    
+            <a class="oxygen-light" href="blog.html">Blog Post</a>
+            <a class="oxygen-light" href="#contact">Contact Us</a>
+            <a class="oxygen-light" href="register.html#about">Programs</a> 
+            <a class="oxygen-light" href="register.html">Enroll</a>
+            <a class="oxygen-light" href="homecoaching.html">Home coaching</a>
+            <a class="oxygen-light" href="models.html">Get scouted</a>
+            <a class="oxygen-light" href="#book-our-models">Book our Models</a>
+            <a class="oxygen-light" href="loginform.html">sign in</a>
+      </nav>
+
+      <div class="intro-section">
+        <div class="content" id="home">
+            
+          <div class="headings" style="color: whitesmoke;">
+            <h1  class="outfit">L&C MODELING ACADEMY</h1>
+           
+
+            <h4 class="" style="size: 50px;">BEST MODELING SCHOOL IN KENYA</h4>
+          </div>
+        </div>
+    </div>
+
+
+    <!-- Get Scouted Section -->
+    <section id="get-scouted" class="custom-section">
+        <h2>Get Scouted by L&C Modeling School</h2>
+        <p>Are you ready to make your mark in the modeling industry? At L&C Modeling School, we're always on the lookout for fresh faces and unique talent. If you have the passion and the potential, we want to hear from you!</p>
+        
+        <h3>How to Apply</h3>
+        <form id="scouted-form" class="custom-form">
+            <label for="full_name">Full Name:</label>
+            <input type="text" id="full_name" name="full_name" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="telephone">Telephone:</label>
+            <input type="tel" id="telephone" name="telephone" required>
+            
+            <label for="county">County:</label>
+            <input type="text" id="county" name="county" required>
+            
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required>
+            
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" required>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+            
+            <label for="nationality">Nationality:</label>
+            <input type="text" id="nationality" name="nationality" required>
+            
+            <label for="photos">Upload Photos:</label>
+            <input type="file" id="photos" name="photos" accept="image/*" required>
+            
+            <label for="about">Tell Us About Yourself:</label>
+            <textarea id="about" name="about" required></textarea>
+            
+            <button type="submit">Submit Your Application</button>
+        </form>
+        
+        <p><em>*Please ensure all information provided is accurate and up-to-date. We will review all submissions and contact selected candidates for further steps.*</em></p>
+    </section>
+    <section  id="blogs" style="max-width: 90% ;" class="blog-preview-section">
+            
+            
+        <h1 class="section__title" style="color: rgb(14, 1, 61);">Modeling</h1><br />
+            <button class="arrow left" onclick="scrollLeft()">&#10094;</button>
+            <div class="blog-preview-container" id="blogPreviewContainer">
+                <div class="blog-preview-card">
+                 <div class="image">
+              <img src="model1.jpg" alt="Modeling Image 2">
+          </div>
+                </div>
+                <div class="blog-preview-card">
+                    <div class="image">
+              <img src="model11.jpg" alt="Modeling Image 1">
+          </div>
+                </div>
+                <div class="blog-preview-card">
+                  <div class="image">
+                    <img src="model2.jpg" alt="Modeling Image 2">
+                </div>
+                </div>
+                <div class="blog-preview-card">
+                  <div class="image">
+                    <img src="model3.jpg" alt="Modeling Image 2">
+                </div>
+                </div>
+                <div class="blog-preview-card">
+                  <div class="image">
+                    <img src="model5.jpg" alt="Modeling Image 2">
+                </div>
+                </div>
+                <div class="blog-preview-card">
+                  <div class="image">
+                    <img src="model12.jpg" alt="Modeling Image 2">
+                </div>
+                </div>
+                <div class="blog-preview-card">
+                  <div class="image">
+                    <img src="model8.jpg" alt="Modeling Image 2">
+                </div>
+                </div>
+                <div class="blog-preview-card">
+                  <div class="image">
+                    <img src="model13.jpg" alt="Modeling Image 2">
+                </div>
+                </div>
+
+                <div class="blog-preview-card">
+                  <div class="image">
+                    <img src="model4.jpg" alt="Modeling Image 2">
+                </div>
+                </div>
+
+            </div>
+            <button class="arrow right" onclick="scrollRight()">&#10095;</button>
+            
+            <div class="pagination-dots" id="paginationDots"></div>
+        </section>
+
+    <!-- Book Our Models Section -->
+    <section id="book-our-models" class="custom-section">
+        <h2>Book Our Models</h2>
+        <p>Discover top-tier modeling talent at L&C Modeling School. Our diverse roster of professional models is available for fashion shows, photoshoots, commercials, and special events. Let us help you find the perfect model to bring your vision to life.</p>
+        
+        <h3>Why Choose Us?</h3>
+        <ul>
+            <li><strong>Experienced Models:</strong> Our models are trained and experienced, ready to deliver outstanding performances.</li>
+            <li><strong>Diverse Talent Pool:</strong> We offer a wide range of models to suit any project requirement.</li>
+            <li><strong>Professional Service:</strong> From booking to execution, we ensure a seamless and professional experience.</li>
+        </ul>
+        
+        <h3>How to Book</h3>
+        <form id="booking-form" class="custom-form">
+            <label for="full_name">Full Name:</label>
+            <input type="text" id="full_name" name="full_name" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="telephone">Telephone:</label>
+            <input type="tel" id="telephone" name="telephone" required>
+            
+            <label for="project_details">Project Details:</label>
+            <textarea id="project_details" name="project_details" required></textarea>
+            
+            <button type="submit">Book a Model</button>
+        </form>
+        
+        <p><em>*For any inquiries or special requests, please contact our booking team at [contact email/phone number].*</em></p>
+    
+    
+        <div class="social-icons">
+            <a href="https://www.facebook.com/profile.php?id=100088956974742&mibextid=ZbWKwL" class="icon-link">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://www.youtube.com/@Lc_Modeling_Academy" class="icon-link">
+                <i class="fab fa-youtube"></i>
+            </a>
+            <a href="http://tiktok.com/@lc.modeling.school" class="icon-link">
+                <i class="fab fa-tiktok"></i>
+            </a>
+            <a href="https://x.com/lcmodeling8" class="icon-link">
+                <i class="fa-brands fa-x-twitter"></i>
+            </a>
+            <a href="https://www.instagram.com/lc_modeling_school?igsh=MXhzZmtrd3h2NmE2eA==" class="icon-link">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://pin.it/bCh9xEAnd" class="icon-link">
+                <i class="fab fa-pinterest"></i>
+            </a>
+            <a href="https://ke.linkedin.com/company/l-c-modeling-company-academy" class="icon-link">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="tel:+254702066492" class="icon-link">
+                <i class="fas fa-phone"></i>
+            </a>
+            <a href="mailto:Linkosiclothing@gmail.com" class="icon-link">
+                <i class="fas fa-envelope"></i>
+            </a>
+            <a href="https://wa.me/+254702066492" class="icon-link">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+        </div>
+    
+    </section>
+
+    
+    <footer class="footer">
+        <h2><span>L&C</span> MODELING</h2>
+      
+       
+        <p class="design-credit"> L&C Modeling school is reulated by linkosiclothing</p>
+        
+        <div class="partnership-logos">
+            <img src="lc foundation.jpg" alt="Partner 1">
+            <img src="sponsor2.png" alt="Partner 2">
+            <img src="also.jpg" alt="Partner 2"> 
+        </div>
+        <p> Our Patners & sponsors</p>
+      
+        <p>&copy; 2024 L&C Modeling. All rights reserved.</p>
+  
+    </footer>
+a  
+
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+      (function() {
+        emailjs.init("dsXzYWYxtQEg1cUPx");
+      })();
+    </script>
+
+    <script>
+        document.getElementById('scouted-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const form = event.target;
+            const formData = new FormData(form);
+
+            const templateParams = {
+                to_name: 'Admin',
+                from_name: formData.get('full_name'),
+                email: formData.get('email'),
+                telephone: formData.get('telephone'),
+                county: formData.get('county'),
+                first_name: formData.get('full_name').split(' ')[0],  // Assuming the first word is the first name
+                age: formData.get('age'),
+                gender: formData.get('gender'),
+                nationality: formData.get('nationality'),
+                course: 'Scouting Application',
+                start_date: new Date().toLocaleDateString()  // Current date as start date
+            };
+
+            emailjs.send('service_hw70pzw', 'template_vot7k6s', templateParams)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    alert('Form submitted successfully!');
+                    form.reset();
+                }, function(error) {
+                    console.log('FAILED...', error);
+                    alert('Form submission failed. Please try again.');
+                });
+        });
+
+        document.getElementById('booking-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const form = event.target;
+            const formData = new FormData(form);
+
+            const templateParams = {
+                to_name: 'Admin',
+                from_name: formData.get('full_name'),
+                email: formData.get('email'),
+                telephone: formData.get('telephone'),
+                county: '',
+                first_name: formData.get('full_name').split(' ')[0],  // Assuming the first word is the first name
+                age: '',
+                gender: '',
+                nationality: '',
+                course: 'Model Booking',
+                start_date: new Date().toLocaleDateString(),  // Current date as start date
+                id_number: '',  // Not relevant for this form
+                project_details: formData.get('project_details')  // Adding project details
+            };
+
+            emailjs.send('service_hw70pzw', 'template_vot7k6s', templateParams)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    alert('Form submitted successfully!');
+                    form.reset();
+                }, function(error) {
+                    console.log('FAILED...', error);
+                    alert('Form submission failed. Please try again.');
+                });
+        });
+//===========================================================================
+
+
+        window.onload = function () {
+	window.addEventListener('scroll', function (e) {
+		if (window.pageYOffset > 100) {
+			document.querySelector("header").classList.add('is-scrolling');
+		} else {
+			document.querySelector("header").classList.remove('is-scrolling');
+		}
+	});
+
+	const menu_btn = document.querySelector('.hamburger');
+	const mobile_menu = document.querySelector('.mobile-nav');
+
+	menu_btn.addEventListener('click', function () {
+		menu_btn.classList.toggle('is-active');
+		mobile_menu.classList.toggle('is-active');
+	});
+}
+
+
+
+
+///==================================================================================
+
+
+
+const header = document.querySelector('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('is-scrolling');
+            } else {
+                header.classList.remove('is-scrolling');
+            }
+        });
+
+        document.querySelector('.hamburger').addEventListener('click', function () {
+            this.classList.toggle('is-active');
+        });
+
+
+///=========================================================================================
+
+///=========================================================================================
+
+
+
+const container = document.getElementById('blogPreviewContainer');
+        const paginationDotsContainer = document.getElementById('paginationDots');
+        let scrollAmount = 0;
+        let startX;
+        let scrollLeftPos;
+
+        function createPaginationDots() {
+            const numberOfDots = Math.ceil(container.children.length / 3);
+            for (let i = 0; i < numberOfDots; i++) {
+                const dot = document.createElement('div');
+                dot.classList.add('pagination-dot');
+                dot.addEventListener('click', () => goToPage(i));
+                paginationDotsContainer.appendChild(dot);
+            }
+            updatePaginationDots();
+        }
+
+        function updatePaginationDots() {
+            const dots = paginationDotsContainer.children;
+            const activeIndex = Math.round(scrollAmount / container.clientWidth);
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].classList.toggle('active', i === activeIndex);
+            }
+        }
+
+        function goToPage(pageIndex) {
+            const width = container.clientWidth;
+            scrollAmount = width * pageIndex;
+            container.style.transform = `translateX(-${scrollAmount}px)`;
+            updatePaginationDots();
+        }
+
+        function scrollLeft() {
+            const width = container.clientWidth;
+            scrollAmount = Math.max(scrollAmount - width, 0);
+            container.style.transform = `translateX(-${scrollAmount}px)`;
+            updatePaginationDots();
+        }
+
+        function scrollRight() {
+            const width = container.clientWidth;
+            const maxScroll = container.scrollWidth - width;
+            scrollAmount = Math.min(scrollAmount + width, maxScroll);
+            container.style.transform = `translateX(-${scrollAmount}px)`;
+            updatePaginationDots();
+        }
+
+        container.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].pageX;
+            scrollLeftPos = scrollAmount;
+        });
+
+        container.addEventListener('touchmove', (e) => {
+            const x = e.touches[0].pageX;
+            const walk = startX - x;
+            const width = container.clientWidth;
+            const maxScroll = container.scrollWidth - width;
+            scrollAmount = Math.max(0, Math.min(maxScroll, scrollLeftPos + walk));
+            container.style.transform = `translateX(-${scrollAmount}px)`;
+            updatePaginationDots();
+        });
+
+        createPaginationDots();
+
+
+////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+    </script>
+</body>
+</html>
