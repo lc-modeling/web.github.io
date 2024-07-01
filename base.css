@@ -1254,6 +1254,7 @@ header.is-scrolling .container {
   width: 100%;
 }
 .footer h2 {
+  font-family: "Outfit", sans-serif;
   font-size: 24px;
   margin-bottom: 20px;
 }
