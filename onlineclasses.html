@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L&C Modeling School</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="base.css">
+    <link rel="icon" href="lc ffot.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Your existing styles */
+        .outfit {
+            font-family: "Outfit", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 300;
+            font-style: normal;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .icon-link {
+            color: rgb(9, 1, 15);
+            font-size: 15px;
+            text-decoration: none;
+        }
+
+        .icon-link:hover {
+            color: #0abaff;
+        }
+
+        body {
+            font-family: "Outfit", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 300;
+            font-style: normal;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            color: #333;
+        }
+
+        .custom-section {
+            padding: 20px;
+            background: #fff;
+            margin: 20px auto;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .custom-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .custom-form label {
+            margin-top: 10px;
+            width: 100%;
+            text-align: left;
+        }
+
+        .custom-form input, .custom-form select, .custom-form textarea {
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .custom-form button {
+            padding: 10px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 5px;
+            background: #333;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .custom-form button:hover {
+            background: #555;
+        }
+
+        @media (max-width: 768px) {
+            .custom-section {
+                margin: 10px;
+                padding: 10px;
+                width: 90%;
+            }
+        }
+
+        .intro-section {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .intro-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('musa.png');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .intro-section .content {
+            position: absolute;
+            top: 50%;
+            right: 10%;
+            transform: translateY(-50%);
+            color: white;
+            text-align: right;
+            font-family: Arial, sans-serif;
+            z-index: 1;
+        }
+
+        .headings__main {
+            font-size: 3rem;
+        }
+
+        .headings_subtitle {
+            font-size: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .intro-section .content {
+                top: 50%;
+                left: 50%;
+                right: auto;
+                transform: translate(-50%, -50%);
+                text-align: center;
+            }
+        }
+
+        .empty-section {
+            width: 100%;
+            height: 5vh;
+            padding: 10px;
+            box-sizing: border-box;
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h2 style='font-family: "Outfit", sans-serif;'><span>L&C</span> MODELING</h2>
+            <nav>
+                <a class="oxygen-light" href="index.html">Home</a>
+                <a class="oxygen-light" href="blog.html">Blog Post</a>
+                <a class="oxygen-light" href="register.html#about">Programmes</a>
+                <a class="oxygen-light" href="#contact">Contact</a>
+                <a class="oxygen-light" href="register.html">Enroll</a>
+                <a class="oxygen-light" href="homecoaching.html">Home Coaching</a>
+                <a class="oxygen-light" href="models.html">Get Scouted</a>
+                <a class="oxygen-light" href="#book-our-models">Book Our Models</a>
+                <a class="oxygen-light" href="loginform.html">Sign In</a>
+            </nav>
+            <button class="hamburger">
+                <div class="bar"></div>
+            </button>
+        </div>
+    </header>
+    <nav class="mobile-nav">
+        <a class="oxygen-light" href="index.html">Home</a>
+        <a class="oxygen-light" href="blog.html">Blog Post</a>
+        <a class="oxygen-light" href="#contact">Contact Us</a>
+        <a class="oxygen-light" href="register.html#about">Programs</a>
+        <a class="oxygen-light" href="register.html">Enroll</a>
+        <a class="oxygen-light" href="homecoaching.html">Home Coaching</a>
+        <a class="oxygen-light" href="models.html">Get Scouted</a>
+        <a class="oxygen-light" href="#book-our-models">Book Our Models</a>
+        <a class="oxygen-light" href="loginform.html">Sign In</a>
+    </nav>
+
+    <div class="intro-section">
+        <div class="content" id="home">
+            <div class="headings" style="color: whitesmoke;">
+                <h1 class="outfit">L&C MODELING ACADEMY</h1>
+                <h4 style="size: 50px;">BEST MODELING SCHOOL IN KENYA</h4>
+            </div>
+        </div>
+    </div>
+
+    <!-- Get Scouted Section -->
+    <section id="get-scouted" class="custom-section">
+        <h2>Get Scouted by L&C Models Management</h2>
+        <p>Are you ready to make your mark in the modeling industry? At L&C Modeling School, we're always on the lookout for fresh faces and unique talent. If you have the passion and the potential, we want to hear from you!</p>
+        
+        <h3>How to Apply</h3>
+        <form id="scouted-form" class="custom-form">
+            <label for="full_name">Full Name:</label>
+            <input type="text" id="full_name" name="full_name" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="telephone">Telephone:</label>
+            <input type="tel" id="telephone" name="telephone" required>
+            
+            <label for="county">County:</label>
+            <input type="text" id="county" name="county" required>
+            
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required>
+            
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" required>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+            
+            <label for="nationality">Nationality:</label>
+            <input type="text" id="nationality" name="nationality" required>
+            
+            <label for="photos">Upload Photos:</label>
+            <input type="file" id="photos" name="photos" accept="image/*" required>
+            
+            <label for="about">Tell Us About Yourself:</label>
+            <textarea id="about" name="about" rows="5" required></textarea>
+            
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+
+    <!-- Book Our Models Section -->
+    <section id="book-our-models" class="custom-section">
+        <h2>Book Our Models</h2>
+        <p>Are you looking to book one of our models for your next event, photoshoot, or campaign? At L&C Modeling School, we have a diverse range of talent ready to meet your needs. Complete the form below, and our booking team will get in touch with you.</p>
+        
+        <form id="booking-form" class="custom-form">
+            <label for="full_name">Full Name:</label>
+            <input type="text" id="full_name" name="full_name" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="telephone">Telephone:</label>
+            <input type="tel" id="telephone" name="telephone" required>
+            
+            <label for="event_date">Event Date:</label>
+            <input type="date" id="event_date" name="event_date" required>
+            
+            <label for="event_location">Event Location:</label>
+            <input type="text" id="event_location" name="event_location" required>
+            
+            <label for="model_requirements">Model Requirements:</label>
+            <textarea id="model_requirements" name="model_requirements" rows="5" required></textarea>
+            
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+
+    <!-- New Online Classes Section -->
+    <section id="online-classes" class="custom-section">
+        <h2>Join Our Online Classes</h2>
+        <p>Can't make it to our campus? No worries! L&C Modeling School offers comprehensive online classes that you can join from the comfort of your home. Whether you're a beginner or looking to enhance your skills, our online classes are designed to help you succeed in the modeling industry.</p>
+        
+        <h3>Sign Up for Online Classes</h3>
+        <form id="online-classes-form" class="custom-form">
+            <label for="full_name">Full Name:</label>
+            <input type="text" id="full_name" name="full_name" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="telephone">Telephone:</label>
+            <input type="tel" id="telephone" name="telephone" required>
+            
+            <label for="preferred_course">Preferred Course:</label>
+            <select id="preferred_course" name="preferred_course" required>
+                <option value="Introduction to Modeling">Introduction to Modeling</option>
+                <option value="Advanced Runway Techniques">Advanced Runway Techniques</option>
+                <option value="Commercial Modeling">Commercial Modeling</option>
+                <option value="Portfolio Development">Portfolio Development</option>
+            </select>
+            
+            <label for="start_date">Preferred Start Date:</label>
+            <input type="date" id="start_date" name="start_date" required>
+            
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        (function() {
+            emailjs.init('YOUR_EMAILJS_USER_ID');
+        })();
+
+        const forms = [
+            { id: 'scouted-form', service: 'service_kk6l2ea', template: 'template_scouted' },
+            { id: 'booking-form', service: 'service_kk6l2ea', template: 'template_booking' },
+            { id: 'online-classes-form', service: 'service_kk6l2ea', template: 'template_online_classes' },
+        ];
+
+        forms.forEach(formConfig => {
+            const form = document.getElementById(formConfig.id);
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                emailjs.sendForm(formConfig.service, formConfig.template, this)
+                    .then(() => {
+                        alert('Your form has been submitted successfully!');
+                        form.reset();
+                    }, error => {
+                        console.error('FAILED...', error);
+                        alert('Failed to submit the form. Please try again.');
+                    });
+            });
+        });
+
+        const hamburger = document.querySelector('.hamburger');
+        const mobileNav = document.querySelector('.mobile-nav');
+
+        hamburger.addEventListener('click', () => {
+            mobileNav.classList.toggle('open');
+        });
+
+        window.addEventListener('click', (event) => {
+            if (!hamburger.contains(event.target) && !mobileNav.contains(event.target)) {
+                mobileNav.classList.remove('open');
+            }
+        });
+    </script>
+</body>
+</html>
