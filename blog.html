@@ -12,15 +12,81 @@
   <link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
- 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="blog.css">
     <style>
+.created-on {
+    color: green;
+}
+
+.share-btn {
+  display: inline-block;
+  cursor: pointer;
+  color: #000;
+  font-size: 1.5em;
+  transition: color 0.3s;
+}
+
+.share-btn:hover {
+  color: blue;
+}
+
+.post img {
+  border-radius: 10px; /* Adjust the value to get the desired roundness */
+}
+
+
+
          .centered-large-text {
             text-align: center;
             font-size: 48px; /* Adjust this value to make the text bigger */
         }
+        .main-heading {
+    font-size: 2rem;
+    color: #333;
+    text-align: center;
+    margin: 0;
+}
+
+.sub-heading {
+    font-size: 1.2rem;
+    color: #4b4a4a;
+    text-align: center;
+    margin: 0;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 600px) {
+    .main-heading {
+        font-size: 1.4rem;
+    }
+    
+    .sub-heading {
+        font-size: 1rem;
+    }
+}
+.social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .icon-link {
+            color: white;
+            font-size: 15px;
+            text-decoration: none;
+        }
+
+        .icon-link:hover {
+            color: #0abaff; /* Bluish color on hover */
+        }
+ a.post-link {
+      color: black;
+      text-decoration: none;
+    }
   </style>
 
 </head>
@@ -31,9 +97,12 @@
       <div class="intro-text">
         Welcome to L&C Modeling School Blog! Discover the latest trends in modeling, tips from industry experts, and stories from our talented students. Stay tuned for updates and insights into the glamorous world of modeling.
       </div>
+      <br>
 
     <section id="blogs" class="blog-preview-section">
-      <h1 class="centered-large-text">Stories</h1>
+      <h1 class="main-heading">L&C MODELS STORIES PLATFORM</h1>
+      <h2 class="sub-heading">Creating Impacts through talents</h2>
+    
         <div id="blog-posts">
             <!-- Dynamic content will be inserted here -->
         </div>
@@ -41,7 +110,45 @@
     <h1 class="centered-large-text">Blog posts</h1>
     <div class="container" id="blog-container">
         <!-- Blog posts will be appended here -->
+         
       </div>
+      
+      <section style="background: linear-gradient(135deg, rgb(58, 141, 255), rgb(134, 185, 255), rgb(58, 255, 196)); color: white; padding: 20px;">
+       <p class="sub-heading" style="color: rgb(24, 23, 22);  font-family: 'Outfit', sans-serif;">Check out our socials</p>
+      <div class="social-icons">
+          <a href="https://www.facebook.com/profile.php?id=100088956974742&mibextid=ZbWKwL" class="icon-link">
+              <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://www.youtube.com/@Lc_Modeling_Academy" class="icon-link">
+              <i class="fab fa-youtube"></i>
+          </a>
+          <a href="http://tiktok.com/@lc.modeling.school" class="icon-link">
+              <i class="fab fa-tiktok"></i>
+          </a>
+          <a href="https://x.com/lcmodeling8" class="icon-link">
+            <i class="fa-brands fa-x-twitter"></i>
+          </a>
+          <a href="https://www.instagram.com/lc_modeling_school?igsh=MXhzZmtrd3h2NmE2eA==" class="icon-link">
+              <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://pin.it/bCh9xEAnd" class="icon-link">
+              <i class="fab fa-pinterest"></i>
+          </a>
+          <a href="https://ke.linkedin.com/company/l-c-modeling-company-academy" class="icon-link">
+              <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="tel:+254702066492" class="icon-link">
+              <i class="fas fa-phone"></i>
+          </a>
+          <a href="mailto:Linkosiclothing@gmail.com" class="icon-link">
+              <i class="fas fa-envelope"></i>
+          </a>
+          <a href="https://wa.me/+254702066492" class="icon-link">
+              <i class="fab fa-whatsapp"></i>
+          </a>
+      </div>
+      <br>
+      </section>
       <footer class="footer" style='font-family: "Outfit", sans-serif;'>
         <h2><span>L&C</span> MODELING</h2>
         <p class="design-credit">L&C Modeling school is regulated by Linkosiclothing</p>
