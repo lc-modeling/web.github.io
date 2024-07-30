@@ -1431,7 +1431,7 @@ header.is-scrolling .container {
   .slider-arrow {
     padding: 7px;
     font-size: 18px;
-    bottom: -10px; /* Adjust position for smaller devices */
+    bottom: -0px; /* Adjust position for smaller devices */
   }
 
   .slider-arrow-left {
