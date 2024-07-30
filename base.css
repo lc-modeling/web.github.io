@@ -1304,14 +1304,11 @@ header.is-scrolling .container {
 
 
 
-
-
-
-
 /* Styling for the blog preview section */
 .blog-preview-section {
   position: relative;
   max-width: 100%;
+  overflow: hidden; /* Changed from visible to hidden */
   margin: 20px auto;
   padding: 10px;
   text-align: center;
@@ -1324,7 +1321,7 @@ header.is-scrolling .container {
   align-items: center;
   max-width: 100%;
   margin: auto;
-  overflow: visible; /* Change from hidden to visible */
+  overflow: hidden; /* Changed from visible to hidden */
   padding-bottom: 50px; /* Add padding to ensure buttons are visible */
 }
 
@@ -1445,7 +1442,6 @@ header.is-scrolling .container {
     right: 20%; /* Ensure both arrows are visible */
   }
 }
-
 
 
 
