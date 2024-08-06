@@ -174,4 +174,4 @@ if (postId) {
   displaySingleBlogPost(postId);
 } else {
   displayBlogPosts();
-}
+} 
