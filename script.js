@@ -51,7 +51,7 @@ async function displayBlogPosts() {
         <h2><a href="?post=${doc.id}" class="post-link">${sanitizeHTML(postData.name)}</a></h2>
         <img src="${sanitizeHTML(postData.header_image)}" alt="${sanitizeHTML(postData.name)}">
         <p style="color: green; font-size: inherit;">${formattedDate}</p>
-        ${contentHtml}
+        <div class="green-transparent-bg">${contentHtml}</div>
         <span class="share-btn" data-url="${window.location.origin}?post=${doc.id}">
           <i class="fas fa-share"></i>
         </span>
@@ -117,7 +117,7 @@ async function displaySingleBlogPost(docId) {
         <h2>${sanitizeHTML(postData.name)}</h2>
         <img src="${sanitizeHTML(postData.header_image)}" alt="${sanitizeHTML(postData.name)}">
         <p style="color: green; font-size: inherit;">${formattedDate}</p>
-        ${contentHtml}
+        <div class="green-transparent-bg">${contentHtml}</div>
         <span class="share-btn" data-url="${window.location.origin}?post=${docId}">
           <i class="fas fa-share"></i>
         </span>
@@ -174,4 +174,4 @@ if (postId) {
   displaySingleBlogPost(postId);
 } else {
   displayBlogPosts();
-} 
+}

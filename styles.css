@@ -5,6 +5,14 @@
     font-family: 'Outfit', sans-serif;
 }
 
+
+.blue-transparent-bg{
+    background-color: rgba(158, 23, 91, 0.2); /* Green with 20% opacity */
+    padding: 10px; /* Optional: to add some padding around the text */
+    border-radius: 5px; /* Optional: to round the corners */
+}
+
+
 .blog-preview-section h1 {
     text-align: center;
     font-weight: 700;
@@ -56,7 +64,7 @@
 .slider-arrow {
     position: absolute;
     bottom: -1px; /* Position the arrows below the images */
-    background: rgba(32, 55, 73, 0.8);
+    background: rgba(0, 0, 0, 0.8);
     color: #fff;
     border: none;
     padding: 10px;

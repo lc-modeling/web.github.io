@@ -5,6 +5,13 @@ body {
     padding: 0;
   }
   
+  /* Add this in your CSS file or within a <style> tag in your HTML */
+.green-transparent-bg {
+  background-color: rgba(115, 252, 115, 0.2); /* Green with 20% opacity */
+  padding: 10px; /* Optional: to add some padding around the text */
+  border-radius: 5px; /* Optional: to round the corners */
+}
+
   .outfit {
     font-family: "Outfit", sans-serif;
     font-optical-sizing: auto;
@@ -15,7 +22,7 @@ body {
   .container {
     max-width: 800px;
     margin: 20px auto;
-    background: #fff;
+    background-color: rgba(73, 70, 250, 0.2); 
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
@@ -43,10 +50,12 @@ body {
   }
   
   .post img {
-    max-width: 90%;
+   width: 80%;
     height: auto;
     display: block;
-    margin: 10px 0;
+    border-radius: 8px;
+    transition: transform 0.3s;
+    margin: 0 auto;
   }
   
   .post h2 {

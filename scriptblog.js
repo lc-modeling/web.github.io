@@ -61,7 +61,7 @@ async function displayBlogPosts() {
       </div>
       <div class="text-description">
         <p class="created-on">${createdOnDate}</p>
-        ${postData.text_description}
+         <div class="blue-transparent-bg">${postData.text_description}</div>
         <br>
         <i class="fa-solid fa-share" onclick="copyToClipboard('${window.location.origin}?post=${doc.id}')"></i>
       </div>
