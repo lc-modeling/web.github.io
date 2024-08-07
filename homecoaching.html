@@ -53,92 +53,70 @@
 
 
         .intro-section {
-                    position: relative;
-                    width: 100%;
-                    height: 100vh; /* Adjust the height as needed */
-                    overflow: hidden; /* Ensure the image doesn't overflow its container */
-                }
+            position: relative;
+            width: 100%;
+            height: 100vh; /* Adjust the height as needed */
+            overflow: hidden; /* Ensures the image doesn't overflow its container */
+        }
+
+        .intro-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .intro-section .content {
+            position: absolute;
+            top: 50%;
+            right: 10%;
+            transform: translateY(-50%);
+            color: white;
+            text-align: right;
+            font-family: Arial, sans-serif;
+            z-index: 1; /* Ensure the content is above the background */
+        }
+
+        .headings__main {
+            font-size: 3rem;
+        }
+
+        .headings_subtitle {
+            font-size: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .intro-section .content {
+                top: 50%;
+                left: 50%;
+                right: auto;
+                transform: translate(-50%, -50%);
+                text-align: center;
+            }
+        }
+
+        .empty-section {
+            width: 100%;
+            height: 5vh; /* Adjust the height as needed */
+            padding: 10px; /* Add padding around the section */
+            box-sizing: border-box; /* Ensure padding is included in the element's total width and height */
+            background-color: #f0f0f0; /* Optional: Background color to visualize the section */
+        }
+
+        .background-video, .background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
         
-                .intro-section::before {
-                    content: "";
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    background-image: url('red.png'); 
-                    background-size: cover;
-                    background-position: center;
-                   /* Add the path to your background image -webkit-animation: kenburns-top 8000ms ease-in-out infinite alternate both;
-                            animation: kenburns-top 5000ms ease-in-out infinite alternate both;*/ 
-                }
-        
-                @-webkit-keyframes kenburns-top {
-                    0% {
-                        -webkit-transform: scale(1) translateY(0);
-                                transform: scale(1) translateY(0);
-                        -webkit-transform-origin: 50% 16%;
-                                transform-origin: 50% 16%;
-                    }
-                    100% {
-                        -webkit-transform: scale(1.25) translateY(-15px);
-                                transform: scale(1.25) translateY(-15px);
-                        -webkit-transform-origin: top;
-                                transform-origin: top;
-                    }
-                }
-                @keyframes kenburns-top {
-                    0% {
-                        -webkit-transform: scale(1) translateY(0);
-                                transform: scale(1) translateY(0);
-                        -webkit-transform-origin: 50% 16%;
-                                transform-origin: 50% 16%;
-                    }
-                    100% {
-                        -webkit-transform: scale(1.25) translateY(-15px);
-                                transform: scale(1.25) translateY(-15px);
-                        -webkit-transform-origin: top;
-                                transform-origin: top;
-                    }
-                }
-        
-                .intro-section .content {
-                    position: absolute;
-                    top: 50%;
-                    right: 10%;
-                    transform: translateY(-50%);
-                    color: white;
-                    text-align: right;
-                    font-family: Arial, sans-serif;
-                    z-index: 1; /* Ensure the content is above the background */
-                }
-        
-                .headings__main {
-                    font-size: 3rem;
-                }
-        
-                .headings_subtitle {
-                    font-size: 1.5rem;
-                }
-        
-                @media (max-width: 768px) {
-                    .intro-section .content {
-                        top: 50%;
-                        left: 50%;
-                        right: auto;
-                        transform: translate(-50%, -50%);
-                        text-align: center;
-                    }
-                  }
-        
-        
-                  .empty-section {
-                    width: 100%;
-                    height: 5vh; /* Adjust the height as needed */
-                    padding: 10px; /* Add padding around the section */
-                    box-sizing: border-box; /* Ensure padding is included in the element's total width and height */
-                    background-color: #f0f0f0; /* Optional: Background color to visualize the section */
-                } 
             </style>
 
 </head>
@@ -164,18 +142,18 @@
         <a class="oxygen-light" href="register.html">Enroll</a>
         <a class="oxygen-light" href="loginform.html">sign in</a>
       </nav>
+     
 
-      <div class="intro-section">
+      
+      <div class="intro-section" id="background-container">
         <div class="content" id="home">
-            
-          <div class="headings" style="color: whitesmoke;">
-            <h1 class="outfit" style="color: rgb(0, 0, 59);" >L&C MODELING ACADEMY</h1>
-           
-
-            <h4 class="" style="size: 50px; color: #000;">BEST MODELING SCHOOL IN KENYA</h4>
-          </div>
+            <div class="headings" style="color: whitesmoke;">
+                <h1 class="outfit">L&C MODELING ACADEMY</h1>
+                <h4 class="" style="size: 50px;">BEST MODELING SCHOOL IN KENYA</h4>
+            </div>
         </div>
-    </div>  
+    </div>
+
     <section id="programs" class="programs-section">
         <div class="section-content">
           <h2 class="section__title" style="color: azure;">Programs</h2>
@@ -539,6 +517,94 @@
     
             createPaginationDots();
         });
+    </script>
+     <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+        // Your Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAxauEEtqkuJOWA9HRe1jpT_wCXH62nksM",
+            authDomain: "schoolcms-77713.firebaseapp.com",
+            projectId: "schoolcms-77713",
+            storageBucket: "schoolcms-77713.appspot.com",
+            messagingSenderId: "757700374571",
+            appId: "1:757700374571:web:a86b334d619cf160fa7a6e"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function fetchBackground() {
+            try {
+                const querySnapshot = await getDocs(collection(db, "homecoaching_home"));
+
+                if (!querySnapshot.empty) {
+                    querySnapshot.forEach((doc) => {
+                        const data = doc.data();
+                        console.log("Document data:", data);
+
+                        const backgroundContainer = document.getElementById('background-container');
+                        const mediaUrl = data.header_image;
+
+                        if (mediaUrl) {
+                            console.log('Media URL:', mediaUrl);
+
+                            const videoExtensions = ['.mp4', '.webm'];
+                            const imageExtensions = ['.jpg', '.jpeg', '.png'];
+                            const isVideo = videoExtensions.some(ext => mediaUrl.includes(ext));
+                            const isImage = imageExtensions.some(ext => mediaUrl.includes(ext));
+
+                            if (isVideo) {
+                                console.log('Attempting to load video...');
+                                const videoElement = document.createElement('video');
+                                videoElement.className = 'background-video';
+                                videoElement.autoplay = true;
+                                videoElement.loop = true;
+                                videoElement.muted = true;
+                                videoElement.playsInline = true;
+
+                                const sourceElement = document.createElement('source');
+                                sourceElement.src = mediaUrl;
+                                sourceElement.type = 'video/mp4'; // assuming mp4 format
+
+                                videoElement.appendChild(sourceElement);
+                                backgroundContainer.appendChild(videoElement);
+
+                                videoElement.addEventListener('loadeddata', () => {
+                                    console.log('Video loaded successfully');
+                                });
+
+                                videoElement.addEventListener('error', (e) => {
+                                    console.error('Error loading video:', e);
+                                    console.log('Attempting to fallback to image...');
+                                    // Optionally load a fallback image if video fails
+                                });
+                            } else if (isImage) {
+                                console.log('Attempting to load image...');
+                                const imageElement = document.createElement('img');
+                                imageElement.className = 'background-image';
+                                imageElement.src = mediaUrl;
+                                imageElement.alt = 'Background Image';
+
+                                backgroundContainer.appendChild(imageElement);
+                            } else {
+                                console.log("Unsupported media format");
+                            }
+                        } else {
+                            console.log("No media found in the database");
+                        }
+                    });
+                } else {
+                    console.log("No documents found in the collection!");
+                }
+            } catch (error) {
+                console.error("Error fetching document:", error);
+            }
+        }
+
+        fetchBackground();
     </script>
 </body>
 </html>

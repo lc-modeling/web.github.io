@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L&C Modeling Academy</title>
+    <style>
+        .intro-section {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .intro-section .content {
+            position: absolute;
+            top: 50%;
+            right: 10%;
+            transform: translateY(-50%);
+            color: white;
+            text-align: right;
+            font-family: Arial, sans-serif;
+            z-index: 1;
+        }
+
+        .background-video,
+        .background-image {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: translate(-50%, -50%);
+        }
+
+        @media (max-width: 768px) {
+            .background-video {
+                width: 100vw;
+                height: 56.25vw; /* 16:9 aspect ratio */
+                top: 0;
+                left: 0;
+                transform: none;
+            }
+
+            .background-image {
+                width: 100vw;
+                height: auto;
+                top: 0;
+                left: 0;
+                transform: none;
+            }
+        }
+
+        .empty-section {
+            width: 100%;
+            height: 5vh;
+            padding: 10px;
+            box-sizing: border-box;
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <div class="intro-section" id="background-container">
+        <div class="content" id="home">
+            <div class="headings">
+                <h1 class="outfit">L&C MODELING ACADEMY</h1>
+                <h4 class="">BEST MODELING SCHOOL IN KENYA</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="empty-section"></div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+        // Your Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAxauEEtqkuJOWA9HRe1jpT_wCXH62nksM",
+            authDomain: "schoolcms-77713.firebaseapp.com",
+            projectId: "schoolcms-77713",
+            storageBucket: "schoolcms-77713.appspot.com",
+            messagingSenderId: "757700374571",
+            appId: "1:757700374571:web:a86b334d619cf160fa7a6e"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function fetchBackground() {
+            try {
+                const querySnapshot = await getDocs(collection(db, "homecoaching_home"));
+
+                if (!querySnapshot.empty) {
+                    querySnapshot.forEach((doc) => {
+                        const data = doc.data();
+                        console.log("Document data:", data);
+
+                        const backgroundContainer = document.getElementById('background-container');
+                        const mediaUrl = data.header_image;
+
+                        if (mediaUrl) {
+                            console.log('Media URL:', mediaUrl);
+
+                            const videoExtensions = ['.mp4', '.webm'];
+                            const imageExtensions = ['.jpg', '.jpeg', '.png'];
+                            const isVideo = videoExtensions.some(ext => mediaUrl.includes(ext));
+                            const isImage = imageExtensions.some(ext => mediaUrl.includes(ext));
+
+                            if (isVideo) {
+                                console.log('Attempting to load video...');
+                                const videoElement = document.createElement('video');
+                                videoElement.className = 'background-video';
+                                videoElement.autoplay = true;
+                                videoElement.loop = true;
+                                videoElement.muted = true;
+                                videoElement.playsInline = true;
+
+                                const sourceElement = document.createElement('source');
+                                sourceElement.src = mediaUrl;
+                                sourceElement.type = 'video/mp4'; // assuming mp4 format
+
+                                videoElement.appendChild(sourceElement);
+                                backgroundContainer.appendChild(videoElement);
+
+                                videoElement.addEventListener('loadeddata', () => {
+                                    console.log('Video loaded successfully');
+                                });
+
+                                videoElement.addEventListener('error', (e) => {
+                                    console.error('Error loading video:', e);
+                                    console.log('Attempting to fallback to image...');
+                                    // Optionally load a fallback image if video fails
+                                });
+                            } else if (isImage) {
+                                console.log('Attempting to load image...');
+                                const imageElement = document.createElement('img');
+                                imageElement.className = 'background-image';
+                                imageElement.src = mediaUrl;
+                                imageElement.alt = 'Background Image';
+
+                                backgroundContainer.appendChild(imageElement);
+                            } else {
+                                console.log("Unsupported media format");
+                            }
+                        } else {
+                            console.log("No media found in the database");
+                        }
+                    });
+                } else {
+                    console.log("No documents found in the collection!");
+                }
+            } catch (error) {
+                console.error("Error fetching document:", error);
+            }
+        }
+
+        fetchBackground();
+    </script>
+</body>
+</html>
