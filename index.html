@@ -46,8 +46,7 @@
             color: #0abaff; /* Bluish color on hover */
         }
 
-
-.intro-section {
+        .intro-section {
             position: relative;
             width: 100%;
             height: 100vh; /* Adjust the height as needed */
@@ -61,40 +60,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('mordern.png'); 
             background-size: cover;
             background-position: center;
-           /* Add the path to your background image -webkit-animation: kenburns-top 8000ms ease-in-out infinite alternate both;
-                    animation: kenburns-top 5000ms ease-in-out infinite alternate both;*/ 
-        }
-
-        @-webkit-keyframes kenburns-top {
-            0% {
-                -webkit-transform: scale(1) translateY(0);
-                        transform: scale(1) translateY(0);
-                -webkit-transform-origin: 50% 16%;
-                        transform-origin: 50% 16%;
-            }
-            100% {
-                -webkit-transform: scale(1.25) translateY(-15px);
-                        transform: scale(1.25) translateY(-15px);
-                -webkit-transform-origin: top;
-                        transform-origin: top;
-            }
-        }
-        @keyframes kenburns-top {
-            0% {
-                -webkit-transform: scale(1) translateY(0);
-                        transform: scale(1) translateY(0);
-                -webkit-transform-origin: 50% 16%;
-                        transform-origin: 50% 16%;
-            }
-            100% {
-                -webkit-transform: scale(1.25) translateY(-15px);
-                        transform: scale(1.25) translateY(-15px);
-                -webkit-transform-origin: top;
-                        transform-origin: top;
-            }
         }
 
         .intro-section .content {
@@ -124,8 +91,19 @@
                 transform: translate(-50%, -50%);
                 text-align: center;
             }
-          }
+        }
 
+      
+
+        .background-video, .background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
 
           .empty-section {
             width: 100%;
@@ -178,18 +156,14 @@
             <a class="oxygen-light" href="loginform.html">sign in</a>
       </nav>
 
-      <div class="intro-section">
+      <div class="intro-section" id="background-container">
         <div class="content" id="home">
-            
-          <div class="headings" style="color: whitesmoke;">
-            <h1 class="outfit">L&C MODELING ACADEMY</h1>
-           
-
-            <h4 class="" style="size: 50px;">BEST MODELING SCHOOL IN KENYA</h4>
-          </div>
+            <div class="headings" style="color: whitesmoke;">
+                <h1 class="outfit">L&C MODELING ACADEMY</h1>
+                <h4 class="" style="size: 50px;">BEST MODELING SCHOOL IN KENYA</h4>
+            </div>
         </div>
     </div>
-
 
     <!--<div class="empty-section"></div>-->
 
@@ -656,6 +630,7 @@
     <script src="js/gsap.min.js"></script>
     <script src="js/imagesloaded.pkgd.min.js"></script>
     <script type="module" src="js/index.js"></script>
+    <script type="module" src="header1.js"></script>
     <script type="module">
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
