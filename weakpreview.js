@@ -1,79 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Preview Week Section</title>
-    <style>
-        /* Styling for the video section */
-        .video-section {
-            position: relative;
-            max-width: 100%;
-            margin: 20px auto;
-            padding: 10px;
-            text-align: center;
-        }
-
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
-            height: 0;
-            overflow: hidden;
-            max-width: 100%;
-            background: #000;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            margin: auto;
-        }
-
-        .responsive-iframe, .responsive-video, .responsive-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        .video-container::after {
-            content: '';
-            display: block;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
-        }
-
-        @media (max-width: 768px) {
-            .video-container {
-                padding-bottom: 75%; /* Adjust aspect ratio for mobile */
-            }
-        }
-
-        @media (min-width: 769px) {
-            .video-container {
-                height: 100vh; /* Full height for large screens */
-                padding-bottom: 0; /* Remove padding for large screens */
-            }
-
-            .responsive-video, .responsive-image {
-                height: 100%;
-                width: 100%;
-                object-fit: cover; /* Maintain aspect ratio and cover the container */
-            }
-        }
-    </style>
-</head>
-<body>
-    <section class="video-section">
-        <h1>
-            L&C MODELS PREVIEW WEEK 
-            <span style="font-style: italic; font-size: small;">Every Twice a month</span>
-        </h1>
-        <div class="video-container" id="video-container">
-            <!-- The video or image will be dynamically inserted here -->
-        </div>
-    </section>
-
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
         import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 
         // Your Firebase configuration object
@@ -143,6 +68,3 @@
         }
 
         fetchPreviewWeek();
-    </script>
-</body>
-</html>
