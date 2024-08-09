@@ -1340,7 +1340,7 @@ header.is-scrolling .container {
 }
 
 .slider-item img {
-  width: 90%;
+  width: 100%;
   height: auto;
   display: block;
   border-radius: 8px;
@@ -1424,7 +1424,7 @@ header.is-scrolling .container {
   }
 
   .slider-content {
-    width: 95%;
+    width: 100%;
     padding: 5px;
   }
 
