@@ -3,80 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Preview Week Section</title>
-    <style>
-        /* Styling for the video section */
-        .video-section {
-            position: relative;
-            max-width: 100%;
-            margin: 20px auto;
-            padding: 10px;
-            text-align: center;
-        }
-
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
-            height: 0;
-            overflow: hidden;
-            max-width: 100%;
-            background: #000;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            margin: auto;
-        }
-
-        .responsive-iframe, .responsive-video, .responsive-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        .video-container::after {
-            content: '';
-            display: block;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
-        }
-
-        @media (max-width: 768px) {
-            .video-container {
-                padding-bottom: 75%; /* Adjust aspect ratio for mobile */
-            }
-        }
-
-        @media (min-width: 769px) {
-            .video-container {
-                height: 100vh; /* Full height for large screens */
-                padding-bottom: 0; /* Remove padding for large screens */
-            }
-
-            .responsive-video, .responsive-image {
-                height: 100%;
-                width: 100%;
-                object-fit: cover; /* Maintain aspect ratio and cover the container */
-            }
-        }
-    </style>
+    <title>Document</title>
+    <link rel="stylesheet" href="base.css">
 </head>
 <body>
-    <section class="video-section">
-        <h1>
-            L&C MODELS PREVIEW WEEK 
-            <span style="font-style: italic; font-size: small;">Every Twice a month</span>
+    <section id="blogs" class="blog-preview-section">
+        <h1 style="color: rgb(130, 197, 255); font-family: 'Outfit', sans-serif; font-optical-sizing: auto; font-weight: 700; font-style: normal;">
+            DIVERSITY & INCLUSIVITY
         </h1>
-        <div class="video-container" id="video-container">
-            <!-- The video or image will be dynamically inserted here -->
-        </div>
+        <br>
+        <button class="arrow left" onclick="scrollLeft()">&#10094;</button>
+        <div class="blog-preview-container" id="blogPreviewContainer"></div>
+        <button class="arrow right" onclick="scrollRight()">&#10095;</button>
+    
+        <div class="pagination-dots" id="paginationDots"></div>
     </section>
-
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
-        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
-
-        // Your Firebase configuration object
+    <section class="about-us">
+        <p class="oxygen-light" style="font-family: 'Outfit', sans-serif;">
+            We don't have restrictions towards your body type. We are committed and devoted to helping you grow your talent in modeling to a top professional level. Enroll with L&C modeling school today!
+        </p>
+    </section>
+    
+    <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js"></script>
+    
+    <script>
+        // Your web app's Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyAxauEEtqkuJOWA9HRe1jpT_wCXH62nksM",
             authDomain: "schoolcms-77713.firebaseapp.com",
@@ -85,64 +37,86 @@
             messagingSenderId: "757700374571",
             appId: "1:757700374571:web:a86b334d619cf160fa7a6e"
         };
-
+      
         // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
+        const app = firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore(app);
+        const container = document.getElementById('blogPreviewContainer');
+        const paginationDotsContainer = document.getElementById('paginationDots');
+        let scrollAmount = 0;
 
-        async function fetchPreviewWeek() {
-            try {
-                const querySnapshot = await getDocs(collection(db, "preview_week"));
+        // Fetch data from Firestore
+        async function fetchBlogPreviews() {
+            const querySnapshot = await db.collection('diversity_and_inclusivity').get();
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                const blogCard = document.createElement('div');
+                blogCard.classList.add('blog-preview-card');
+                
+                const imageContainer = document.createElement('div');
+                imageContainer.classList.add('image');
+                
+                const img = document.createElement('img');
+                img.src = data.header_image;
+                img.alt = `Modeling Image ${data.name}`;
+                
+                imageContainer.appendChild(img);
+                blogCard.appendChild(imageContainer);
+                container.appendChild(blogCard);
+            });
 
-                if (!querySnapshot.empty) {
-                    querySnapshot.forEach((doc) => {
-                        const data = doc.data();
-                        const videoContainer = document.getElementById('video-container');
-                        const mediaUrl = data.header_image;
+            createPaginationDots();
+        }
 
-                        if (mediaUrl) {
-                            const videoExtensions = ['.mp4', '.webm'];
-                            const imageExtensions = ['.jpg', '.jpeg', '.png'];
-                            const isVideo = videoExtensions.some(ext => mediaUrl.includes(ext));
-                            const isImage = imageExtensions.some(ext => mediaUrl.includes(ext));
+        function createPaginationDots() {
+            const numberOfDots = Math.ceil(container.children.length / 3);
+            for (let i = 0; i < numberOfDots; i++) {
+                const dot = document.createElement('div');
+                dot.classList.add('pagination-dot');
+                dot.addEventListener('click', () => goToPage(i));
+                paginationDotsContainer.appendChild(dot);
+            }
+            updatePaginationDots();
+        }
 
-                            if (isVideo) {
-                                const videoElement = document.createElement('video');
-                                videoElement.className = 'responsive-video';
-                                videoElement.autoplay = true;
-                                videoElement.loop = true;
-                                videoElement.muted = true;
-                                videoElement.playsInline = true;
-
-                                const sourceElement = document.createElement('source');
-                                sourceElement.src = mediaUrl;
-                                sourceElement.type = 'video/mp4'; // assuming mp4 format
-
-                                videoElement.appendChild(sourceElement);
-                                videoContainer.appendChild(videoElement);
-                            } else if (isImage) {
-                                const imageElement = document.createElement('img');
-                                imageElement.className = 'responsive-image';
-                                imageElement.src = mediaUrl;
-                                imageElement.alt = 'Background Image';
-
-                                videoContainer.appendChild(imageElement);
-                            } else {
-                                console.log("Unsupported media format");
-                            }
-                        } else {
-                            console.log("No media found in the database");
-                        }
-                    });
-                } else {
-                    console.log("No documents found in the collection!");
-                }
-            } catch (error) {
-                console.error("Error fetching document:", error);
+        function updatePaginationDots() {
+            const dots = paginationDotsContainer.children;
+            const activeIndex = Math.round(scrollAmount / container.clientWidth);
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].classList.toggle('active', i === activeIndex);
             }
         }
 
-        fetchPreviewWeek();
+        function goToPage(pageIndex) {
+            const width = container.clientWidth;
+            scrollAmount = width * pageIndex;
+            container.style.transform = `translateX(-${scrollAmount}px)`;
+            updatePaginationDots();
+        }
+
+        function scrollLeft() {
+            const width = container.clientWidth;
+            scrollAmount -= width;
+            if (scrollAmount < 0) {
+                scrollAmount = 0;
+            }
+            container.style.transform = `translateX(-${scrollAmount}px)`;
+            updatePaginationDots();
+        }
+
+        function scrollRight() {
+            const width = container.clientWidth;
+            const maxScroll = container.scrollWidth - width;
+            scrollAmount += width;
+            if (scrollAmount > maxScroll) {
+                scrollAmount = maxScroll;
+            }
+            container.style.transform = `translateX(-${scrollAmount}px)`;
+            updatePaginationDots();
+        }
+
+        // Call the fetch function on load
+        fetchBlogPreviews();
     </script>
 </body>
 </html>

@@ -723,72 +723,67 @@ const header = document.querySelector('header');
 
 ///=========================================================================================
 
+  const container = document.getElementById('blogPreviewContainer');
+    const paginationDotsContainer = document.getElementById('paginationDots');
+    let scrollAmount = 0;
 
-
-const container = document.getElementById('blogPreviewContainer');
-        const paginationDotsContainer = document.getElementById('paginationDots');
-        let scrollAmount = 0;
-        let startX;
-        let scrollLeftPos;
-
-        function createPaginationDots() {
-            const numberOfDots = Math.ceil(container.children.length / 3);
-            for (let i = 0; i < numberOfDots; i++) {
-                const dot = document.createElement('div');
-                dot.classList.add('pagination-dot');
-                dot.addEventListener('click', () => goToPage(i));
-                paginationDotsContainer.appendChild(dot);
-            }
-            updatePaginationDots();
+    function createPaginationDots() {
+        const numberOfDots = Math.ceil(container.children.length / 3);
+        for (let i = 0; i < numberOfDots; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('pagination-dot');
+            dot.addEventListener('click', () => goToPage(i));
+            paginationDotsContainer.appendChild(dot);
         }
+        updatePaginationDots();
+    }
 
-        function updatePaginationDots() {
-            const dots = paginationDotsContainer.children;
-            const activeIndex = Math.round(scrollAmount / container.clientWidth);
-            for (let i = 0; i < dots.length; i++) {
-                dots[i].classList.toggle('active', i === activeIndex);
-            }
+    function updatePaginationDots() {
+        const dots = paginationDotsContainer.children;
+        const activeIndex = Math.round(scrollAmount / container.clientWidth);
+        for (let i = 0; i < dots.length; i++) {
+            dots[i].classList.toggle('active', i === activeIndex);
         }
+    }
 
-        function goToPage(pageIndex) {
-            const width = container.clientWidth;
-            scrollAmount = width * pageIndex;
-            container.style.transform = `translateX(-${scrollAmount}px)`;
-            updatePaginationDots();
-        }
+    function goToPage(pageIndex) {
+        const width = container.clientWidth;
+        scrollAmount = width * pageIndex;
+        container.style.transform = `translateX(-${scrollAmount}px)`;
+        updatePaginationDots();
+    }
 
-        function scrollLeft() {
-            const width = container.clientWidth;
-            scrollAmount = Math.max(scrollAmount - width, 0);
-            container.style.transform = `translateX(-${scrollAmount}px)`;
-            updatePaginationDots();
-        }
+    function scrollLeft() {
+        const width = container.clientWidth;
+        scrollAmount = Math.max(scrollAmount - width, 0);
+        container.style.transform = `translateX(-${scrollAmount}px)`;
+        updatePaginationDots();
+    }
 
-        function scrollRight() {
-            const width = container.clientWidth;
-            const maxScroll = container.scrollWidth - width;
-            scrollAmount = Math.min(scrollAmount + width, maxScroll);
-            container.style.transform = `translateX(-${scrollAmount}px)`;
-            updatePaginationDots();
-        }
+    function scrollRight() {
+        const width = container.clientWidth;
+        const maxScroll = container.scrollWidth - width;
+        scrollAmount = Math.min(scrollAmount + width, maxScroll);
+        container.style.transform = `translateX(-${scrollAmount}px)`;
+        updatePaginationDots();
+    }
 
-        container.addEventListener('touchstart', (e) => {
-            startX = e.touches[0].pageX;
-            scrollLeftPos = scrollAmount;
-        });
+    container.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].pageX;
+        scrollLeftPos = scrollAmount;
+    });
 
-        container.addEventListener('touchmove', (e) => {
-            const x = e.touches[0].pageX;
-            const walk = startX - x;
-            const width = container.clientWidth;
-            const maxScroll = container.scrollWidth - width;
-            scrollAmount = Math.max(0, Math.min(maxScroll, scrollLeftPos + walk));
-            container.style.transform = `translateX(-${scrollAmount}px)`;
-            updatePaginationDots();
-        });
+    container.addEventListener('touchmove', (e) => {
+        const x = e.touches[0].pageX;
+        const walk = startX - x;
+        const width = container.clientWidth;
+        const maxScroll = container.scrollWidth - width;
+        scrollAmount = Math.max(0, Math.min(maxScroll, scrollLeftPos + walk));
+        container.style.transform = `translateX(-${scrollAmount}px)`;
+        updatePaginationDots();
+    });
 
-        createPaginationDots();
-
+    createPaginationDots();
 
 ////////////////////////////////////////////////////////////////////////////
 
