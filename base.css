@@ -936,14 +936,6 @@ header.is-scrolling .container {
 
 
 
-
-
-
-
-
-
-
-/*/////////////////////////////////////////////////////////*/
 .blog-preview-section {
   position: relative;
   max-width: 100%;
@@ -1014,21 +1006,22 @@ header.is-scrolling .container {
 
 .arrow {
   position: absolute;
-  top: 50%;
+  top: 98%;
   transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.5);
-  color: #fff;
+  background: rgb(255, 253, 253);
+  color: #020000;
   border: none;
   padding: 10px;
   cursor: pointer;
+  border-radius: 50%;
 }
 
 .arrow.left {
-  left: 0;
+  left: 20px;
 }
 
 .arrow.right {
-  right: 0;
+  right: 20px;
 }
 
 .pagination-dots {
@@ -1053,15 +1046,26 @@ header.is-scrolling .container {
 
 @media (max-width: 768px) {
   .blog-preview-card {
-      flex: 0 0 50%;
+    flex: 0 0 50%;
   }
 }
 
 @media (max-width: 480px) {
   .blog-preview-card {
-      flex: 0 0 100%;
+    flex: 0 0 100%;
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+  }
+
+  .blog-preview-card img {
+    border-radius: 0; /* Remove border radius to make the image touch corners */
+    width: 100vw; /* Make the image take the full width of the viewport */
+    height: auto;
   }
 }
+
+
+
 
 
 
@@ -1413,16 +1417,50 @@ header.is-scrolling .container {
 }
 
 /* Responsive styling */
+/* Reset all margins and paddings */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Ensure no spacing on the entire page */
+html, body {
+  width: 100%;
+  height: 100%;
+ 
+}
+
+/* Styling for the slider container on small devices */
 @media (max-width: 768px) {
-  .slider-item {
-    flex: 0 0 100%;
+  .slider-container {
+    width: 100%;
+    padding: 0;
     margin: 0;
+    overflow: hidden;
   }
 
-  .slider-item img {
+  .slider-item {
+    flex: 0 0 100%;
+    padding: 0;
+    margin: 0;
     width: 100%;
   }
 
+  .slider-item img {
+    width: 100vw; /* Use viewport width to ensure full coverage */
+    height: auto;
+    display: block;
+    margin: 0;
+    border-radius: 5px;
+  }
+  
+  /* Optional: Remove potential spacing from other parent elements */
+  .blog-preview-section {
+    margin: 0;
+    padding: 0;
+  }
+  
   .slider-content {
     width: 100%;
     padding: 5px;
@@ -1431,15 +1469,15 @@ header.is-scrolling .container {
   .slider-arrow {
     padding: 7px;
     font-size: 18px;
-    bottom: -0px; /* Adjust position for smaller devices */
+    bottom: 0;
   }
 
   .slider-arrow-left {
-    left: 20%; /* Ensure both arrows are visible */
+    left: 20%;
   }
 
   .slider-arrow-right {
-    right: 20%; /* Ensure both arrows are visible */
+    right: 20%;
   }
 }
 
