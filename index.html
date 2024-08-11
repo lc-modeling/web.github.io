@@ -29,6 +29,76 @@
       body{
         font-family: 'Outfit', sans-serif;
       }
+
+
+      .form-container {
+  
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 500px;
+  margin: auto;
+  color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h1 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  color: #fff;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  background: transparent;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #66afe9;
+  box-shadow: 0 0 5px rgba(102, 175, 233, 0.8);
+}
+
+.submit-btn {
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.25rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+  background-color: #0056b3;
+}
+
+
+
+
+
+
+
      .social-icons {
             display: flex;
             justify-content: center;
@@ -521,25 +591,47 @@
             <div class="contact-info">
                 <h2 style="color: azure;">Contact Us </h2>
                 <p style="color: aliceblue;">We would love to hear from you. Please fill out the form below for any inquiries.</p>
-                <form id="contact-form" class="contact-form">
+                <div class="form-container">
+                 
+                  <form action="https://docs.google.com/forms/d/e/1FAIpQLScuT_v237ikhoBwT3yr_20933IeOHTitMRP4ykFI4-ESxJmMg/formResponse" method="POST" target="hidden_iframe" onsubmit="handleFormSubmit()">
                     <div class="form-group">
-                        <label for="name">Full Name:</label>
-                        <input type="text" id="name" name="name" required>
+                        <label for="fullname">Full Name</label>
+                        <input type="text" id="fullname" name="entry.99802494" required>
                     </div>
                     <div class="form-group">
-                        <label for="email">Email Address:</label>
-                        <input type="email" id="email" name="email" required>
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="entry.1528339953" required>
                     </div>
                     <div class="form-group">
-                        <label for="telephone">Telephone No:</label>
-                        <input type="tel" id="telephone" name="telephone" required>
+                        <label for="phonenumber">Phone Number</label>
+                        <input type="text" id="phonenumber" name="entry.822223779" required>
                     </div>
                     <div class="form-group">
-                        <label for="message">Message:</label>
-                        <textarea class="text" name="user_project" id="message" placeholder="Write your message"></textarea>
+                        <label for="message">Message</label>
+                        <textarea id="message" name="entry.2014478615" required></textarea>
                     </div>
-                    <button type="submit" style="background-color: rgb(10, 54, 30);" class="btn-submit">Submit</button>
+                    <button type="submit" class="submit-btn">Send</button>
                 </form>
+                
+                <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="formSubmissionComplete()"></iframe>
+                
+                <script>
+                function handleFormSubmit() {
+                    // The form will be submitted as usual.
+                    // We rely on the iframe to capture the submission result.
+                }
+                
+                function formSubmissionComplete() {
+                    // This function will be called once the form submission is complete.
+                    // Reload the page and display the alert.
+                    alert("Form submitted successfully!");
+                    window.location.reload();  // Reload the page
+                }
+                </script>
+                
+              </div>
+              
+              
                 <br>
                 
                 <div class="contact-buttons">
@@ -828,56 +920,24 @@ window.addEventListener('resize', updateSlider);
 
 
 
+function handleFormSubmit() {
+    // The form will be submitted as usual.
+}
+
+function formSubmissionComplete() {
+    // After the form is submitted, reset the form and show a success alert
+    document.querySelector("form").reset();
+    alert("Form submitted successfully!");
+}
+
 ////////////////////////////////////////////////////////////////////////////
-
-(function() {
-        emailjs.init("dsXzYWYxtQEg1cUPx"); // Initialize EmailJS with your public key
-    })();
-
-    document.getElementById('contact-form').addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        // Collect form data
-        var formData = {
-            from_name: document.getElementById('name').value,
-            email: document.getElementById('email').value,
-            telephone: document.getElementById('telephone').value,
-            message: document.getElementById('message').value
-        };
-
-        // Define the email template parameters
-        var templateParams = {
-            to_name: "Recipient", // Change this if you have a specific recipient in mind
-            from_name: formData.from_name,
-            email: formData.email,
-            telephone: formData.telephone,
-            message: formData.message
-        };
-
-        // Send the email using EmailJS
-        emailjs.send('service_hw70pzw', 'template_rqn75wb', templateParams)
-            .then(function(response) {
-                console.log('SUCCESS!', response.status, response.text);
-
-                // Clear the form
-                document.getElementById('contact-form').reset();
-
-                // Display the success message
-                var successMessage = document.getElementById('success-message');
-                successMessage.style.display = 'block';
-
-                // Hide the success message after 5 seconds
-                setTimeout(function() {
-                    successMessage.style.display = 'none';
-                }, 5000);
-            }, function(error) {
-                console.log('FAILED...', error);
-                alert('Failed to send your message. Please try again.');
-            });
-    });
 
 
 
     </script>
+
+<script>
+  
+  </script>
   </body>
 </html>
