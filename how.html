@@ -1,122 +1,179 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="base.css">
-</head>
-<body>
-    <section id="blogs" class="blog-preview-section">
-        <h1 style="color: rgb(130, 197, 255); font-family: 'Outfit', sans-serif; font-optical-sizing: auto; font-weight: 700; font-style: normal;">
-            DIVERSITY & INCLUSIVITY
-        </h1>
-        <br>
-        <button class="arrow left" onclick="scrollLeft()">&#10094;</button>
-        <div class="blog-preview-container" id="blogPreviewContainer"></div>
-        <button class="arrow right" onclick="scrollRight()">&#10095;</button>
+<form id="scouted-form" class="custom-form" action="https://docs.google.com/forms/d/e/1FAIpQLScgvA7mj1yHKalbQhA1kVlbWqy3qJ3AXWSZVOAWUzNoFhAjeA/formResponse" method="POST" target="_self">
+    <label for="full_name">Full Name:</label>
+    <input type="text" id="full_name" name="entry.1019816441" required>
     
-        <div class="pagination-dots" id="paginationDots"></div>
-    </section>
-    <section class="about-us">
-        <p class="oxygen-light" style="font-family: 'Outfit', sans-serif;">
-            We don't have restrictions towards your body type. We are committed and devoted to helping you grow your talent in modeling to a top professional level. Enroll with L&C modeling school today!
-        </p>
-    </section>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="entry.1220679944" required>
     
-    <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js"></script>
+    <label for="telephone">Telephone:</label>
+    <input type="tel" id="telephone" name="entry.169218329" required>
+       
+    <label for="nationality">Nationality:</label>
+    <select id="nationality" name="entry.143653613" required>
+        <!-- No predefined options, user will manually input -->
+    </select>
     
-    <script>
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyAxauEEtqkuJOWA9HRe1jpT_wCXH62nksM",
-            authDomain: "schoolcms-77713.firebaseapp.com",
-            projectId: "schoolcms-77713",
-            storageBucket: "schoolcms-77713.appspot.com",
-            messagingSenderId: "757700374571",
-            appId: "1:757700374571:web:a86b334d619cf160fa7a6e"
-        };
-      
-        // Initialize Firebase
-        const app = firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore(app);
-        const container = document.getElementById('blogPreviewContainer');
-        const paginationDotsContainer = document.getElementById('paginationDots');
-        let scrollAmount = 0;
+    <label for="county">County/Province:</label>
+    <select id="county" name="entry.456324458" required>
+        <!-- No predefined options, user will manually input -->
+    </select>
+    
+    <label for="age">Age:</label>
+    <input type="number" id="age" name="entry.1193438277" required>
+    
+    <label for="gender">Gender:</label>
+    <select id="gender" name="entry.30128656" required>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+    </select>
+ 
+    <label for="about">Tell Us About Yourself:</label>
+    <textarea id="about" name="entry.1519128391" required></textarea>
+    
+    <button type="submit">Submit Your Application</button>
+</form>
+<script src="onlineclasss.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const scoutedForm = document.getElementById('scouted-form');
+        const nationalitySelect = document.getElementById('nationality');
+        const countySelect = document.getElementById('county');
 
-        // Fetch data from Firestore
-        async function fetchBlogPreviews() {
-            const querySnapshot = await db.collection('diversity_and_inclusivity').get();
-            querySnapshot.forEach((doc) => {
-                const data = doc.data();
-                const blogCard = document.createElement('div');
-                blogCard.classList.add('blog-preview-card');
-                
-                const imageContainer = document.createElement('div');
-                imageContainer.classList.add('image');
-                
-                const img = document.createElement('img');
-                img.src = data.header_image;
-                img.alt = `Modeling Image ${data.name}`;
-                
-                imageContainer.appendChild(img);
-                blogCard.appendChild(imageContainer);
-                container.appendChild(blogCard);
-            });
-
-            createPaginationDots();
+        function fetchCountries() {
+            fetch('https://raw.githubusercontent.com/dr5hn/countries-states-cities-database/master/countries.json')
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(country => {
+                        const option = document.createElement('option');
+                        option.value = country.name;
+                        option.textContent = country.name;
+                        nationalitySelect.appendChild(option);
+                    });
+                });
         }
 
-        function createPaginationDots() {
-            const numberOfDots = Math.ceil(container.children.length / 3);
-            for (let i = 0; i < numberOfDots; i++) {
-                const dot = document.createElement('div');
-                dot.classList.add('pagination-dot');
-                dot.addEventListener('click', () => goToPage(i));
-                paginationDotsContainer.appendChild(dot);
+        function fetchStates(country, targetSelect) {
+            fetch('https://raw.githubusercontent.com/dr5hn/countries-states-cities-database/master/states.json')
+                .then(response => response.json())
+                .then(data => {
+                    targetSelect.innerHTML = '';
+                    data.forEach(state => {
+                        if (state.country_name === country) {
+                            const option = document.createElement('option');
+                            option.value = state.name;
+                            option.textContent = state.name;
+                            targetSelect.appendChild(option);
+                        }
+                    });
+                });
+        }
+
+        nationalitySelect.addEventListener('change', function() {
+            fetchStates(this.value, countySelect);
+        });
+
+        fetchCountries();
+
+        scoutedForm.addEventListener('submit', function(event) {
+            // Form will automatically be submitted to Google Forms
+            alert('Form submitted successfully!');
+        });
+    });
+
+    // Additional code for handling the hamburger menu and other functionality remains the same
+    window.onload = function () {
+        window.addEventListener('scroll', function (e) {
+            if (window.pageYOffset > 100) {
+                document.querySelector("header").classList.add('is-scrolling');
+            } else {
+                document.querySelector("header").classList.remove('is-scrolling');
             }
-            updatePaginationDots();
-        }
+        });
 
-        function updatePaginationDots() {
-            const dots = paginationDotsContainer.children;
-            const activeIndex = Math.round(scrollAmount / container.clientWidth);
-            for (let i = 0; i < dots.length; i++) {
-                dots[i].classList.toggle('active', i === activeIndex);
-            }
-        }
+        const menu_btn = document.querySelector('.hamburger');
+        const mobile_menu = document.querySelector('.mobile-nav');
 
-        function goToPage(pageIndex) {
-            const width = container.clientWidth;
-            scrollAmount = width * pageIndex;
-            container.style.transform = `translateX(-${scrollAmount}px)`;
-            updatePaginationDots();
-        }
+        menu_btn.addEventListener('click', function () {
+            menu_btn.classList.toggle('is-active');
+            mobile_menu.classList.toggle('is-active');
+        });
+    }
 
-        function scrollLeft() {
-            const width = container.clientWidth;
-            scrollAmount -= width;
-            if (scrollAmount < 0) {
-                scrollAmount = 0;
-            }
-            container.style.transform = `translateX(-${scrollAmount}px)`;
-            updatePaginationDots();
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            header.classList.add('is-scrolling');
+        } else {
+            header.classList.remove('is-scrolling');
         }
+    });
 
-        function scrollRight() {
-            const width = container.clientWidth;
-            const maxScroll = container.scrollWidth - width;
-            scrollAmount += width;
-            if (scrollAmount > maxScroll) {
-                scrollAmount = maxScroll;
-            }
-            container.style.transform = `translateX(-${scrollAmount}px)`;
-            updatePaginationDots();
+    document.querySelector('.hamburger').addEventListener('click', function () {
+        this.classList.toggle('is-active');
+    });
+
+    const container = document.getElementById('blogPreviewContainer');
+    const paginationDotsContainer = document.getElementById('paginationDots');
+    let scrollAmount = 0;
+    let startX;
+    let scrollLeftPos;
+
+    function createPaginationDots() {
+        const numberOfDots = Math.ceil(container.children.length / 3);
+        for (let i = 0; i < numberOfDots; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('pagination-dot');
+            dot.addEventListener('click', () => goToPage(i));
+            paginationDotsContainer.appendChild(dot);
         }
+        updatePaginationDots();
+    }
 
-        // Call the fetch function on load
-        fetchBlogPreviews();
-    </script>
-</body>
-</html>
+    function updatePaginationDots() {
+        const dots = paginationDotsContainer.children;
+        const activeIndex = Math.round(scrollAmount / container.clientWidth);
+        for (let i = 0; i < dots.length; i++) {
+            dots[i].classList.toggle('active', i === activeIndex);
+        }
+    }
+
+    function goToPage(pageIndex) {
+        const width = container.clientWidth;
+        scrollAmount = width * pageIndex;
+        container.style.transform = `translateX(-${scrollAmount}px)`;
+        updatePaginationDots();
+    }
+
+    function scrollLeft() {
+        const width = container.clientWidth;
+        scrollAmount = Math.max(scrollAmount - width, 0);
+        container.style.transform = `translateX(-${scrollAmount}px)`;
+        updatePaginationDots();
+    }
+
+    function scrollRight() {
+        const width = container.clientWidth;
+        const maxScroll = container.scrollWidth - width;
+        scrollAmount = Math.min(scrollAmount + width, maxScroll);
+        container.style.transform = `translateX(-${scrollAmount}px)`;
+        updatePaginationDots();
+    }
+
+    container.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].pageX;
+        scrollLeftPos = scrollAmount;
+    });
+
+    container.addEventListener('touchmove', (e) => {
+        const x = e.touches[0].pageX;
+        const walk = startX - x;
+        const width = container.clientWidth;
+        const maxScroll = container.scrollWidth - width;
+        scrollAmount = Math.max(0, Math.min(maxScroll, scrollLeftPos + walk));
+        container.style.transform = `translateX(-${scrollAmount}px)`;
+        updatePaginationDots();
+    });
+
+    createPaginationDots();
+</script>

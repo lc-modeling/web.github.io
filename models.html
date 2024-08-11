@@ -244,40 +244,46 @@
         <p>Are you ready to make your mark in the modeling industry? At L&C Modeling School, we're always on the lookout for fresh faces and unique talent. If you have the passion and the potential, we want to hear from you!</p>
         
         <h3>How to Apply</h3>
-        <form id="scouted-form" class="custom-form">
+        <form id="scouted-form" class="custom-form" action="https://docs.google.com/forms/d/e/1FAIpQLScgvA7mj1yHKalbQhA1kVlbWqy3qJ3AXWSZVOAWUzNoFhAjeA/formResponse" method="POST" target="hidden_iframe">
             <label for="full_name">Full Name:</label>
-            <input type="text" id="full_name" name="full_name" required>
+            <input type="text" id="full_name" name="entry.1019816441" required>
             
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" name="entry.1220679944" required>
             
             <label for="telephone">Telephone:</label>
-            <input type="tel" id="telephone" name="telephone" required>
+            <input type="tel" id="telephone" name="entry.169218329" required>
                
             <label for="nationality">Nationality:</label>
-            <select id="nationality" name="nationality" required></select>
+            <select id="nationality" name="entry.143653613" required>
+                <!-- No predefined options, user will manually input -->
+            </select>
             
             <label for="county">County/Province:</label>
-            <select id="county" name="county" required></select>
+            <select id="county" name="entry.456324458" required>
+                <!-- No predefined options, user will manually input -->
+            </select>
             
             <label for="age">Age:</label>
-            <input type="number" id="age" name="age" required>
+            <input type="number" id="age" name="entry.1193438277" required>
             
             <label for="gender">Gender:</label>
-            <select id="gender" name="gender" required>
+            <select id="gender" name="entry.30128656" required>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
                 <option value="Other">Other</option>
             </select>
          
-            <label for="photos">Upload Photos:</label>
-            <input type="file" id="photos" name="photos" accept="image/*" required>
-            
             <label for="about">Tell Us About Yourself:</label>
-            <textarea id="about" name="about" required></textarea>
+            <textarea id="about" name="entry.1519128391" required></textarea>
             
             <button type="submit">Submit Your Application</button>
         </form>
+        
+        <!-- Hidden iframe to handle form submission without redirect -->
+        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+        
+        
         
         <p><em>Please ensure all information provided is accurate and up-to-date. We will review all submissions and contact selected candidates for further steps.</em></p>
     </section>
@@ -291,19 +297,19 @@
         <form id="online-classes-form" class="custom-form">
             <label for="full_name">Full Name:</label>
             <input type="text" id="full_name" name="full_name" required>
-            
+        
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required>
-            
+        
             <label for="telephone">Telephone:</label>
             <input type="tel" id="telephone" name="telephone" required>
-              <label for="nationality">Nationality:</label>
+        
+            <label for="nationality">Nationality:</label>
             <select id="online_nationality" name="nationality" required></select>
-            
+        
             <label for="county">County/Province:</label>
             <select id="online_county" name="county" required></select>
-            
-          
+        
             <label for="preferred_course">Preferred Course:</label>
             <select id="preferred_course" name="preferred_course" required>
                 <option value="Introduction to Modeling">Introduction to Modeling</option>
@@ -311,13 +317,15 @@
                 <option value="Commercial Modeling">Commercial Modeling</option>
                 <option value="Portfolio Development">Portfolio Development</option>
             </select>
-            
+        
             <label for="start_date">Preferred Start Date:</label>
             <input type="date" id="start_date" name="start_date" required>
-            
+        
             <button type="submit">Submit</button>
         </form>
     </section>
+
+
     <section  id="blogs" style="max-width: 90% ;" class="blog-preview-section">
             
             
@@ -460,24 +468,12 @@
   
     </footer>
     
- 
-<!-- Include intl-tel-input JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
-
-  
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script src="book.js"></script>
     <script>
-        (function() {
-            emailjs.init("dsXzYWYxtQEg1cUPx");
-        })();
-    
         document.addEventListener('DOMContentLoaded', function() {
             const scoutedForm = document.getElementById('scouted-form');
-            const onlineClassesForm = document.getElementById('online-classes-form');
             const nationalitySelect = document.getElementById('nationality');
-            const onlineNationalitySelect = document.getElementById('online_nationality');
             const countySelect = document.getElementById('county');
-            const onlineCountySelect = document.getElementById('online_county');
     
             function fetchCountries() {
                 fetch('https://raw.githubusercontent.com/dr5hn/countries-states-cities-database/master/countries.json')
@@ -488,7 +484,6 @@
                             option.value = country.name;
                             option.textContent = country.name;
                             nationalitySelect.appendChild(option);
-                            onlineNationalitySelect.appendChild(option.cloneNode(true));
                         });
                     });
             }
@@ -513,69 +508,20 @@
                 fetchStates(this.value, countySelect);
             });
     
-            onlineNationalitySelect.addEventListener('change', function() {
-                fetchStates(this.value, onlineCountySelect);
-            });
-    
             fetchCountries();
     
             scoutedForm.addEventListener('submit', function(event) {
-                event.preventDefault();
-                const formData = new FormData(scoutedForm);
-                const templateParams = {
-                    to_name: 'Admin',
-                    from_name: formData.get('full_name'),
-                    email: formData.get('email'),
-                    telephone: formData.get('telephone'),
-                    county: formData.get('county'),
-                    first_name: formData.get('full_name').split(' ')[0],
-                    age: formData.get('age'),
-                    gender: formData.get('gender'),
-                    nationality: formData.get('nationality'),
-                    course: 'Scouting Application',
-                    start_date: new Date().toLocaleDateString(),
-                    about: formData.get('about'),
-                    photos: formData.get('photos') // Add handling for file uploads if needed
-                };
+                event.preventDefault(); // Prevent the default form submission
+                scoutedForm.target = 'hidden_iframe'; // Set the target to the hidden iframe
+                scoutedForm.submit(); // Submit the form
     
-                emailjs.send('service_hw70pzw', 'template_vot7k6s', templateParams)
-                    .then(function(response) {
-                        console.log('SUCCESS!', response.status, response.text);
-                        alert('Form submitted successfully!');
-                        scoutedForm.reset();
-                    }, function(error) {
-                        console.log('FAILED...', error);
-                        alert('Form submission failed. Please try again.');
-                    });
-            });
-    
-            onlineClassesForm.addEventListener('submit', function(event) {
-                event.preventDefault();
-                const formData = new FormData(onlineClassesForm);
-                const templateParams = {
-                    to_name: 'Admin',
-                    from_name: formData.get('full_name'),
-                    email: formData.get('email'),
-                    telephone: formData.get('telephone'),
-                    county: formData.get('county'),
-                    first_name: formData.get('full_name').split(' ')[0],
-                    nationality: formData.get('nationality'),
-                    course: formData.get('preferred_course'),
-                    start_date: formData.get('start_date')
-                };
-    
-                emailjs.send('service_hw70pzw', 'template_vot7k6s', templateParams)
-                    .then(function(response) {
-                        console.log('SUCCESS!', response.status, response.text);
-                        alert('Form submitted successfully!');
-                        onlineClassesForm.reset();
-                    }, function(error) {
-                        console.log('FAILED...', error);
-                        alert('Form submission failed. Please try again.');
-                    });
+                // Show success message and clear the form
+                alert('Form submitted successfully!');
+                scoutedForm.reset();
             });
         });
     
+        // Additional code for handling the hamburger menu and other functionality remains the same
         window.onload = function () {
             window.addEventListener('scroll', function (e) {
                 if (window.pageYOffset > 100) {
@@ -671,7 +617,7 @@
     
         createPaginationDots();
     </script>
-    
+   <script type="module" src="onlineclasss.js"></script>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
         import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
