@@ -404,7 +404,8 @@ a:focus-visible {
   text-align: center;
   position: relative; /* Ensure it's relative to its parent */
   z-index: 10;
-  color: var(--color-title);
+  color: whitesmoke;
+  text-shadow: 3px 3px 6px rgba(2, 2, 2, 0.973);
   text-transform: uppercase;
   top: 45%; /* Move down slightly */
   transform: translateY(-50%); /* Center it vertically */
