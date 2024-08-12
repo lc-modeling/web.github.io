@@ -15,6 +15,22 @@
 
   <style>
 
+.green-button {
+    display: inline-block;
+    padding: 12px 20px;
+    background-color: #28a745;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    
+}
+
+.green-button:hover {
+    background-color: #2b2188;
+}
 
 
 .outfit{
@@ -284,8 +300,29 @@
         <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
         
         
-        
-        <p><em>Please ensure all information provided is accurate and up-to-date. We will review all submissions and contact selected candidates for further steps.</em></p>
+        <br>
+<hr>
+    <h3>Upload Your Photos</h3>
+    <br>
+    <p>To help us evaluate your potential, please upload a few recent photos. These should include:</p>
+    <ul>
+     <p> <strong>A headshot</strong>: A clear image of your face, with minimal makeup and no filters.</p>  
+     <p> <strong>A full-body shot</strong>: Wear fitted clothing that shows your silhouette.</p>  
+     <p> <strong>Profile photos</strong>: Both left and right profiles.</p> 
+    </ul>
+    <p>Please ensure that the photos are high-quality, well-lit, and accurately represent your current look. Once you’re ready, click the link below to upload your</p>
+     <br>
+  <!-- Green button to open the Google Form in the same tab -->
+<p><a href="https://forms.gle/Cj26hZQzaBHs5s8M7" id="upload-button" class="green-button">Upload Your Photos Here</a></p>
+
+
+   
+   
+    <br>
+    <p><em>Please ensure all information provided is accurate and up-to-date. We will review all submissions and contact selected candidates for further steps.</em></p>
+    
+    <br>
+
     </section>
     
     <!-- Online Classes Section -->
@@ -696,6 +733,29 @@
 
         fetchBackground("main_header_banner", "image1_vedio");
         fetchBackground("models_header", "header_image");
+    </script>
+
+    <script>
+document.getElementById('upload-link').onclick = function(e) {
+    e.preventDefault();
+
+    // Replace the YOUR_GOOGLE_FORM_LINK with your actual Google Form link
+    const googleFormLink = "https://forms.gle/YOUR_GOOGLE_FORM_LINK";
+
+    // Get the iframe element
+    const iframe = document.getElementById('upload-iframe');
+
+    // Set the iframe's source to the Google Form link
+    iframe.src = googleFormLink;
+
+    // Make the iframe visible
+    iframe.style.display = "block";
+
+    // Scroll to the iframe to ensure the user sees it
+    iframe.scrollIntoView({ behavior: "smooth" });
+};
+
+        
     </script>
 </body>
 </html>
