@@ -279,71 +279,60 @@
         <div class="contact-info">
             <h2 style="color: rgb(166, 208, 209);">Enroll Now</h2>
             <p style="color: aquamarine;">Please provide these details.</p>
-            <form class="registration-form" id="registration-form">
-                <!-- Existing form fields -->
+            <form id="registration-form" class="registration-form" onsubmit="sendEmail(event, 'registration-form')">
                 <div class="form-group">
-                    <label for="full-name">Full Name:</label>
-                    <input type="text" id="full-name" name="full-name" required>
+                  <label for="full-name">Full Name:</label>
+                  <input type="text" id="full-name" name="full-name" required>
                 </div>
                 <div class="form-group">
-                    <label for="email">Email Address:</label>
-                    <input type="email" id="email" name="email" required>
+                  <label for="email">Email Address:</label>
+                  <input type="email" id="email" name="email" required>
                 </div>
                 <div class="form-group">
-                    <label for="telephone">Telephone No:</label>
-                    <input type="tel" id="telephone" name="telephone" required>
+                  <label for="telephone">Telephone No:</label>
+                  <input type="tel" id="telephone" name="telephone" required>
                 </div>
                 <div class="form-group">
-                    <label for="nationality">Nationality:</label>
-                    <select id="nationality" name="nationality" required>
-                        <option value="" disabled selected>Select your nationality</option>
-                    </select>
+                  <label for="nationality">Nationality:</label>
+                  <select id="nationality" name="nationality" required></select>
                 </div>
                 <div class="form-group">
-                    <label for="county">County of Residence:</label>
-                    <select id="county" name="county" required>
-                        <option value="" disabled selected>Select your county</option>
-                    </select>
+                  <label for="county">County of Residence:</label>
+                  <select id="county" name="county" required></select>
                 </div>
                 <div class="form-group">
-                    <label for="first-name">First Name:</label>
-                    <input type="text" id="first-name" name="first-name" required>
+                  <label for="age">Age:</label>
+                  <input type="number" id="age" name="age" required>
                 </div>
                 <div class="form-group">
-                    <label for="age">Age:</label>
-                    <input type="number" id="age" name="age" required>
+                  <label for="gender">Gender:</label>
+                  <select id="gender" name="gender" required>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                  </select>
                 </div>
                 <div class="form-group">
-                    <label for="gender">Gender:</label>
-                    <select id="gender" name="gender" required>
-                        <option value="" disabled selected>Select your gender</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                        <option value="Other">Other</option>
-                    </select>
+                  <label for="id-number">ID/Passport Number:</label>
+                  <input type="text" id="id-number" name="id-number" required>
                 </div>
                 <div class="form-group">
-                    <label for="id-number">ID/Passport Number:</label>
-                    <input type="text" id="id-number" name="id-number" required>
+                  <label for="course">Course Application:</label>
+                  <select id="course" name="course" required>
+                    <option value="How to Build Your Portfolio">How to Build Your Portfolio</option>
+                    <option value="Beauty Pageantry">Beauty Pageantry</option>
+                    <option value="Public Speaking/Modeling Etiquette">Public Speaking/Modeling Etiquette</option>
+                    <option value="High Fashion Modeling Classes">High Fashion Modeling Classes</option>
+                    <option value="home coaching">home coaching</option>
+                  </select>
                 </div>
                 <div class="form-group">
-                    <label for="course">Course Application:</label>
-                    <select id="course" name="course" required>
-                        <option value="" disabled selected>Select a course</option>
-                        <option value="How to Build Your Portfolio">How to Build Your Portfolio</option>
-                        <option value="Beauty Pageantry">Beauty Pageantry</option>
-                        <option value="Public Speaking/Modeling Etiquette">Public Speaking/Modeling Etiquette</option>
-                        <option value="High Fashion Modeling Classes">High Fashion Modeling Classes</option>
-                        <option value="home coaching">home coaching</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="start-date">State your Starting Date and Month:</label>
-                    <input type="date" id="start-date" name="start-date" required>
+                  <label for="start-date">State your Starting Date and Month:</label>
+                  <input type="date" id="start-date" name="start-date" required>
                 </div>
                 <br>
                 <button type="submit" class="btn-submit">Submit</button>
-            </form>
+              </form>
     
                 <!-- Download Buttons -->
                 <div class="download-buttons">
@@ -411,8 +400,15 @@
         
     </main>
    
-  
-    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function(){
+            emailjs.init({
+                publicKey: "4FWgmfHCRbCX00_Nu",
+            });
+        })();
+    </script>
+    <script src="email.js"></script>
    <script>
 
     document.addEventListener('DOMContentLoaded', function() {
@@ -459,7 +455,7 @@
             event.preventDefault();
 
             const formData = new FormData(form);
-            const googleFormUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdaHd5EpPQkKv04KsrGicDV8rslvdQMA8K3CXfFjoPWGht-_g/formResponse";
+            const googleFormUrl = "httpsooglkKv04KsrGicDV8rslvdQMA8K3CXfFjoPWGht-_g/formResponse";
 
             const formParams = new URLSearchParams();
             formParams.append('entry.1585363289', formData.get('full-name'));

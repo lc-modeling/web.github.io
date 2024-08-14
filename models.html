@@ -260,45 +260,42 @@
         <p>Are you ready to make your mark in the modeling industry? At L&C Modeling School, we're always on the lookout for fresh faces and unique talent. If you have the passion and the potential, we want to hear from you!</p>
         
         <h3>How to Apply</h3>
-        <form id="scouted-form" class="custom-form" action="https://docs.google.com/forms/d/e/1FAIpQLScgvA7mj1yHKalbQhA1kVlbWqy3qJ3AXWSZVOAWUzNoFhAjeA/formResponse" method="POST" target="hidden_iframe">
+       
+        
+        <form id="scouted-form" class="custom-form" onsubmit="sendEmail(event, 'scouted-form')">
             <label for="full_name">Full Name:</label>
-            <input type="text" id="full_name" name="entry.1019816441" required>
+            <input type="text" id="full_name" name="full_name" required>
             
             <label for="email">Email:</label>
-            <input type="email" id="email" name="entry.1220679944" required>
+            <input type="email" id="email" name="email" required>
             
             <label for="telephone">Telephone:</label>
-            <input type="tel" id="telephone" name="entry.169218329" required>
-               
+            <input type="tel" id="telephone" name="telephone" required>
+            
             <label for="nationality">Nationality:</label>
-            <select id="nationality" name="entry.143653613" required>
-                <!-- No predefined options, user will manually input -->
-            </select>
+            <select id="nationality" name="nationality" required></select>
             
             <label for="county">County/Province:</label>
-            <select id="county" name="entry.456324458" required>
-                <!-- No predefined options, user will manually input -->
-            </select>
+            <select id="county" name="county" required></select>
             
             <label for="age">Age:</label>
-            <input type="number" id="age" name="entry.1193438277" required>
+            <input type="number" id="age" name="age" required>
             
             <label for="gender">Gender:</label>
-            <select id="gender" name="entry.30128656" required>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
+            <select id="gender" name="gender" required>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
             </select>
-         
+          
+            <label for="photo">Upload a Photo of Yourself</label>
+            <input type="file" id="photo" name="photo" accept="image/*">
+          
             <label for="about">Tell Us About Yourself:</label>
-            <textarea id="about" name="entry.1519128391" required></textarea>
+            <textarea id="about" name="about" required></textarea>
             
             <button type="submit">Submit Your Application</button>
-        </form>
-        
-        <!-- Hidden iframe to handle form submission without redirect -->
-        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
-        
+          </form>
         
         <br>
 <hr>
@@ -331,35 +328,36 @@
         <p>Can't make it to our campus? No worries! L&C Modeling School offers comprehensive online classes that you can join from the comfort of your home. Whether you're a beginner or looking to enhance your skills, our online classes are designed to help you succeed in the modeling industry.</p>
         
         <h3>Sign Up for Online Classes</h3>
-        <form id="online-classes-form" class="custom-form">
+        <form id="online-classes-form" class="custom-form" onsubmit="sendEmail(event, 'online-classes-form')">
             <label for="full_name">Full Name:</label>
             <input type="text" id="full_name" name="full_name" required>
-        
+          
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required>
-        
+          
             <label for="telephone">Telephone:</label>
             <input type="tel" id="telephone" name="telephone" required>
-        
+          
             <label for="nationality">Nationality:</label>
             <select id="online_nationality" name="nationality" required></select>
-        
+          
             <label for="county">County/Province:</label>
             <select id="online_county" name="county" required></select>
-        
-            <label for="preferred_course">Preferred Course:</label>
+          
+            <label for="preferred_course">Preferred online Course:</label>
             <select id="preferred_course" name="preferred_course" required>
-                <option value="Introduction to Modeling">Introduction to Modeling</option>
-                <option value="Advanced Runway Techniques">Advanced Runway Techniques</option>
-                <option value="Commercial Modeling">Commercial Modeling</option>
-                <option value="Portfolio Development">Portfolio Development</option>
+              <option value="online classes to Modeling"> Introduction to Modeling</option>
+              <option value=" online classes Advanced Runway Techniques"> Advanced Runway Techniques</option>
+              <option value="online classes Commercial Modeling">  Commercial Modeling</option>
+              <option value="online classes Portfolio Development"> Portfolio Development</option>
             </select>
-        
+          
             <label for="start_date">Preferred Start Date:</label>
             <input type="date" id="start_date" name="start_date" required>
-        
+          
             <button type="submit">Submit</button>
-        </form>
+          </form>
+          
     </section>
 
 
@@ -435,7 +433,7 @@
         </ul>
         
         <h3>How to Book</h3>
-        <form id="booking-form" class="custom-form">
+        <form id="booking-form" class="custom-form" onsubmit="sendEmail(event, 'booking-form')">
             <label for="full_name">Full Name:</label>
             <input type="text" id="full_name" name="full_name" required>
             
@@ -449,7 +447,7 @@
             <textarea id="project_details" name="project_details" required></textarea>
             
             <button type="submit">Book a Model</button>
-        </form>
+          </form>
         
         <p><em>For any inquiries or special requests, please contact our booking team on our socials</em></p>
     
@@ -504,8 +502,15 @@
         <p>&copy; L&C Modeling. All rights reserved.</p>
   
     </footer>
-    
-<script src="book.js"></script>
+    <script src="email.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script type="text/javascript">
+      (function(){
+          emailjs.init({
+              publicKey: "4FWgmfHCRbCX00_Nu",
+          });
+      })();
+  </script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const scoutedForm = document.getElementById('scouted-form');
