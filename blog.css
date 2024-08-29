@@ -19,13 +19,39 @@ body {
     font-style: normal;
   }
   
+/* Default styles for larger screens */
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  background-color: rgba(73, 70, 250, 0.2);
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.post img {
+  width: 80%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  transition: transform 0.3s;
+  margin: 0 auto;
+}
+
+/* Media query for small screens (phones) */
+@media (max-width: 768px) {
   .container {
-    max-width: 800px;
-    margin: 20px auto;
-    background-color: rgba(73, 70, 250, 0.2); 
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 100%; /* Allow container to take full width on small screens */
+    padding: 0; /* Remove padding to ensure the image can touch the edges */
+    margin: 0; /* Remove margins to make the container fully touch the frame */
   }
+
+  .post img {
+    width: 100%; /* Make the image take full width of the container */
+    border-radius: 0; /* Remove border radius to make the image edges touch */
+    margin: 0; /* Remove margin for the image to fully touch the container edges */
+  }
+}
+
   
   .header {
     background-color: #061320;
@@ -49,15 +75,25 @@ body {
     border-bottom: 2px solid #cfcfcf;
   }
   
+  /* Default styles for large screens */
+.post img {
+  width: 80%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  transition: transform 0.3s;
+  margin: 0 auto;
+}
+
+/* Media query for small screens (phones) */
+@media (max-width: 768px) {
   .post img {
-   width: 80%;
-    height: auto;
-    display: block;
-    border-radius: 8px;
-    transition: transform 0.3s;
-    margin: 0 auto;
+    width: 100%;
+    border-radius: 0; /* Remove border radius if needed to make it fully touch the frame */
+    margin: 0; /* Remove margin to make it touch the frame */
   }
-  
+}
+
   .post h2 {
     color: #333;
     font-size: 24px;

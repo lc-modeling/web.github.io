@@ -740,27 +740,6 @@
         fetchBackground("models_header", "header_image");
     </script>
 
-    <script>
-document.getElementById('upload-link').onclick = function(e) {
-    e.preventDefault();
-
-    // Replace the YOUR_GOOGLE_FORM_LINK with your actual Google Form link
-    const googleFormLink = "https://forms.gle/YOUR_GOOGLE_FORM_LINK";
-
-    // Get the iframe element
-    const iframe = document.getElementById('upload-iframe');
-
-    // Set the iframe's source to the Google Form link
-    iframe.src = googleFormLink;
-
-    // Make the iframe visible
-    iframe.style.display = "block";
-
-    // Scroll to the iframe to ensure the user sees it
-    iframe.scrollIntoView({ behavior: "smooth" });
-};
-
-        
-    </script>
+    
 </body>
 </html>
