@@ -91,8 +91,22 @@
 
 </head>
 <body>
-    <header class="header">
-        L&C Modeling
+    <header>
+        <nav class="navbar">
+          <div class="brand-title">LC Blog & Stories</div>
+          <a href="javascript:void(0);" class="toggle-button" id="toggle-button">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </a>
+          <div class="navbar-links" id="navbar-links">
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="#blog-container">Blog</a></li>
+              <li><a href="#blog-preview-section">Stories</a></li>
+            </ul>
+          </div>
+        </nav>
       </header>
       <div class="intro-text">
         Welcome to L&C Modeling School Blog! Discover the latest trends in modeling, tips from industry experts, and stories from our talented students. Stay tuned for updates and insights into the glamorous world of modeling.
@@ -160,6 +174,22 @@
         <p>&copy; L&C Modeling. All rights reserved.</p>
     </footer>
     <script type="module" src="script.js"></script>
+    <script>
+  document.getElementById("toggle-button").addEventListener("click", function() {
+  const navbarLinks = document.getElementById("navbar-links");
+  navbarLinks.classList.toggle("active");
+});
+
+// Close the menu when a navigation link is clicked
+const navLinks = document.querySelectorAll(".navbar-links a");
+navLinks.forEach(link => {
+  link.addEventListener("click", function() {
+    const navbarLinks = document.getElementById("navbar-links");
+    navbarLinks.classList.remove("active");
+  });
+});
+
+    </script>
     <script type="module" src="scriptblog.js"></script>
 </body>
 </html>

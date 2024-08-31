@@ -227,3 +227,93 @@ body {
     }
   }
   
+
+  
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  padding: 10px 20px;
+  color: white;
+}
+
+.brand-title {
+  font-size: 1.5em;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+.navbar-links li {
+  margin-left: 20px;
+}
+
+.navbar-links a {
+  text-decoration: none;
+  color: white;
+  font-size: 1em;
+}
+
+/* Hamburger button styles */
+.toggle-button {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 21px;
+  cursor: pointer;
+}
+
+.toggle-button .bar {
+  height: 3px;
+  width: 100%;
+  background-color: white;
+  border-radius: 10px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .navbar-links {
+    display: none;
+    width: 100%;
+    background-color: #333; /* Ensures the dropdown menu has a background */
+    position: absolute; /* Positions the dropdown */
+    top: 60px; /* Adjust as needed */
+    left: 0;
+    flex-direction: column;
+  }
+
+  .navbar-links.active {
+    display: flex;
+  }
+
+  .navbar-links ul {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .navbar-links li {
+    text-align: center;
+    margin: 15px 0;
+  }
+
+  .toggle-button {
+    display: flex;
+  }
+}
+
+@media (min-width: 769px) {
+  .toggle-button {
+    display: none;
+  }
+}
