@@ -17,6 +17,27 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="blog.css">
     <style>
+html {
+  scroll-behavior: smooth;
+}
+
+/* Share Icon Styles */
+.share-icon {
+  display: inline-block;
+  margin-top: 15px;
+ padding-left: 1cm;
+  color: #070707; /* Facebook-like blue */
+  font-size: 24px;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.share-icon:hover {
+  color: #8a1f66; /* Lighter blue on hover */
+}
+
+
+
 .created-on {
     color: green;
 }
@@ -192,5 +213,65 @@ navLinks.forEach(link => {
     </script>
     <script type="module" src="scriptblog.js"></script>
     <script type="module" src="blog.js"></script>
+    <script type="module" src="">
+
+      // Function to copy the shareable URL to the clipboard and show popup
+function copyToClipboard(url) {
+  const tempInput = document.createElement('input');
+  tempInput.value = url;
+  document.body.appendChild(tempInput);
+  tempInput.select();
+  document.execCommand('copy');
+  document.body.removeChild(tempInput);
+  
+  // Show popup
+  showPopup('URL copied to clipboard!');
+}
+
+// Function to show popup
+function showPopup(message) {
+  let popup = document.createElement('div');
+  popup.className = 'popup';
+  popup.innerHTML = `<span>${message}</span><i class="fa-solid fa-check-circle"></i>`;
+  document.body.appendChild(popup);
+
+  setTimeout(() => {
+    popup.classList.add('show');
+  }, 100);
+
+  setTimeout(() => {
+    popup.classList.remove('show');
+    setTimeout(() => {
+      document.body.removeChild(popup);
+    }, 400); // wait for transition to finish
+  }, 3000); // display for 3 seconds
+}
+
+
+document.querySelector('a.oxygen-light').addEventListener('click', function (event) {
+  event.preventDefault(); // Prevent the default anchor click behavior
+
+  const targetElement = document.querySelector('#blog-container');
+  const offset = 100; // Adjust this value based on your header height
+
+  if (targetElement) {
+    const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+    const offsetPosition = elementPosition - offset;
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth'
+    });
+  } else {
+    // Fallback: navigate to the blog.html page if the element isn't found
+    window.location.href = 'blog.html#blog-container';
+  }
+});
+
+
+
+    </script>
+
+    
 </body>
 </html>

@@ -27,7 +27,6 @@ function debounce(func, delay) {
 // Function to fetch and display blog posts
 async function displayBlogPosts() {
   const blogRef = collection(firestore, "lcschoolblog");
-  // Create a query to order by 'published_on' in descending order
   const blogQuery = query(blogRef, orderBy("published_on", "desc"));
   const blogContainer = document.getElementById('blog-container');
   const loadingIndicator = document.createElement('p');
@@ -58,11 +57,17 @@ async function displayBlogPosts() {
         }
       });
 
+      // Create the unique shareable URL
+      const shareUrl = `${window.location.origin}/blog.html?header_image=${encodeURIComponent(postData.header_image)}`;
+
       postElement.innerHTML = `
         <h2>${sanitizeHTML(postData.name)}</h2>
         <img src="${sanitizeHTML(postData.header_image)}" alt="${sanitizeHTML(postData.name)}">
         <p style="color: green; font-size: inherit;">${formattedDate}</p>
         <div class="green-transparent-bg">${contentHtml}</div>
+        <a href="#" class="share-icon" onclick="copyToClipboard('${shareUrl}')">
+          <i class="fa-solid fa-square-arrow-up-right"></i>
+        </a>
         <div class="separator"></div>
         <div class="dots">
           <span class="dot green"></span>
@@ -80,7 +85,7 @@ async function displayBlogPosts() {
       const targetPost = document.getElementById(encodeURIComponent(headerImage));
       if (targetPost) {
         debounce(() => {
-          targetPost.scrollIntoView({ behavior: 'smooth' });
+          targetPost.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }, 200)();
       }
     }
@@ -97,5 +102,18 @@ function sanitizeHTML(str) {
   return temp.innerHTML;
 }
 
+// Function to copy the shareable URL to the clipboard
+function copyToClipboard(url) {
+  const tempInput = document.createElement('input');
+  tempInput.value = url;
+  document.body.appendChild(tempInput);
+  tempInput.select();
+  document.execCommand('copy');
+  document.body.removeChild(tempInput);
+  alert('URL copied to clipboard: ' + url);
+}
+
 // Fetch and display the blog posts on page load
 displayBlogPosts();
+
+

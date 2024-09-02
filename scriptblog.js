@@ -15,6 +15,7 @@ const firebaseConfig = {
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApps()[0];
 const firestore = getFirestore(app);
 
+// Function to copy the shareable URL to the clipboard
 function copyToClipboard(url) {
   navigator.clipboard.writeText(url).then(() => {
     alert('Link copied to clipboard!');
@@ -23,6 +24,7 @@ function copyToClipboard(url) {
   });
 }
 
+// Expose the copyToClipboard function to the global scope
 window.copyToClipboard = copyToClipboard;
 
 async function displayBlogPosts() {
@@ -32,8 +34,9 @@ async function displayBlogPosts() {
 
   blogSnapshot.forEach(doc => {
     const postData = doc.data();
-    const blogPost = document.createElement('div');
-    blogPost.className = 'blog-post';
+    const postElement = document.createElement('div');
+    postElement.className = 'blog-post';
+    postElement.id = encodeURIComponent(postData.header_image_stories);
 
     const sliderContainerId = `slider-${doc.id}`;
     let sliderItemsHTML = "";
@@ -50,7 +53,10 @@ async function displayBlogPosts() {
 
     const createdOnDate = new Date(postData.created_on.seconds * 1000).toLocaleDateString();
 
-    blogPost.innerHTML = `
+    // Create the unique shareable URL
+    const shareUrl = `${window.location.origin}/blog.html?header_image=${encodeURIComponent(postData.header_image_stories)}`;
+
+    postElement.innerHTML = `
       <h2>${postData.Name_story}</h2>
       <div class="slider-container">
         <div id="${sliderContainerId}" class="slider">
@@ -63,11 +69,23 @@ async function displayBlogPosts() {
         <p class="created-on">${createdOnDate}</p>
          <div class="blue-transparent-bg">${postData.text_description}</div>
         <br>
-        <i class="fa-solid fa-share" onclick="copyToClipboard('${window.location.origin}?post=${doc.id}')"></i>
+        <a href="#" class="share-icon" onclick="copyToClipboard('${shareUrl}')">
+          <i class="fa-solid fa-share"></i>
+        </a>
       </div>
     `;
-    blogPostsContainer.appendChild(blogPost);
+    blogPostsContainer.appendChild(postElement);
   });
+
+  // Scroll to the specific post if header_image matches
+  const urlParams = new URLSearchParams(window.location.search);
+  const headerImage = urlParams.get('header_image');
+  if (headerImage) {
+    const targetPost = document.getElementById(encodeURIComponent(headerImage));
+    if (targetPost) {
+      targetPost.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
 }
 
 function createMediaElement(url, altText) {
@@ -119,6 +137,7 @@ function updateSlider(sliderId) {
   slider.style.transform = `translateX(-${totalWidth}px)`;
 }
 
+// Handle resizing to adjust the slider
 window.addEventListener('resize', () => {
   const sliders = document.querySelectorAll('.slider');
   sliders.forEach(slider => {
@@ -127,4 +146,5 @@ window.addEventListener('resize', () => {
   });
 });
 
+// Fetch and display the blog posts on page load
 displayBlogPosts();
