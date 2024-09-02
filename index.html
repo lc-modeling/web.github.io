@@ -667,7 +667,7 @@
     <script type="module" src="header1.js"></script>
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-      import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+      import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
     
       // Your Firebase configuration
       const firebaseConfig = {
@@ -686,8 +686,10 @@
       // Function to fetch and display blog posts
       async function displayBlogPosts() {
         const blogRef = collection(firestore, "lcschoolblog");
+        // Create a query to order by 'published_on' in descending order
+        const blogQuery = query(blogRef, orderBy("published_on", "desc"));
         const blogContainer = document.getElementById('blog-container');
-        const blogSnapshot = await getDocs(blogRef);
+        const blogSnapshot = await getDocs(blogQuery);
     
         blogSnapshot.forEach(doc => {
           const postData = doc.data();
@@ -709,6 +711,7 @@
       // Fetch and display the blog posts on page load
       displayBlogPosts();
     </script>
+    
     
     <script>
       window.onload = function () {
