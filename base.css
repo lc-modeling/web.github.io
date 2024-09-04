@@ -402,26 +402,38 @@ a:focus-visible {
 
 .headings {
   text-align: center;
-  position: relative; /* Ensure it's relative to its parent */
+  position: relative;
   z-index: 10;
   color: whitesmoke;
   text-shadow: 3px 3px 6px rgba(2, 2, 2, 0.973);
   text-transform: uppercase;
-  top: 45%; /* Move down slightly */
-  transform: translateY(-50%); /* Center it vertically */
+  top: 45%;
+  transform: translateY(-50%);
 }
 
 .headings__main {
   line-height: 0.5;
-  
   font-family: "Oxygen", sans-serif;
   font-weight: 400;
   font-style: normal;
+  white-space: nowrap; /* Prevents wrapping */
 }
 
 .headings_subtitle {
   line-height: 0.5;
-  font-size: clamp(0.8rem, 0.6rem + 0.8vw, 1.5rem); /* Reduced font size */
+  font-size: clamp(0.8rem, 0.6rem + 0.8vw, 1.5rem);
+}
+
+/* Media query for small devices */
+@media (max-width: 600px) {
+  .headings h1 {
+    font-size: clamp(1.5rem, 1rem + 2vw, 2.5rem); /* Adjust font size for smaller screens */
+    white-space: nowrap; /* Ensures text stays on one line */
+  }
+
+  .headings h4 {
+    font-size: clamp(0.7rem, 0.5rem + 1vw, 1.2rem); /* Reduce font size for small screens */
+  }
 }
 
 @media screen and (min-width: 53em) {

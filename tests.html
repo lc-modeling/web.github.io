@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diversity & Inclusivity</title>
+    <style>
+        .blog-preview-section {
+            max-width: 90%;
+            margin: 0 auto;
+        }
+        .section__title {
+            color: rgb(130, 197, 255);
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 2em;
+            text-align: center;
+        }
+        .blog-preview-container {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+        }
+        .blog-preview-card {
+            flex: 0 0 auto;
+            width: 200px;
+            margin: 10px;
+            background-color: #f5f5f5;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .blog-preview-card .image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .arrow {
+            background: none;
+            border: none;
+            font-size: 2em;
+            cursor: pointer;
+        }
+        .pagination-dots {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .pagination-dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            margin: 0 5px;
+            background-color: #ccc;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .pagination-dot.active {
+            background-color: #333;
+        }
+        .about-us p {
+            font-family: 'Outfit', sans-serif;
+            text-align: center;
+            font-size: 1.2em;
+            margin: 20px auto;
+            max-width: 600px;
+        }
+    </style>
+</head>
+<body>
+    <section id="blogs" class="blog-preview-section">
+        <h1 class="section__title">DIVERSITY & INCLUSIVITY</h1>
+        <br />
+        <div class="blog-preview-container" id="blogPreviewContainer"></div>
+        <div class="pagination-dots" id="paginationDots"></div>
+    </section>
+
+    <section class="about-us">
+        <p>We don't have restrictions towards your body type. We are committed and devoted to helping you grow your talent in modeling to a top professional level. Enroll with L&C modeling school today!</p>
+    </section>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+        import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAxauEEtqkuJOWA9HRe1jpT_wCXH62nks",
+            authDomain: "schoolcms-77713.firebaseapp.com",
+            projectId: "schoolcms-77713",
+            storageBucket: "schoolcms-77713.appspot.com",
+            messagingSenderId: "757700374571",
+            appId: "1:757700374571:web:a86b334d619cf160fa7a6e"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        const container = document.getElementById('blogPreviewContainer');
+        const paginationDotsContainer = document.getElementById('paginationDots');
+        let scrollAmount = 0;
+
+        async function fetchAndDisplayImages() {
+            try {
+                const modelsCollection = collection(db, 'diversity_and_inclusivity');
+                const modelsQuery = query(modelsCollection, orderBy('time', 'desc'));
+                const querySnapshot = await getDocs(modelsQuery);
+
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    const imageUrl = data.header_image;
+
+                    if (imageUrl && typeof imageUrl === 'string' && imageUrl.trim() !== '') {
+                        addImageToContainer(imageUrl);
+                    } else {
+                        console.error(`No valid image URL found in document: ${doc.id}`, data);
+                    }
+                });
+
+                if (container.children.length === 0) {
+                    console.warn('No images were added to the container. Check your Firestore data.');
+                }
+
+                createPaginationDots();
+
+            } catch (error) {
+                console.error('Error fetching images from Firestore:', error);
+            }
+        }
+
+        function addImageToContainer(imageUrl) {
+            const card = document.createElement('div');
+            card.classList.add('blog-preview-card');
+
+            const imageDiv = document.createElement('div');
+            imageDiv.classList.add('image');
+
+            const img = document.createElement('img');
+            img.src = imageUrl;
+            img.alt = "Diversity & Inclusivity Image";
+            img.onerror = () => console.error('Failed to load image at URL:', imageUrl);
+
+            imageDiv.appendChild(img);
+            card.appendChild(imageDiv);
+            container.appendChild(card);
+        }
+
+        function createPaginationDots() {
+            const numberOfDots = Math.ceil(container.children.length / 3);
+            paginationDotsContainer.innerHTML = "";
+            for (let i = 0; i < numberOfDots; i++) {
+                const dot = document.createElement('div');
+                dot.classList.add('pagination-dot');
+                dot.addEventListener('click', () => goToPage(i));
+                paginationDotsContainer.appendChild(dot);
+            }
+            updatePaginationDots();
+        }
+
+        function updatePaginationDots() {
+            const dots = paginationDotsContainer.children;
+            const activeIndex = Math.round(scrollAmount / container.clientWidth);
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].classList.toggle('active', i === activeIndex);
+            }
+        }
+
+        function goToPage(pageIndex) {
+            const width = container.clientWidth;
+            scrollAmount = width * pageIndex;
+            container.style.transform = `translateX(-${scrollAmount}px)`;
+            updatePaginationDots();
+        }
+
+        container.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].pageX;
+            scrollLeftPos = scrollAmount;
+        });
+
+        container.addEventListener('touchmove', (e) => {
+            const x = e.touches[0].pageX;
+            const walk = startX - x;
+            const width = container.clientWidth;
+            const maxScroll = container.scrollWidth - width;
+            scrollAmount = Math.max(0, Math.min(maxScroll, scrollLeftPos + walk));
+            container.style.transform = `translateX(-${scrollAmount}px)`;
+            updatePaginationDots();
+        });
+
+        fetchAndDisplayImages();
+    </script>
+</body>
+</html>
