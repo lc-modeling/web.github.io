@@ -432,7 +432,7 @@ a:focus-visible {
   }
 
   .headings h4 {
-    font-size: clamp(0.7rem, 0.5rem + 1vw, 1.2rem); /* Reduce font size for small screens */
+    font-size: clamp(0.9rem, 0.7rem + 1vw, 1.4rem); /* Reduce font size for small screens */
   }
 }
 
