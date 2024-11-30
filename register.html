@@ -273,66 +273,66 @@
         element.classList.toggle('active');
     }
 </script>
-  <section id="contact" class="contact-section">
+<section id="contact" class="contact-section">
     <div class="section-content">
-        <h2 class="section__title" style="color: white;">Join Us Today</h2>
+        <h2 class="section__title">Join Us Today</h2>
         <div class="contact-info">
-            <h2 style="color: rgb(166, 208, 209);">Enroll Now</h2>
-            <p style="color: aquamarine;">Please provide these details.</p>
+            <h2>Enroll Now</h2>
+            <p>Please provide these details.</p>
             <form id="registration-form" class="registration-form" onsubmit="sendEmail(event, 'registration-form')">
                 <div class="form-group">
-                  <label for="full-name">Full Name:</label>
-                  <input type="text" id="full-name" name="full-name" required>
+                    <label for="full-name">Full Name:</label>
+                    <input type="text" id="full-name" name="full-name" required>
                 </div>
                 <div class="form-group">
-                  <label for="email">Email Address:</label>
-                  <input type="email" id="email" name="email" required>
+                    <label for="email">Email Address:</label>
+                    <input type="email" id="email" name="email" required>
                 </div>
                 <div class="form-group">
-                  <label for="telephone">Telephone No:</label>
-                  <input type="tel" id="telephone" name="telephone" required>
+                    <label for="telephone">Telephone No:</label>
+                    <input type="tel" id="telephone" name="telephone" required>
                 </div>
                 <div class="form-group">
-                  <label for="nationality">Nationality:</label>
-                  <select id="nationality" name="nationality" required></select>
+                    <label for="nationality">Nationality:</label>
+                    <select id="nationality" name="nationality" required></select>
                 </div>
                 <div class="form-group">
-                  <label for="county">County of Residence:</label>
-                  <select id="county" name="county" required></select>
+                    <label for="county">County/Province of Residence:</label>
+                    <input type="text" id="county" name="county" required>
                 </div>
                 <div class="form-group">
-                  <label for="age">Age:</label>
-                  <input type="number" id="age" name="age" required>
+                    <label for="age">Age:</label>
+                    <input type="number" id="age" name="age" required>
                 </div>
                 <div class="form-group">
-                  <label for="gender">Gender:</label>
-                  <select id="gender" name="gender" required>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Other">Other</option>
-                  </select>
+                    <label for="gender">Gender:</label>
+                    <select id="gender" name="gender" required>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
                 </div>
                 <div class="form-group">
-                  <label for="id-number">ID/Passport Number:</label>
-                  <input type="text" id="id-number" name="id-number" required>
+                    <label for="id-number">ID/Passport Number:</label>
+                    <input type="text" id="id-number" name="id-number" required>
                 </div>
                 <div class="form-group">
-                  <label for="course">Course Application:</label>
-                  <select id="course" name="course" required>
-                    <option value="How to Build Your Portfolio">How to Build Your Portfolio</option>
-                    <option value="Beauty Pageantry">Beauty Pageantry</option>
-                    <option value="Public Speaking/Modeling Etiquette">Public Speaking/Modeling Etiquette</option>
-                    <option value="High Fashion Modeling Classes">High Fashion Modeling Classes</option>
-                    <option value="home coaching">home coaching</option>
-                  </select>
+                    <label for="course">Course Application:</label>
+                    <select id="course" name="course" required>
+                        <option value="How to Build Your Portfolio">How to Build Your Portfolio</option>
+                        <option value="Beauty Pageantry">Beauty Pageantry</option>
+                        <option value="Public Speaking/Modeling Etiquette">Public Speaking/Modeling Etiquette</option>
+                        <option value="High Fashion Modeling Classes">High Fashion Modeling Classes</option>
+                        <option value="home coaching">Home Coaching</option>
+                    </select>
                 </div>
                 <div class="form-group">
-                  <label for="start-date">State your Starting Date and Month:</label>
-                  <input type="date" id="start-date" name="start-date" required>
+                    <label for="start-date">State your Starting Date and Month:</label>
+                    <input type="date" id="start-date" name="start-date" required>
                 </div>
                 <br>
                 <button type="submit" class="btn-submit">Submit</button>
-              </form>
+            </form>
     
                 <!-- Download Buttons -->
                 <div class="download-buttons">
@@ -400,90 +400,36 @@
         
     </main>
    
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <script type="text/javascript">
-        (function(){
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        (function() {
             emailjs.init({
                 publicKey: "4FWgmfHCRbCX00_Nu",
             });
         })();
     </script>
     <script src="email.js"></script>
-   <script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const nationalitySelect = document.getElementById('nationality');
 
-    document.addEventListener('DOMContentLoaded', function() {
-        const form = document.getElementById('registration-form');
-        const nationalitySelect = document.getElementById('nationality');
-        const countySelect = document.getElementById('county');
-
-        function fetchCountries() {
-            fetch('https://raw.githubusercontent.com/dr5hn/countries-states-cities-database/master/countries.json')
-                .then(response => response.json())
-                .then(data => {
-                    data.forEach(country => {
+            async function fetchCountries() {
+                try {
+                    const response = await fetch('https://restcountries.com/v3.1/all');
+                    const countries = await response.json();
+                    countries.forEach(country => {
                         const option = document.createElement('option');
-                        option.value = country.name;
-                        option.textContent = country.name;
+                        option.value = country.name.common;
+                        option.textContent = country.name.common;
                         nationalitySelect.appendChild(option);
                     });
-                });
-        }
+                } catch (error) {
+                    console.error('Error fetching countries:', error);
+                }
+            }
 
-        function fetchStates(country) {
-            fetch('https://raw.githubusercontent.com/dr5hn/countries-states-cities-database/master/states.json')
-                .then(response => response.json())
-                .then(data => {
-                    countySelect.innerHTML = '<option value="" disabled selected>Select your county</option>';
-                    data.forEach(state => {
-                        if (state.country_name === country) {
-                            const option = document.createElement('option');
-                            option.value = state.name;
-                            option.textContent = state.name;
-                            countySelect.appendChild(option);
-                        }
-                    });
-                });
-        }
-
-        nationalitySelect.addEventListener('change', function() {
-            fetchStates(this.value);
-        });
-
-        fetchCountries();
-
-        form.addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            const formData = new FormData(form);
-            const googleFormUrl = "httpsooglkKv04KsrGicDV8rslvdQMA8K3CXfFjoPWGht-_g/formResponse";
-
-            const formParams = new URLSearchParams();
-            formParams.append('entry.1585363289', formData.get('full-name'));
-            formParams.append('entry.2037469775', formData.get('email'));
-            formParams.append('entry.858942408', formData.get('telephone'));
-            formParams.append('entry.1615014722', formData.get('nationality'));
-            formParams.append('entry.1288358507', formData.get('county'));
-            formParams.append('entry.779612522', formData.get('first-name'));
-            formParams.append('entry.1784102390', formData.get('age'));
-            formParams.append('entry.745083427', formData.get('gender'));
-            formParams.append('entry.1500336013', formData.get('id-number'));
-            formParams.append('entry.1556826747', formData.get('course'));
-            formParams.append('entry.762263845', formData.get('start-date'));
-
-            fetch(googleFormUrl, {
-                method: "POST",
-                mode: "no-cors",
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded"
-                },
-                body: formParams.toString()
-            }).then(() => {
-                alert('Form submitted successfully!');
-                form.reset();
-            }).catch(() => {
-                alert('Form submission failed. Please try again.');
-            });
-        });
+            fetchCountries();
+        
 
         // Existing JS functions
 

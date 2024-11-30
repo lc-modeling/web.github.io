@@ -265,37 +265,39 @@
         <form id="scouted-form" class="custom-form" onsubmit="sendEmail(event, 'scouted-form')">
             <label for="full_name">Full Name:</label>
             <input type="text" id="full_name" name="full_name" required>
-            
+        
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required>
-            
+        
             <label for="telephone">Telephone:</label>
             <input type="tel" id="telephone" name="telephone" required>
-            
+        
             <label for="nationality">Nationality:</label>
-            <select id="nationality" name="nationality" required></select>
-            
+            <select id="nationality" name="nationality" required>
+                <option value="" disabled selected>Select your nationality</option>
+            </select>
+        
             <label for="county">County/Province:</label>
-            <select id="county" name="county" required></select>
-            
+            <input type="text" id="county" name="county" placeholder="Enter your county or province" required>
+        
             <label for="age">Age:</label>
             <input type="number" id="age" name="age" required>
-            
+        
             <label for="gender">Gender:</label>
             <select id="gender" name="gender" required>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-              <option value="Other">Other</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
             </select>
-          
-            <label for="photo">Upload a Photo of Yourself</label>
+        
+            <label for="photo">Upload a Photo of Yourself:</label>
             <input type="file" id="photo" name="photo" accept="image/*">
-          
+        
             <label for="about">Tell Us About Yourself:</label>
             <textarea id="about" name="about" required></textarea>
-            
+        
             <button type="submit">Submit Your Application</button>
-          </form>
+        </form>
         
         <br>
 <hr>
@@ -331,32 +333,35 @@
         <form id="online-classes-form" class="custom-form" onsubmit="sendEmail(event, 'online-classes-form')">
             <label for="full_name">Full Name:</label>
             <input type="text" id="full_name" name="full_name" required>
-          
+        
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required>
-          
+        
             <label for="telephone">Telephone:</label>
             <input type="tel" id="telephone" name="telephone" required>
-          
+        
             <label for="nationality">Nationality:</label>
-            <select id="online_nationality" name="nationality" required></select>
-          
-            <label for="county">County/Province:</label>
-            <select id="online_county" name="county" required></select>
-          
-            <label for="preferred_course">Preferred online Course:</label>
-            <select id="preferred_course" name="preferred_course" required>
-              <option value="online classes to Modeling"> Introduction to Modeling</option>
-              <option value=" online classes Advanced Runway Techniques"> Advanced Runway Techniques</option>
-              <option value="online classes Commercial Modeling">  Commercial Modeling</option>
-              <option value="online classes Portfolio Development"> Portfolio Development</option>
+            <select id="online_nationality" name="nationality" required>
+                <option value="" disabled selected>Select your nationality</option>
             </select>
-          
+        
+            <label for="county">County/Province:</label>
+            <input type="text" id="online_county" name="county" placeholder="Enter your county or province" required>
+        
+            <label for="preferred_course">Preferred Online Course:</label>
+            <select id="preferred_course" name="preferred_course" required>
+                <option value="Introduction to Modeling">Introduction to Modeling</option>
+                <option value="Advanced Runway Techniques">Advanced Runway Techniques</option>
+                <option value="Commercial Modeling">Commercial Modeling</option>
+                <option value="Portfolio Development">Portfolio Development</option>
+            </select>
+        
             <label for="start_date">Preferred Start Date:</label>
             <input type="date" id="start_date" name="start_date" required>
-          
+        
             <button type="submit">Submit</button>
-          </form>
+        </form>
+        
           
     </section>
 
@@ -512,45 +517,29 @@
       })();
   </script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const scoutedForm = document.getElementById('scouted-form');
-            const nationalitySelect = document.getElementById('nationality');
-            const countySelect = document.getElementById('county');
-    
-            function fetchCountries() {
-                fetch('https://raw.githubusercontent.com/dr5hn/countries-states-cities-database/master/countries.json')
-                    .then(response => response.json())
-                    .then(data => {
-                        data.forEach(country => {
-                            const option = document.createElement('option');
-                            option.value = country.name;
-                            option.textContent = country.name;
-                            nationalitySelect.appendChild(option);
-                        });
-                    });
-            }
-    
-            function fetchStates(country, targetSelect) {
-                fetch('https://raw.githubusercontent.com/dr5hn/countries-states-cities-database/master/states.json')
-                    .then(response => response.json())
-                    .then(data => {
-                        targetSelect.innerHTML = '';
-                        data.forEach(state => {
-                            if (state.country_name === country) {
-                                const option = document.createElement('option');
-                                option.value = state.name;
-                                option.textContent = state.name;
-                                targetSelect.appendChild(option);
-                            }
-                        });
-                    });
-            }
-    
-            nationalitySelect.addEventListener('change', function() {
-                fetchStates(this.value, countySelect);
+       document.addEventListener('DOMContentLoaded', function () {
+    const nationalityElements = document.querySelectorAll('[id$="nationality"]'); // Select all nationality dropdowns
+
+    // Fetch and populate the nationality dropdown
+    async function fetchCountries() {
+        try {
+            const response = await fetch('https://restcountries.com/v3.1/all');
+            const countries = await response.json();
+            nationalityElements.forEach(nationalitySelect => {
+                countries.forEach(country => {
+                    const option = document.createElement('option');
+                    option.value = country.name.common;
+                    option.textContent = country.name.common;
+                    nationalitySelect.appendChild(option);
+                });
             });
-    
-            fetchCountries();
+        } catch (error) {
+            console.error('Error fetching countries:', error);
+        }
+    }
+
+    fetchCountries();
+
     
             scoutedForm.addEventListener('submit', function(event) {
                 event.preventDefault(); // Prevent the default form submission
