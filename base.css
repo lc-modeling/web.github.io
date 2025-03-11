@@ -1224,90 +1224,68 @@ header.is-scrolling .container {
 
 
 
-/*=============================================================*/
+/* Base Styles */
 .footer {
-  background:black;
-  color: #fff;
-  padding: 40px 20px;
+  background-color: black;
+  color: white;
   text-align: center;
+  padding: 20px;
+  width: 100%;
+  font-family: "Outfit", sans-serif;
+}
+
+.footer h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  white-space: nowrap; /* Prevents line breaks */
+}
+
+.footer p {
+  margin: 10px 0;
+  white-space: nowrap; /* Keeps each sentence on one line */
 }
 
 .footer a {
   color: #007bff;
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .footer a:hover {
   text-decoration: underline;
 }
 
-.footer p {
-  margin: 10px 0;
-}
-
-.footer .social-icons {
-  margin: 20px 0;
-}
-
-.footer .social-icons .icon-link {
-  margin: 0 10px;
-}
-
-.footer .icon-link img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s;
-}
-
-.footer .icon-link:hover img {
-  transform: scale(1.1);
-}
-
-.footer .design-credit {
-  margin-top: 20px;
-}
-
-.footer {
-  background-color: black;
-  color: white;
-  text-align: center;
-  padding: 20px 0;
-  position: relative;
-  width: 100%;
-}
-.footer h2 {
-  font-family: "Outfit", sans-serif;
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-.footer .partnership-logos, .footer .sponsor-logos {
+/* Logos Container */
+.footer .partnership-logos {
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
+  gap: 10px;
 }
-.footer .partnership-logos img, .footer .sponsor-logos img {
+
+.footer .partnership-logos img {
   width: 90px;
   height: 90px;
   margin: 10px;
 }
-.footer .website-logo {
-  width: 100px;
-  height: auto;
-  margin-top: 20px;
-}
+
+/* Mobile Styles */
 @media (max-width: 768px) {
-  .footer .partnership-logos img, .footer .sponsor-logos img {
-      width: 60px;
-      height: 60px;
+  .footer h2 {
+    font-size: 18px;
+  }
+  
+  .footer p,
+  .footer a {
+    font-size: 14px;
+  }
+  
+  .footer .partnership-logos img {
+    width: 60px;
+    height: 60px;
   }
 }
-
-
-
-
-
 
 
 
