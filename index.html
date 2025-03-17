@@ -26,6 +26,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="base.css">
+    <script type="module" src="modelsmanagement.js"></script>
+    <link rel="stylesheet" href="modelsmanagement.css">
     <style>
       body{
         font-family: 'Outfit', sans-serif;
@@ -145,7 +147,7 @@
             <a class="oxygen-light" href="homecoaching.html">home coaching </a>
             <a class="oxygen-light" href="models.html">Get scouted</a>
             <a class="oxygen-light" href="models.html#book-our-models">Book our Models</a>
-            <a class="oxygen-light" href="loginform.html">sign in</a>
+            <a class="oxygen-light" href="model.html">Models Management</a>
             
           </nav>
           <button class="hamburger">
@@ -165,6 +167,7 @@
             <a class="oxygen-light" href="models.html">Get scouted</a>
             <a class="oxygen-light" href="models.html#book-our-models">Book our Models</a>
             <a class="oxygen-light" href="loginform.html">sign in</a>
+            <a class="oxygen-light" href="model.html">Models Management</a>
       </nav>
 
       <div class="intro-section" id="background-container">
@@ -403,13 +406,41 @@
               <div class="slider-arrow slider-arrow-right" onclick="moveRight()">&#10095;</div>
             </div>
           </section>
+<br><br>
 
+ <!-- ======== Header Section ======== -->
+ <section class="custom-header-section">
+  <img src="modelsh.png" alt="Header Image">
+<a href="model.html">view more</a>
+</section>
+
+<h1 style="text-align: center; font-size: 2em; color: aquamarine;">
+ OUR L&C MODELS 
+ 
+</h1>
+<br><br>
+<!-- ======== Profile Slider Section ======== -->
+<section class="custom-slider-section">
+  <div class="custom-slider-container">
+    <div class="custom-slider-track" id="custom-slider-track">
+      <!-- Dynamic slides will be inserted here -->
+    </div>
+  </div>
+  <!-- Slider Controls -->
+  <div class="custom-slider-controls">
+    <span class="custom-arrow custom-arrow-left">&#10094;</span>
+    <div class="custom-dots-container" id="custom-dots-container"></div>
+    <span class="custom-arrow custom-arrow-right">&#10095;</span>
+  </div>
+</section>
+<br><br>
 
 <section class="video-section" style="max-width: 100%; margin: auto; padding: 20px;">
-  <h1 style="text-align: center; font-size: 2em;">
+  <h1 style="text-align: center; font-size: 2em; color: aquamarine;">
     L&C MODELS PREVIEW WEEK 
     <span style="font-style: italic; font-size: small;">Every Twice a month</span>
   </h1>
+  <br>
   <br>
   <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%;">
     <iframe 

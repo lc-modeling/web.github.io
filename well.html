@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Model Preview Slider</title>
+  <style>
+    /* ======== Basic Reset and Body ======== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f6f6f6;
+      color: #333;
+    }
+
+    /* ======== Header Section ======== */
+    .custom-header-section {
+      width: 100%;
+      margin-bottom: 30px;
+    }
+    .custom-header-section img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* ======== Slider Section ======== */
+    .custom-slider-section {
+      width: 100%;
+      margin: 0 auto 40px auto;
+      position: relative;
+      padding: 0 20px; /* slight horizontal padding */
+    }
+    .custom-slider-container {
+      overflow: hidden;
+      background-color: #fff;
+      /* Removed border-radius */
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 20px 0;
+    }
+    .custom-slider-track {
+      display: flex;
+      gap: 20px;
+      transition: transform 0.5s ease;
+      will-change: transform;
+    }
+
+    /* Each slide is one profile card */
+    .custom-slide {
+      text-align: center;
+      height: 300px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      background: #fff;
+      border: 1px solid #eaeaea;
+      /* Removed border-radius */
+    }
+
+    /* Profile image styling */
+    .custom-profile-image {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 10px;
+      overflow: hidden;
+      border-radius: 50%;
+    }
+    .custom-profile-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Name and description styling */
+    .custom-slide h3 {
+      margin-bottom: 5px;
+      font-size: 1rem;
+      color: #222;
+    }
+    .custom-slide p {
+      font-size: 0.9rem;
+      color: #555;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3; /* Limit to 3 lines */
+      -webkit-box-orient: vertical;
+    }
+
+    /* Button styling */
+    .custom-slide button {
+      margin-top: 10px;
+      padding: 8px 16px;
+      border: none;
+      background-color: #007BFF;
+      color: #fff;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background-color 0.3s;
+    }
+    .custom-slide button:hover {
+      background-color: #0056b3;
+    }
+
+    /* ======== Arrows & Dots Controls ======== */
+    .custom-slider-controls {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      user-select: none;
+    }
+    .custom-arrow {
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #333;
+      transition: color 0.3s;
+    }
+    .custom-arrow:hover {
+      color: #007BFF;
+    }
+    .custom-dots-container {
+      display: flex;
+      gap: 8px;
+    }
+    .custom-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #ccc;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .custom-dot.active {
+      background-color: #000;
+    }
+
+    /* ======== Responsive Layout ======== */
+    @media (min-width: 992px) {
+      .custom-slide {
+        flex: 0 0 calc((100% - 20px * (6 - 1)) / 6);
+      }
+    }
+    @media (min-width: 600px) and (max-width: 991px) {
+      .custom-slide {
+        flex: 0 0 calc((100% - 20px * (3 - 1)) / 3);
+      }
+    }
+    @media (max-width: 599px) {
+      .custom-slide {
+        flex: 0 0 calc((100% - 20px * (2 - 1)) / 2);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ======== Header Section ======== -->
+  <section class="custom-header-section">
+    <img src="modelsh.jpg" alt="Header Image">
+  </section>
+
+  <!-- ======== Profile Slider Section ======== -->
+  <section class="custom-slider-section">
+    <div class="custom-slider-container">
+      <div class="custom-slider-track" id="custom-slider-track">
+        <!-- Dynamic slides will be inserted here -->
+      </div>
+    </div>
+    <!-- Slider Controls -->
+    <div class="custom-slider-controls">
+      <span class="custom-arrow custom-arrow-left">&#10094;</span>
+      <div class="custom-dots-container" id="custom-dots-container"></div>
+      <span class="custom-arrow custom-arrow-right">&#10095;</span>
+    </div>
+  </section>
+
+  <!-- ======== Firebase & Slider Script ======== -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    // Your Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyAxauEEtqkuJOWA9HRe1jpT_wCXH62nksM",
+      authDomain: "schoolcms-77713.firebaseapp.com",
+      projectId: "schoolcms-77713",
+      storageBucket: "schoolcms-77713.appspot.com",
+      messagingSenderId: "757700374571",
+      appId: "1:757700374571:web:a86b334d619cf160fa7a6e"
+    };
+
+    // Initialize Firebase and Firestore
+    const app = initializeApp(firebaseConfig);
+    const firestore = getFirestore(app);
+
+    // Fetch models ordered by publish_date (newest first)
+    async function fetchModels() {
+      const modelsRef = collection(firestore, "lc_models_management");
+      const modelsQuery = query(modelsRef, orderBy("publish_date", "desc"));
+      const snapshot = await getDocs(modelsQuery);
+      return snapshot.docs.map(doc => doc.data());
+    }
+
+    // Create a slide element for each model
+    function createSlide(modelData) {
+      const slide = document.createElement('div');
+      slide.className = 'custom-slide';
+      // Use encoded header_image as an identifier (assuming uniqueness)
+      slide.id = encodeURIComponent(modelData.header_image);
+      
+      slide.innerHTML = `
+        <div class="custom-profile-image">
+          <img src="${modelData.header_image}" alt="${modelData.name}">
+        </div>
+        <h3>${modelData.name}</h3>
+        <p>${modelData.text_description}</p>
+        <button onclick="window.location.href='model.html?header_image=${encodeURIComponent(modelData.header_image)}'">
+          View Model
+        </button>
+      `;
+      return slide;
+    }
+
+    // Initialize the slider
+    async function initSlider() {
+      const sliderTrack = document.getElementById('custom-slider-track');
+      const dotsContainer = document.getElementById('custom-dots-container');
+      const models = await fetchModels();
+      sliderTrack.innerHTML = '';
+
+      models.forEach(modelData => {
+        const slide = createSlide(modelData);
+        sliderTrack.appendChild(slide);
+      });
+
+      const slides = document.querySelectorAll('.custom-slide');
+      let currentIndex = 0;
+      const totalSlides = slides.length;
+
+      function itemsToShow() {
+        if (window.innerWidth >= 992) {
+          return 6;
+        } else if (window.innerWidth >= 600) {
+          return 3;
+        } else {
+          return 2;
+        }
+      }
+
+      function updateSlider() {
+        const gap = parseInt(getComputedStyle(sliderTrack).gap) || 0;
+        const slideElement = slides[0];
+        const slideFullWidth = slideElement.offsetWidth + gap;
+        // Wrap around if currentIndex is out of bounds
+        if (currentIndex >= totalSlides) currentIndex = 0;
+        if (currentIndex < 0) currentIndex = totalSlides - 1;
+        sliderTrack.style.transform = `translateX(-${currentIndex * slideFullWidth}px)`;
+        updateDots();
+      }
+
+      function createDots() {
+        dotsContainer.innerHTML = '';
+        for (let i = 0; i < totalSlides; i++) {
+          const dot = document.createElement('div');
+          dot.classList.add('custom-dot');
+          dot.addEventListener('click', () => {
+            currentIndex = i;
+            updateSlider();
+          });
+          dotsContainer.appendChild(dot);
+        }
+      }
+
+      function updateDots() {
+        const dots = document.querySelectorAll('.custom-dot');
+        dots.forEach((dot, idx) => {
+          dot.classList.toggle('active', idx === currentIndex);
+        });
+      }
+
+      function nextSlide() {
+        currentIndex++;
+        updateSlider();
+      }
+
+      function prevSlide() {
+        currentIndex--;
+        updateSlider();
+      }
+
+      // Arrow event listeners
+      document.querySelector('.custom-arrow-left').addEventListener('click', prevSlide);
+      document.querySelector('.custom-arrow-right').addEventListener('click', nextSlide);
+      window.addEventListener('resize', updateSlider);
+
+      createDots();
+      updateSlider();
+
+      // Auto slide every 5 seconds
+      setInterval(nextSlide, 5000);
+    }
+
+    initSlider();
+  </script>
+</body>
+</html>
