@@ -67,14 +67,13 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
   >
 
-
   <style>
     /* ======== Global Font Reset to Poppins ======== */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Poppins', sans-serif; /* The key change to apply the font throughout */
+      font-family: 'Poppins', sans-serif;
     }
 
     body {
@@ -506,156 +505,151 @@
       }
     }
 
-/* Import Google Font */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+    /* Import Google Font */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
-/* General Styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
-}
+    /* General Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
 
-/* Navbar Styling */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 50px;
-  background-color: #1c1c1c;
-  color: #fff;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-}
+    /* Navbar Styling */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 50px;
+      background-color: #1c1c1c;
+      color: #fff;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    }
 
-/* Brand Title */
-.brand-title {
-  font-size: 1.5rem;
-  font-weight: 600;
-}
+    /* Brand Title */
+    .brand-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
 
-/* Navbar Links */
-.navbar-links ul {
-  list-style: none;
-  display: flex;
-  gap: 25px;
-}
+    /* Navbar Links */
+    .navbar-links ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
 
-.navbar-links ul li {
-  display: inline;
-}
+    .navbar-links ul li {
+      display: inline;
+    }
 
-.navbar-links ul li a {
-  text-decoration: none;
-  color: #fff;
-  font-size: 1rem;
-  font-weight: 400;
-  transition: 0.3s ease-in-out;
-  padding: 8px 12px;
-  border-radius: 5px;
-}
+    .navbar-links ul li a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 400;
+      transition: 0.3s ease-in-out;
+      padding: 8px 12px;
+      border-radius: 5px;
+    }
 
-.navbar-links ul li a:hover {
-  background-color: #ff6b6b;
-  color: #fff;
-}
+    .navbar-links ul li a:hover {
+      background-color: #ff6b6b;
+      color: #fff;
+    }
 
-/* Toggle Button (Hamburger Menu) */
-.toggle-button {
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
-}
+    /* Toggle Button (Hamburger Menu) */
+    .toggle-button {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
 
-.bar {
-  background-color: #fff;
-  height: 3px;
-  width: 25px;
-  margin: 4px 0;
-  transition: 0.3s ease-in-out;
-}
+    .bar {
+      background-color: #fff;
+      height: 3px;
+      width: 25px;
+      margin: 4px 0;
+      transition: 0.3s ease-in-out;
+    }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .toggle-button {
-    display: flex;
-  }
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .toggle-button {
+        display: flex;
+      }
 
-  .navbar-links {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-    background-color: #222020;
-    position: absolute;
-    top: 60px;
-    left: 0;
-    text-align: center;
-    padding: 20px 0;
-  }
+      .navbar-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: #222020;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        text-align: center;
+        padding: 20px 0;
+      }
 
-  .navbar-links ul {
-    flex-direction: column;
-    width: 100%;
-  }
+      .navbar-links ul {
+        flex-direction: column;
+        width: 100%;
+      }
 
-  .navbar-links ul li {
-    padding: 15px 0;
-  }
+      .navbar-links ul li {
+        padding: 15px 0;
+      }
 
-  .navbar-links.active {
-    display: flex;
-  }
-}
-
-
+      .navbar-links.active {
+        display: flex;
+      }
+    }
   </style>
 </head>
 <body>
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>L&C Models Management</title>
-     
-    </head>
-    <body>
-    
-      <header>
-        <nav class="navbar">
-          <div class="brand-title">LC Blog & Stories</div>
-          <a href="javascript:void(0);" class="toggle-button" id="toggle-button">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-          </a>
-          <div class="navbar-links" id="navbar-links">
-            <ul>
-              <li><a href="index.html">Home</a></li>
-              <li><a href="blog.html">Blog</a></li>
-             
-            </ul>
-          </div>
-        </nav>
-      </header>
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L&C Models Management</title>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="brand-title">LC Blog & Stories</div>
+        <a href="javascript:void(0);" class="toggle-button" id="toggle-button">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </a>
+        <div class="navbar-links" id="navbar-links">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="blog.html">Blog</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
 
-      <br>
-    
-      <script>
-        // Toggle menu functionality
-        document.getElementById("toggle-button").addEventListener("click", function () {
-          document.getElementById("navbar-links").classList.toggle("active");
-        });
-      </script>
-    
-    </body>
-    </html>
-    
+    <br>
+  
+    <script>
+      // Toggle menu functionality
+      document.getElementById("toggle-button").addEventListener("click", function () {
+        document.getElementById("navbar-links").classList.toggle("active");
+      });
+    </script>
+  
+  </body>
+  </html>
+  
   <!-- L&C Container -->
   <div class="lc-container">
     <!-- Image First -->
@@ -811,7 +805,7 @@
       return temp.innerHTML;
     }
 
-    // Copy link to clipboard
+    // Copy link to clipboard (updated function: alert shows only "Copied")
     function copyToClipboard(url) {
       const tempInput = document.createElement('input');
       tempInput.value = url;
@@ -819,7 +813,7 @@
       tempInput.select();
       document.execCommand('copy');
       document.body.removeChild(tempInput);
-      alert('Copied to clipboard:\n' + url);
+      alert('Copied');
     }
 
     // Toggle the Enquire Modal
@@ -971,7 +965,7 @@
       arrowRight.addEventListener('click', nextSlide);
       window.addEventListener('resize', updateSlider);
 
-      // Auto slide every 5s
+      // Auto slide every 7s
       setInterval(nextSlide, 7000);
 
       createDots();
