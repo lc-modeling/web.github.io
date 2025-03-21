@@ -6,10 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   
   <!-- Primary Meta Tags -->
-  <title>L&C Models Management Kenya | Join 100+ Aspiring Models</title>
+  <title>L&C Models Management Kenya | Join 5000+ Aspiring Models</title>
   <meta 
     name="description" 
-    content="Join L&C Models Management Kenya and be part of 100+ aspiring models. Enjoy professional branding, global exposure, and a non-exclusive contract. Apply now!"
+    content="Join L&C Models Management Kenya and be part of 5000+ aspiring models. Enjoy professional branding, global exposure, and a non-exclusive contract. Apply now!"
   >
   <meta 
     name="keywords" 
@@ -18,10 +18,10 @@
   <meta name="robots" content="index, follow" />
 
   <!-- Open Graph (OG) for Social Media -->
-  <meta property="og:title" content="L&C Models Management Kenya | Join 100+ Aspiring Models" />
+  <meta property="og:title" content="L&C Models Management Kenya | Join 5000+ Aspiring Models" />
   <meta 
     property="og:description" 
-    content="Join L&C Models Management Kenya and be part of 100+ aspiring models. Enjoy professional branding, global exposure, and a non-exclusive contract. Apply now!"
+    content="Join L&C Models Management Kenya and be part of 5000+ aspiring models. Enjoy professional branding, global exposure, and a non-exclusive contract. Apply now!"
   />
   <meta property="og:image" content="modelsh.jpg" />
   <meta property="og:type" content="website" />
@@ -29,10 +29,10 @@
 
   <!-- Twitter Card Tags -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="L&C Models Management Kenya | Join 100+ Aspiring Models">
+  <meta name="twitter:title" content="L&C Models Management Kenya | Join 5000+ Aspiring Models">
   <meta 
     name="twitter:description" 
-    content="Join L&C Models Management Kenya and be part of 100+ aspiring models. Enjoy professional branding, global exposure, and a non-exclusive contract."
+    content="Join L&C Models Management Kenya and be part of 5000+ aspiring models. Enjoy professional branding, global exposure, and a non-exclusive contract."
   >
   <meta name="twitter:image" content="modelsh.jpg">
 
@@ -44,7 +44,7 @@
     "name": "L&C Models Management Kenya",
     "url": "https://your-domain.com",
     "logo": "https://your-domain.com/logo.png",
-    "description": "Join L&C Models Management Kenya and be part of 100+ aspiring models. Enjoy professional branding, global exposure, and a non-exclusive contract.",
+    "description": "Join L&C Models Management Kenya and be part of 5000+ aspiring models. Enjoy professional branding, global exposure, and a non-exclusive contract.",
     "contactPoint": [{
       "@type": "ContactPoint",
       "telephone": "+254-XXX-XXX-XXX",
@@ -661,7 +661,7 @@
 
     <div class="lc-text lc-section">
       <p>
-        L&C Models Management is looking for new faces every day! With unlimited spots available, we aim to feature over 100+ models.
+        L&C Models Management is looking for new faces every day! With unlimited spots available, we aim to feature over 5000+ models.
         To apply, models are required to submit professional photos along with their details, including full name, date of birth, nationality, and occupation.
       </p>
     </div>
@@ -769,6 +769,50 @@
     </div>
   </div>
 
+  <!-- EmailJS Script and Initialization -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script type="text/javascript">
+    (function(){
+      emailjs.init({
+        publicKey: "4FWgmfHCRbCX00_Nu"
+      });
+    })();
+
+    // Updated submitEnquiry function to send enquiry via EmailJS
+    window.submitEnquiry = function() {
+      const name = document.getElementById('userName').value.trim();
+      const email = document.getElementById('userEmail').value.trim();
+      const modelName = document.getElementById('modelName').value;
+      const modelUrl = document.getElementById('modelUrl').value;
+      const type = document.getElementById('enquireType').value;
+      const message = document.getElementById('userMessage').value.trim();
+
+      if (!name || !email) {
+        alert("Please enter your name and email.");
+        return;
+      }
+
+      const templateParams = {
+        user_name: name,
+        user_email: email,
+        model_name: modelName,
+        model_url: modelUrl,
+        enquiry_type: type,
+        user_message: message
+      };
+
+      emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+      .then((result) => {
+          console.log('Enquiry successfully sent!', result.text);
+          alert("Your enquiry has been submitted!");
+          toggleModal(); // close the modal
+      }, (error) => {
+          console.error('Failed to send enquiry. Error:', error);
+          alert("There was an error submitting your enquiry. Please try again later.");
+      });
+    };
+  </script>
+
   <!-- Firebase and Firestore Scripts -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
@@ -805,7 +849,7 @@
       return temp.innerHTML;
     }
 
-    // Copy link to clipboard (updated function: alert shows only "Copied")
+    // Copy link to clipboard
     function copyToClipboard(url) {
       const tempInput = document.createElement('input');
       tempInput.value = url;
@@ -845,31 +889,11 @@
       toggleShareModal();
     };
 
-    // Handle the enquiry submission
-    window.submitEnquiry = function() {
-      const name = document.getElementById('userName').value.trim();
-      const email = document.getElementById('userEmail').value.trim();
-      const modelName = document.getElementById('modelName').value;
-      const modelUrl = document.getElementById('modelUrl').value;
-      const type = document.getElementById('enquireType').value;
-      const message = document.getElementById('userMessage').value.trim();
-
-      if (!name || !email) {
-        alert("Please enter your name and email.");
-        return;
-      }
-
-      // You can integrate your own form handling here (send to server, etc.)
-      alert(`Enquiry Submitted!\n\nName: ${name}\nEmail: ${email}\nModel: ${modelName}\nURL: ${modelUrl}\nType: ${type}\nMessage: ${message}`);
-      toggleModal(); // close the modal after "submission"
-    };
-
     // Share modal button event listeners
     document.getElementById('shareFacebook').addEventListener('click', () => {
       window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentShareUrl)}`, '_blank');
     });
     document.getElementById('shareInstagram').addEventListener('click', () => {
-      // Instagram doesn't offer direct share links. This is just a placeholder.
       window.open('https://www.instagram.com', '_blank');
     });
     document.getElementById('shareTwitter').addEventListener('click', () => {
@@ -884,12 +908,10 @@
 
     // Slider initialization
     function initSlider(sliderContainer, slidesData) {
-      // Create the track
       const sliderTrack = document.createElement('div');
       sliderTrack.className = 'slider-track';
       sliderContainer.appendChild(sliderTrack);
 
-      // Create each slide
       slidesData.forEach(imgSrc => {
         const slide = document.createElement('div');
         slide.className = 'slide';
@@ -897,7 +919,6 @@
         sliderTrack.appendChild(slide);
       });
 
-      // Arrows below the slider
       const sliderArrows = document.createElement('div');
       sliderArrows.className = 'slider-arrows';
       sliderArrows.innerHTML = `
@@ -906,12 +927,10 @@
       `;
       sliderContainer.parentNode.insertBefore(sliderArrows, sliderContainer.nextSibling);
 
-      // Dots below arrows
       const dotsContainer = document.createElement('div');
       dotsContainer.className = 'dots-container';
       sliderContainer.parentNode.insertBefore(dotsContainer, sliderArrows.nextSibling);
 
-      // Slider logic
       const slides = sliderTrack.querySelectorAll('.slide');
       const arrowLeft = sliderArrows.querySelector('.slider-arrow-left');
       const arrowRight = sliderArrows.querySelector('.slider-arrow-right');
@@ -965,7 +984,6 @@
       arrowRight.addEventListener('click', nextSlide);
       window.addEventListener('resize', updateSlider);
 
-      // Auto slide every 7s
       setInterval(nextSlide, 7000);
 
       createDots();
@@ -981,7 +999,7 @@
         const modelsQuery = query(modelsRef, orderBy("publish_date", "desc"));
         const snapshot = await getDocs(modelsQuery);
 
-        allModels.innerHTML = ''; // clear loading text
+        allModels.innerHTML = '';
 
         snapshot.forEach(doc => {
           const data = doc.data();
@@ -989,7 +1007,6 @@
           modelDiv.className = 'model-container';
           modelDiv.id = encodeURIComponent(data.header_image);
 
-          // Format publish date
           let formattedDate = '';
           if (data.publish_date && data.publish_date.toDate) {
             const dateObj = data.publish_date.toDate();
@@ -1000,14 +1017,12 @@
             });
           }
 
-          // Combine header_image + images array
           const allImages = [];
           if (data.header_image) allImages.push(data.header_image);
           if (data.images && Array.isArray(data.images)) {
             allImages.push(...data.images);
           }
 
-          // Build container HTML
           modelDiv.innerHTML = `
             <h2 class="model-name">${sanitizeHTML(data.name)}</h2>
             <div class="slider-container"></div>
@@ -1022,17 +1037,14 @@
             </p>
           `;
 
-          // Slider
           const sliderContainer = modelDiv.querySelector('.slider-container');
           if (allImages.length > 0) {
             initSlider(sliderContainer, allImages);
           }
 
-          // Actions (Share & Enquire)
           const actionsDiv = document.createElement('div');
           actionsDiv.className = 'actions';
 
-          // Share Button (opens share modal)
           const shareBtn = document.createElement('button');
           shareBtn.className = 'share-button';
           shareBtn.innerHTML = '<i class="fas fa-share-alt"></i> Share';
@@ -1041,7 +1053,6 @@
             openShareModal(data.name, shareUrl);
           });
 
-          // Enquire Button
           const enquireBtn = document.createElement('button');
           enquireBtn.className = 'enquire-button';
           enquireBtn.textContent = 'Enquire';
@@ -1057,7 +1068,6 @@
           allModels.appendChild(modelDiv);
         });
 
-        // If ?header_image= is set, scroll to that model
         const urlParams = new URLSearchParams(window.location.search);
         const headerImage = urlParams.get('header_image');
         if (headerImage) {
