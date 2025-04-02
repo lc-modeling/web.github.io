@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Responsive meta tag -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog Posts Management</title>
+    <style>
+      /* Basic Reset */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        padding: 20px;
+      }
+      /* Header Bar */
+      .header-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+      }
+      .header-bar h1 {
+        font-size: 24px;
+        color: #333;
+      }
+      #addPostBtn {
+        padding: 10px 20px;
+        font-size: 16px;
+        border: 2px dashed #007BFF;
+        background: transparent;
+        color: #007BFF;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+      }
+      #addPostBtn:hover {
+        background-color: rgba(0, 123, 255, 0.1);
+      }
+      /* Posts Container (black background for table) */
+      .posts-container {
+        background-color: #000;
+        padding: 10px;
+        border-radius: 8px;
+        overflow-x: auto;
+      }
+      /* Table Styles */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 800px;
+      }
+      th, td {
+        text-align: left;
+        padding: 16px;
+        border-bottom: 1px solid #333;
+        color: #fff;
+        font-size: 16px;
+        white-space: nowrap;
+      }
+      th {
+        background-color: #2c2c2c;
+        font-weight: 600;
+      }
+      td {
+        background-color: #1f1f1f;
+      }
+      /* Thumbnail Styles */
+      .thumbnail {
+        max-width: 80px;
+        max-height: 80px;
+        border-radius: 4px;
+        object-fit: cover;
+      }
+      /* Action Buttons */
+      .actions button {
+        margin-right: 8px;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+      .actions .editBtn {
+        background-color: #007BFF;
+        color: #fff;
+      }
+      .actions .deleteBtn {
+        background-color: #d9534f;
+        color: #fff;
+      }
+      /* Modal Styles */
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.5);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+      }
+      .modal {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        width: 100%;
+        max-width: 500px;
+        position: relative;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+      .modal h2 {
+        margin-bottom: 20px;
+      }
+      .modal .close {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 28px;
+        cursor: pointer;
+      }
+      .modal form {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .modal form input[type="text"],
+      .modal form input[type="file"],
+      .modal form input[type="datetime-local"],
+      .modal form textarea {
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      .modal form textarea {
+        resize: vertical;
+      }
+      .modal form button {
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .modal form .cancelBtn {
+        background-color: #ccc;
+        color: #333;
+      }
+      .modal form .saveBtn {
+        background-color: #007BFF;
+        color: #fff;
+      }
+      /* Responsive Adjustments */
+      @media (max-width: 600px) {
+        .modal {
+          width: 90%;
+        }
+        .header-bar h1 {
+          font-size: 20px;
+        }
+        #addPostBtn {
+          padding: 12px;
+          font-size: 16px;
+        }
+        th, td {
+          padding: 12px;
+          font-size: 14px;
+        }
+        .thumbnail {
+          max-width: 60px;
+          max-height: 60px;
+        }
+        .actions button {
+          padding: 6px 8px;
+          font-size: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header Bar with Title and Add Button -->
+    <div class="header-bar">
+      <h1>Blog Posts</h1>
+      <button id="addPostBtn">+ Add New Post</button>
+    </div>
+
+    <!-- Container for displaying blog posts in a table -->
+    <div class="posts-container">
+      <table id="postsTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Photo</th>
+            <th>Title</th>
+            <th>Published</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Blog posts will be inserted here dynamically -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Modal for Adding/Editing Blog Posts -->
+    <div id="modalOverlay" class="modal-overlay">
+      <div class="modal">
+        <span id="closeModal" class="close">&times;</span>
+        <h2 id="modalTitle">Add Blog Post</h2>
+        <form id="postForm">
+          <input type="text" id="postName" placeholder="Blog Title" required />
+          <input type="file" id="headerImage" accept="image/*" />
+          <input type="datetime-local" id="publishedOn" required />
+          <textarea id="postContent" placeholder="Enter blog content (new paragraph per line)" rows="5" required></textarea>
+          <div style="display: flex; gap: 10px;">
+            <button type="submit" class="saveBtn" id="saveBtn">Save Post</button>
+            <button type="button" class="cancelBtn" id="cancelBtn">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script type="module">
+      import { 
+        initializeApp 
+      } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+      import { 
+        getFirestore, collection, getDocs, query, orderBy, addDoc, updateDoc, deleteDoc, doc, getDoc 
+      } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+      // Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyAxauEEtqkuJOWA9HRe1jpT_wCXH62nksM",
+        authDomain: "schoolcms-77713.firebaseapp.com",
+        projectId: "schoolcms-77713",
+        storageBucket: "schoolcms-77713.appspot.com",
+        messagingSenderId: "757700374571",
+        appId: "1:757700374571:web:a86b334d619cf160fa7a6e"
+      };
+
+      // Initialize Firebase and Firestore
+      const app = initializeApp(firebaseConfig);
+      const firestore = getFirestore(app);
+      const blogCollection = collection(firestore, "lcschoolblog");
+
+      // Cloudinary configuration (for header image upload)
+      const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/dwlasndqv/upload";
+      const CLOUDINARY_UPLOAD_PRESET = "quranpilot";
+
+      // Helper function to sanitize HTML
+      function sanitizeHTML(str) {
+        const temp = document.createElement("div");
+        temp.textContent = str;
+        return temp.innerHTML;
+      }
+
+      // UI Elements
+      const postsTableBody = document.querySelector("#postsTable tbody");
+      const addPostBtn = document.getElementById("addPostBtn");
+      const modalOverlay = document.getElementById("modalOverlay");
+      const closeModalEl = document.getElementById("closeModal");
+      const cancelBtn = document.getElementById("cancelBtn");
+      const postForm = document.getElementById("postForm");
+      const postNameInput = document.getElementById("postName");
+      const headerImageInput = document.getElementById("headerImage");
+      const publishedOnInput = document.getElementById("publishedOn");
+      const postContentInput = document.getElementById("postContent");
+      const saveBtn = document.getElementById("saveBtn");
+      const modalTitle = document.getElementById("modalTitle");
+
+      // Variables for edit mode
+      let currentDocId = null;
+      let currentHeaderImageUrl = "";
+
+      // Function to display blog posts in table view
+      async function displayBlogPosts() {
+        postsTableBody.innerHTML = "<tr><td colspan='5' style='color: #fff;'>Loading posts...</td></tr>";
+        try {
+          // Fetch posts ordered by published_on (descending)
+          const blogQuery = query(blogCollection, orderBy("published_on", "desc"));
+          const snapshot = await getDocs(blogQuery);
+          postsTableBody.innerHTML = "";
+          snapshot.forEach(docSnap => {
+            const data = docSnap.data();
+            const row = document.createElement("tr");
+
+            // ID Column
+            const idCell = document.createElement("td");
+            idCell.textContent = docSnap.id;
+            row.appendChild(idCell);
+
+            // Photo Column
+            const photoCell = document.createElement("td");
+            if (data.header_image) {
+              const img = document.createElement("img");
+              img.src = sanitizeHTML(data.header_image);
+              img.alt = sanitizeHTML(data.name);
+              img.className = "thumbnail";
+              photoCell.appendChild(img);
+            }
+            row.appendChild(photoCell);
+
+            // Title Column
+            const titleCell = document.createElement("td");
+            titleCell.textContent = sanitizeHTML(data.name);
+            row.appendChild(titleCell);
+
+            // Published Date Column (formatted as "March 27, 2025")
+            const publishedCell = document.createElement("td");
+            if (data.published_on) {
+              const dateObj = new Date(data.published_on);
+              const options = { year: "numeric", month: "long", day: "numeric" };
+              publishedCell.textContent = dateObj.toLocaleDateString(undefined, options);
+            }
+            row.appendChild(publishedCell);
+
+            // Actions Column
+            const actionsCell = document.createElement("td");
+            actionsCell.className = "actions";
+            const editBtn = document.createElement("button");
+            editBtn.className = "editBtn";
+            editBtn.textContent = "Edit";
+            editBtn.setAttribute("data-id", docSnap.id);
+            editBtn.addEventListener("click", async () => {
+              const docRef = doc(firestore, "lcschoolblog", docSnap.id);
+              const docData = await getDoc(docRef);
+              if (docData.exists()) {
+                openModal(true, { id: docSnap.id, ...docData.data() });
+              }
+            });
+            actionsCell.appendChild(editBtn);
+
+            const deleteBtn = document.createElement("button");
+            deleteBtn.className = "deleteBtn";
+            deleteBtn.textContent = "Delete";
+            deleteBtn.setAttribute("data-id", docSnap.id);
+            deleteBtn.addEventListener("click", async () => {
+              if (confirm("Are you sure you want to delete this post?")) {
+                await deleteDoc(doc(firestore, "lcschoolblog", docSnap.id));
+                displayBlogPosts();
+              }
+            });
+            actionsCell.appendChild(deleteBtn);
+            row.appendChild(actionsCell);
+
+            postsTableBody.appendChild(row);
+          });
+        } catch (error) {
+          postsTableBody.innerHTML = "<tr><td colspan='5' style='color: #fff;'>Error loading posts.</td></tr>";
+          console.error("Error fetching blog posts:", error);
+        }
+      }
+
+      // Open modal (for adding or editing)
+      function openModal(isEdit = false, postData = {}) {
+        modalOverlay.style.display = "flex";
+        if (isEdit) {
+          modalTitle.textContent = "Edit Blog Post";
+          postNameInput.value = postData.name || "";
+          // For header image, store existing URL (file input cannot be prefilled)
+          currentHeaderImageUrl = postData.header_image || "";
+          publishedOnInput.value = postData.published_on
+            ? new Date(postData.published_on).toISOString().slice(0, 16)
+            : "";
+          // If content is stored as an array, join paragraphs by newline
+          if (Array.isArray(postData.content)) {
+            postContentInput.value = postData.content.map(item => item.value).join("\n");
+          } else {
+            postContentInput.value = postData.content || "";
+          }
+          currentDocId = postData.id;
+        } else {
+          modalTitle.textContent = "Add Blog Post";
+          postForm.reset();
+          currentDocId = null;
+          currentHeaderImageUrl = "";
+          publishedOnInput.value = new Date().toISOString().slice(0, 16);
+        }
+      }
+
+      // Close modal and reset form
+      function closeModalFunc() {
+        modalOverlay.style.display = "none";
+        postForm.reset();
+        currentDocId = null;
+        currentHeaderImageUrl = "";
+      }
+
+      addPostBtn.addEventListener("click", () => openModal(false));
+      closeModalEl.addEventListener("click", closeModalFunc);
+      cancelBtn.addEventListener("click", closeModalFunc);
+
+      // Function to upload file to Cloudinary
+      async function uploadToCloudinary(file) {
+        const formData = new FormData();
+        formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+        formData.append("file", file);
+        const response = await fetch(CLOUDINARY_URL, {
+          method: "POST",
+          body: formData
+        });
+        const data = await response.json();
+        if (response.ok) {
+          return data.secure_url;
+        } else {
+          throw new Error(data.error?.message || "Upload failed");
+        }
+      }
+
+      // Form submission: add new post or update existing
+      postForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        saveBtn.disabled = true;
+        saveBtn.textContent = "Saving...";
+        try {
+          const name = postNameInput.value.trim();
+          const publishedOn = publishedOnInput.value;
+          const contentText = postContentInput.value.trim();
+          // Convert multiline text into an array of paragraph objects
+          const contentArray = contentText
+            .split("\n")
+            .filter(line => line.trim() !== "")
+            .map(line => ({ value: line.trim() }));
+          let headerImageUrl = currentHeaderImageUrl;
+          if (headerImageInput.files.length > 0) {
+            headerImageUrl = await uploadToCloudinary(headerImageInput.files[0]);
+          }
+          const postData = {
+            name,
+            header_image: headerImageUrl,
+            published_on: publishedOn,
+            content: contentArray
+          };
+
+          if (currentDocId) {
+            // Update existing document
+            const docRef = doc(firestore, "lcschoolblog", currentDocId);
+            await updateDoc(docRef, postData);
+            alert("Post updated successfully!");
+          } else {
+            // Create new document
+            await addDoc(blogCollection, postData);
+            alert("Post added successfully!");
+          }
+          displayBlogPosts();
+          closeModalFunc();
+        } catch (error) {
+          console.error("Error saving post:", error);
+          alert("Error saving post. Please try again.");
+        } finally {
+          saveBtn.disabled = false;
+          saveBtn.textContent = "Save Post";
+        }
+      });
+
+      // Initial load of blog posts
+      displayBlogPosts();
+    </script>
+  </body>
+</html>

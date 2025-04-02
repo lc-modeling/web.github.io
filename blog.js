@@ -44,8 +44,14 @@ async function displayBlogPosts() {
       postElement.id = encodeURIComponent(postData.header_image);
 
       let formattedDate = '';
-      if (postData.published_on && postData.published_on.toDate) {
-        const publishedDate = postData.published_on.toDate();
+      if (postData.published_on) {
+        let publishedDate;
+        // Check if published_on is a Firestore Timestamp (has toDate method)
+        if (postData.published_on.toDate) {
+          publishedDate = postData.published_on.toDate();
+        } else {
+          publishedDate = new Date(postData.published_on);
+        }
         const options = { year: 'numeric', month: 'long', day: 'numeric' };
         formattedDate = publishedDate.toLocaleDateString(undefined, options);
       }
@@ -115,5 +121,3 @@ function copyToClipboard(url) {
 
 // Fetch and display the blog posts on page load
 displayBlogPosts();
-
-

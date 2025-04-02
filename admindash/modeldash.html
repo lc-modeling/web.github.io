@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Responsive meta tag -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Models Management</title>
+    <style>
+      /* Basic Reset */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        padding: 20px;
+      }
+      /* Header Bar */
+      .header-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+      }
+      .header-bar h1 {
+        font-size: 24px;
+        color: #333;
+      }
+      #addModelBtn {
+        padding: 10px 20px;
+        font-size: 16px;
+        border: 2px dashed #007BFF;
+        background: transparent;
+        color: #007BFF;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+      }
+      #addModelBtn:hover {
+        background-color: rgba(0, 123, 255, 0.1);
+      }
+      /* Models Container (table view) */
+      .models-container {
+        background-color: #000;
+        padding: 10px;
+        border-radius: 8px;
+        overflow-x: auto;
+      }
+      /* Table Styles */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 1100px;
+      }
+      th, td {
+        text-align: left;
+        padding: 16px;
+        border-bottom: 1px solid #333;
+        color: #fff;
+        font-size: 16px;
+        white-space: nowrap;
+      }
+      th {
+        background-color: #2c2c2c;
+        font-weight: 600;
+      }
+      td {
+        background-color: #1f1f1f;
+      }
+      /* Thumbnail Styles */
+      .thumbnail {
+        max-width: 80px;
+        max-height: 80px;
+        border-radius: 4px;
+        object-fit: cover;
+      }
+      /* Additional Images Preview in Table */
+      .additional-images-container {
+        display: flex;
+        gap: 4px;
+        overflow-x: auto;
+        max-width: 180px;
+      }
+      .additional-images-container img {
+        width: 80px;
+        height: 80px;
+        border-radius: 4px;
+        object-fit: cover;
+      }
+      /* Action Buttons */
+      .actions button {
+        margin-right: 8px;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+      .actions .editBtn {
+        background-color: #007BFF;
+        color: #fff;
+      }
+      .actions .deleteBtn {
+        background-color: #d9534f;
+        color: #fff;
+      }
+      /* Modal Styles */
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.5);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+      }
+      .modal {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        width: 100%;
+        max-width: 600px;
+        position: relative;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+      .modal h2 {
+        margin-bottom: 20px;
+      }
+      .modal .close {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 28px;
+        cursor: pointer;
+      }
+      .modal form {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .modal form input[type="text"],
+      .modal form input[type="file"],
+      .modal form input[type="datetime-local"],
+      .modal form textarea {
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      .modal form textarea {
+        resize: vertical;
+      }
+      .modal form button {
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .modal form .cancelBtn {
+        background-color: #ccc;
+        color: #333;
+      }
+      .modal form .saveBtn {
+        background-color: #007BFF;
+        color: #fff;
+      }
+      /* Preview Slider for Additional Images (in form) */
+      .preview-slider {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        border: 1px solid #ccc;
+        padding: 8px;
+        border-radius: 4px;
+      }
+      .preview-slider img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 4px;
+      }
+      /* Preview for Header Image (in form) */
+      .header-preview {
+        margin-top: 8px;
+        text-align: center;
+      }
+      .header-preview img {
+        max-width: 100%;
+        max-height: 200px;
+        border-radius: 4px;
+        object-fit: cover;
+      }
+      /* Responsive Adjustments */
+      @media (max-width: 600px) {
+        .modal {
+          width: 90%;
+        }
+        .header-bar h1 {
+          font-size: 20px;
+        }
+        #addModelBtn {
+          padding: 12px;
+          font-size: 16px;
+        }
+        th, td {
+          padding: 12px;
+          font-size: 14px;
+        }
+        .thumbnail {
+          max-width: 60px;
+          max-height: 60px;
+        }
+        .actions button {
+          padding: 6px 8px;
+          font-size: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header Bar -->
+    <div class="header-bar">
+      <h1>Models Management</h1>
+      <button id="addModelBtn">+ Add New Model</button>
+    </div>
+
+    <!-- Models Container -->
+    <div class="models-container">
+      <table id="modelsTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Header Image</th>
+            <th>Additional Images</th>
+            <th>Model Name</th>
+            <th>Publish Date</th>
+            <th>Text Description</th>
+            <th>Content</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Models will be populated here dynamically -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Modal for Adding/Editing Models -->
+    <div id="modalOverlay" class="modal-overlay">
+      <div class="modal">
+        <span id="closeModal" class="close">&times;</span>
+        <h2 id="modalTitle">Add Model</h2>
+        <form id="modelForm">
+          <input type="text" id="modelName" placeholder="Model Name" required />
+
+          <label>Header Image (will be used as thumbnail):</label>
+          <input type="file" id="headerImage" accept="image/*" />
+          <!-- Header image preview -->
+          <div id="headerImagePreview" class="header-preview"></div>
+
+          <label>Additional Images (optional, select multiple):</label>
+          <input type="file" id="additionalImages" accept="image/*" multiple />
+          <!-- Preview slider for additional images -->
+          <div id="additionalImagesPreview" class="preview-slider"></div>
+
+          <input type="datetime-local" id="publishDate" required />
+          <textarea id="textDescription" placeholder="Short description" rows="3" required></textarea>
+          <textarea id="fullDescription" placeholder="Full description" rows="5" required></textarea>
+          <!-- New field for content -->
+          <textarea id="content" placeholder="Content" rows="5" required></textarea>
+          <div style="display: flex; gap: 10px;">
+            <button type="submit" class="saveBtn" id="saveBtn">Save Model</button>
+            <button type="button" class="cancelBtn" id="cancelBtn">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Firebase and Cloudinary Scripts -->
+    <script type="module">
+      import { 
+        initializeApp 
+      } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+      import { 
+        getFirestore, collection, getDocs, query, orderBy, addDoc, updateDoc, deleteDoc, doc, getDoc 
+      } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+      // Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyAxauEEtqkuJOWA9HRe1jpT_wCXH62nksM",
+        authDomain: "schoolcms-77713.firebaseapp.com",
+        projectId: "schoolcms-77713",
+        storageBucket: "schoolcms-77713.appspot.com",
+        messagingSenderId: "757700374571",
+        appId: "1:757700374571:web:a86b334d619cf160fa7a6e"
+      };
+
+      // Initialize Firebase and Firestore
+      const app = initializeApp(firebaseConfig);
+      const firestore = getFirestore(app);
+      const modelsCollection = collection(firestore, "lc_models_management");
+
+      // Cloudinary configuration (for image uploads)
+      const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/dwlasndqv/upload";
+      const CLOUDINARY_UPLOAD_PRESET = "quranpilot";
+
+      // Helper to sanitize HTML
+      function sanitizeHTML(str) {
+        const temp = document.createElement("div");
+        temp.textContent = str;
+        return temp.innerHTML;
+      }
+
+      // UI Elements
+      const modelsTableBody = document.querySelector("#modelsTable tbody");
+      const addModelBtn = document.getElementById("addModelBtn");
+      const modalOverlay = document.getElementById("modalOverlay");
+      const closeModalEl = document.getElementById("closeModal");
+      const cancelBtn = document.getElementById("cancelBtn");
+      const modelForm = document.getElementById("modelForm");
+      const modelNameInput = document.getElementById("modelName");
+      const headerImageInput = document.getElementById("headerImage");
+      const additionalImagesInput = document.getElementById("additionalImages");
+      const publishDateInput = document.getElementById("publishDate");
+      const textDescriptionInput = document.getElementById("textDescription");
+      const fullDescriptionInput = document.getElementById("fullDescription");
+      const contentInput = document.getElementById("content");
+      const saveBtn = document.getElementById("saveBtn");
+      const modalTitle = document.getElementById("modalTitle");
+      const additionalImagesPreview = document.getElementById("additionalImagesPreview");
+      const headerImagePreview = document.getElementById("headerImagePreview");
+
+      // For edit mode
+      let currentDocId = null;
+      let currentHeaderImageUrl = "";
+      let currentAdditionalImages = []; // Can be URLs already stored
+
+      // Function to update the header image preview
+      function updateHeaderImagePreview(fileOrUrl) {
+        headerImagePreview.innerHTML = "";
+        const img = document.createElement("img");
+        if (fileOrUrl instanceof File) {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            img.src = e.target.result;
+          };
+          reader.readAsDataURL(fileOrUrl);
+        } else if (fileOrUrl) {
+          img.src = fileOrUrl;
+        }
+        headerImagePreview.appendChild(img);
+      }
+
+      // Listen for changes on header image input
+      headerImageInput.addEventListener("change", () => {
+        if (headerImageInput.files.length > 0) {
+          updateHeaderImagePreview(headerImageInput.files[0]);
+        } else {
+          headerImagePreview.innerHTML = "";
+        }
+      });
+
+      // Function to update the preview slider for additional images in the form
+      function updateAdditionalImagesPreview(filesOrUrls) {
+        additionalImagesPreview.innerHTML = "";
+        if (filesOrUrls && filesOrUrls.length) {
+          filesOrUrls.forEach(item => {
+            const img = document.createElement("img");
+            if (item instanceof File) {
+              const reader = new FileReader();
+              reader.onload = function(e) {
+                img.src = e.target.result;
+              };
+              reader.readAsDataURL(item);
+            } else {
+              img.src = item;
+            }
+            additionalImagesPreview.appendChild(img);
+          });
+        }
+      }
+
+      // Listen for changes on the additional images input to update preview slider
+      additionalImagesInput.addEventListener("change", () => {
+        const files = Array.from(additionalImagesInput.files);
+        updateAdditionalImagesPreview(files);
+      });
+
+      // Function to display models in table view
+      async function displayModels() {
+        modelsTableBody.innerHTML = "<tr><td colspan='8' style='color: #fff;'>Loading models...</td></tr>";
+        try {
+          const modelsQuery = query(modelsCollection, orderBy("publish_date", "desc"));
+          const snapshot = await getDocs(modelsQuery);
+          modelsTableBody.innerHTML = "";
+          snapshot.forEach(docSnap => {
+            const data = docSnap.data();
+            const row = document.createElement("tr");
+
+            // ID
+            const idCell = document.createElement("td");
+            idCell.textContent = docSnap.id;
+            row.appendChild(idCell);
+
+            // Header Image
+            const headerCell = document.createElement("td");
+            if (data.header_image) {
+              const img = document.createElement("img");
+              img.src = sanitizeHTML(data.header_image);
+              img.alt = sanitizeHTML(data.name);
+              img.className = "thumbnail";
+              headerCell.appendChild(img);
+            }
+            row.appendChild(headerCell);
+
+            // Additional Images (scrollable container)
+            const additionalImagesCell = document.createElement("td");
+            if (data.images && Array.isArray(data.images) && data.images.length) {
+              const container = document.createElement("div");
+              container.className = "additional-images-container";
+              data.images.forEach(url => {
+                const img = document.createElement("img");
+                img.src = sanitizeHTML(url);
+                img.alt = "Additional image";
+                container.appendChild(img);
+              });
+              additionalImagesCell.appendChild(container);
+            }
+            row.appendChild(additionalImagesCell);
+
+            // Model Name
+            const nameCell = document.createElement("td");
+            nameCell.textContent = sanitizeHTML(data.name);
+            row.appendChild(nameCell);
+
+            // Publish Date (formatted)
+            const dateCell = document.createElement("td");
+            if (data.publish_date) {
+              const dateObj = new Date(data.publish_date);
+              const options = { year: "numeric", month: "long", day: "numeric" };
+              dateCell.textContent = dateObj.toLocaleDateString(undefined, options);
+            }
+            row.appendChild(dateCell);
+
+            // Text Description
+            const textDescriptionCell = document.createElement("td");
+            textDescriptionCell.textContent = sanitizeHTML(data.text_description || "");
+            row.appendChild(textDescriptionCell);
+
+            // Content
+            const contentCell = document.createElement("td");
+            contentCell.textContent = sanitizeHTML(data.content || "");
+            row.appendChild(contentCell);
+
+            // Actions
+            const actionsCell = document.createElement("td");
+            actionsCell.className = "actions";
+            const editBtn = document.createElement("button");
+            editBtn.className = "editBtn";
+            editBtn.textContent = "Edit";
+            editBtn.setAttribute("data-id", docSnap.id);
+            editBtn.addEventListener("click", async () => {
+              const docRef = doc(firestore, "lc_models_management", docSnap.id);
+              const docData = await getDoc(docRef);
+              if (docData.exists()) {
+                openModal(true, { id: docSnap.id, ...docData.data() });
+              }
+            });
+            actionsCell.appendChild(editBtn);
+            const deleteBtn = document.createElement("button");
+            deleteBtn.className = "deleteBtn";
+            deleteBtn.textContent = "Delete";
+            deleteBtn.setAttribute("data-id", docSnap.id);
+            deleteBtn.addEventListener("click", async () => {
+              if (confirm("Are you sure you want to delete this model?")) {
+                await deleteDoc(doc(firestore, "lc_models_management", docSnap.id));
+                displayModels();
+              }
+            });
+            actionsCell.appendChild(deleteBtn);
+            row.appendChild(actionsCell);
+
+            modelsTableBody.appendChild(row);
+          });
+        } catch (error) {
+          console.error("Error fetching models:", error);
+          modelsTableBody.innerHTML = "<tr><td colspan='8' style='color: #fff;'>Error loading models.</td></tr>";
+        }
+      }
+
+      // Open modal (for adding or editing)
+      function openModal(isEdit = false, modelData = {}) {
+        modalOverlay.style.display = "flex";
+        if (isEdit) {
+          modalTitle.textContent = "Edit Model";
+          modelNameInput.value = modelData.name || "";
+          currentHeaderImageUrl = modelData.header_image || "";
+          currentAdditionalImages = modelData.images || [];
+          // Update header image preview with stored URL
+          updateHeaderImagePreview(currentHeaderImageUrl);
+          // Update additional images preview with stored URLs
+          updateAdditionalImagesPreview(currentAdditionalImages);
+          publishDateInput.value = modelData.publish_date 
+            ? new Date(modelData.publish_date).toISOString().slice(0,16)
+            : "";
+          textDescriptionInput.value = modelData.text_description || "";
+          fullDescriptionInput.value = modelData.full_description || "";
+          contentInput.value = modelData.content || "";
+          currentDocId = modelData.id;
+        } else {
+          modalTitle.textContent = "Add Model";
+          modelForm.reset();
+          currentDocId = null;
+          currentHeaderImageUrl = "";
+          currentAdditionalImages = [];
+          updateHeaderImagePreview("");
+          updateAdditionalImagesPreview([]);
+          publishDateInput.value = new Date().toISOString().slice(0,16);
+        }
+      }
+
+      // Close modal and reset form
+      function closeModalFunc() {
+        modalOverlay.style.display = "none";
+        modelForm.reset();
+        currentDocId = null;
+        currentHeaderImageUrl = "";
+        currentAdditionalImages = [];
+        updateHeaderImagePreview("");
+        updateAdditionalImagesPreview([]);
+      }
+
+      addModelBtn.addEventListener("click", () => openModal(false));
+      closeModalEl.addEventListener("click", closeModalFunc);
+      cancelBtn.addEventListener("click", closeModalFunc);
+
+      // Function to upload a file to Cloudinary
+      async function uploadToCloudinary(file) {
+        const formData = new FormData();
+        formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+        formData.append("file", file);
+        const response = await fetch(CLOUDINARY_URL, {
+          method: "POST",
+          body: formData
+        });
+        const data = await response.json();
+        if (response.ok) {
+          return data.secure_url;
+        } else {
+          throw new Error(data.error?.message || "Upload failed");
+        }
+      }
+
+      // Form submission: add new model or update existing
+      modelForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        saveBtn.disabled = true;
+        saveBtn.textContent = "Saving...";
+        try {
+          const name = modelNameInput.value.trim();
+          const publishDate = publishDateInput.value;
+          const textDescription = textDescriptionInput.value.trim();
+          const fullDescription = fullDescriptionInput.value.trim();
+          const content = contentInput.value.trim();
+
+          // Handle header image upload (if a new file is chosen)
+          let headerImageUrl = currentHeaderImageUrl;
+          if (headerImageInput.files.length > 0) {
+            headerImageUrl = await uploadToCloudinary(headerImageInput.files[0]);
+          }
+
+          // Handle additional images upload (if any files selected)
+          let additionalImagesUrls = currentAdditionalImages;
+          if (additionalImagesInput.files.length > 0) {
+            const filesArray = Array.from(additionalImagesInput.files);
+            additionalImagesUrls = await Promise.all(
+              filesArray.map(file => uploadToCloudinary(file))
+            );
+          }
+
+          const modelData = {
+            name,
+            header_image: headerImageUrl,
+            publish_date: publishDate,
+            text_description: textDescription,
+            full_description: fullDescription,
+            content,
+            images: additionalImagesUrls
+          };
+
+          if (currentDocId) {
+            // Update existing model document
+            const docRef = doc(firestore, "lc_models_management", currentDocId);
+            await updateDoc(docRef, modelData);
+            alert("Model updated successfully!");
+          } else {
+            // Create new model document
+            await addDoc(modelsCollection, modelData);
+            alert("Model added successfully!");
+          }
+          displayModels();
+          closeModalFunc();
+        } catch (error) {
+          console.error("Error saving model:", error);
+          alert("Error saving model. Please try again.");
+        } finally {
+          saveBtn.disabled = false;
+          saveBtn.textContent = "Save Model";
+        }
+      });
+
+      // Initial load of models
+      displayModels();
+    </script>
+  </body>
+</html>

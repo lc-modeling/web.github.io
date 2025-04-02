@@ -763,8 +763,13 @@
           modelDiv.className = 'model-container';
           modelDiv.id = encodeURIComponent(data.header_image);
           let formattedDate = '';
-          if (data.publish_date && data.publish_date.toDate) {
-            const dateObj = data.publish_date.toDate();
+          if (data.publish_date) {
+            let dateObj;
+            if (data.publish_date.toDate) {
+              dateObj = data.publish_date.toDate();
+            } else {
+              dateObj = new Date(data.publish_date);
+            }
             formattedDate = dateObj.toLocaleDateString(undefined, {
               year: 'numeric',
               month: 'long',

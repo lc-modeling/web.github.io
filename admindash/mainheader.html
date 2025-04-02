@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Add viewport meta tag for responsive scaling on mobile devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LC Modeling Main Header Content</title>
+    <style>
+      /* Basic Reset */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        padding: 20px;
+      }
+      /* Header Bar */
+      .header-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+      }
+      .header-bar h1 {
+        font-size: 24px;
+        color: #333;
+      }
+      /* Add Button with icon */
+      #addPostBtn {
+        display: inline-block;
+        border: 2px dashed #007BFF;
+        border-radius: 10px;
+        color: #007BFF;
+        background: transparent;
+        padding: 20px;
+        font-size: 18px;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+      }
+      #addPostBtn:hover {
+        background-color: rgba(0, 123, 255, 0.1);
+      }
+      /* Feedback Message */
+      #feedback {
+        text-align: center;
+        font-size: 18px;
+        margin-bottom: 20px;
+        color: green;
+      }
+      /* Posts Container (black background) */
+      .posts-container {
+        background-color: #000;
+        padding: 10px;
+        border-radius: 8px;
+        max-width: 100%;
+        overflow-x: auto;
+      }
+      /* Table Styles */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        /* Increased minimum width so all columns remain spacious */
+        min-width: 800px;
+      }
+      th, td {
+        text-align: left;
+        padding: 16px;
+        border-bottom: 1px solid #333;
+        color: #fff;
+        font-size: 16px;
+        /* Prevent text from wrapping too early */
+        white-space: nowrap;
+      }
+      th {
+        background-color: #2c2c2c;
+        font-weight: 600;
+      }
+      td {
+        background-color: #1f1f1f;
+      }
+      /* Thumbnail Styles */
+      .thumbnail, .thumbnail-video {
+        max-width: 80px;
+        max-height: 80px;
+        border-radius: 4px;
+        object-fit: cover;
+      }
+      /* Action Buttons */
+      .actions button {
+        margin-right: 8px;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      .actions .edit {
+        background-color: #007BFF;
+        color: #fff;
+      }
+      .actions .delete {
+        background-color: #d9534f;
+        color: #fff;
+      }
+      /* Modal Styles */
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.5);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+      }
+      .modal {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        /* Make modal width flexible: full width up to a max for larger screens */
+        width: 100%;
+        max-width: 400px;
+        position: relative;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+      .modal h2 {
+        margin-top: 0;
+        font-size: 22px;
+      }
+      .modal .close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+        font-size: 24px;
+      }
+      .modal form {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .modal form input[type="text"],
+      .modal form input[type="file"] {
+        padding: 12px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      .modal form .preview {
+        text-align: center;
+        margin-bottom: 10px;
+      }
+      .modal form .preview img,
+      .modal form .preview video {
+        max-width: 100%;
+        border-radius: 4px;
+      }
+      .modal form button {
+        padding: 12px;
+        border: none;
+        border-radius: 4px;
+        background-color: #007BFF;
+        color: #fff;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      .modal form .cancelBtn {
+        background-color: #ccc;
+        color: #333;
+      }
+      /* Responsive Adjustments for small devices */
+      @media (max-width: 600px) {
+        body {
+          padding: 10px;
+        }
+        .header-bar h1 {
+          font-size: 20px;
+        }
+        #addPostBtn {
+          padding: 12px;
+          font-size: 16px;
+        }
+        #feedback {
+          font-size: 16px;
+        }
+        th, td {
+          padding: 12px;
+          font-size: 16px;
+        }
+        .thumbnail, .thumbnail-video {
+          max-width: 60px;
+          max-height: 60px;
+        }
+        .actions button {
+          padding: 8px 10px;
+          font-size: 14px;
+        }
+        .modal {
+          /* Modal takes up 90% of the viewport width on small devices */
+          width: 90%;
+        }
+        .modal h2 {
+          font-size: 20px;
+        }
+        .modal form input[type="text"],
+        .modal form input[type="file"] {
+          padding: 10px;
+          font-size: 16px;
+        }
+        .modal form button {
+          padding: 10px;
+          font-size: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header Bar with Title and Add Button -->
+    <div class="header-bar">
+      <h1>LC Modeling Main Header Content</h1>
+      <button id="addPostBtn">+ Add</button>
+    </div>
+
+    <div id="feedback"></div>
+
+    <!-- Posts Container (black background) -->
+    <div class="posts-container">
+      <table id="postsTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Photo/Video</th>
+            <th>Name</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Posts will be rendered here -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Modal for Adding/Editing Post -->
+    <div id="modalOverlay" class="modal-overlay">
+      <div class="modal">
+        <span id="closeModal" class="close">&times;</span>
+        <h2 id="modalTitle">Add Media Post</h2>
+        <form id="postForm">
+          <input type="text" id="postName" placeholder="Enter Name" required />
+          <input type="file" id="postFile" accept="image/*,video/*" />
+          <div class="preview" id="filePreview"></div>
+          <button type="submit" id="saveBtn">Save Post</button>
+          <button type="button" class="cancelBtn" id="cancelBtn">Cancel</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Firebase & App Script: Use ES modules -->
+    <script type="module">
+      // Import Firebase modules (v10.12.5)
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+      import {
+        getFirestore,
+        collection,
+        addDoc,
+        updateDoc,
+        deleteDoc,
+        doc,
+        getDocs
+      } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+      // Firebase configuration (your provided credentials)
+      const firebaseConfig = {
+        apiKey: "AIzaSyAxauEEtqkuJOWA9HRe1jpT_wCXH62nksM",
+        authDomain: "schoolcms-77713.firebaseapp.com",
+        projectId: "schoolcms-77713",
+        storageBucket: "schoolcms-77713.appspot.com",
+        messagingSenderId: "757700374571",
+        appId: "1:757700374571:web:a86b334d619cf160fa7a6e"
+      };
+
+      // Initialize Firebase and Firestore
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+      const postsCollection = collection(db, "main_header_banner");
+
+      // Cloudinary configuration
+      const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/dwlasndqv/upload";
+      const CLOUDINARY_UPLOAD_PRESET = "quranpilot";
+
+      // UI Elements
+      const addPostBtn = document.getElementById("addPostBtn");
+      const modalOverlay = document.getElementById("modalOverlay");
+      const closeModalEl = document.getElementById("closeModal");
+      const cancelBtn = document.getElementById("cancelBtn");
+      const postForm = document.getElementById("postForm");
+      const postNameInput = document.getElementById("postName");
+      const postFileInput = document.getElementById("postFile");
+      const filePreview = document.getElementById("filePreview");
+      const modalTitle = document.getElementById("modalTitle");
+      const saveBtn = document.getElementById("saveBtn");
+      const feedbackEl = document.getElementById("feedback");
+      const postsTableBody = document.querySelector("#postsTable tbody");
+
+      // For edit mode: store the document id (or null when adding)
+      let currentDocId = null;
+
+      // Check if URL is likely a video (by extension)
+      function isVideo(url) {
+        return /\.(mp4|webm|ogg)$/i.test(url);
+      }
+
+      // Open modal for adding or editing
+      function openModal(isEdit = false, postData = {}) {
+        modalOverlay.style.display = "flex";
+        feedbackEl.textContent = "";
+        if (isEdit) {
+          modalTitle.textContent = "Edit Media Post";
+          postNameInput.value = postData.name || "";
+          // If editing, show preview if media exists
+          if (postData.image1_vedio) {
+            filePreview.innerHTML = isVideo(postData.image1_vedio)
+              ? `<video controls src="${postData.image1_vedio}"></video>`
+              : `<img src="${postData.image1_vedio}" alt="Preview">`;
+          } else {
+            filePreview.innerHTML = "";
+          }
+          currentDocId = postData.id; // store document id for update
+        } else {
+          modalTitle.textContent = "Add Media Post";
+          postForm.reset();
+          filePreview.innerHTML = "";
+          currentDocId = null;
+        }
+      }
+
+      // Close modal
+      function closeModalFunc() {
+        modalOverlay.style.display = "none";
+        postForm.reset();
+        filePreview.innerHTML = "";
+        currentDocId = null;
+      }
+
+      // Update preview when file input changes
+      postFileInput.addEventListener("change", function () {
+        filePreview.innerHTML = "";
+        const file = this.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          if (file.type.startsWith("video/")) {
+            filePreview.innerHTML = `<video controls src="${e.target.result}"></video>`;
+          } else {
+            filePreview.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
+          }
+        };
+        reader.readAsDataURL(file);
+      });
+
+      // Cloudinary upload function
+      async function uploadToCloudinary(file) {
+        const formData = new FormData();
+        formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+        formData.append("file", file);
+        const response = await fetch(CLOUDINARY_URL, {
+          method: "POST",
+          body: formData
+        });
+        const data = await response.json();
+        if (response.ok) {
+          return data.secure_url;
+        } else {
+          throw new Error(data.error?.message || "Upload failed");
+        }
+      }
+
+      // Push a new post (or update an existing one) to Firestore
+      postForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const name = postNameInput.value.trim();
+        if (!name) {
+          alert("Name cannot be blank.");
+          return;
+        }
+        saveBtn.disabled = true;
+        saveBtn.textContent = "Saving...";
+        let mediaUrl = "";
+        const file = postFileInput.files[0];
+
+        try {
+          if (file) {
+            mediaUrl = await uploadToCloudinary(file);
+          } else if (currentDocId) {
+            // In edit mode, if no new file is selected, get the existing URL from the table row
+            const row = postsTableBody.querySelector(`tr[data-id="${currentDocId}"]`);
+            const thumbnail = row?.querySelector(".thumbnail") || row?.querySelector(".thumbnail-video");
+            mediaUrl = thumbnail ? thumbnail.src : "";
+          }
+
+          const postData = {
+            name,
+            image1_vedio: mediaUrl,
+            timestamp: new Date().toISOString()
+          };
+
+          if (currentDocId) {
+            // Update existing document
+            const docRef = doc(db, "main_header_banner", currentDocId);
+            await updateDoc(docRef, postData);
+            feedbackEl.textContent = "Post updated successfully!";
+          } else {
+            // Add new document
+            await addDoc(postsCollection, postData);
+            feedbackEl.textContent = "Post added successfully!";
+          }
+          await fetchPosts();
+          closeModalFunc();
+        } catch (error) {
+          console.error("Error:", error);
+          alert("Error uploading media.");
+        } finally {
+          saveBtn.disabled = false;
+          saveBtn.textContent = "Save Post";
+        }
+      });
+
+      // Fetch posts from Firestore and render them
+      async function fetchPosts() {
+        postsTableBody.innerHTML = "";
+        try {
+          const querySnapshot = await getDocs(postsCollection);
+          querySnapshot.forEach((docSnap) => {
+            const data = docSnap.data();
+            data.id = docSnap.id; // store Firestore doc id
+            renderPostRow(data);
+          });
+        } catch (error) {
+          console.error("Error fetching posts:", error);
+        }
+      }
+
+      // Render a single post row in the table
+      function renderPostRow(post) {
+        const row = document.createElement("tr");
+        row.setAttribute("data-id", post.id);
+
+        // ID Cell
+        const idCell = document.createElement("td");
+        idCell.textContent = post.id;
+        row.appendChild(idCell);
+
+        // Media Cell
+        const mediaCell = document.createElement("td");
+        if (post.image1_vedio) {
+          if (isVideo(post.image1_vedio)) {
+            const videoElem = document.createElement("video");
+            videoElem.src = post.image1_vedio;
+            videoElem.className = "thumbnail-video";
+            videoElem.muted = true;
+            videoElem.controls = false;
+            mediaCell.appendChild(videoElem);
+          } else {
+            const imgElem = document.createElement("img");
+            imgElem.src = post.image1_vedio;
+            imgElem.alt = post.name;
+            imgElem.className = "thumbnail";
+            mediaCell.appendChild(imgElem);
+          }
+        }
+        row.appendChild(mediaCell);
+
+        // Name Cell
+        const nameCell = document.createElement("td");
+        nameCell.textContent = post.name;
+        row.appendChild(nameCell);
+
+        // Actions Cell
+        const actionsCell = document.createElement("td");
+        actionsCell.className = "actions";
+
+        const editBtn = document.createElement("button");
+        editBtn.className = "edit";
+        editBtn.textContent = "Edit";
+        editBtn.addEventListener("click", () => openModal(true, post));
+        actionsCell.appendChild(editBtn);
+
+        const deleteBtn = document.createElement("button");
+        deleteBtn.className = "delete";
+        deleteBtn.textContent = "Delete";
+        deleteBtn.addEventListener("click", async () => {
+          if (confirm("Are you sure you want to delete this post?")) {
+            try {
+              await deleteDoc(doc(db, "main_header_banner", post.id));
+              feedbackEl.textContent = "Post deleted.";
+              await fetchPosts();
+            } catch (error) {
+              console.error("Error deleting post:", error);
+              alert("Error deleting post.");
+            }
+          }
+        });
+        actionsCell.appendChild(deleteBtn);
+        row.appendChild(actionsCell);
+
+        postsTableBody.appendChild(row);
+      }
+
+      // Event listeners for opening and closing modal
+      addPostBtn.addEventListener("click", () => openModal());
+      closeModalEl.addEventListener("click", closeModalFunc);
+      cancelBtn.addEventListener("click", closeModalFunc);
+
+      // Initial fetch of posts
+      fetchPosts();
+    </script>
+  </body>
+</html>
