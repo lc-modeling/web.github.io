@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Responsive meta tag -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog Posts Management</title>
+    <style>
+      /* Basic Reset */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        padding: 20px;
+      }
+      /* Header Bar */
+      .header-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+      }
+      .header-bar h1 {
+        font-size: 24px;
+        color: #333;
+      }
+      #addPostBtn {
+        padding: 10px 20px;
+        font-size: 16px;
+        border: 2px dashed #007BFF;
+        background: transparent;
+        color: #007BFF;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+      }
+      #addPostBtn:hover {
+        background-color: rgba(0, 123, 255, 0.1);
+      }
+      /* Posts Container (table view) */
+      .models-container {
+        background-color: #000;
+        padding: 10px;
+        border-radius: 8px;
+        overflow-x: auto;
+      }
+      /* Table Styles */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 1100px;
+      }
+      th, td {
+        text-align: left;
+        padding: 16px;
+        border-bottom: 1px solid #333;
+        color: #fff;
+        font-size: 16px;
+        white-space: nowrap;
+      }
+      th {
+        background-color: #2c2c2c;
+        font-weight: 600;
+      }
+      td {
+        background-color: #1f1f1f;
+      }
+      /* Thumbnail Styles */
+      .thumbnail {
+        max-width: 80px;
+        max-height: 80px;
+        border-radius: 4px;
+        object-fit: cover;
+      }
+      /* Additional Images Preview in Table */
+      .additional-images-container {
+        display: flex;
+        gap: 4px;
+        overflow-x: auto;
+        max-width: 180px;
+      }
+      .additional-images-container img {
+        width: 80px;
+        height: 80px;
+        border-radius: 4px;
+        object-fit: cover;
+      }
+      /* Action Buttons */
+      .actions button {
+        margin-right: 8px;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+      .actions .editBtn {
+        background-color: #007BFF;
+        color: #fff;
+      }
+      .actions .deleteBtn {
+        background-color: #d9534f;
+        color: #fff;
+      }
+      /* Modal Styles */
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.5);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+      }
+      .modal {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        width: 100%;
+        max-width: 600px;
+        position: relative;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+      .modal h2 {
+        margin-bottom: 20px;
+      }
+      .modal .close {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 28px;
+        cursor: pointer;
+      }
+      .modal form {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .modal form input[type="text"],
+      .modal form input[type="file"],
+      .modal form textarea {
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      .modal form textarea {
+        resize: vertical;
+      }
+      .modal form button {
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .modal form .cancelBtn {
+        background-color: #ccc;
+        color: #333;
+      }
+      .modal form .saveBtn {
+        background-color: #007BFF;
+        color: #fff;
+      }
+      /* Preview Slider for Content Images (in form) */
+      .preview-slider {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        border: 1px solid #ccc;
+        padding: 8px;
+        border-radius: 4px;
+      }
+      .preview-slider img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 4px;
+      }
+      /* Preview for Header Image (in form) */
+      .header-preview {
+        margin-top: 8px;
+        text-align: center;
+      }
+      .header-preview img {
+        max-width: 100%;
+        max-height: 200px;
+        border-radius: 4px;
+        object-fit: cover;
+      }
+      /* Responsive Adjustments */
+      @media (max-width: 600px) {
+        .modal {
+          width: 90%;
+        }
+        .header-bar h1 {
+          font-size: 20px;
+        }
+        #addPostBtn {
+          padding: 12px;
+          font-size: 16px;
+        }
+        th, td {
+          padding: 12px;
+          font-size: 14px;
+        }
+        .thumbnail {
+          max-width: 60px;
+          max-height: 60px;
+        }
+        .actions button {
+          padding: 6px 8px;
+          font-size: 12px;
+        }
+      }
+      /* Style for text description in table */
+      .text-description-content {
+        display: -webkit-box;
+        -webkit-line-clamp: 3; /* Limits text to 3 lines */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: normal;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header Bar -->
+    <div class="header-bar">
+      <h1>Blog Posts Management</h1>
+      <button id="addPostBtn">+ Add New Post</button>
+    </div>
+
+    <!-- Posts Container -->
+    <div class="models-container">
+      <table id="postsTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Header Image</th>
+            <th>Content Images</th>
+            <th>Post Title</th>
+            <th>Created On</th>
+            <th>Text Description</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Blog posts will be populated here dynamically -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Modal for Adding/Editing Posts -->
+    <div id="modalOverlay" class="modal-overlay">
+      <div class="modal">
+        <span id="closeModal" class="close">&times;</span>
+        <h2 id="modalTitle">Add Post</h2>
+        <form id="postForm">
+          <input type="text" id="postTitle" placeholder="Post Title" required />
+
+          <label>Header Image (for story):</label>
+          <input type="file" id="headerImage" accept="image/*" />
+          <!-- Header image preview -->
+          <div id="headerImagePreview" class="header-preview"></div>
+
+          <label>Content Images (optional, select multiple):</label>
+          <input type="file" id="contentImages" accept="image/*" multiple />
+          <!-- Preview slider for content images -->
+          <div id="contentImagesPreview" class="preview-slider"></div>
+
+          <textarea id="textDescription" placeholder="Short Description" rows="3" required></textarea>
+          <div style="display: flex; gap: 10px;">
+            <button type="submit" class="saveBtn" id="saveBtn">Save Post</button>
+            <button type="button" class="cancelBtn" id="cancelBtn">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Firebase and Cloudinary Scripts -->
+    <script type="module">
+      import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+      import { 
+        getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc, getDoc, serverTimestamp 
+      } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+      // Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyAxauEEtqkuJOWA9HRe1jpT_wCXH62nksM",
+        authDomain: "schoolcms-77713.firebaseapp.com",
+        projectId: "schoolcms-77713",
+        storageBucket: "schoolcms-77713.appspot.com",
+        messagingSenderId: "757700374571",
+        appId: "1:757700374571:web:a86b334d619cf160fa7a6e"
+      };
+
+      const app = !getApps().length ? initializeApp(firebaseConfig) : getApps()[0];
+      const firestore = getFirestore(app);
+      const postsCollection = collection(firestore, "lcstories");
+
+      // Cloudinary configuration for image uploads
+      const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/dwlasndqv/upload";
+      const CLOUDINARY_UPLOAD_PRESET = "quranpilot";
+
+      // Helper to sanitize HTML
+      function sanitizeHTML(str) {
+        const temp = document.createElement("div");
+        temp.textContent = str;
+        return temp.innerHTML;
+      }
+
+      // UI Elements
+      const postsTableBody = document.querySelector("#postsTable tbody");
+      const addPostBtn = document.getElementById("addPostBtn");
+      const modalOverlay = document.getElementById("modalOverlay");
+      const closeModalEl = document.getElementById("closeModal");
+      const cancelBtn = document.getElementById("cancelBtn");
+      const postForm = document.getElementById("postForm");
+      const postTitleInput = document.getElementById("postTitle");
+      const headerImageInput = document.getElementById("headerImage");
+      const contentImagesInput = document.getElementById("contentImages");
+      const textDescriptionInput = document.getElementById("textDescription");
+      const saveBtn = document.getElementById("saveBtn");
+      const modalTitle = document.getElementById("modalTitle");
+      const contentImagesPreview = document.getElementById("contentImagesPreview");
+      const headerImagePreview = document.getElementById("headerImagePreview");
+
+      // For edit mode
+      let currentDocId = null;
+      let currentHeaderImageUrl = "";
+      let currentContentImages = [];
+      let currentCreatedOn = null; // To keep the original creation time when editing
+
+      // Function to update the header image preview
+      function updateHeaderImagePreview(fileOrUrl) {
+        headerImagePreview.innerHTML = "";
+        const img = document.createElement("img");
+        if (fileOrUrl instanceof File) {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            img.src = e.target.result;
+          };
+          reader.readAsDataURL(fileOrUrl);
+        } else if (fileOrUrl) {
+          img.src = fileOrUrl;
+        }
+        headerImagePreview.appendChild(img);
+      }
+
+      // Listen for changes on header image input
+      headerImageInput.addEventListener("change", () => {
+        if (headerImageInput.files.length > 0) {
+          updateHeaderImagePreview(headerImageInput.files[0]);
+        } else {
+          headerImagePreview.innerHTML = "";
+        }
+      });
+
+      // Function to update the preview slider for content images in the form
+      function updateContentImagesPreview(filesOrUrls) {
+        contentImagesPreview.innerHTML = "";
+        if (filesOrUrls && filesOrUrls.length) {
+          filesOrUrls.forEach(item => {
+            const img = document.createElement("img");
+            if (item instanceof File) {
+              const reader = new FileReader();
+              reader.onload = function(e) {
+                img.src = e.target.result;
+              };
+              reader.readAsDataURL(item);
+            } else {
+              img.src = item;
+            }
+            contentImagesPreview.appendChild(img);
+          });
+        }
+      }
+
+      // Listen for changes on the content images input to update preview slider
+      contentImagesInput.addEventListener("change", () => {
+        const files = Array.from(contentImagesInput.files);
+        updateContentImagesPreview(files);
+      });
+
+      // Function to display posts in table view
+      async function displayPosts() {
+        postsTableBody.innerHTML = "<tr><td colspan='7' style='color: #fff;'>Loading posts...</td></tr>";
+        try {
+          const snapshot = await getDocs(postsCollection);
+          postsTableBody.innerHTML = "";
+          snapshot.forEach(docSnap => {
+            const data = docSnap.data();
+            const row = document.createElement("tr");
+
+            // ID
+            const idCell = document.createElement("td");
+            idCell.textContent = docSnap.id;
+            row.appendChild(idCell);
+
+            // Header Image
+            const headerCell = document.createElement("td");
+            if (data.header_image_stories) {
+              const img = document.createElement("img");
+              img.src = sanitizeHTML(data.header_image_stories);
+              img.alt = sanitizeHTML(data.Name_story);
+              img.className = "thumbnail";
+              headerCell.appendChild(img);
+            }
+            row.appendChild(headerCell);
+
+            // Content Images (scrollable container)
+            const contentImagesCell = document.createElement("td");
+            if (data.content_images && Array.isArray(data.content_images) && data.content_images.length) {
+              const container = document.createElement("div");
+              container.className = "additional-images-container";
+              data.content_images.forEach(url => {
+                const img = document.createElement("img");
+                img.src = sanitizeHTML(url);
+                img.alt = "Content image";
+                container.appendChild(img);
+              });
+              contentImagesCell.appendChild(container);
+            }
+            row.appendChild(contentImagesCell);
+
+            // Post Title
+            const titleCell = document.createElement("td");
+            titleCell.textContent = sanitizeHTML(data.Name_story);
+            row.appendChild(titleCell);
+
+            // Created On (formatted)
+            const createdOnCell = document.createElement("td");
+            if (data.created_on) {
+              const dateObj = data.created_on.toDate ? data.created_on.toDate() : new Date(data.created_on);
+              const options = { year: "numeric", month: "long", day: "numeric" };
+              createdOnCell.textContent = dateObj.toLocaleDateString(undefined, options);
+            }
+            row.appendChild(createdOnCell);
+
+            // Text Description with paragraph wrapping and truncation
+            const textDescCell = document.createElement("td");
+            const p = document.createElement("p");
+            p.className = "text-description-content";
+            p.innerHTML = sanitizeHTML(data.text_description || "");
+            textDescCell.appendChild(p);
+            row.appendChild(textDescCell);
+
+            // Actions
+            const actionsCell = document.createElement("td");
+            actionsCell.className = "actions";
+            const editBtn = document.createElement("button");
+            editBtn.className = "editBtn";
+            editBtn.textContent = "Edit";
+            editBtn.setAttribute("data-id", docSnap.id);
+            editBtn.addEventListener("click", async () => {
+              const docRef = doc(firestore, "lcstories", docSnap.id);
+              const docData = await getDoc(docRef);
+              if (docData.exists()) {
+                openModal(true, { id: docSnap.id, ...docData.data() });
+              }
+            });
+            actionsCell.appendChild(editBtn);
+            const deleteBtn = document.createElement("button");
+            deleteBtn.className = "deleteBtn";
+            deleteBtn.textContent = "Delete";
+            deleteBtn.setAttribute("data-id", docSnap.id);
+            deleteBtn.addEventListener("click", async () => {
+              if (confirm("Are you sure you want to delete this post?")) {
+                await deleteDoc(doc(firestore, "lcstories", docSnap.id));
+                displayPosts();
+              }
+            });
+            actionsCell.appendChild(deleteBtn);
+            row.appendChild(actionsCell);
+
+            postsTableBody.appendChild(row);
+          });
+        } catch (error) {
+          console.error("Error fetching posts:", error);
+          postsTableBody.innerHTML = "<tr><td colspan='7' style='color: #fff;'>Error loading posts.</td></tr>";
+        }
+      }
+
+      // Open modal (for adding or editing)
+      function openModal(isEdit = false, postData = {}) {
+        modalOverlay.style.display = "flex";
+        if (isEdit) {
+          modalTitle.textContent = "Edit Post";
+          postTitleInput.value = postData.Name_story || "";
+          currentHeaderImageUrl = postData.header_image_stories || "";
+          currentContentImages = postData.content_images || [];
+          currentCreatedOn = postData.created_on || null;
+          // Update header image preview with stored URL
+          updateHeaderImagePreview(currentHeaderImageUrl);
+          // Update content images preview with stored URLs
+          updateContentImagesPreview(currentContentImages);
+          textDescriptionInput.value = postData.text_description || "";
+          currentDocId = postData.id;
+        } else {
+          modalTitle.textContent = "Add Post";
+          postForm.reset();
+          currentDocId = null;
+          currentHeaderImageUrl = "";
+          currentContentImages = [];
+          currentCreatedOn = null;
+          updateHeaderImagePreview("");
+          updateContentImagesPreview([]);
+        }
+      }
+
+      // Close modal and reset form
+      function closeModalFunc() {
+        modalOverlay.style.display = "none";
+        postForm.reset();
+        currentDocId = null;
+        currentHeaderImageUrl = "";
+        currentContentImages = [];
+        currentCreatedOn = null;
+        updateHeaderImagePreview("");
+        updateContentImagesPreview([]);
+      }
+
+      addPostBtn.addEventListener("click", () => openModal(false));
+      closeModalEl.addEventListener("click", closeModalFunc);
+      cancelBtn.addEventListener("click", closeModalFunc);
+
+      // Function to upload a file to Cloudinary
+      async function uploadToCloudinary(file) {
+        const formData = new FormData();
+        formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+        formData.append("file", file);
+        const response = await fetch(CLOUDINARY_URL, {
+          method: "POST",
+          body: formData
+        });
+        const data = await response.json();
+        if (response.ok) {
+          return data.secure_url;
+        } else {
+          throw new Error(data.error?.message || "Upload failed");
+        }
+      }
+
+      // Form submission: add new post or update existing
+      postForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        saveBtn.disabled = true;
+        saveBtn.textContent = "Saving...";
+        try {
+          const Name_story = postTitleInput.value.trim();
+          const text_description = textDescriptionInput.value.trim();
+
+          // Handle header image upload (if a new file is chosen)
+          let header_image_stories = currentHeaderImageUrl;
+          if (headerImageInput.files.length > 0) {
+            header_image_stories = await uploadToCloudinary(headerImageInput.files[0]);
+          }
+
+          // Handle content images upload (if any files selected)
+          let content_images = currentContentImages;
+          if (contentImagesInput.files.length > 0) {
+            const filesArray = Array.from(contentImagesInput.files);
+            content_images = await Promise.all(
+              filesArray.map(file => uploadToCloudinary(file))
+            );
+          }
+
+          const postData = {
+            Name_story,
+            header_image_stories,
+            text_description,
+            content_images,
+            created_on: currentDocId ? currentCreatedOn : serverTimestamp()
+          };
+
+          if (currentDocId) {
+            // Update existing post document
+            const docRef = doc(firestore, "lcstories", currentDocId);
+            await updateDoc(docRef, postData);
+            alert("Post updated successfully!");
+          } else {
+            // Create new post document
+            await addDoc(postsCollection, postData);
+            alert("Post added successfully!");
+          }
+          displayPosts();
+          closeModalFunc();
+        } catch (error) {
+          console.error("Error saving post:", error);
+          alert("Error saving post. Please try again.");
+        } finally {
+          saveBtn.disabled = false;
+          saveBtn.textContent = "Save Post";
+        }
+      });
+
+      // Initial load of posts
+      displayPosts();
+    </script>
+  </body>
+</html>
