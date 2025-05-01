@@ -221,6 +221,45 @@
           font-size: 12px;
         }
       }
+      /* ————————————————
+   Modal Overlay
+   ———————————————— */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.5);
+  display: none;
+
+  /* allow internal scrolling and give a little padding */
+  overflow-y: auto;
+  padding: 1rem;
+
+  /* pin modal to top so it scrolls into view naturally */
+  align-items: flex-start;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* ————————————————
+   Modal Window
+   ———————————————— */
+.modal {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 600px;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+
+  /* constrain height and scroll internals */
+  max-height: calc(100vh - 2rem); /* viewport minus overlay padding */
+  overflow-y: auto;
+}
+
     </style>
   </head>
   <body>

@@ -894,5 +894,36 @@
 
     displayModels();
   </script>
+  <script>
+    async function shortenAndCopy() {
+      // Make sure we actually have a ?header_image URL to shorten
+      if (!currentShareUrl) {
+        return alert("Please click Share on a model first!");
+      }
+  
+      const fullUrl = currentShareUrl;
+      try {
+        // ask TinyURL to shorten that full model URL
+        const resp = await fetch(
+          "https://tinyurl.com/api-create.php?url=" +
+            encodeURIComponent(fullUrl)
+        );
+        if (!resp.ok) throw new Error("Network response was not OK");
+  
+        const shortUrl = await resp.text(); // e.g. "http://tinyurl.com/abc123"
+        await navigator.clipboard.writeText(shortUrl);
+        alert("Copied short link:\n" + shortUrl);
+      } catch (e) {
+        console.error("Shorten/copy failed:", e);
+        alert("Could not generate short link. Try again later.");
+      }
+    }
+  
+    // bind it (no need to cloneNode now)
+    document
+      .getElementById("copyLink")
+      .addEventListener("click", shortenAndCopy);
+  </script>
+  
 </body>
 </html>

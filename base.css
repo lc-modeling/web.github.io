@@ -1289,6 +1289,23 @@ header.is-scrolling .container {
 
 
 
+/* 1) spacing and border before the all-rights paragraph */
+/* 2) force left alignment */
+.footer .all-rights {
+  margin-top: 70px;        /* gap between logos and this line */
+  padding-top: 15px;       /* space from the border to the text */
+  border-top: 1px solid #444; /* the horizontal rule */
+  text-align: left;        /* align at the start */
+  white-space: normal;     /* allow wrapping if needed */
+  font-size: 14px;         /* match mobile paragraph size */
+}
+
+/* optionally, if you want to ensure that only the last paragraph is styled,
+   without adding a class, you can use:
+.footer p:last-of-type { …same rules… } 
+*/
+
+
 
 
 
