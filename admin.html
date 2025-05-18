@@ -5,16 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LC Modeling School Admin Dashboard</title>
     <style>
-
-
-.outfit{
-  font-family: "Outfit", sans-serif;
-  font-optical-sizing: auto;
-  font-weight:300;
-  font-style: normal;
-}
-
-
+        .outfit {
+            font-family: "Outfit", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 300;
+            font-style: normal;
+        }
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
@@ -114,15 +110,9 @@
             border-radius: 3px;
             transition: background-color 0.3s;
         }
-        .edit-btn {
-            background-color: #007bff;
-        }
-        .delete-btn {
-            background-color: red;
-        }
-        .edit-btn:hover, .delete-btn:hover {
-            opacity: 0.8;
-        }
+        .edit-btn { background-color: #007bff; }
+        .delete-btn { background-color: red; }
+        .edit-btn:hover, .delete-btn:hover { opacity: 0.8; }
         .form-container {
             display: flex;
             flex-wrap: wrap;
@@ -143,43 +133,25 @@
             border: 1px solid #ccc;
             border-radius: 4px;
         }
-        textarea {
-            resize: vertical;
-        }
+        textarea { resize: vertical; }
         @media (max-width: 768px) {
-            .menu-toggle {
-                display: block;
-            }
+            .menu-toggle { display: block; }
             .sidebar {
                 width: 100%;
                 height: auto;
                 position: relative;
                 display: none;
             }
-            .sidebar a {
-                float: left;
-            }
-            .content {
-                margin-left: 0;
-            }
-            .analytics .card {
-                flex: 1 1 100%;
-            }
+            .sidebar a { float: left; }
+            .content { margin-left: 0; }
+            .analytics .card { flex: 1 1 100%; }
             table {
                 display: block;
                 width: 100%;
                 overflow-x: auto;
             }
-            table, th, td {
-                display: block;
-                width: 100%;
-            }
-            th, td {
-                padding: 10px;
-            }
-            th {
-                background-color: #f2f2f2;
-            }
+            table, th, td { display: block; width: 100%; }
+            th, td { padding: 10px; }
             tbody tr {
                 display: flex;
                 flex-wrap: wrap;
@@ -188,10 +160,7 @@
                 border-radius: 5px;
                 overflow: hidden;
             }
-            tbody tr td {
-                flex: 1 1 100%;
-                padding: 10px;
-            }
+            tbody tr td { flex: 1 1 100%; padding: 10px; }
         }
     </style>
 </head>
@@ -209,6 +178,8 @@
         <a href="#students">Manage Students</a>
         <a href="#settings">Settings</a>
         <a href="index.html">Logout</a>
+        <!-- New Analytics External Link -->
+        <a href="https://analytics.google.com/analytics/web/?authuser=0#/p489768763/reports/intelligenthome" target="_blank">View GA Dashboard</a>
     </div>
 
     <div class="content">
@@ -231,50 +202,13 @@
                 <p id="active-blog-posts">Loading...</p>
             </div>
         </div>
+        <!-- Button to open full GA -->
+        <a href="https://analytics.google.com/analytics/web/?authuser=0#/p489768763/reports/intelligenthome" class="btn" target="_blank">
+            View Detailed Analytics
+        </a>
 
-        <div id="students" class="card">
-            <h3>Manage Students</h3>
-            <form id="student-form">
-                <div class="form-container">
-                    <div>
-                        <label for="student-name">Student Name:</label>
-                        <input type="text" id="student-name" name="student-name" required>
-                    </div>
-                    <div>
-                        <label for="student-email">Email:</label>
-                        <input type="email" id="student-email" name="student-email" required>
-                    </div>
-                    <div>
-                        <label for="student-phone">Phone:</label>
-                        <input type="tel" id="student-phone" name="student-phone" required>
-                    </div>
-                </div>
-                <div class="form-container">
-                    <div>
-                        <label for="student-address">Address:</label>
-                        <textarea id="student-address" name="student-address" required></textarea>
-                    </div>
-                </div>
-                <button style="background-color: #4CAF50;" type="submit">Enroll Student</button>
-            </form>
-            <h3>Enrolled Students</h3>
-            <table id="students-table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Address</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Students will be dynamically added here -->
-                </tbody>
-            </table>
-        </div>
+       
 
-        
         <div id="settings" class="card">
             <h3>blogs update</h3>
             <p>Update your blog and posts settings.</p>
@@ -296,47 +230,17 @@
             <p>update lc models management section photos and contet .</p>
             <a href="admindash/modeldash.html" class="btn">update</a>
         </div>
-
-       <!--  <div id="settings" class="card">
-        <h3>home coaching header image</h3>
-        <p>update homecoaching header image </p>
-        <a href="https://app.firecms.co/p/schoolcms-77713/c/homecoaching_home" class="btn">update</a>
-    </div> -->
-    <!--<div id="settings" class="card">
-    <h3>enroll/register</h3>
-    <p>change or update home coaching header content .</p>
-    <a href="https://app.firecms.co/p/schoolcms-77713/c/enroll_header" class="btn">update</a>
-</div> -->
-<div id="settings" class="card">
-    <h3>models/getcsouted header content</h3>
-    <p>change or update models/getcsouted header content .</p>
-    <a href="admindash/modelsheader.html" class="btn">update</a>
-</div>
-
-
-<!--<div id="settings" class="card">
-    <h3>models images </h3>
-    <p>update and change models images .</p>
-    <a href="https://app.firecms.co/p/schoolcms-77713/c/models_images" class="btn">update</a>
-</div> -->
-
-<div id="settings" class="card">
-    <h3>diversity & INCLUSIVITY</h3>
-    <p>update diversity and inclusivity section photos.</p>
-    <a href="admindash/diversityupdate.html" class="btn">update</a>
-</div>
-
+        <div id="settings" class="card">
+            <h3>models/getcsouted header content</h3>
+            <p>change or update models/getcsouted header content .</p>
+            <a href="admindash/modelsheader.html" class="btn">update</a>
+        </div>
+        <div id="settings" class="card">
+            <h3>diversity & INCLUSIVITY</h3>
+            <p>update diversity and inclusivity section photos.</p>
+            <a href="admindash/diversityupdate.html" class="btn">update</a>
+        </div>
     </div>
-   
-</div>
-
-
-
-
-</div>
-    </div>
-
-
 
     <!-- Firebase scripts -->
     <script type="module">
@@ -393,7 +297,6 @@
                 `;
                 tableBody.appendChild(row);
             });
-            // Attach event listeners for edit and delete buttons
             document.querySelectorAll('.edit-btn').forEach(btn => btn.addEventListener('click', handleEditStudent));
             document.querySelectorAll('.delete-btn').forEach(btn => btn.addEventListener('click', handleDeleteStudent));
         }
