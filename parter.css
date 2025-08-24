@@ -1,0 +1,124 @@
+/* Section Styling */
+.partner-section {
+  text-align: center;
+  padding: 30px 20px;
+  background: #f9f9f9;
+  border-radius: 0; /* Removed rounded corners */
+  width: 100%; /* Full width */
+  max-width: 100%; /* No max-width limit */
+  margin: 0; /* Remove margin to stretch to edge */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Heading and Paragraph */
+.partner-section h2 {
+  font-size: 1.6rem;
+  margin-bottom: 10px;
+}
+
+.partner-section p {
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+/* Call to Action Button */
+.cta-btn {
+  padding: 10px 20px;
+  border: none;
+  background: #0a2a66;
+  color: #fff;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.cta-btn:hover {
+  background: #1245a5;
+}
+
+/* Modal Styling */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 95%;
+  max-width: 500px;
+  transition: all 0.3s ease;
+}
+
+/* Modal Header */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Modal Controls */
+.modal-controls button {
+  margin-left: 5px;
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* Form Styling */
+form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+}
+
+form label {
+  text-align: left;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+form input,
+form select,
+form textarea {
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 100%;
+  resize: none;
+}
+
+textarea {
+  min-height: 100px;
+}
+
+/* Submit Button */
+.submit-btn {
+  margin-top: 15px;
+  padding: 12px;
+  background: #0a2a66;
+  border: none;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.submit-btn:hover {
+  background: #1245a5;
+}
+
+/* Minimized Modal */
+.modal.minimized .modal-content {
+  height: 40px;
+  overflow: hidden;
+  max-width: 300px;
+}

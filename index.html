@@ -61,7 +61,7 @@
   </script>
 <!-- Font Awesome CDN (latest stable) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+<link rel="stylesheet" href="parter.css">
   <!-- 10. Main JS -->
   <script type="module" src="modelsmanagement.js"></script>
 
@@ -609,7 +609,55 @@
     </section>
     
       
+  <!-- Partner With Us Section -->
+  <section class="partner-section">
+    <h2>Partner With Us</h2>
+    <p style="color: #000;">Collaborate with us and grow together.</p>
+    <button id="openFormBtn" class="cta-btn"><i class="fas fa-handshake"></i> Partner With Us</button>
+  </section>
 
+  <!-- Popup Modal -->
+  <div id="partnerModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Partnership Form</h3>
+        <div class="modal-controls">
+        
+          <button id="closeBtn">×</button>
+        </div>
+      </div>
+      <form id="partnerForm">
+        <label for="org-name">Organization / Individual Name</label>
+        <input type="text" id="org-name" name="org_name" placeholder="Your organization or full name" required>
+
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+        <label for="telephone">Telephone No</label>
+        <input type="tel" id="telephone" name="telephone" placeholder="+254 700 000 000" required>
+
+        <label for="partnership-type">Type of Partnership</label>
+        <select id="partnership-type" name="partnership_type" required>
+          <option value="" disabled selected>Select type</option>
+          <option value="Sponsorship">Sponsorship</option>
+          <option value="Collaboration">Collaboration</option>
+          <option value="CSR">CSR (Corporate Social Responsibility)</option>
+          <option value="Other">Other</option>
+        </select>
+
+        <label for="message">Message / Proposal</label>
+        <textarea id="message" name="message" placeholder="Write your proposal here..." required></textarea>
+
+        <button type="submit" class="submit-btn">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- EmailJS -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script src="partner.js"></script>
+
+ 
 
 
 
@@ -623,6 +671,19 @@
       </div>
       <p class="all-rights">&copy; L&C Modeling. All rights reserved.</p>
     </footer>
+
+     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    (function(){
+        emailjs.init({
+            publicKey: "4FWgmfHCRbCX00_Nu",
+        });
+    })();
+  </script>
+  <script src="email.js"></script>
+ 
+</body>
+</html>
     
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script type="text/javascript">
@@ -632,7 +693,7 @@
           });
       })();
   </script>
-<script src="email.js"></script>
+
 
         <script type="module" src="inclu.js"></script>
     </main>
