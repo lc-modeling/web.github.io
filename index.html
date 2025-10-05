@@ -139,7 +139,7 @@
 
         .empty-section {
             width: 100%;
-            height: 5vh; /* Adjust the height as needed */
+            height: 5vh; 
             padding: 10px; /* Add padding around the section */
             box-sizing: border-box; /* Ensure padding is included in the element's total width and height */
             background-color: #f0f0f0; /* Optional: Background color to visualize the section */
@@ -161,6 +161,217 @@
             box-sizing: border-box; /* Ensure padding is included in the element's total width and height */
             background-color: #f0f0f0; /* Optional: Background color to visualize the section */
         } 
+
+
+/* ===============================
+   Apply for Modelling Classes Button
+   =============================== */
+.apply-btn {
+  display: inline-block;
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+  border-radius: 50px;
+  padding: 10px 25px;
+  font-size: 16px;
+  font-weight: 700; /* bold text for emphasis */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 20px; /* space before the heading */
+  font-family: 'Outfit', sans-serif; /* matches your existing site font */
+}
+
+/* Hover effect */
+.apply-btn:hover {
+  background: white;
+  color: black;
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.6); /* subtle glow effect */
+}
+
+/* Focus (keyboard navigation accessibility) */
+.apply-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.4);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .apply-btn {
+    padding: 8px 20px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .apply-btn {
+    width: 90%;
+    font-size: 13px;
+    padding: 10px;
+  }
+}
+
+/* Animation Keyframes */
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Apply the animation */
+.apply-btn {
+  animation: fadeSlideUp 1.2s ease-out forwards;
+}
+
+
+
+/* ============================================
+   ✨ L&C Modeling Academy — About Section Styles
+   ============================================ */
+
+/* Paragraph text styling */
+.home-content p {
+  color: white;
+  line-height: 1.7;
+  font-size: 17px;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  font-family: 'Outfit', sans-serif;
+}
+
+/* Headings remain bold and elegant */
+.headings__main, 
+.headings_subtitle {
+  text-align: center;
+  color: white;
+}
+
+/* ===============================
+   🎯 Apply Button Styling
+   =============================== */
+.apply-btn {
+  display: inline-block;
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+  border-radius: 50px;
+  padding: 10px 25px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-top: 40px; /* space below paragraphs on large screens */
+  font-family: 'Outfit', sans-serif;
+  animation: fadeSlideUp 1.2s ease-out forwards, softPulse 3s infinite ease-in-out;
+}
+
+/* Hover effect — inverts color + glow */
+.apply-btn:hover {
+  background: white;
+  color: black;
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+}
+
+/* Unique spacing for this specific workshop button */
+.workshop-btn {
+  margin-top: 50px; /* slightly lower on desktops */
+}
+
+/* ===============================
+   ✨ Animation Keyframes
+   =============================== */
+
+/* Fade and slide up when the section loads */
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Subtle continuous pulse effect for visibility */
+@keyframes softPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  }
+}
+
+/* ===============================
+   📱 Responsive Adjustments
+   =============================== */
+
+/* For tablets and mid-sized devices */
+@media (max-width: 768px) {
+  /* Reduce paragraph text slightly */
+  .home-content p {
+    font-size: 15px;
+    line-height: 1.6;
+    padding: 0 25px;
+  }
+
+  /* Slightly lower button and adjust text size */
+  .apply-btn {
+    padding: 8px 22px;
+    font-size: 14px;
+    margin-top: 45px;
+  }
+}
+
+/* For small phones */
+@media (max-width: 480px) {
+  /* Make paragraph smaller and fit comfortably */
+  .home-content p {
+    font-size: 13px;
+    line-height: 1.5;
+    padding: 0 15px; /* adds side breathing room */
+  }
+
+  /* Make button full width and uniquely lower */
+  .apply-btn {
+    width: 90%;
+    font-size: 13px;
+    padding: 10px;
+    margin-top: 70px; /* uniquely lower for visibility */
+  }
+}
+
+/* For extra-small screens (like older small phones) */
+@media (max-width: 360px) {
+  .home-content p {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .apply-btn {
+    margin-top: 90px; /* even lower for compact screens */
+  }
+}
+
+        
     </style>
     <script>
       document.documentElement.className = "js";
@@ -179,7 +390,7 @@
             <a class="oxygen-light" href="models.html#online-classes">Online classes</a>
             <a class="oxygen-light" href="blog.html#blog-container">Blog Post</a>
             <a class="oxygen-light" href="blog.html">Stories</a>
-            <a class="oxygen-light" href="register.html#about">Programmes</a>
+        <a class="oxygen-light" href="programs.html">programs</a>
             <a class="oxygen-light" href="#contact">Contact</a>
             <a class="oxygen-light" href="register.html">Enroll</a>
             <a class="oxygen-light" href="homecoaching.html">home coaching </a>
@@ -199,8 +410,8 @@
         <a class="oxygen-light" href="models.html#online-classes">Online classes</a>
         <a class="oxygen-light" href="blog.html#blog-container">Blog Post</a>
             <a class="oxygen-light" href="blog.html">Stories</a>
+           <a class="oxygen-light" href="programs.html">programs</a>
             <a class="oxygen-light" href="#contact">Contact Us</a>
-            <a class="oxygen-light" href="register.html#about">Programs</a> 
             <a class="oxygen-light" href="register.html">Enroll</a>
             <a class="oxygen-light" href="homecoaching.html">Home coaching</a>
             <a class="oxygen-light" href="models.html">Get scouted</a>
@@ -212,6 +423,7 @@
       <div class="intro-section" id="background-container">
         <div class="content" id="home">
             <div class="headings">
+              <button class="apply-btn"onclick="window.location.href='programs.html#programs'">Apply for Modelling Classes</button>
                 <h1 class="outfit">L&C MODELING ACADEMY</h1>
                 <h4 class="" style="size: 50px;">BEST MODELING SCHOOL IN KENYA</h4>
             </div>
@@ -240,7 +452,10 @@
 
                      <br>
                      <p  class="oxygen-light" style=" font-family: 'Outfit', sans-serif; font-optical-sizing: auto; font-weight: 300; font-style: normal;">At L&C modeling school Kenya We advocate for equality, diversity, and togetherness.</p>
-                </div>
+                
+                <br>
+                     <button class="apply-btn workshop-btn"  onclick="window.location.href='programs.html#6-Week'">APPLY FOR L&C MODELS WORKSHOP</button>
+                    </div>
               </div>
             </section>
 
@@ -323,99 +538,191 @@
 
               </div>
          
-        
-              <section id="programs" class="programs-section">
-                <div class="section-content">
-                  <h2 class="section__title" style="color: azure;">Programs</h2>
-                  
-                  <!-- New Program Card: Self Branding Classes -->
-                  <div class="program-card" onclick="toggleCard('self-branding-details')">
-                    <h3>Self Branding Classes</h3>
-                    <p class="program-summary">Learn to craft and promote your personal brand effectively in the competitive modeling industry.</p>
-                    <div class="program-details" id="self-branding-details">
-                      <p>Our Self Branding Classes focus on developing your unique identity, digital presence, and communication skills to help you stand out in the modeling world.</p>
-                      <ul>
-                        <li><strong>Personal Branding Strategy:</strong> Identify your unique strengths and style.</li>
-                        <li><strong>Digital Presence:</strong> Build and manage your online portfolio and social media.</li>
-                        <li><strong>Networking:</strong> Learn effective techniques to connect with industry professionals.</li>
-                        <li><strong>Media Training:</strong> Enhance your interview and public speaking skills.</li>
-                      </ul>
-                    </div>
-                  </div>
-                  
-                  <!-- Existing Program Cards -->
-                  <div class="program-card" onclick="toggleCard('pageantry-details')">
-                    <h3>Pageantry</h3>
-                    <p class="program-summary">Shape, groom, and prepare girls and women into confident models and beauty queens.</p>
-                    <div class="program-details" id="pageantry-details">
-                      <p>Our beauty Pageantry shapes, grooms, and prepares girls and women into gorgeous, confident, and promising models, beauty queens, and divers.</p>
-                      <p>We build our students' confidence, leadership skills, and mold them to become good role models to society, by helping them come up with impactful projects that contribute to the growth of society.</p>
-                      <p>For children pageantry, we empower them to be confident in front of a large crowd by giving them a pageantry experience through the Miss L&C competition that happens annually. The class is open to every girl and woman aged 12 and above.</p>
-                      <ul>
-                        <li><strong>Art of Communication:</strong> Essential interview skills, speech enhancement, mic utility, etc.</li>
-                        <li><strong>Ramp Walk:</strong> Posture, pose, stage presence, etc.</li>
-                        <li><strong>Fitness & Diet:</strong> Diet/Nutrition, exercise routine.</li>
-                        <li><strong>Camera Facing Technique & Portfolio Assistance:</strong> Modeling techniques, practice photoshoot session.</li>
-                        <li><strong>Makeup Lessons:</strong> How to do makeup for various assignments.</li>
-                        <li><strong>Table Etiquette:</strong> Eating style, table setting, napkin etiquette.</li>
-                        <li><strong>Social Graces:</strong> Social etiquette, personal hygiene.</li>
-                        <li><strong>Power Dressing Lessons:</strong> Styling tips for your body type, accessorizing.</li>
-                        <li><strong>Pageantry Q&A Preparation:</strong> Question handling, personalizing answers.</li>
-                      </ul>
-                    </div>
-                  </div>
-                  
-                  <div class="program-card" onclick="toggleCard('runway-modeling-details')">
-                    <h3>Runway Modeling</h3>
-                    <p class="program-summary">Learn to walk confidently on the runway and perfect your modeling skills.</p>
-                    <div class="program-details" id="runway-modeling-details">
-                      <p>A first show starts with a great walk. Our runway classes offer a positive mindset and wellness as the foundation of the models. Students have a fundamental skill to learn with passion and persistence, allowing them to reach their full potential.</p>
-                      <ul>
-                        <li>How to walk confidently on the runway</li>
-                        <li>How to perfect your posture</li>
-                        <li>How to make great portfolio pictures</li>
-                        <li>How to pose on the runway</li>
-                        <li>How to control your facial expressions</li>
-                        <li>How to make a great facial impression at castings</li>
-                      </ul>
-                    </div>
-                  </div>
-                  
-                  <div class="program-card" onclick="toggleCard('commercial-modeling-details')">
-                    <h3>Commercial Modeling</h3>
-                    <p class="program-summary">Break into the modeling world regardless of your body type.</p>
-                    <div class="program-details" id="commercial-modeling-details">
-                      <p>Commercial modeling embraces all looks, ages, and body shapes for advertising, campaign, and product marketing. It is a rewarding field within the fashion industry that offers individuals an opportunity to be the face of a product and connect with consumers on a visual emotional level.</p>
-                      <ul>
-                        <li>How to build your portfolio</li>
-                        <li>How to create a presence on social media</li>
-                        <li>Fitness and diet</li>
-                        <li>Camera facing technique</li>
-                      </ul>
-                    </div>
-                  </div>
-                  
-                  <div class="program-card" onclick="toggleCard('etiquette-classes-details')">
-                    <h3>Etiquette Classes</h3>
-                    <p class="program-summary">Learn essential etiquette skills for any social context.</p>
-                    <div class="program-details" id="etiquette-classes-details">
-                      <p>Etiquette is a life skill and not a complicated rule. Our etiquette classes teach you to apply etiquette to any social context, equipping you with the skills to communicate appropriately in any medium. Our straightforward and practical programs will make your future interactions with others more effective and enjoyable.</p>
-                      <ul>
-                        <li>Dining etiquette</li>
-                        <li>Image consultancy, including style and beauty</li>
-                        <li>Elegant social skills</li>
-                        <li>Graceful movement: sitting, standing, and walking</li>
-                        <li>How to gain confidence in any social situation</li>
-                        <li>Conversation etiquette at any social events</li>
-                        <li>Mastering effective eye contact</li>
-                        <li>Social media, email, and phone manners</li>
-                        <li>How to deal with bad manners</li>
-                      </ul>
-                    </div>
-                  </div>
-                  
-                </div>
-              </section>
+        <section id="programs" class="programs-section">
+  <div class="section-content">
+    <h2 class="section__title" style="color: azure;">Programs</h2>
+
+    <!-- NEW PROGRAM 1: L&C Modeling Workshop -->
+    <div class="program-card" onclick="toggleCard('workshop-details')">
+      <h3>L&C Modeling School — Workshop Program</h3>
+      <p class="program-summary">
+        Discover our modeling workshop program, dates, and how to register. Open to anyone interested in joining the modeling industry.
+      </p>
+      <div class="program-details" id="workshop-details">
+        <h4>Benefits of the L&C Models Workshop</h4>
+        <ul>
+          <li>Prepare models for professional photoshoots and build a strong portfolio</li>
+          <li>Guidance on posing, facial expressions, runway basics, and portfolio sequencing</li>
+          <li>Confidence-building in front of cameras with personalized feedback</li>
+          <li>Access to industry tips on auditioning, casting calls, and contract basics</li>
+          <li>Networking opportunities with photographers, stylists, and agents</li>
+          <li>Small class sizes to ensure individual attention and rapid skill progression</li>
+          <li>Optional one-on-one coaching sessions available (subject to availability)</li>
+        </ul>
+
+        <h4>What You'll Learn</h4>
+        <ul>
+          <li>Posing fundamentals for headshots, editorial, and commercial work</li>
+          <li>Facial expression control, eye focus, and movement choreography</li>
+          <li>Wardrobe and styling basics for different looks</li>
+          <li>Makeup and grooming notes for models (non-pro makeup tips)</li>
+          <li>Runway stance, walking rhythm, and turns</li>
+          <li>Portfolio development: selecting shots, sequencing, and captions</li>
+          <li>How to present a professional model comp card</li>
+          <li>Casting and audition preparation, including self-tapes</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- NEW PROGRAM 2: 6-Week Comprehensive Training -->
+    <div class="program-card" onclick="toggleCard('six-week-details')">
+      <h3>L&C Modeling School — 6-Week Training Program</h3>
+      <p class="program-summary">
+        Join our 6-week professional modeling program designed to transform aspiring models into confident professionals.
+      </p>
+      <div class="program-details" id="six-week-details">
+        <p>
+          Hello, thank you for reaching out to L&C Modeling School Kenya. We are excited to guide you into the world of professional modeling through our comprehensive 6-week training program.
+        </p>
+
+        <h4>Why Join Us?</h4>
+        <ul>
+          <li>Hands-on training in runway techniques, posing, personal branding & confidence building</li>
+          <li>Learn about contracts & safety to protect yourself in the industry</li>
+          <li>Build a professional portfolio and gain exposure to real opportunities</li>
+          <li>Get a professional L&C Modeling School Handbook to guide your journey</li>
+          <li>Join a fast-growing community of aspiring and professional models</li>
+        </ul>
+
+        <h4>Training Fee</h4>
+        <ul>
+          <li><strong>Standard Package:</strong> Ksh 27,000 (inclusive of registration, branded t-shirt worth Ksh 1,000, handbook worth Ksh 1,500, and enrollment)</li>
+          <li><strong>Referral/Friends Package:</strong> Ksh 24,500 each (when two or more join together – save Ksh 2,500)</li>
+          <li><strong>Family Package:</strong> Ksh 23,500 each (when family members enroll together – save Ksh 3,500 per person)</li>
+          <li><strong>Trial Package:</strong> 3 weeks at Ksh 15,000 (handbook not included, available separately at Ksh 1,500)</li>
+          <li><strong>Flexible Payment Plan:</strong> Start with half (Ksh 13,500), and clear the balance within the first 3 weeks of training.</li>
+        </ul>
+
+        <h4>Training Schedule</h4>
+        <ul>
+          <li><strong>Monday – Thursday:</strong> General students</li>
+          <li><strong>Saturday & Sunday:</strong> Special sessions for school-going kids</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Existing Programs Below -->
+    <div class="program-card" onclick="toggleCard('self-branding-details')">
+      <h3>Self Branding Classes</h3>
+      <p class="program-summary">
+        Learn to craft and promote your personal brand effectively in the competitive modeling industry.
+      </p>
+      <div class="program-details" id="self-branding-details">
+        <p>
+          Our Self Branding Classes focus on developing your unique identity, digital presence, and communication skills to help you stand out in the modeling world.
+        </p>
+        <ul>
+          <li><strong>Personal Branding Strategy:</strong> Identify your unique strengths and style.</li>
+          <li><strong>Digital Presence:</strong> Build and manage your online portfolio and social media.</li>
+          <li><strong>Networking:</strong> Learn effective techniques to connect with industry professionals.</li>
+          <li><strong>Media Training:</strong> Enhance your interview and public speaking skills.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="program-card" onclick="toggleCard('pageantry-details')">
+      <h3>Pageantry</h3>
+      <p class="program-summary">
+        Shape, groom, and prepare girls and women into confident models and beauty queens.
+      </p>
+      <div class="program-details" id="pageantry-details">
+        <p>
+          Our beauty Pageantry shapes, grooms, and prepares girls and women into gorgeous, confident, and promising models, beauty queens, and divers.
+        </p>
+        <p>
+          We build our students' confidence, leadership skills, and mold them to become good role models to society, by helping them come up with impactful projects that contribute to the growth of society.
+        </p>
+        <p>
+          For children pageantry, we empower them to be confident in front of a large crowd by giving them a pageantry experience through the Miss L&C competition that happens annually. The class is open to every girl and woman aged 12 and above.
+        </p>
+        <ul>
+          <li><strong>Art of Communication:</strong> Essential interview skills, speech enhancement, mic utility, etc.</li>
+          <li><strong>Ramp Walk:</strong> Posture, pose, stage presence, etc.</li>
+          <li><strong>Fitness & Diet:</strong> Diet/Nutrition, exercise routine.</li>
+          <li><strong>Camera Facing Technique & Portfolio Assistance:</strong> Modeling techniques, practice photoshoot session.</li>
+          <li><strong>Makeup Lessons:</strong> How to do makeup for various assignments.</li>
+          <li><strong>Table Etiquette:</strong> Eating style, table setting, napkin etiquette.</li>
+          <li><strong>Social Graces:</strong> Social etiquette, personal hygiene.</li>
+          <li><strong>Power Dressing Lessons:</strong> Styling tips for your body type, accessorizing.</li>
+          <li><strong>Pageantry Q&A Preparation:</strong> Question handling, personalizing answers.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="program-card" onclick="toggleCard('runway-modeling-details')">
+      <h3>Runway Modeling</h3>
+      <p class="program-summary">
+        Learn to walk confidently on the runway and perfect your modeling skills.
+      </p>
+      <div class="program-details" id="runway-modeling-details">
+        <p>
+          A first show starts with a great walk. Our runway classes offer a positive mindset and wellness as the foundation of the models. Students have a fundamental skill to learn with passion and persistence, allowing them to reach their full potential.
+        </p>
+        <ul>
+          <li>How to walk confidently on the runway</li>
+          <li>How to perfect your posture</li>
+          <li>How to make great portfolio pictures</li>
+          <li>How to pose on the runway</li>
+          <li>How to control your facial expressions</li>
+          <li>How to make a great facial impression at castings</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="program-card" onclick="toggleCard('commercial-modeling-details')">
+      <h3>Commercial Modeling</h3>
+      <p class="program-summary">
+        Break into the modeling world regardless of your body type.
+      </p>
+      <div class="program-details" id="commercial-modeling-details">
+        <p>
+          Commercial modeling embraces all looks, ages, and body shapes for advertising, campaign, and product marketing.
+        </p>
+        <ul>
+          <li>How to build your portfolio</li>
+          <li>How to create a presence on social media</li>
+          <li>Fitness and diet</li>
+          <li>Camera facing technique</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="program-card" onclick="toggleCard('etiquette-classes-details')">
+      <h3>Etiquette Classes</h3>
+      <p class="program-summary">
+        Learn essential etiquette skills for any social context.
+      </p>
+      <div class="program-details" id="etiquette-classes-details">
+        <p>
+          Etiquette is a life skill and not a complicated rule. Our etiquette classes teach you to apply etiquette to any social context.
+        </p>
+        <ul>
+          <li>Dining etiquette</li>
+          <li>Image consultancy, including style and beauty</li>
+          <li>Elegant social skills</li>
+          <li>Graceful movement: sitting, standing, and walking</li>
+          <li>How to gain confidence in any social situation</li>
+          <li>Conversation etiquette at any social events</li>
+          <li>Mastering effective eye contact</li>
+          <li>Social media, email, and phone manners</li>
+          <li>How to deal with bad manners</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
               
         <script>
             function toggleCard(id) {
@@ -499,7 +806,7 @@
   <iframe 
     width="560" 
     height="315" 
-    src="https://www.youtube.com/embed/3Z4mrAI8-ao?si=FgQKK_NH3JGjNAsD&autoplay=1&mute=1" 
+    src="https://www.youtube.com/embed/p6I26i2_9go?si=rD78iZY4Tg3ILcu-&autoplay=1&mute=1" 
     title="YouTube video player" 
     frameborder="0" 
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
@@ -508,6 +815,7 @@
     style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
   </iframe>
 </div>
+
 </section>
 
     
@@ -611,8 +919,8 @@
       
   <!-- Partner With Us Section -->
   <section class="partner-section">
-    <h2>Partner With Us</h2>
-    <p style="color: #000;">Collaborate with us and grow together.</p>
+    <h1>Partner With Us</h1>
+    <p >Collaborate with us and grow together.</p>
     <button id="openFormBtn" class="cta-btn"><i class="fas fa-handshake"></i> Partner With Us</button>
   </section>
 

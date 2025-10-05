@@ -2,7 +2,7 @@
 .partner-section {
   text-align: center;
   padding: 30px 20px;
-  background: #f9f9f9;
+  background: #000; /* Changed from light gray to black */
   border-radius: 0; /* Removed rounded corners */
   width: 100%; /* Full width */
   max-width: 100%; /* No max-width limit */
@@ -10,30 +10,39 @@
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-/* Heading and Paragraph */
-.partner-section h2 {
-  font-size: 1.6rem;
+/* Heading (White with black outline) */
+.partner-section h1 {
+  font-size: 1.8rem;
+  color: #fff; /* White text */
+  text-shadow: 
+    -1px -1px 0 #000,  
+    1px -1px 0 #000,  
+    -1px 1px 0 #000,  
+    1px 1px 0 #000; 
   margin-bottom: 10px;
+  font-weight: 800;
 }
 
+/* Subheading and Paragraph */
 .partner-section p {
   font-size: 1rem;
   margin-bottom: 20px;
+  color: #fff; /* Changed from black to white */
 }
 
 /* Call to Action Button */
 .cta-btn {
   padding: 10px 20px;
   border: none;
-  background: #0a2a66;
-  color: #fff;
+  background: #fff; /* White button for contrast */
+  color: #000; /* Black text for visibility */
   font-size: 1rem;
   border-radius: 6px;
   cursor: pointer;
   transition: 0.3s;
 }
 .cta-btn:hover {
-  background: #1245a5;
+  background: #ddd; /* Slight gray on hover */
 }
 
 /* Modal Styling */
@@ -49,7 +58,8 @@
 }
 
 .modal-content {
-  background: #fff;
+  background: #111; /* Dark modal for consistency */
+  color: #fff; /* White text */
   padding: 20px;
   border-radius: 10px;
   width: 95%;
@@ -70,6 +80,7 @@
   background: transparent;
   border: none;
   font-size: 1.2rem;
+  color: #fff; /* White icons */
   cursor: pointer;
 }
 
@@ -84,6 +95,7 @@ form label {
   text-align: left;
   margin-top: 10px;
   font-weight: bold;
+  color: #fff; /* White labels */
 }
 
 form input,
@@ -92,9 +104,11 @@ form textarea {
   padding: 10px;
   margin-top: 5px;
   border-radius: 6px;
-  border: 1px solid #ccc;
+  border: 1px solid #444;
   width: 100%;
   resize: none;
+  background: #222; /* Dark inputs */
+  color: #fff; /* White text inside inputs */
 }
 
 textarea {
@@ -105,15 +119,15 @@ textarea {
 .submit-btn {
   margin-top: 15px;
   padding: 12px;
-  background: #0a2a66;
+  background: #fff; /* White button */
   border: none;
-  color: #fff;
+  color: #000; /* Black text */
   border-radius: 6px;
   cursor: pointer;
   transition: 0.3s;
 }
 .submit-btn:hover {
-  background: #1245a5;
+  background: #ddd;
 }
 
 /* Minimized Modal */
@@ -121,4 +135,17 @@ textarea {
   height: 40px;
   overflow: hidden;
   max-width: 300px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .partner-section h1 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .partner-section h1 {
+    font-size: 1.3rem;
+  }
 }
