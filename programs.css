@@ -42,8 +42,13 @@ body {
   color: #222;
 }
 
+/* Ensure icons keep their original fonts */
+.fa, .fab, .fas, .far, .fal, .fad, .bi, [class*="icon"] {
+  font-family: "Font Awesome 6 Brands", "Font Awesome 6 Free", "Font Awesome 6 Pro" !important;
+}
+
 h1, h2, h3 {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Outfit', sans-serif;
 }
 
 a {
