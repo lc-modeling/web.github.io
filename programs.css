@@ -1,3 +1,37 @@
+
+  @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css");
+
+.feature-icon {
+  color: #c7a74f; /* gold color */
+  display: inline-block;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* Default size (desktop) */
+.feature-icon {
+  font-size: 60px;
+}
+
+/* Medium devices (tablets) */
+@media (max-width: 992px) {
+  .feature-icon {
+    font-size: 50px;
+  }
+}
+
+/* Small devices (phones) */
+@media (max-width: 600px) {
+  .feature-icon {
+    font-size: 40px;
+  }
+}
+
+/* Optional hover effect */
+.feature-icon:hover {
+  transform: scale(1.1);
+  color: #d4b550; /* lighter gold on hover */
+}
+
 /* ========================
    GENERAL STYLING
 ======================== */
@@ -39,6 +73,7 @@ a {
   opacity: 0;
   transition: opacity 1.2s ease-in-out;
 }
+
 .slide.active {
   opacity: 1;
 }
@@ -54,49 +89,57 @@ a {
   padding: 0 20px;
 }
 
+/* Smaller and spaced-out title and paragraph */
 .hero h1 {
-  font-size: 2.8rem;
-  margin-bottom: 10px;
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  line-height: 1.3;
 }
 
 .hero p {
-  font-size: 1.2rem;
-  max-width: 700px;
-  margin: 0 auto 20px;
+  font-size: 1rem;
+  max-width: 650px;
+  margin: 0 auto 30px;
+  line-height: 1.5;
 }
 
-/* ========================
-   BUTTONS (Transparent & Rounded)
-======================== */
-
-/* General Button Style */
-.hero-btn,
-.apply-btn {
+/* HERO BUTTON (white transparent, rounded) */
+.hero-btn {
   display: inline-block;
   background: transparent;
   color: #fff;
   border: 2px solid #fff;
+  padding: 8px 22px;
+  border-radius: 50px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+  animation: subtlePulse 3s infinite;
+}
+
+.hero-btn:hover {
+  background: #fff;
+  color: #0a2a66;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  transform: scale(1.05);
+}
+
+/* ========================
+   BUTTONS (for other sections)
+======================== */
+.apply-btn {
+  display: inline-block;
+  border: 2px solid #0a2a66;
+  color: #0a2a66;
+  background: transparent;
   padding: 10px 28px;
-  border-radius: 50px; /* fully rounded edges */
+  border-radius: 50px;
   font-weight: 700;
   letter-spacing: 0.5px;
   text-transform: uppercase;
   transition: all 0.3s ease;
-}
-
-/* HERO BUTTON (white text on overlay) */
-.hero-btn:hover {
-  background: #fff;
-  color: #0a2a66;
-  box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
-  transform: scale(1.05);
-}
-
-/* APPLY BUTTON (for program cards) */
-.apply-btn {
-  border: 2px solid #0a2a66;
-  color: #0a2a66;
-  background: transparent;
 }
 
 .apply-btn:hover {
@@ -106,17 +149,11 @@ a {
   transform: scale(1.05);
 }
 
-/* ========================
-   BUTTON ANIMATION
-======================== */
+/* Button Pulse Animation */
 @keyframes subtlePulse {
   0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); }
   70% { box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
   100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
-}
-
-.hero-btn {
-  animation: subtlePulse 3s infinite;
 }
 
 /* ========================
@@ -147,6 +184,7 @@ a {
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   transition: transform 0.3s ease;
 }
+
 .program-card:hover {
   transform: translateY(-5px);
 }
@@ -180,6 +218,7 @@ a {
   margin-bottom: 20px;
   text-align: left;
 }
+
 .program-info ul li {
   font-size: 0.95rem;
   margin-bottom: 6px;
@@ -200,37 +239,57 @@ a {
 /* ========================
    RESPONSIVE
 ======================== */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
+  .hero {
+    height: 80vh;
+  }
   .hero h1 {
-    font-size: 2rem;
+    font-size: 1.6rem;
   }
   .hero p {
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
-  .program-info h3 {
-    font-size: 1.2rem;
+  .hero-btn {
+    font-size: 0.8rem;
+    padding: 7px 20px;
   }
+}
 
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+  }
+  .hero p {
+    font-size: 0.9rem;
+    margin-bottom: 25px;
+  }
   .hero-btn,
   .apply-btn {
-    font-size: 0.9rem;
-    padding: 9px 20px;
-    border-width: 1.8px;
+    font-size: 0.8rem;
+    padding: 8px 20px;
   }
 }
 
 @media (max-width: 480px) {
+  .hero {
+    height: 75vh;
+  }
+  .hero h1 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  .hero p {
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+  }
   .hero-btn,
   .apply-btn {
-    width: 80%;
-    font-size: 0.85rem;
-    padding: 10px;
+    width: 75%;
+    font-size: 0.75rem;
+    padding: 9px;
   }
 }
-
-
-
-
 
 
 

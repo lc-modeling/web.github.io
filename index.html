@@ -67,6 +67,38 @@
 
 
     <style>
+      @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css");
+
+.feature-icon {
+  color: #c7a74f; /* gold color */
+  display: inline-block;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* Default size (desktop) */
+.feature-icon {
+  font-size: 60px;
+}
+
+/* Medium devices (tablets) */
+@media (max-width: 992px) {
+  .feature-icon {
+    font-size: 50px;
+  }
+}
+
+/* Small devices (phones) */
+@media (max-width: 600px) {
+  .feature-icon {
+    font-size: 40px;
+  }
+}
+
+/* Optional hover effect */
+.feature-icon:hover {
+  transform: scale(1.1);
+  color: #d4b550; /* lighter gold on hover */
+}
       body{
         font-family: 'Outfit', sans-serif;
       }
@@ -510,6 +542,8 @@
   -->
 
   <section class="about-us">
+<i class="bi bi-book feature-icon"></i>
+
     <h2 class="section__title" style="color: rgb(247, 251, 255); font-family: 'Outfit', sans-serif; font-weight: 700;">About Us</h2>
     <br />
     <div class="container">
