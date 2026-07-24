@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="imgfallback.js"></script>
   <title>LC School Blog</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -124,7 +125,7 @@ html {
 <body>
     <header>
         <nav class="navbar">
-          <div class="brand-title">LC Blog & Stories</div>
+          <div class="brand-title">LC Blog</div>
           <a href="javascript:void(0);" class="toggle-button" id="toggle-button">
             <span class="bar"></span>
             <span class="bar"></span>
@@ -134,7 +135,7 @@ html {
             <ul>
               <li><a href="index.html">Home</a></li>
               <li><a href="#blog-container">Blog</a></li>
-              <li><a href="#blog-preview-section">Stories</a></li>
+              <li><a href="modelconnect.html">L&amp;C Model Connect</a></li>
             </ul>
           </div>
         </nav>
@@ -144,14 +145,6 @@ html {
       </div>
       <br>
 
-    <section id="blogs" class="blog-preview-section">
-      <h1 class="main-heading">L&C MODELS STORIES PLATFORM</h1>
-      <h2 class="sub-heading">Creating Impacts through talents</h2>
-    
-        <div id="blog-posts">
-            <!-- Dynamic content will be inserted here -->
-        </div>
-    </section>
     <h1 class="centered-large-text" id="blog">Blog posts</h1>
     <div class="container" id="blog-container">
         <!-- Blog posts will be appended here -->
@@ -221,7 +214,6 @@ navLinks.forEach(link => {
 });
 
     </script>
-    <script type="module" src="scriptblog.js"></script>
     <script type="module" src="blog.js"></script>
     <script type="module" src="">
 

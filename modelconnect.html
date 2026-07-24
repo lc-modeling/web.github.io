@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="imgfallback.js"></script>
+  <title>L&C Model Connect — Find Modeling Instructors Across Kenya</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="lc-ffot.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="blog.css">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5PZ8ZZ4TS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V5PZ8ZZ4TS');
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    :root {
+      --mc-brand: #8a1f66;
+      --mc-brand-2: #3a8dff;
+      --mc-ink: #1c1c22;
+      --mc-soft: #5a5a66;
+      --mc-line: #e7e7ee;
+      --mc-bg: #f7f7fb;
+    }
+    .mc { font-family: "Outfit", sans-serif; color: var(--mc-ink); }
+
+    /* Hero */
+    .mc-hero {
+      position: relative;
+      overflow: hidden;
+      min-height: 88vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      padding: 90px 20px;
+      text-align: center;
+      background: linear-gradient(135deg, #8a1f66 0%, #3a8dff 100%);
+    }
+    .mc-hero__bg { position: absolute; inset: 0; z-index: 0; }
+    .mc-hero__bg-img {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      animation: mc-hero-fade 50s cubic-bezier(.45,0,.55,1) infinite;
+    }
+    .mc-hero__bg-img:nth-child(1) { animation-delay: 0s; }
+    .mc-hero__bg-img:nth-child(2) { animation-delay: 10s; }
+    .mc-hero__bg-img:nth-child(3) { animation-delay: 20s; }
+    .mc-hero__bg-img:nth-child(4) { animation-delay: 30s; }
+    .mc-hero__bg-img:nth-child(5) { animation-delay: 40s; }
+    @keyframes mc-hero-fade {
+      0%   { opacity: 0; }
+      8%   { opacity: 1; }
+      12%  { opacity: 1; }
+      20%  { opacity: 0; }
+      100% { opacity: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .mc-hero__bg-img { animation: none; opacity: 0; }
+      .mc-hero__bg-img:nth-child(1) { opacity: 1; }
+    }
+    .mc-hero__overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(135deg, rgba(138,31,102,.26) 0%, rgba(58,141,255,.18) 100%);
+    }
+    .mc-hero__content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; }
+    .mc-hero h1 { font-size: clamp(2.2rem, 4.5vw, 3.4rem); margin: 0 0 18px; line-height: 1.15; text-shadow: 0 2px 6px rgba(0,0,0,.55), 0 8px 26px rgba(0,0,0,.4); }
+    .mc-hero p { font-size: clamp(1.05rem, 1.6vw, 1.35rem); max-width: 720px; margin: 0 auto 34px; opacity: .97; text-shadow: 0 2px 10px rgba(0,0,0,.45); }
+    .mc-hero__btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .mc-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 26px; border-radius: 40px; font-size: 1rem; font-weight: 600;
+      text-decoration: none; cursor: pointer; border: 2px solid #fff; transition: transform .15s, background .2s;
+    }
+    .mc-btn:hover { transform: translateY(-2px); }
+    .mc-btn--solid { background: #fff; color: var(--mc-brand); }
+    .mc-btn--ghost { background: transparent; color: #fff; }
+
+    /* Gallery slider */
+    .mc-gallery { padding: 54px 0 60px; background: #fff; }
+    .mc-gallery__title { text-align: center; font-size: 2rem; margin: 0 0 8px; }
+    .mc-gallery__sub { text-align: center; color: var(--mc-soft); margin: 0 auto 32px; max-width: 640px; padding: 0 20px; }
+    .mc-slider { position: relative; }
+    .mc-slider__scroller {
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-behavior: smooth;
+      scroll-snap-type: x proximity;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      -webkit-mask-image: linear-gradient(to right, transparent 0, #000 60px, #000 calc(100% - 60px), transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0, #000 60px, #000 calc(100% - 60px), transparent 100%);
+    }
+    .mc-slider__scroller::-webkit-scrollbar { display: none; }
+    .mc-slider__track {
+      display: flex;
+      width: max-content;
+      gap: 20px;
+      padding: 6px 50px;
+    }
+    .mc-slider__slide {
+      flex: 0 0 auto;
+      width: 300px;
+      height: 380px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 14px 34px rgba(0,0,0,.14);
+      margin: 0;
+      scroll-snap-align: start;
+    }
+    .mc-slider__slide img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s ease; }
+    .mc-slider__slide:hover img { transform: scale(1.06); }
+    .mc-slider__arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255,255,255,.92);
+      color: var(--mc-brand);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      cursor: pointer;
+      z-index: 5;
+      box-shadow: 0 8px 20px rgba(0,0,0,.2);
+      transition: background .2s, transform .2s;
+    }
+    .mc-slider__arrow:hover { background: #fff; transform: translateY(-50%) scale(1.08); }
+    .mc-slider__arrow:active { transform: translateY(-50%) scale(.95); }
+    .mc-slider__arrow--left { left: 6px; }
+    .mc-slider__arrow--right { right: 6px; }
+    @media (max-width: 900px) {
+      .mc-slider__slide { width: 232px; height: 300px; border-radius: 18px; }
+      .mc-slider__track { gap: 18px; padding: 6px 46px; }
+      .mc-slider__arrow { width: 42px; height: 42px; font-size: 17px; }
+    }
+    @media (max-width: 520px) {
+      .mc-slider__slide { width: 176px; height: 232px; border-radius: 14px; }
+      .mc-slider__track { gap: 14px; padding: 6px 40px; }
+      .mc-gallery__title { font-size: 1.5rem; }
+      .mc-slider__arrow { width: 38px; height: 38px; font-size: 15px; }
+      .mc-slider__arrow--left { left: 3px; }
+      .mc-slider__arrow--right { right: 3px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .mc-slider__scroller { -webkit-mask-image: none; mask-image: none; }
+    }
+
+    /* Generic section */
+    .mc-section { max-width: 1150px; margin: 0 auto; padding: 60px 20px; }
+    .mc-section h2 { text-align: center; font-size: 2rem; margin: 0 0 8px; }
+    .mc-section .mc-sub { text-align: center; color: var(--mc-soft); margin: 0 auto 40px; max-width: 640px; }
+
+    /* How it works */
+    .mc-how { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+    .mc-how__col { background: var(--mc-bg); border: 1px solid var(--mc-line); border-radius: 16px; padding: 26px; }
+    .mc-how__col h3 { margin: 0 0 16px; font-size: 1.25rem; color: var(--mc-brand); }
+    .mc-steps { list-style: none; margin: 0; padding: 0; counter-reset: step; }
+    .mc-steps li { position: relative; padding: 10px 0 10px 46px; counter-increment: step; }
+    .mc-steps li::before {
+      content: counter(step); position: absolute; left: 0; top: 8px;
+      width: 30px; height: 30px; border-radius: 50%; background: var(--mc-brand-2); color: #fff;
+      display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .9rem;
+    }
+
+    /* Categories */
+    .mc-cats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+    .mc-cat {
+      background: #fff; border: 1px solid var(--mc-line); border-radius: 14px; padding: 22px 18px;
+      text-align: center; transition: transform .15s, box-shadow .2s;
+    }
+    .mc-cat:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(0,0,0,.08); }
+    .mc-cat i { font-size: 1.7rem; color: var(--mc-brand); margin-bottom: 10px; }
+    .mc-cat span { display: block; font-weight: 600; }
+
+    /* Instructor directory */
+    #instructors { background: var(--mc-bg); }
+    .instructor-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; }
+    .instructor-card {
+      background: #fff; border: 1px solid var(--mc-line); border-radius: 16px; overflow: hidden;
+      display: flex; flex-direction: column; box-shadow: 0 4px 14px rgba(0,0,0,.05);
+    }
+    .instructor-card__photo { width: 100%; height: 240px; object-fit: cover; display: block; background: #eee; }
+    .instructor-card__photo--placeholder {
+      display: flex; align-items: center; justify-content: center; font-size: 3rem; color: #bbb;
+    }
+    .instructor-card__body { padding: 18px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+    .instructor-card__name { margin: 0; font-size: 1.2rem; }
+    .instructor-card__details { margin: 0; color: var(--mc-soft); font-size: .95rem; white-space: pre-line; }
+    .instructor-card__portfolio { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; }
+    .instructor-card__thumb { width: 64px; height: 64px; object-fit: cover; border-radius: 8px; flex: 0 0 auto; }
+    .instructor-card__book {
+      margin-top: auto; text-align: center; background: var(--mc-brand); color: #fff; text-decoration: none;
+      padding: 12px; border-radius: 10px; font-weight: 600; transition: background .2s;
+    }
+    .instructor-card__book:hover { background: #6c1750; }
+    .mc-empty { text-align: center; color: var(--mc-soft); grid-column: 1 / -1; padding: 30px; }
+
+    /* Forms */
+    .mc-forms { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+    .mc-form-card { background: #fff; border: 1px solid var(--mc-line); border-radius: 16px; padding: 26px; }
+    .mc-form-card h3 { margin: 0 0 6px; color: var(--mc-brand); }
+    .mc-form-card p.mc-note { margin: 0 0 18px; color: var(--mc-soft); font-size: .9rem; }
+    .mc-form-card label { display: block; font-weight: 600; font-size: .9rem; margin: 12px 0 5px; }
+    .mc-form-card input, .mc-form-card select, .mc-form-card textarea {
+      width: 100%; padding: 11px 13px; border: 1px solid var(--mc-line); border-radius: 10px;
+      font-family: inherit; font-size: .95rem;
+    }
+    .mc-form-card textarea { resize: vertical; }
+    .mc-form-card button {
+      margin-top: 18px; width: 100%; padding: 13px; border: none; border-radius: 10px;
+      background: var(--mc-brand); color: #fff; font-weight: 600; font-size: 1rem; cursor: pointer;
+    }
+    .mc-form-card button:hover { background: #6c1750; }
+
+    /* Testimonials */
+    .mc-testimonials { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+    .mc-quote { background: #fff; border: 1px solid var(--mc-line); border-radius: 14px; padding: 22px; }
+    .mc-quote p { font-style: italic; color: var(--mc-ink); margin: 0 0 12px; }
+    .mc-quote span { font-weight: 700; color: var(--mc-brand); }
+
+    /* Contact / socials */
+    .mc-contact { background: linear-gradient(135deg, #3a8dff, #8a1f66); color: #fff; text-align: center; }
+    .mc-contact h2 { color: #fff; }
+    .mc-contact .mc-sub { color: rgba(255,255,255,.9); }
+    .social-icons { display: flex; justify-content: center; gap: 20px; margin-top: 18px; flex-wrap: wrap; }
+    .icon-link { color: #fff; font-size: 20px; text-decoration: none; }
+    .icon-link:hover { color: #ffe0f2; }
+
+    @media (max-width: 760px) {
+      .mc-hero { min-height: 78vh; padding: 70px 20px; }
+      .mc-how, .mc-forms { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .mc-hero { min-height: 68vh; }
+    }
+  </style>
+</head>
+<body class="mc">
+  <header>
+    <nav class="navbar">
+      <div class="brand-title">L&C Model Connect</div>
+      <a href="javascript:void(0);" class="toggle-button" id="toggle-button">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </a>
+      <div class="navbar-links" id="navbar-links">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#instructors">Instructors</a></li>
+          <li><a href="#categories">Training</a></li>
+          <li><a href="#become-instructor">Become an Instructor</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="mc-hero">
+    <!-- Background photos: 5 images, each crossfades in for 10s. Swap these src paths for your own. -->
+    <div class="mc-hero__bg" aria-hidden="true">
+      <div class="mc-hero__bg-img" style="background-image:url('headerconnect1.jpg')"></div>
+      <div class="mc-hero__bg-img" style="background-image:url('headerconnect2.jpg')"></div>
+      <div class="mc-hero__bg-img" style="background-image:url('headerconnect3.jpg')"></div>
+      <div class="mc-hero__bg-img" style="background-image:url('headerconnect4.jpg')"></div>
+      <div class="mc-hero__bg-img" style="background-image:url('headerconnect5.jpg')"></div>
+    </div>
+    <div class="mc-hero__overlay"></div>
+    <div class="mc-hero__content">
+      <h1>Find Professional Modeling Instructors Across Kenya</h1>
+      <p>Book catwalk, runway, pageantry, posing, and grooming classes online or in person.</p>
+      <div class="mc-hero__btns">
+        <a href="#book-training" class="mc-btn mc-btn--solid"><i class="fa-solid fa-calendar-check"></i> Book Training</a>
+        <a href="#become-instructor" class="mc-btn mc-btn--ghost"><i class="fa-solid fa-chalkboard-user"></i> Become an Instructor</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STYLE SHOWCASE SLIDER -->
+  <section class="mc-gallery" aria-label="Photo gallery">
+    <h2 class="mc-gallery__title">Style Showcase</h2>
+    <p class="mc-gallery__sub">A glimpse of our instructors and students in action.</p>
+    <div class="mc-slider" id="mcSlider">
+      <button class="mc-slider__arrow mc-slider__arrow--left" id="mcArrowLeft" type="button" aria-label="Scroll photos left">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <div class="mc-slider__scroller" id="mcSliderScroller" tabindex="0">
+        <div class="mc-slider__track" id="mcSliderTrack">
+          <!-- Add your own photos here — just swap the 10 src paths below. -->
+          <figure class="mc-slider__slide"><img src="connect1.jpg" alt="L&amp;C Model Connect showcase photo 1" loading="lazy"></figure>
+          <figure class="mc-slider__slide"><img src="connect2.jpg" alt="L&amp;C Model Connect showcase photo 2" loading="lazy"></figure>
+          <figure class="mc-slider__slide"><img src="connect3.jpg" alt="L&amp;C Model Connect showcase photo 3" loading="lazy"></figure>
+          <figure class="mc-slider__slide"><img src="connect4.jpg" alt="L&amp;C Model Connect showcase photo 4" loading="lazy"></figure>
+          <figure class="mc-slider__slide"><img src="connect5.jpg" alt="L&amp;C Model Connect showcase photo 5" loading="lazy"></figure>
+          <figure class="mc-slider__slide"><img src="connect6.jpg" alt="L&amp;C Model Connect showcase photo 6" loading="lazy"></figure>
+          <figure class="mc-slider__slide"><img src="connect7.jpg" alt="L&amp;C Model Connect showcase photo 7" loading="lazy"></figure>
+          <figure class="mc-slider__slide"><img src="connect8.jpg" alt="L&amp;C Model Connect showcase photo 8" loading="lazy"></figure>
+          <figure class="mc-slider__slide"><img src="connect9.jpg" alt="L&amp;C Model Connect showcase photo 9" loading="lazy"></figure>
+          <figure class="mc-slider__slide"><img src="connect10.jpg" alt="L&amp;C Model Connect showcase photo 10" loading="lazy"></figure>
+        </div>
+      </div>
+      <button class="mc-slider__arrow mc-slider__arrow--right" id="mcArrowRight" type="button" aria-label="Scroll photos right">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="mc-section" id="how-it-works">
+    <h2>How It Works</h2>
+    <p class="mc-sub">A simple path whether you're learning or teaching.</p>
+    <div class="mc-how">
+      <div class="mc-how__col">
+        <h3><i class="fa-solid fa-graduation-cap"></i> For Students</h3>
+        <ol class="mc-steps">
+          <li>Browse instructors</li>
+          <li>Book a training session</li>
+          <li>Attend training online or physically</li>
+          <li>Grow your modeling career</li>
+        </ol>
+      </div>
+      <div class="mc-how__col">
+        <h3><i class="fa-solid fa-chalkboard-user"></i> For Instructors</h3>
+        <ol class="mc-steps">
+          <li>Create a profile</li>
+          <li>Get approved</li>
+          <li>Receive student bookings</li>
+          <li>Earn income from training</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRAINING CATEGORIES -->
+  <section class="mc-section" id="categories">
+    <h2>Training Categories</h2>
+    <p class="mc-sub">Choose the discipline you'd like to master.</p>
+    <div class="mc-cats">
+      <div class="mc-cat"><i class="fa-solid fa-person-walking"></i><span>Catwalk Training</span></div>
+      <div class="mc-cat"><i class="fa-solid fa-shoe-prints"></i><span>Runway Coaching</span></div>
+      <div class="mc-cat"><i class="fa-solid fa-crown"></i><span>Pageantry Training</span></div>
+      <div class="mc-cat"><i class="fa-solid fa-camera"></i><span>Posing Classes</span></div>
+      <div class="mc-cat"><i class="fa-solid fa-spa"></i><span>Grooming &amp; Etiquette</span></div>
+      <div class="mc-cat"><i class="fa-solid fa-face-smile"></i><span>Confidence Building</span></div>
+      <div class="mc-cat"><i class="fa-solid fa-child-reaching"></i><span>Kids Modeling</span></div>
+    </div>
+  </section>
+
+  <!-- INSTRUCTOR DIRECTORY -->
+  <section class="mc-section" id="instructors">
+    <h2>Our Instructors</h2>
+    <p class="mc-sub">Approved modeling instructors ready to train you. Tap <strong>Book Now</strong> to reach out.</p>
+    <div id="instructor-directory" class="instructor-grid">
+      <!-- Instructor cards are injected here from the database -->
+    </div>
+  </section>
+
+  <!-- APPLICATION + BOOKING FORMS -->
+  <section class="mc-section">
+    <div class="mc-forms">
+      <!-- Become an Instructor -->
+      <div class="mc-form-card" id="become-instructor">
+        <h3><i class="fa-solid fa-chalkboard-user"></i> Become an Instructor</h3>
+        <p class="mc-note">Apply to join L&amp;C Model Connect. We'll review your application and get in touch.</p>
+        <form id="instructorForm">
+          <label>Full Name</label>
+          <input type="text" name="fullname" required>
+          <label>Phone Number</label>
+          <input type="tel" name="phone" required>
+          <label>Email Address</label>
+          <input type="email" name="email" required>
+          <label>Location / County</label>
+          <input type="text" name="location" required>
+          <label>Years of Experience</label>
+          <input type="number" name="experience" min="0">
+          <label>Specialization</label>
+          <select name="specialization">
+            <option>Catwalk Training</option>
+            <option>Runway Coaching</option>
+            <option>Pageantry Training</option>
+            <option>Posing Classes</option>
+            <option>Grooming &amp; Etiquette</option>
+            <option>Confidence Building</option>
+            <option>Kids Modeling</option>
+          </select>
+          <label>Social Media Links</label>
+          <input type="text" name="socials" placeholder="Instagram, TikTok, etc.">
+          <button type="submit"><i class="fa-solid fa-paper-plane"></i> Submit Application</button>
+        </form>
+      </div>
+
+      <!-- Book Training -->
+      <div class="mc-form-card" id="book-training">
+        <h3><i class="fa-solid fa-calendar-check"></i> Book Training</h3>
+        <p class="mc-note">Tell us what you'd like to learn and we'll match you with an instructor.</p>
+        <form id="bookingForm">
+          <label>Full Name</label>
+          <input type="text" name="fullname" required>
+          <label>Phone Number</label>
+          <input type="tel" name="phone" required>
+          <label>Email Address</label>
+          <input type="email" name="email" required>
+          <label>Location</label>
+          <input type="text" name="location" required>
+          <label>Type of Training Required</label>
+          <select name="training">
+            <option>Catwalk Training</option>
+            <option>Runway Coaching</option>
+            <option>Pageantry Training</option>
+            <option>Posing Classes</option>
+            <option>Grooming &amp; Etiquette</option>
+            <option>Confidence Building</option>
+            <option>Kids Modeling</option>
+          </select>
+          <label>Preferred Instructor</label>
+          <input type="text" name="instructor" placeholder="Optional">
+          <label>Preferred Training Method</label>
+          <select name="method">
+            <option>Online</option>
+            <option>Physical</option>
+          </select>
+          <button type="submit"><i class="fa-solid fa-paper-plane"></i> Send Booking Request</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="mc-section" id="testimonials">
+    <h2>What Students Say</h2>
+    <p class="mc-sub">Real experiences from models trained through the platform.</p>
+    <div class="mc-testimonials">
+      <div class="mc-quote">
+        <p>"My instructor completely transformed my runway walk. I booked my first fashion show a month later!"</p>
+        <span>— Aisha, Nairobi</span>
+      </div>
+      <div class="mc-quote">
+        <p>"The grooming and confidence classes gave me the edge I needed for pageantry."</p>
+        <span>— Brian, Mombasa</span>
+      </div>
+      <div class="mc-quote">
+        <p>"Online catwalk training that actually works. Flexible and professional."</p>
+        <span>— Faith, Kisumu</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="mc-section mc-contact" id="contact">
+    <h2>Get In Touch</h2>
+    <p class="mc-sub">Reach L&amp;C Model Connect through any of the channels below.</p>
+    <div class="social-icons">
+      <a href="https://wa.me/+254702066492" class="icon-link" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      <a href="mailto:Linkosiclothing@gmail.com" class="icon-link" title="Email"><i class="fas fa-envelope"></i></a>
+      <a href="tel:+254702066492" class="icon-link" title="Call"><i class="fas fa-phone"></i></a>
+      <a href="https://www.facebook.com/profile.php?id=100088956974742&mibextid=ZbWKwL" class="icon-link"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/lc_modeling_school?igsh=MXhzZmtrd3h2NmE2eA==" class="icon-link"><i class="fab fa-instagram"></i></a>
+      <a href="http://tiktok.com/@lc.modeling.school" class="icon-link"><i class="fab fa-tiktok"></i></a>
+      <a href="https://www.youtube.com/@Lc_Modeling_Academy" class="icon-link"><i class="fab fa-youtube"></i></a>
+    </div>
+  </section>
+
+  <footer class="footer" style='font-family: "Outfit", sans-serif;'>
+    <h2><span>L&C</span> MODEL CONNECT</h2>
+    <p class="design-credit">L&C Modeling school is regulated by Linkosiclothing</p>
+    <p>&copy; L&C Modeling. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Mobile nav toggle
+    document.getElementById("toggle-button").addEventListener("click", function () {
+      document.getElementById("navbar-links").classList.toggle("active");
+    });
+    document.querySelectorAll(".navbar-links a").forEach(link => {
+      link.addEventListener("click", () => document.getElementById("navbar-links").classList.remove("active"));
+    });
+
+    // Gallery slider: continuous auto-scroll (left) with manual left/right
+    // arrows layered on top of the same native scroll position.
+    (function () {
+      const slider = document.getElementById("mcSlider");
+      const scroller = document.getElementById("mcSliderScroller");
+      const track = document.getElementById("mcSliderTrack");
+      const btnLeft = document.getElementById("mcArrowLeft");
+      const btnRight = document.getElementById("mcArrowRight");
+      if (!slider || !scroller || !track) return;
+
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      // Duplicate the slide set once so the auto-scroll can wrap seamlessly.
+      const originalCount = track.children.length;
+      track.insertAdjacentHTML("beforeend", track.innerHTML);
+      Array.from(track.children).slice(originalCount).forEach(clone => {
+        clone.setAttribute("aria-hidden", "true");
+        const img = clone.querySelector("img");
+        if (img) img.setAttribute("alt", "");
+      });
+
+      let setWidth = track.scrollWidth / 2;
+      window.addEventListener("resize", () => {
+        setWidth = track.scrollWidth / 2;
+      });
+
+      const SPEED = 36; // px per second
+      let hovering = false;
+      let manualUntil = 0;
+      let last = null;
+
+      function step(ts) {
+        if (!reduceMotion) {
+          if (last === null) last = ts;
+          const dt = ts - last;
+          last = ts;
+          if (!hovering && ts > manualUntil) {
+            scroller.scrollLeft += (SPEED * dt) / 1000;
+            if (setWidth && scroller.scrollLeft >= setWidth) {
+              scroller.scrollLeft -= setWidth;
+            }
+          }
+        }
+        requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+
+      slider.addEventListener("mouseenter", () => (hovering = true));
+      slider.addEventListener("mouseleave", () => (hovering = false));
+      slider.addEventListener("focusin", () => (hovering = true));
+      slider.addEventListener("focusout", () => (hovering = false));
+      slider.addEventListener("touchstart", () => (hovering = true), { passive: true });
+      slider.addEventListener("touchend", () => (manualUntil = performance.now() + 2500));
+
+      function slideBy(dir) {
+        const first = track.querySelector(".mc-slider__slide");
+        const gap = 20;
+        const amount = first ? (first.getBoundingClientRect().width + gap) * dir : 300 * dir;
+        scroller.scrollBy({ left: amount, behavior: "smooth" });
+        manualUntil = performance.now() + 2500;
+      }
+      if (btnRight) btnRight.addEventListener("click", () => slideBy(1));
+      if (btnLeft) btnLeft.addEventListener("click", () => slideBy(-1));
+    })();
+  </script>
+  <!-- Forms submit via EmailJS (same account/service used across the site) -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    (function () {
+      emailjs.init({ publicKey: "4FWgmfHCRbCX00_Nu" });
+    })();
+  </script>
+  <script src="email.js"></script>
+  <script type="module" src="modelconnect.js"></script>
+</body>
+</html>

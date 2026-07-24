@@ -1,402 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login/Signup Form</title>
-    <link rel="icon" href="lc ffot.jpg" type="image/x-icon">
-
-    <link rel="icon" href="lc ffot.jpg" type="image/x-icon">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap" rel="stylesheet">
-    
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="icon" type="image/png" href="lc-ffot.png">->
-
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-V5PZ8ZZ4TS"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-V5PZ8ZZ4TS');
-</script>
-    <style>
-
-        
-.outfit{
-  font-family: "Outfit", sans-serif;
-  font-optical-sizing: auto;
-  font-weight:300;
-  font-style: normal;
-}
-
-        :root {
-            --color-bg: #000;
-            --color-text: #fff;
-            --color-header: #222;
-            --color-tab-active: #7aff85;
-            --color-tab-inactive: linear-gradient(135deg, rgb(90, 147, 226) 0%, rgb(14, 30, 50) 100%);
-            --color-form-bg: #222;
-            --color-input-bg: rgba(9, 15, 19, 0.8);
-            --color-submit-bg: #2d0f96;
-            --color-submit-hover: green;
-        }
-
-        body {
-            background-color: white;
-            color: var(--color-text);
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex: 1;
-            padding-top: 100px;
-        }
-
-        .form-wrapper {
-            background-color: var(--color-form-bg);
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            width: 400px;
-            overflow: hidden;
-        }
-
-        .tab-bar {
-            display: flex;
-            justify-content: space-around;
-            background-color: var(--color-tab-inactive);
-            padding: 10px 0;
-        }
-
-        .tab {
-            cursor: pointer;
-            padding: 10px 20px;
-            transition: background-color 0.3s;
-        }
-
-        .tab.active {
-            background-color: var(--color-tab-active);
-        }
-
-        .form-container {
-            padding: 20px;
-            display: none;
-            background: linear-gradient(135deg, rgb(224, 105, 214) 0%, rgb(61, 87, 233) 50%, rgb(159, 58, 117) 100%);
-        }
-
-        .form-container.active {
-            display: block;
-        }
-
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        .form-group label {
-            margin-bottom: 0.5rem;
-            color: var(--color-text);
-        }
-
-        .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 0.5rem;
-            border: 1px solid var(--color-text);
-            border-radius: 5px;
-            background: var(--color-input-bg);
-            color: var(--color-text);
-        }
-
-        .form-group select {
-            appearance: none;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-        }
-
-        .form-group select option {
-            background-color: var(--color-input-bg);
-            color: var(--color-text);
-        }
-
-        .btn-submit {
-            padding: 0.75rem 2rem;
-            border: none;
-            border-radius: 5px;
-            background-color: var(--color-submit-bg);
-            color: var(--color-text);
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
-            align-self: center;
-        }
-
-        .btn-submit:hover {
-            background-color: var(--color-submit-hover);
-            color: var(--color-submit-bg);
-        }
-
-        #success-message {
-            display: none;
-            color: #0f0;
-            text-align: center;
-        }
-
-      /*=============================================================*/
-.footer {
-  background:black;
-  color: #fff;
-  padding: 40px 20px;
-  text-align: center;
-}
-
-.footer a {
-  color: #007bff;
-  text-decoration: none;
-}
-
-.footer a:hover {
-  text-decoration: underline;
-}
-
-.footer p {
-  margin: 10px 0;
-}
-
-.footer .social-icons {
-  margin: 20px 0;
-}
-
-.footer .social-icons .icon-link {
-  margin: 0 10px;
-}
-
-.footer .icon-link img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s;
-}
-
-.footer .icon-link:hover img {
-  transform: scale(1.1);
-}
-
-.footer .design-credit {
-  margin-top: 20px;
-}
-
-.footer {
-  background-color: black;
-  color: white;
-  text-align: center;
-  padding: 20px 0;
-  position: relative;
-  width: 100%;
-}
-.footer h2 {
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-.footer .partnership-logos, .footer .sponsor-logos {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-.footer .partnership-logos img, .footer .sponsor-logos img {
-  width: 90px;
-  height: 90px;
-  margin: 10px;
-}
-.footer .website-logo {
-  width: 100px;
-  height: auto;
-  margin-top: 20px;
-}
-@media (max-width: 768px) {
-  .footer .partnership-logos img, .footer .sponsor-logos img {
-      width: 60px;
-      height: 60px;
-  }
-}
-
-
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>L&C Admin · Login</title>
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="stylesheet" href="admin.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5PZ8ZZ4TS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-V5PZ8ZZ4TS');
+  </script>
+  <style>
+    body {
+      min-height: 100vh; display: grid; place-items: center; padding: 24px;
+      background: radial-gradient(1200px 600px at 20% -10%, #24413a 0%, transparent 60%),
+                  radial-gradient(1000px 500px at 100% 100%, #3a2f18 0%, transparent 55%),
+                  #10151a;
+    }
+    .auth {
+      width: 100%; max-width: 420px;
+      background: var(--surface); border-radius: 18px;
+      box-shadow: var(--shadow-lg); overflow: hidden;
+    }
+    .auth__head { text-align: center; padding: 30px 28px 10px; }
+    .auth__head img { width: 58px; height: 58px; border-radius: 14px; object-fit: cover; box-shadow: var(--shadow-sm); }
+    .auth__head h1 { font-size: 20px; margin: 14px 0 2px; }
+    .auth__head p { margin: 0; color: var(--ink-soft); font-size: 13.5px; }
+    .tabs { display: flex; gap: 6px; padding: 18px 24px 0; }
+    .tab {
+      flex: 1; text-align: center; padding: 10px; cursor: pointer;
+      font-weight: 600; font-size: 14px; color: var(--ink-soft);
+      border-radius: 10px 10px 0 0; border-bottom: 2px solid transparent; transition: .15s;
+    }
+    .tab.active { color: var(--brand); border-bottom-color: var(--brand); background: var(--brand-light); }
+    .pane { display: none; padding: 22px 24px 28px; }
+    .pane.active { display: block; animation: fade .2s ease; }
+    .pw-wrap { position: relative; }
+    .pw-toggle {
+      position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+      border: none; background: none; cursor: pointer; color: var(--muted); font-size: 13px; font-weight: 600;
+    }
+    .alert { display: none; background: #fdecec; color: var(--danger-dark); border: 1px solid #f5c2c2;
+      padding: 10px 12px; border-radius: 9px; font-size: 13px; margin-bottom: 14px; }
+    .alert.show { display: block; }
+    .ok { display: none; background: var(--brand-light); color: var(--brand-dark); border: 1px solid #bfe6cd;
+      padding: 12px; border-radius: 9px; font-size: 14px; text-align: center; margin-top: 14px; }
+    .ok.show { display: block; }
+    .auth__foot { text-align: center; padding: 14px; border-top: 1px solid var(--line); font-size: 13px; }
+    .auth__foot a { color: var(--brand); text-decoration: none; font-weight: 600; }
+  </style>
 </head>
 <body>
- 
-    <div class="container">
-        <div class="form-wrapper">
-            <div class="tab-bar">
-                <div class="tab active" id="login-tab">Login</div>
-                <div class="tab" id="signup-tab">Sign Up</div>
-            </div>
-            <div class="form-container active" id="login-form">
-                <form id="login">
-                    <div class="form-group">
-                        <label for="username-email">Username or Email:</label>
-                        <input type="text" id="username-email" name="username-email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password:</label>
-                        <input type="password" id="password" name="password" required>
-                    </div>
-                    <button type="submit" style="position: center;" class="btn-submit">Login</button>
-                </form>
-            </div>
-            <div class="form-container" id="signup-form">
-                <form id="contact-form" class="contact-form">
-                    <div class="form-group">
-                        <label for="name">Full Name:</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email Address:</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="telephone">Telephone No:</label>
-                        <input type="tel" id="telephone" name="telephone" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="membership">Options:</label>
-                        <select id="membership" name="membership" required>
-                            <option value="Membership">Membership</option>
-                            <option value="Sponsorship">Sponsorship</option>
-                            <option value="Partnership">Partnership</option>
-                            <option value="Student Sign Up">Student Sign Up</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn-submit">Submit</button>
-                </form>
-            </div>
-            <div id="success-message">Thank you for signing up!</div>
-        </div>
+  <div class="auth">
+    <div class="auth__head">
+      <img src="logo.png" alt="L&C">
+      <h1>L&amp;C Admin Portal</h1>
+      <p>Sign in to manage your website</p>
     </div>
 
+    <div class="tabs">
+      <div class="tab active" id="login-tab">Login</div>
+      <div class="tab" id="signup-tab">Sign Up</div>
+    </div>
 
-    <br>
+    <!-- Login -->
+    <div class="pane active" id="login-pane">
+      <form id="login">
+        <div class="alert" id="login-error">Invalid username or password.</div>
+        <div class="field">
+          <label for="username-email">Username or email</label>
+          <input class="input" type="text" id="username-email" required placeholder="you@example.com">
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <div class="pw-wrap">
+            <input class="input" type="password" id="password" required placeholder="••••••••">
+            <button type="button" class="pw-toggle" id="pw-toggle">Show</button>
+          </div>
+        </div>
+        <button type="submit" class="btn btn--primary btn--block" id="login-btn">Login</button>
+      </form>
+    </div>
 
-    <br>
+    <!-- Sign up -->
+    <div class="pane" id="signup-pane">
+      <form id="contact-form">
+        <div class="field"><label for="name">Full name</label><input class="input" id="name" required placeholder="Jane Doe"></div>
+        <div class="field"><label for="email">Email address</label><input class="input" type="email" id="email" required placeholder="jane@example.com"></div>
+        <div class="field"><label for="telephone">Telephone</label><input class="input" type="tel" id="telephone" required placeholder="+254 7xx xxx xxx"></div>
+        <div class="field">
+          <label for="membership">I'm interested in</label>
+          <select class="select" id="membership" required>
+            <option value="Membership">Membership</option>
+            <option value="Sponsorship">Sponsorship</option>
+            <option value="Partnership">Partnership</option>
+            <option value="Student Sign Up">Student Sign Up</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn--primary btn--block" id="signup-btn">Submit</button>
+        <div class="ok" id="success-message">✅ Thank you! We'll be in touch shortly.</div>
+      </form>
+    </div>
 
-  
-          
+    <div class="auth__foot"><a href="index.html">← Back to website</a></div>
+  </div>
 
+  <div class="toast-wrap" id="toasts"></div>
 
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-    <script>
-        (function() {
-            emailjs.init("dsXzYWYxtQEg1cUPx");
-        })();
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script>
+    (function () { emailjs.init("dsXzYWYxtQEg1cUPx"); })();
+    const $ = (id) => document.getElementById(id);
 
-        const loginTab = document.getElementById('login-tab');
-        const signupTab = document.getElementById('signup-tab');
-        const loginForm = document.getElementById('login-form');
-        const signupForm = document.getElementById('signup-form');
+    function toast(msg, type = "success") {
+      const el = document.createElement("div");
+      el.className = "toast toast--" + type;
+      el.textContent = msg;
+      $("toasts").appendChild(el);
+      setTimeout(() => { el.style.opacity = "0"; el.style.transition = "opacity .3s"; setTimeout(() => el.remove(), 300); }, 3000);
+    }
 
-        loginTab.addEventListener('click', () => {
-            loginTab.classList.add('active');
-            signupTab.classList.remove('active');
-            loginForm.classList.add('active');
-            signupForm.classList.remove('active');
-        });
+    // Tabs
+    const loginTab = $("login-tab"), signupTab = $("signup-tab");
+    const loginPane = $("login-pane"), signupPane = $("signup-pane");
+    loginTab.addEventListener("click", () => {
+      loginTab.classList.add("active"); signupTab.classList.remove("active");
+      loginPane.classList.add("active"); signupPane.classList.remove("active");
+    });
+    signupTab.addEventListener("click", () => {
+      signupTab.classList.add("active"); loginTab.classList.remove("active");
+      signupPane.classList.add("active"); loginPane.classList.remove("active");
+    });
 
-        signupTab.addEventListener('click', () => {
-            signupTab.classList.add('active');
-            loginTab.classList.remove('active');
-            signupForm.classList.add('active');
-            loginForm.classList.remove('active');
-        });
+    // Show / hide password
+    $("pw-toggle").addEventListener("click", () => {
+      const pw = $("password");
+      const show = pw.type === "password";
+      pw.type = show ? "text" : "password";
+      $("pw-toggle").textContent = show ? "Hide" : "Show";
+    });
 
-        document.getElementById('login').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const usernameEmail = document.getElementById('username-email').value;
-            const password = document.getElementById('password').value;
+    // Login (client-side check — same as before)
+    $("login").addEventListener("submit", (e) => {
+      e.preventDefault();
+      $("login-error").classList.remove("show");
+      const id = $("username-email").value.trim();
+      const pw = $("password").value;
+      const validUsers = [
+        { email: "admin@l&cteam", password: "LCmodeling12" },
+        { email: "modellinglc@gmail.com", password: "LCmodeling12" }
+      ];
+      const ok = validUsers.find(u => u.email === id && u.password === pw);
+      const btn = $("login-btn");
+      if (ok) {
+        btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Signing in…';
+        setTimeout(() => { window.location.href = "admin.html"; }, 500);
+      } else {
+        $("login-error").classList.add("show");
+      }
+    });
 
-            const validUsers = [
-                { email: 'admin@l&cteam', password: 'LCmodeling12' },
-                { email: 'modellinglc@gmail.com', password: 'LCmodeling12' }
-            ];
-
-            const user = validUsers.find(user => (user.email === usernameEmail) && (user.password === password));
-
-            if (user) {
-                window.location.href = 'admin.html'; // Change this to your desired HTML file
-            } else {
-                alert('Invalid username or password');
-            }
-        });
-
-        document.getElementById('contact-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            const membership = document.getElementById('membership').value;
-
-            const formData = {
-                from_name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                telephone: document.getElementById('telephone').value,
-                message: `Selected option: ${membership}`
-            };
-
-            const templateParams = {
-                to_name: "Recipient",
-                from_name: formData.from_name,
-                email: formData.email,
-                telephone: formData.telephone,
-                message: formData.message
-            };
-
-            emailjs.send('service_hw70pzw', 'template_rqn75wb', templateParams)
-                .then(function(response) {
-                    console.log('SUCCESS!', response.status, response.text);
-                    document.getElementById('contact-form').reset();
-                    const successMessage = document.getElementById('success-message');
-                    successMessage.style.display = 'block';
-                    setTimeout(function() {
-                        successMessage.style.display = 'none';
-                    }, 5000);
-                }, function(error) {
-                    console.log('FAILED...', error);
-                    alert('Failed to send your message. Please try again.');
-                });
-        });
-
-        const header = document.querySelector('.main-header');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('is-scrolling');
-            } else {
-                header.classList.remove('is-scrolling');
-            }
-        });
-
-        document.querySelector('.hamburger').addEventListener('click', function () {
-            this.classList.toggle('is-active');
-            document.querySelector('.mobile-nav').classList.toggle('is-active');
-        });
-    </script>
+    // Sign-up via EmailJS
+    $("contact-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const btn = $("signup-btn");
+      btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Sending…';
+      const params = {
+        to_name: "L&C Team",
+        from_name: $("name").value,
+        email: $("email").value,
+        telephone: $("telephone").value,
+        message: "Selected option: " + $("membership").value
+      };
+      emailjs.send("service_hw70pzw", "template_rqn75wb", params)
+        .then(() => {
+          $("contact-form").reset();
+          $("success-message").classList.add("show");
+          toast("Message sent!");
+          setTimeout(() => $("success-message").classList.remove("show"), 5000);
+        })
+        .catch(() => toast("Failed to send. Please try again.", "error"))
+        .finally(() => { btn.disabled = false; btn.textContent = "Submit"; });
+    });
+  </script>
 </body>
 </html>

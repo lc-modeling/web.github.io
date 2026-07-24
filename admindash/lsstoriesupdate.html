@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <!-- Responsive meta tag -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blog Posts Management</title>
+    <title>L&C Model Connect — Instructors</title>
     <style>
       /* Basic Reset */
       * {
@@ -231,12 +231,41 @@
         margin: 0;
       }
     </style>
+    <link rel="stylesheet" href="../admin.css" />
+    <style>
+      body{font-family:"Outfit",-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);padding:26px 30px 60px;}
+      .header-bar{margin-bottom:24px;align-items:flex-start;}
+      .header-bar__left{display:flex;flex-direction:column;gap:6px;}
+      .back-link{display:inline-flex;align-items:center;gap:6px;color:var(--brand);text-decoration:none;font-weight:600;font-size:13.5px;}
+      .back-link svg{width:16px;height:16px;}
+      .back-link:hover{text-decoration:underline;}
+      .header-bar h1{font-size:24px;color:var(--ink);font-weight:700;}
+      #addModelBtn,#addImageBtn,#addPostBtn{display:inline-flex;align-items:center;gap:6px;border:none;background:var(--brand);color:#fff;padding:11px 18px;border-radius:10px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;box-shadow:var(--shadow-sm);transition:background .15s;}
+      #addModelBtn:hover,#addImageBtn:hover,#addPostBtn:hover{background:var(--brand-dark);}
+      .models-container{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-sm);}
+      table th{background:#fafbfc !important;color:var(--ink-soft) !important;font-size:12.5px;text-transform:uppercase;letter-spacing:.03em;border-bottom:1px solid var(--line) !important;}
+      table td{background:var(--surface) !important;color:var(--ink) !important;border-bottom:1px solid var(--line) !important;}
+      .thumbnail,.additional-images-container img,.preview-slider img,.header-preview img{border-radius:8px;}
+      .editBtn{background:#eef2f7 !important;color:var(--ink) !important;border-radius:8px;font-weight:600;}
+      .deleteBtn{background:var(--danger) !important;color:#fff !important;border-radius:8px;font-weight:600;}
+      .modal{border-radius:16px;box-shadow:var(--shadow-lg);padding:24px;max-width:600px;}
+      .modal h2{font-size:19px;}
+      .modal .close{color:var(--muted);}
+      .modal form input,.modal form textarea,.modal form select{border:1px solid var(--line);border-radius:10px;padding:11px 13px;font-family:inherit;font-size:14px;}
+      .modal form input:focus,.modal form textarea:focus,.modal form select:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px rgba(31,143,78,.15);}
+      .saveBtn,#saveBtn{background:var(--brand) !important;color:#fff !important;border-radius:10px;font-weight:600;border:none;padding:11px 18px;cursor:pointer;}
+      .saveBtn:hover,#saveBtn:hover{background:var(--brand-dark) !important;}
+      .cancelBtn{background:#eef2f7 !important;color:var(--ink) !important;border-radius:10px;font-weight:600;border:none;padding:11px 18px;cursor:pointer;}
+    </style>
   </head>
   <body>
     <!-- Header Bar -->
     <div class="header-bar">
-      <h1>Blog Posts Management</h1>
-      <button id="addPostBtn">+ Add New Post</button>
+      <div class="header-bar__left">
+        <a class="back-link" href="../admin.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Dashboard</a>
+        <h1>L&C Model Connect — Instructors</h1>
+      </div>
+      <button id="addPostBtn">+ Add Instructor</button>
     </div>
 
     <!-- Posts Container -->
@@ -245,11 +274,11 @@
         <thead>
           <tr>
             <th>ID</th>
-            <th>Header Image</th>
-            <th>Content Images</th>
-            <th>Post Title</th>
+            <th>Profile Photo</th>
+            <th>Portfolio Photos</th>
+            <th>Instructor Name</th>
             <th>Created On</th>
-            <th>Text Description</th>
+            <th>Details</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -263,23 +292,23 @@
     <div id="modalOverlay" class="modal-overlay">
       <div class="modal">
         <span id="closeModal" class="close">&times;</span>
-        <h2 id="modalTitle">Add Post</h2>
+        <h2 id="modalTitle">Add Instructor</h2>
         <form id="postForm">
-          <input type="text" id="postTitle" placeholder="Post Title" required />
+          <input type="text" id="postTitle" placeholder="Instructor Name" required />
 
-          <label>Header Image (for story):</label>
+          <label>Profile Photo:</label>
           <input type="file" id="headerImage" accept="image/*" />
-          <!-- Header image preview -->
+          <!-- Profile photo preview -->
           <div id="headerImagePreview" class="header-preview"></div>
 
-          <label>Content Images (optional, select multiple):</label>
+          <label>Portfolio Photos (optional, select multiple):</label>
           <input type="file" id="contentImages" accept="image/*" multiple />
-          <!-- Preview slider for content images -->
+          <!-- Preview slider for portfolio photos -->
           <div id="contentImagesPreview" class="preview-slider"></div>
 
-          <textarea id="textDescription" placeholder="Short Description" rows="3" required></textarea>
+          <textarea id="textDescription" placeholder="Details — location/county, specialization, years of experience, training fee" rows="4" required></textarea>
           <div style="display: flex; gap: 10px;">
-            <button type="submit" class="saveBtn" id="saveBtn">Save Post</button>
+            <button type="submit" class="saveBtn" id="saveBtn">Save Instructor</button>
             <button type="button" class="cancelBtn" id="cancelBtn">Cancel</button>
           </div>
         </form>
@@ -305,7 +334,7 @@
 
       const app = !getApps().length ? initializeApp(firebaseConfig) : getApps()[0];
       const firestore = getFirestore(app);
-      const postsCollection = collection(firestore, "lcstories");
+      const postsCollection = collection(firestore, "lc_model_connect_instructors");
 
       // Cloudinary configuration for image uploads
       const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/dwlasndqv/upload";
@@ -393,7 +422,7 @@
 
       // Function to display posts in table view
       async function displayPosts() {
-        postsTableBody.innerHTML = "<tr><td colspan='7' style='color: #fff;'>Loading posts...</td></tr>";
+        postsTableBody.innerHTML = "<tr><td colspan='7' style='color: #fff;'>Loading instructors...</td></tr>";
         try {
           const snapshot = await getDocs(postsCollection);
           postsTableBody.innerHTML = "";
@@ -462,7 +491,7 @@
             editBtn.textContent = "Edit";
             editBtn.setAttribute("data-id", docSnap.id);
             editBtn.addEventListener("click", async () => {
-              const docRef = doc(firestore, "lcstories", docSnap.id);
+              const docRef = doc(firestore, "lc_model_connect_instructors", docSnap.id);
               const docData = await getDoc(docRef);
               if (docData.exists()) {
                 openModal(true, { id: docSnap.id, ...docData.data() });
@@ -474,8 +503,8 @@
             deleteBtn.textContent = "Delete";
             deleteBtn.setAttribute("data-id", docSnap.id);
             deleteBtn.addEventListener("click", async () => {
-              if (confirm("Are you sure you want to delete this post?")) {
-                await deleteDoc(doc(firestore, "lcstories", docSnap.id));
+              if (confirm("Are you sure you want to delete this instructor?")) {
+                await deleteDoc(doc(firestore, "lc_model_connect_instructors", docSnap.id));
                 displayPosts();
               }
             });
@@ -485,8 +514,8 @@
             postsTableBody.appendChild(row);
           });
         } catch (error) {
-          console.error("Error fetching posts:", error);
-          postsTableBody.innerHTML = "<tr><td colspan='7' style='color: #fff;'>Error loading posts.</td></tr>";
+          console.error("Error fetching instructors:", error);
+          postsTableBody.innerHTML = "<tr><td colspan='7' style='color: #fff;'>Error loading instructors.</td></tr>";
         }
       }
 
@@ -494,7 +523,7 @@
       function openModal(isEdit = false, postData = {}) {
         modalOverlay.style.display = "flex";
         if (isEdit) {
-          modalTitle.textContent = "Edit Post";
+          modalTitle.textContent = "Edit Instructor";
           postTitleInput.value = postData.Name_story || "";
           currentHeaderImageUrl = postData.header_image_stories || "";
           currentContentImages = postData.content_images || [];
@@ -506,7 +535,7 @@
           textDescriptionInput.value = postData.text_description || "";
           currentDocId = postData.id;
         } else {
-          modalTitle.textContent = "Add Post";
+          modalTitle.textContent = "Add Instructor";
           postForm.reset();
           currentDocId = null;
           currentHeaderImageUrl = "";
@@ -584,22 +613,22 @@
 
           if (currentDocId) {
             // Update existing post document
-            const docRef = doc(firestore, "lcstories", currentDocId);
+            const docRef = doc(firestore, "lc_model_connect_instructors", currentDocId);
             await updateDoc(docRef, postData);
-            alert("Post updated successfully!");
+            alert("Instructor updated successfully!");
           } else {
-            // Create new post document
+            // Create new instructor document
             await addDoc(postsCollection, postData);
-            alert("Post added successfully!");
+            alert("Instructor added successfully!");
           }
           displayPosts();
           closeModalFunc();
         } catch (error) {
-          console.error("Error saving post:", error);
-          alert("Error saving post. Please try again.");
+          console.error("Error saving instructor:", error);
+          alert("Error saving instructor. Please try again.");
         } finally {
           saveBtn.disabled = false;
-          saveBtn.textContent = "Save Post";
+          saveBtn.textContent = "Save Instructor";
         }
       });
 

@@ -1,349 +1,359 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="icon" type="image/png" href="lc-ffot.png">
-    <title>LC Modeling School Admin Dashboard</title>
-    <style>
-        .outfit {
-            font-family: "Outfit", sans-serif;
-            font-optical-sizing: auto;
-            font-weight: 300;
-            font-style: normal;
-        }
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-        .header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-        .menu-toggle {
-            display: none;
-            background-color: #333;
-            color: white;
-            padding: 10px;
-            text-align: center;
-            cursor: pointer;
-        }
-        .sidebar {
-            width: 200px;
-            background-color: #333;
-            position: fixed;
-            height: 100%;
-            top: 0;
-            left: 0;
-            padding-top: 60px;
-            overflow: auto;
-        }
-        .sidebar a {
-            padding: 15px;
-            text-decoration: none;
-            font-size: 18px;
-            color: white;
-            display: block;
-        }
-        .sidebar a:hover {
-            background-color: #575757;
-        }
-        .content {
-            margin-left: 220px;
-            padding: 20px;
-        }
-        .card {
-            background-color: white;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .card h3 {
-            margin-top: 0;
-        }
-        .analytics {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-        .analytics .card {
-            flex: 1;
-            margin: 10px;
-        }
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            margin: 10px 0;
-            background-color: #4CAF50;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            text-align: center;
-        }
-        .btn:hover {
-            background-color: #45a049;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        table, th, td {
-            border: 1px solid #dddddd;
-        }
-        th, td {
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        .edit-btn, .delete-btn {
-            padding: 5px 10px;
-            margin-right: 5px;
-            cursor: pointer;
-            border: none;
-            color: white;
-            border-radius: 3px;
-            transition: background-color 0.3s;
-        }
-        .edit-btn { background-color: #007bff; }
-        .delete-btn { background-color: red; }
-        .edit-btn:hover, .delete-btn:hover { opacity: 0.8; }
-        .form-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        .form-container > div {
-            flex: 1;
-            min-width: 200px;
-        }
-        label {
-            display: block;
-            margin-bottom: 8px;
-        }
-        input, textarea, button {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        textarea { resize: vertical; }
-        @media (max-width: 768px) {
-            .menu-toggle { display: block; }
-            .sidebar {
-                width: 100%;
-                height: auto;
-                position: relative;
-                display: none;
-            }
-            .sidebar a { float: left; }
-            .content { margin-left: 0; }
-            .analytics .card { flex: 1 1 100%; }
-            table {
-                display: block;
-                width: 100%;
-                overflow-x: auto;
-            }
-            table, th, td { display: block; width: 100%; }
-            th, td { padding: 10px; }
-            tbody tr {
-                display: flex;
-                flex-wrap: wrap;
-                border: 1px solid #ddd;
-                margin-bottom: 10px;
-                border-radius: 5px;
-                overflow: hidden;
-            }
-            tbody tr td { flex: 1 1 100%; padding: 10px; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="logo.png">
+  <title>LC Modeling School · Admin Dashboard</title>
+  <link rel="stylesheet" href="admin.css">
 </head>
 <body>
+<div class="admin-shell">
 
-    <div class="header">
-        <h1>LC Modeling School Admin Dashboard</h1>
-        <div class="menu-toggle" onclick="toggleSidebar()">☰ Menu</div>
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar__brand">
+      <img src="logo.png" alt="L&C">
+      <div><b>L&amp;C Admin</b><br><span>Modeling School</span></div>
     </div>
 
-    <div class="sidebar">
-        <a href="#dashboard">Dashboard</a>
-        <a href="#analytics">Analytics</a>
-        <a href="https://app.firecms.co/p/schoolcms-77713/c/lcschoolblog">Update Blog</a>
-        <a href="#students">Manage Students</a>
-        <a href="#settings">Settings</a>
-        <a href="index.html">Logout</a>
-        <!-- New Analytics External Link -->
-        <a href="https://analytics.google.com/analytics/web/?authuser=0#/p489768763/reports/intelligenthome" target="_blank">View GA Dashboard</a>
+    <a class="nav-link is-active" href="#dashboard" data-nav>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+      Dashboard
+    </a>
+    <a class="nav-link" href="#tools" data-nav>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2-2 2.5-2.5z"/></svg>
+      Content Editors
+    </a>
+    <a class="nav-link" href="#students" data-nav>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm14 10v-2a4 4 0 0 0-3-3.87M16 3.13A4 4 0 0 1 16 11"/></svg>
+      Manage Students
+    </a>
+    <a class="nav-link" href="https://analytics.google.com/analytics/web/?authuser=0#/p489768763/reports/intelligenthome" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 15l4-4 3 3 5-6"/></svg>
+      Google Analytics
+    </a>
+
+    <div class="nav-spacer"></div>
+
+    <a class="nav-link nav-link--danger" href="loginform.html" id="logoutBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+      Logout
+    </a>
+  </aside>
+  <div class="sidebar-backdrop" id="backdrop"></div>
+
+  <!-- Content -->
+  <main class="content">
+    <div class="topbar">
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+      <div>
+        <h1 id="dashboard">Welcome back, Admin 👋</h1>
+        <p>Manage your website content, students and analytics from one place.</p>
+      </div>
     </div>
 
-    <div class="content">
-        <div id="dashboard" class="card">
-            <h3>Welcome, Admin!</h3>
-            <p>Use the links on the sidebar to manage the LC Modeling School website.</p>
-        </div>
+    <!-- Live stats -->
+    <section class="grid grid--stats" style="margin-bottom:30px;">
+      <div class="stat">
+        <div class="stat__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg></div>
+        <div class="stat__value" id="stat-students">—</div>
+        <div class="stat__label">Enrolled students</div>
+      </div>
+      <div class="stat stat--gold">
+        <div class="stat__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+        <div class="stat__value" id="stat-blogs">—</div>
+        <div class="stat__label">Blog posts</div>
+      </div>
+      <div class="stat stat--info">
+        <div class="stat__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7l-7 5 7 5V7zM1 5h15v14H1z"/></svg></div>
+        <div class="stat__value" id="stat-stories">—</div>
+        <div class="stat__label">Instructors</div>
+      </div>
+      <div class="stat">
+        <div class="stat__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+        <div class="stat__value" id="stat-models">—</div>
+        <div class="stat__label">Models featured</div>
+      </div>
+    </section>
 
-        <div id="analytics" class="analytics">
-            <div class="card">
-                <h3>Student Enrollments</h3>
-                <p id="student-enrollments">Loading...</p>
-            </div>
-            <div class="card">
-                <h3>Courses Completed</h3>
-                <p id="courses-completed">Loading...</p>
-            </div>
-            <div class="card">
-                <h3>Active Blog Posts</h3>
-                <p id="active-blog-posts">Loading...</p>
-            </div>
-        </div>
-        <!-- Button to open full GA -->
-        <a href="https://analytics.google.com/analytics/web/?authuser=0#/p489768763/reports/intelligenthome" class="btn" target="_blank">
-            View Detailed Analytics
-        </a>
+    <!-- Content editors -->
+    <h2 id="tools" style="font-size:18px;margin:0 0 4px;">Content editors</h2>
+    <p style="color:var(--ink-soft);margin:0 0 18px;font-size:14px;">Add, edit or remove any section of the website.</p>
+    <section class="grid grid--tools" style="margin-bottom:36px;">
+      <div class="tool">
+        <div class="tool__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+        <h3>Blog posts</h3>
+        <p>Publish and manage articles that appear on the blog page.</p>
+        <a class="btn btn--primary" href="admindash/blogupdate.html">Open editor</a>
+      </div>
+      <div class="tool">
+        <div class="tool__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7l-7 5 7 5V7zM1 5h15v14H1z"/></svg></div>
+        <h3>L&amp;C Model Connect</h3>
+        <p>Add, edit or remove instructors (photo, portfolio &amp; details) shown on the Model Connect page.</p>
+        <a class="btn btn--primary" href="admindash/lsstoriesupdate.html">Open editor</a>
+      </div>
+      <div class="tool">
+        <div class="tool__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14l4-4h12a2 2 0 0 0 2-2z"/></svg></div>
+        <h3>Home header</h3>
+        <p>Change the hero image or video on the homepage banner.</p>
+        <a class="btn btn--primary" href="admindash/mainheader.html">Open editor</a>
+      </div>
+      <div class="tool">
+        <div class="tool__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+        <h3>Models management</h3>
+        <p>Update the L&amp;C Models Management photos and content.</p>
+        <a class="btn btn--primary" href="admindash/modeldash.html">Open editor</a>
+      </div>
+      <div class="tool">
+        <div class="tool__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16M4 12h16M4 19h10"/></svg></div>
+        <h3>Models page header</h3>
+        <p>Edit the header content on the models / get-scouted page.</p>
+        <a class="btn btn--primary" href="admindash/modelsheader.html">Open editor</a>
+      </div>
+      <div class="tool">
+        <div class="tool__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-8-4.5-8-11a4 4 0 0 1 8-1 4 4 0 0 1 8 1c0 6.5-8 11-8 11z"/></svg></div>
+        <h3>Diversity &amp; inclusivity</h3>
+        <p>Manage the diversity and inclusivity section photos.</p>
+        <a class="btn btn--primary" href="admindash/diversityupdate.html">Open editor</a>
+      </div>
+    </section>
 
-       
+    <!-- Manage students -->
+    <h2 id="students" style="font-size:18px;margin:0 0 4px;">Manage students</h2>
+    <p style="color:var(--ink-soft);margin:0 0 18px;font-size:14px;">Add enrolled students and keep their contact details up to date.</p>
 
-        <div id="settings" class="card">
-            <h3>blogs update</h3>
-            <p>Update your blog and posts settings.</p>
-            <a href="admindash/blogupdate.html" class="btn">update</a>
-        </div>
+    <div class="grid" style="grid-template-columns:minmax(280px,360px) 1fr;align-items:start;">
+      <div class="card">
+        <h3>Add a student</h3>
+        <p class="sub">Fill in the details and save.</p>
+        <form id="student-form">
+          <div class="field"><label for="student-name">Full name</label><input class="input" id="student-name" required placeholder="Jane Doe"></div>
+          <div class="field"><label for="student-email">Email</label><input class="input" id="student-email" type="email" placeholder="jane@example.com"></div>
+          <div class="field"><label for="student-phone">Phone</label><input class="input" id="student-phone" placeholder="+254 7xx xxx xxx"></div>
+          <div class="field"><label for="student-address">Address</label><input class="input" id="student-address" placeholder="Nairobi, Kenya"></div>
+          <button class="btn btn--primary btn--block" type="submit" id="student-save">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+            Add student
+          </button>
+        </form>
+      </div>
 
-        <div id="settings" class="card">
-            <h3>LC stories</h3>
-            <p>upload and update lc stories </p>
-            <a href="admindash/lsstoriesupdate.html" class="btn">update</a>
+      <div class="card" style="padding:0;overflow:hidden;">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border-bottom:1px solid var(--line);">
+          <h3 style="margin:0;">Students <span class="badge" id="student-count">0</span></h3>
+          <input class="input" id="student-search" placeholder="Search…" style="max-width:200px;">
         </div>
-        <div id="settings" class="card">
-            <h3>header image home </h3>
-            <p>update home header image </p>
-            <a href="admindash/mainheader.html" class="btn">update</a>
+        <div class="table-wrap" style="border:0;border-radius:0;">
+          <table class="data">
+            <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Address</th><th style="width:120px;">Actions</th></tr></thead>
+            <tbody id="students-body"></tbody>
+          </table>
         </div>
-        <div id="settings" class="card">
-            <h3>L&C Models Management</h3>
-            <p>update lc models management section photos and contet .</p>
-            <a href="admindash/modeldash.html" class="btn">update</a>
+        <div class="empty" id="students-empty" style="display:none;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg>
+          <p>No students yet. Add your first student on the left.</p>
         </div>
-        <div id="settings" class="card">
-            <h3>models/getcsouted header content</h3>
-            <p>change or update models/getcsouted header content .</p>
-            <a href="admindash/modelsheader.html" class="btn">update</a>
-        </div>
-        <div id="settings" class="card">
-            <h3>diversity & INCLUSIVITY</h3>
-            <p>update diversity and inclusivity section photos.</p>
-            <a href="admindash/diversityupdate.html" class="btn">update</a>
-        </div>
+      </div>
     </div>
+  </main>
+</div>
 
-    <!-- Firebase scripts -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
-        import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-database.js";
+<!-- Edit student modal -->
+<div class="modal-overlay" id="edit-modal">
+  <div class="modal">
+    <div class="modal__head"><h3>Edit student</h3><button class="modal-close" data-close>&times;</button></div>
+    <div class="modal__body">
+      <input type="hidden" id="edit-key">
+      <div class="field"><label>Full name</label><input class="input" id="edit-name"></div>
+      <div class="field"><label>Email</label><input class="input" id="edit-email"></div>
+      <div class="field"><label>Phone</label><input class="input" id="edit-phone"></div>
+      <div class="field"><label>Address</label><input class="input" id="edit-address"></div>
+    </div>
+    <div class="modal__foot">
+      <button class="btn btn--secondary" data-close>Cancel</button>
+      <button class="btn btn--primary" id="edit-save">Save changes</button>
+    </div>
+  </div>
+</div>
 
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyC1Mr82Gq9W8ede84OsnqgDx5saAuN6QII",
-            authDomain: "lcmodelingcms.firebaseapp.com",
-            projectId: "lcmodelingcms",
-            storageBucket: "lcmodelingcms.appspot.com",
-            messagingSenderId: "928501733809",
-            appId: "1:928501733809:web:5dd437ee264debdf708590"
-        };
+<div class="toast-wrap" id="toasts"></div>
 
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const db = getDatabase(app);
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+  import { getDatabase, ref, push, onValue, remove, update } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
+  import { getFirestore, collection, getCountFromServer } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 
-        // Enroll student form submission
-        document.getElementById("student-form").addEventListener("submit", function (event) {
-            event.preventDefault();
-            const name = document.getElementById("student-name").value;
-            const email = document.getElementById("student-email").value;
-            const phone = document.getElementById("student-phone").value;
-            const address = document.getElementById("student-address").value;
+  // Realtime DB (students / analytics)
+  const rtApp = initializeApp({
+    apiKey: "AIzaSyC1Mr82Gq9W8ede84OsnqgDx5saAuN6QII",
+    authDomain: "lcmodelingcms.firebaseapp.com",
+    projectId: "lcmodelingcms",
+    storageBucket: "lcmodelingcms.appspot.com",
+    messagingSenderId: "928501733809",
+    appId: "1:928501733809:web:5dd437ee264debdf708590"
+  });
+  const db = getDatabase(rtApp);
 
-            push(ref(db, 'students'), {
-                name: name,
-                email: email,
-                phone: phone,
-                address: address
-            });
+  // Firestore (content counts for stat cards)
+  const fsApp = initializeApp({
+    apiKey: "AIzaSyAxauEEtqkuJOWA9HRe1jpT_wCXH62nksM",
+    authDomain: "schoolcms-77713.firebaseapp.com",
+    projectId: "schoolcms-77713",
+    storageBucket: "schoolcms-77713.appspot.com",
+    messagingSenderId: "757700374571",
+    appId: "1:757700374571:web:a86b334d619cf160fa7a6e"
+  }, "content");
+  const fs = getFirestore(fsApp);
 
-            document.getElementById("student-form").reset();
-        });
+  /* ---------- helpers ---------- */
+  const $ = (id) => document.getElementById(id);
+  const esc = (s) => { const d = document.createElement("div"); d.textContent = s == null ? "" : s; return d.innerHTML; };
 
-        // Render students in table
-        function renderStudents(students) {
-            const tableBody = document.querySelector("#students-table tbody");
-            tableBody.innerHTML = '';
-            students.forEach(student => {
-                const row = document.createElement("tr");
-                row.innerHTML = `
-                    <td>${student.name}</td>
-                    <td>${student.email}</td>
-                    <td>${student.phone}</td>
-                    <td>${student.address}</td>
-                    <td>
-                        <button class="edit-btn" data-key="${student['.key']}">Edit</button>
-                        <button class="delete-btn" data-key="${student['.key']}">Delete</button>
-                    </td>
-                `;
-                tableBody.appendChild(row);
-            });
-            document.querySelectorAll('.edit-btn').forEach(btn => btn.addEventListener('click', handleEditStudent));
-            document.querySelectorAll('.delete-btn').forEach(btn => btn.addEventListener('click', handleDeleteStudent));
-        }
+  function toast(msg, type = "success") {
+    const el = document.createElement("div");
+    el.className = "toast toast--" + type;
+    const icon = type === "error"
+      ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>'
+      : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>';
+    el.innerHTML = icon + "<span>" + esc(msg) + "</span>";
+    $("toasts").appendChild(el);
+    setTimeout(() => { el.style.opacity = "0"; el.style.transition = "opacity .3s"; setTimeout(() => el.remove(), 300); }, 3200);
+  }
 
-        // Fetch and display students data
-        const studentsRef = ref(db, 'students');
-        onValue(studentsRef, snapshot => {
-            const studentsData = snapshot.val();
-            const studentsArray = studentsData ? Object.entries(studentsData).map(([key, value]) => ({ ...value, '.key': key })) : [];
-            renderStudents(studentsArray);
-        });
+  /* ---------- sidebar (mobile) ---------- */
+  const sidebar = $("sidebar"), backdrop = $("backdrop");
+  const closeNav = () => { sidebar.classList.remove("is-open"); backdrop.classList.remove("is-open"); };
+  $("menuToggle").addEventListener("click", () => { sidebar.classList.toggle("is-open"); backdrop.classList.toggle("is-open"); });
+  backdrop.addEventListener("click", closeNav);
+  document.querySelectorAll(".sidebar a[href^='#']").forEach(a => a.addEventListener("click", closeNav));
 
-        // Edit student functionality
-        function handleEditStudent(event) {
-            const studentId = event.target.dataset.key;
-            alert(`Edit functionality to be implemented for student ID: ${studentId}`);
-        }
+  // active nav highlight on scroll-to
+  document.querySelectorAll("[data-nav]").forEach(link => {
+    link.addEventListener("click", () => {
+      document.querySelectorAll("[data-nav]").forEach(l => l.classList.remove("is-active"));
+      link.classList.add("is-active");
+    });
+  });
 
-        // Delete student functionality
-        function handleDeleteStudent(event) {
-            const studentId = event.target.dataset.key;
-            if (confirm("Are you sure you want to delete this student?")) {
-                remove(ref(db, `students/${studentId}`))
-                    .then(() => alert("Student deleted successfully!"))
-                    .catch(error => console.error("Error deleting student: ", error));
-            }
-        }
+  $("logoutBtn").addEventListener("click", (e) => {
+    if (!confirm("Log out of the admin dashboard?")) e.preventDefault();
+  });
 
-        // Fetch and display analytics data
-        const analyticsData = {
-            "student-enrollments": ref(db, 'analytics/student-enrollments'),
-            "courses-completed": ref(db, 'analytics/courses-completed'),
-            "active-blog-posts": ref(db, 'analytics/active-blog-posts')
-        };
+  /* ---------- live stat cards ---------- */
+  async function countCollection(name, elId) {
+    try {
+      const snap = await getCountFromServer(collection(fs, name));
+      $(elId).textContent = snap.data().count;
+    } catch (e) { $(elId).textContent = "—"; }
+  }
+  countCollection("lcschoolblog", "stat-blogs");
+  countCollection("lc_model_connect_instructors", "stat-stories");
+  countCollection("lc_models_management", "stat-models");
 
-        Object.keys(analyticsData).forEach(key => {
-            onValue(analyticsData[key], snapshot => {
-                document.getElementById(key).innerText = snapshot.val() || '0';
-            });
-        });
+  /* ---------- students CRUD ---------- */
+  let students = [];
+  const body = $("students-body"), emptyState = $("students-empty");
 
-        function toggleSidebar() {
-            const sidebar = document.querySelector('.sidebar');
-            sidebar.style.display = sidebar.style.display === 'block' ? 'none' : 'block';
-        }
-    </script>
+  function renderStudents() {
+    const q = $("student-search").value.trim().toLowerCase();
+    const list = q ? students.filter(s => (s.name || "").toLowerCase().includes(q) || (s.email || "").toLowerCase().includes(q)) : students;
+    body.innerHTML = "";
+    if (!list.length) { emptyState.style.display = "block"; } else { emptyState.style.display = "none"; }
+    list.forEach(s => {
+      const tr = document.createElement("tr");
+      tr.innerHTML =
+        "<td>" + esc(s.name) + "</td><td>" + esc(s.email) + "</td><td>" + esc(s.phone) + "</td><td>" + esc(s.address) + "</td>" +
+        '<td><div class="row-actions">' +
+        '<button class="btn btn--secondary btn--sm" data-edit="' + s.key + '">Edit</button>' +
+        '<button class="btn btn--danger btn--sm" data-del="' + s.key + '">Delete</button>' +
+        "</div></td>";
+      body.appendChild(tr);
+    });
+  }
 
+  onValue(ref(db, "students"), snap => {
+    const data = snap.val() || {};
+    students = Object.entries(data).map(([key, v]) => ({ key, ...v }));
+    $("student-count").textContent = students.length;
+    $("stat-students").textContent = students.length;
+    renderStudents();
+  }, () => { $("stat-students").textContent = "—"; });
+
+  $("student-search").addEventListener("input", renderStudents);
+
+  // Add student
+  $("student-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const btn = $("student-save");
+    const name = $("student-name").value.trim();
+    if (!name) return toast("Name is required", "error");
+    btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Saving…';
+    try {
+      await push(ref(db, "students"), {
+        name,
+        email: $("student-email").value.trim(),
+        phone: $("student-phone").value.trim(),
+        address: $("student-address").value.trim()
+      });
+      $("student-form").reset();
+      toast("Student added");
+    } catch (err) {
+      toast("Could not add student", "error");
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg> Add student';
+    }
+  });
+
+  // Row actions (event delegation)
+  body.addEventListener("click", (e) => {
+    const editKey = e.target.closest("[data-edit]")?.dataset.edit;
+    const delKey = e.target.closest("[data-del]")?.dataset.del;
+    if (editKey) openEdit(editKey);
+    if (delKey) deleteStudent(delKey);
+  });
+
+  async function deleteStudent(key) {
+    const s = students.find(x => x.key === key);
+    if (!confirm(`Delete ${s?.name || "this student"}? This cannot be undone.`)) return;
+    try { await remove(ref(db, "students/" + key)); toast("Student deleted"); }
+    catch { toast("Could not delete student", "error"); }
+  }
+
+  /* ---------- edit modal ---------- */
+  const modal = $("edit-modal");
+  const openModal = () => modal.classList.add("is-open");
+  const closeModal = () => modal.classList.remove("is-open");
+  modal.querySelectorAll("[data-close]").forEach(b => b.addEventListener("click", closeModal));
+  modal.addEventListener("click", e => { if (e.target === modal) closeModal(); });
+
+  function openEdit(key) {
+    const s = students.find(x => x.key === key);
+    if (!s) return;
+    $("edit-key").value = key;
+    $("edit-name").value = s.name || "";
+    $("edit-email").value = s.email || "";
+    $("edit-phone").value = s.phone || "";
+    $("edit-address").value = s.address || "";
+    openModal();
+  }
+
+  $("edit-save").addEventListener("click", async () => {
+    const key = $("edit-key").value;
+    const btn = $("edit-save");
+    btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Saving…';
+    try {
+      await update(ref(db, "students/" + key), {
+        name: $("edit-name").value.trim(),
+        email: $("edit-email").value.trim(),
+        phone: $("edit-phone").value.trim(),
+        address: $("edit-address").value.trim()
+      });
+      closeModal(); toast("Student updated");
+    } catch { toast("Could not update student", "error"); }
+    finally { btn.disabled = false; btn.textContent = "Save changes"; }
+  });
+</script>
 </body>
 </html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Firestore Diagnostic — LC Modeling</title>
+  <style>
+    :root { --ok:#1a7f37; --warn:#9a6700; --bad:#cf222e; --muted:#57606a; --line:#d0d7de; }
+    * { box-sizing: border-box; }
+    body { font-family: -apple-system, "Segoe UI", Roboto, sans-serif; margin: 0; background:#f6f8fa; color:#1f2328; }
+    header { background:#24292f; color:#fff; padding:18px 24px; }
+    header h1 { margin:0; font-size:20px; }
+    header p { margin:6px 0 0; color:#c9d1d9; font-size:13px; }
+    main { max-width:1100px; margin:0 auto; padding:24px; }
+    .summary { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:24px; }
+    .card { flex:1; min-width:150px; background:#fff; border:1px solid var(--line); border-radius:8px; padding:14px 16px; }
+    .card .n { font-size:28px; font-weight:700; }
+    .card .l { font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; }
+    .card.bad .n { color:var(--bad); } .card.warn .n { color:var(--warn); } .card.ok .n { color:var(--ok); }
+    .collection { background:#fff; border:1px solid var(--line); border-radius:8px; margin-bottom:20px; overflow:hidden; }
+    .collection > h2 { margin:0; padding:14px 16px; font-size:16px; background:#f6f8fa; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; }
+    .collection > h2 small { font-weight:400; color:var(--muted); }
+    .doc { border-bottom:1px solid var(--line); padding:14px 16px; }
+    .doc:last-child { border-bottom:0; }
+    .doc-id { font-family:ui-monospace, monospace; font-size:12px; color:var(--muted); margin-bottom:8px; }
+    .flags { margin:8px 0; }
+    .flag { display:inline-block; font-size:12px; font-weight:600; padding:3px 8px; border-radius:12px; margin:2px 4px 2px 0; }
+    .flag.bad { background:#ffebe9; color:var(--bad); }
+    .flag.warn { background:#fff8c5; color:var(--warn); }
+    .flag.ok { background:#dafbe1; color:var(--ok); }
+    table.fields { width:100%; border-collapse:collapse; font-size:13px; margin-top:8px; }
+    table.fields td { padding:5px 8px; border-top:1px solid #eaeef2; vertical-align:top; }
+    table.fields td.k { font-family:ui-monospace, monospace; color:#0550ae; width:200px; word-break:break-all; }
+    table.fields td.v { word-break:break-word; white-space:pre-wrap; }
+    .missing-field { color:var(--bad); font-weight:600; }
+    .imgcheck { display:flex; align-items:center; gap:6px; font-size:12px; }
+    .imgcheck img { width:44px; height:44px; object-fit:cover; border-radius:4px; border:1px solid var(--line); background:#eee; }
+    .err { background:#ffebe9; border:1px solid var(--bad); color:var(--bad); padding:12px 16px; border-radius:8px; }
+    .legend { font-size:13px; color:var(--muted); margin-bottom:16px; line-height:1.6; }
+    code { background:#eff1f3; padding:1px 5px; border-radius:4px; font-size:12px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🔍 Firestore Diagnostic</h1>
+    <p>Reads every collection directly from your database and flags why documents (and images) may not appear on the site. This page is for debugging only — it is set to <code>noindex</code>.</p>
+  </header>
+  <main>
+    <div class="legend">
+      <strong>How to read this:</strong>
+      <span class="flag bad">HIDDEN</span> = the frontend sorts this collection by a field this document is missing, so Firestore's <code>orderBy</code> silently drops it — it will never show.
+      <span class="flag warn">NO IMAGE</span> = expected image field is empty/missing.
+      <span class="flag bad">BROKEN IMG</span> = the image URL failed to load (404 / bad Cloudinary URL).
+      <span class="flag warn">NO created_on</span> = missing timestamp that crashes some render loops.
+    </div>
+
+    <div class="summary" id="summary"><div class="card"><div class="n">…</div><div class="l">Loading</div></div></div>
+    <div id="output"></div>
+  </main>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+    // Same project the whole site uses (schoolcms-77713)
+    const firebaseConfig = {
+      apiKey: "AIzaSyAxauEEtqkuJOWA9HRe1jpT_wCXH62nksM",
+      authDomain: "schoolcms-77713.firebaseapp.com",
+      projectId: "schoolcms-77713",
+      storageBucket: "schoolcms-77713.appspot.com",
+      messagingSenderId: "757700374571",
+      appId: "1:757700374571:web:a86b334d619cf160fa7a6e"
+    };
+
+    const db = getFirestore(initializeApp(firebaseConfig));
+
+    // Each collection + the field the FRONTEND sorts by (orderBy drops docs missing it).
+    // needsCreatedOn = the render loop reads created_on.seconds and crashes if absent.
+    const COLLECTIONS = [
+      { name: "lcschoolblog",              sortField: "published_on", needsCreatedOn: false, note: "Blog posts (blog.js)" },
+      { name: "lcstories",                 sortField: null,           needsCreatedOn: true,  note: "LC Stories (scriptblog.js)" },
+      { name: "lc_models_management",      sortField: "publish_date", needsCreatedOn: false, note: "Models slider (modelsmanagement.js)" },
+      { name: "models_images",             sortField: "updated_on",   needsCreatedOn: false, note: "Model gallery (modelsimages.js)" },
+      { name: "models_header",             sortField: null,           needsCreatedOn: false, note: "Models page header (admin)" },
+      { name: "main_header_banner",        sortField: null,           needsCreatedOn: false, note: "Home hero banner (header1.js)" },
+      { name: "preview_week",              sortField: null,           needsCreatedOn: false, note: "Preview of the week (weakpreview.js)" },
+      { name: "diversity_and_inclusivity", sortField: "time",         needsCreatedOn: false, note: "Diversity carousel (inclu.js)" },
+      { name: "enroll_header",             sortField: null,           needsCreatedOn: false, note: "Enroll page header (register.html)" },
+    ];
+
+    const looksLikeUrl = (v) => typeof v === "string" && /^https?:\/\//i.test(v.trim());
+    const isVideo = (u) => /\.(mp4|webm|mov|ogg)(\?|$)/i.test(u);
+
+    // Load an image URL in the background and resolve true/false for success.
+    function testImage(url) {
+      return new Promise((resolve) => {
+        if (isVideo(url)) { resolve(true); return; } // don't image-test videos
+        const img = new Image();
+        const t = setTimeout(() => resolve(false), 12000);
+        img.onload = () => { clearTimeout(t); resolve(true); };
+        img.onerror = () => { clearTimeout(t); resolve(false); };
+        img.src = url;
+      });
+    }
+
+    function fmtValue(v) {
+      if (v && typeof v === "object" && "seconds" in v) {
+        return `Timestamp(${new Date(v.seconds * 1000).toLocaleString()})`;
+      }
+      if (Array.isArray(v)) return `[${v.length} item(s)]\n` + v.map(x => "  • " + String(x)).join("\n");
+      if (v && typeof v === "object") return JSON.stringify(v, null, 2);
+      return String(v);
+    }
+
+    const totals = { docs: 0, hidden: 0, brokenImg: 0, noImg: 0, collections: 0, empty: 0 };
+
+    const output = document.getElementById("output");
+
+    for (const cfg of COLLECTIONS) {
+      const section = document.createElement("div");
+      section.className = "collection";
+      const h2 = document.createElement("h2");
+      section.appendChild(h2);
+      output.appendChild(section);
+
+      let snap;
+      try {
+        // NOTE: we deliberately do NOT use orderBy here — we want to see EVERY doc,
+        // including the ones the real site is hiding.
+        snap = await getDocs(collection(db, cfg.name));
+      } catch (e) {
+        h2.innerHTML = `${cfg.name} <small>${cfg.note}</small>`;
+        const err = document.createElement("div");
+        err.className = "err";
+        err.textContent = `❌ Could not read this collection: ${e.code || ""} ${e.message}\n` +
+          (String(e.message).includes("permission") ? "→ This is a Firestore SECURITY RULES problem: reads are blocked." : "");
+        section.appendChild(err);
+        continue;
+      }
+
+      totals.collections++;
+      totals.docs += snap.size;
+      if (snap.size === 0) totals.empty++;
+
+      const sortNote = cfg.sortField
+        ? `site sorts by <code>${cfg.sortField}</code>`
+        : `no sort on frontend`;
+      h2.innerHTML = `${cfg.name} <small>${snap.size} doc(s) · ${cfg.note} · ${sortNote}</small>`;
+
+      const imageTests = [];
+
+      snap.forEach((docSnap) => {
+        const data = docSnap.data();
+        const doc = document.createElement("div");
+        doc.className = "doc";
+
+        const idEl = document.createElement("div");
+        idEl.className = "doc-id";
+        idEl.textContent = "doc id: " + docSnap.id;
+        doc.appendChild(idEl);
+
+        const flags = document.createElement("div");
+        flags.className = "flags";
+
+        // Flag 1: hidden by orderBy
+        if (cfg.sortField && !(cfg.sortField in data)) {
+          flags.innerHTML += `<span class="flag bad" title="orderBy('${cfg.sortField}') excludes this">HIDDEN — missing "${cfg.sortField}"</span>`;
+          totals.hidden++;
+        }
+        // Flag 2: created_on crash risk
+        if (cfg.needsCreatedOn && !data.created_on) {
+          flags.innerHTML += `<span class="flag warn">NO created_on (crashes render loop)</span>`;
+        }
+        // Flag 3: any image-looking fields present?
+        const urlFields = Object.entries(data).flatMap(([k, v]) => {
+          if (looksLikeUrl(v)) return [[k, v]];
+          if (Array.isArray(v)) return v.filter(looksLikeUrl).map((u, i) => [`${k}[${i}]`, u]);
+          return [];
+        });
+        if (urlFields.length === 0) {
+          flags.innerHTML += `<span class="flag warn">NO IMAGE/URL field</span>`;
+          totals.noImg++;
+        }
+        if (flags.children.length === 0) {
+          flags.innerHTML += `<span class="flag ok">OK</span>`;
+        }
+        doc.appendChild(flags);
+
+        // Field dump
+        const table = document.createElement("table");
+        table.className = "fields";
+        const expectedMissing = cfg.sortField && !(cfg.sortField in data);
+        for (const [k, v] of Object.entries(data)) {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `<td class="k">${k}</td><td class="v"></td>`;
+          tr.querySelector(".v").textContent = fmtValue(v);
+          table.appendChild(tr);
+        }
+        if (expectedMissing) {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `<td class="k missing-field">${cfg.sortField}</td><td class="v missing-field">⟵ MISSING (this is why it's hidden)</td>`;
+          table.appendChild(tr);
+        }
+        doc.appendChild(table);
+
+        // Image load checks (async, filled in after)
+        for (const [k, url] of urlFields) {
+          const row = document.createElement("div");
+          row.className = "imgcheck";
+          row.innerHTML = `<img alt=""><span>${isVideo(url) ? "🎬 video" : "checking…"} <code>${k}</code></span>`;
+          const imgEl = row.querySelector("img");
+          const label = row.querySelector("span");
+          imgEl.src = url;
+          doc.appendChild(row);
+          imageTests.push(
+            testImage(url).then((ok) => {
+              if (isVideo(url)) { label.innerHTML = `🎬 video (not load-tested) <code>${k}</code>`; return; }
+              if (ok) label.innerHTML = `✅ loads <code>${k}</code>`;
+              else {
+                label.innerHTML = `<span style="color:var(--bad);font-weight:600">❌ BROKEN IMG</span> <code>${k}</code> — ${url}`;
+                totals.brokenImg++;
+              }
+            })
+          );
+        }
+
+        section.appendChild(doc);
+      });
+
+      await Promise.all(imageTests);
+    }
+
+    // Summary cards
+    const summary = document.getElementById("summary");
+    summary.innerHTML = `
+      <div class="card"><div class="n">${totals.docs}</div><div class="l">Total documents</div></div>
+      <div class="card ${totals.hidden ? "bad" : "ok"}"><div class="n">${totals.hidden}</div><div class="l">Hidden by orderBy</div></div>
+      <div class="card ${totals.brokenImg ? "bad" : "ok"}"><div class="n">${totals.brokenImg}</div><div class="l">Broken images</div></div>
+      <div class="card ${totals.noImg ? "warn" : "ok"}"><div class="n">${totals.noImg}</div><div class="l">Docs w/o image field</div></div>
+      <div class="card ${totals.empty ? "warn" : "ok"}"><div class="n">${totals.empty}</div><div class="l">Empty collections</div></div>
+    `;
+  </script>
+</body>
+</html>
