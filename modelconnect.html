@@ -237,6 +237,27 @@
     .mc-quote { background: #fff; border: 1px solid var(--mc-line); border-radius: 14px; padding: 22px; }
     .mc-quote p { font-style: italic; color: var(--mc-ink); margin: 0 0 12px; }
     .mc-quote span { font-weight: 700; color: var(--mc-brand); }
+    .mc-testi-dots { display: none; justify-content: center; gap: 8px; margin-top: 18px; }
+    .mc-testi-dots__dot {
+      width: 8px; height: 8px; border-radius: 50%; border: none; padding: 0;
+      background: var(--mc-line); cursor: pointer; transition: background .2s, transform .2s;
+    }
+    .mc-testi-dots__dot.active { background: var(--mc-brand); transform: scale(1.25); }
+    @media (max-width: 760px) {
+      .mc-testimonials {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        gap: 0;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+      .mc-testimonials::-webkit-scrollbar { display: none; }
+      .mc-quote { flex: 0 0 100%; scroll-snap-align: center; margin: 0 auto; }
+      .mc-testi-dots { display: flex; }
+    }
 
     /* Contact / socials */
     .mc-contact { background: linear-gradient(135deg, #3a8dff, #8a1f66); color: #fff; text-align: center; }
@@ -450,7 +471,7 @@
   <section class="mc-section" id="testimonials">
     <h2>What Students Say</h2>
     <p class="mc-sub">Real experiences from models trained through the platform.</p>
-    <div class="mc-testimonials">
+    <div class="mc-testimonials" id="mcTestimonials">
       <div class="mc-quote">
         <p>"My instructor completely transformed my runway walk. I booked my first fashion show a month later!"</p>
         <span>— Aisha, Nairobi</span>
@@ -464,6 +485,7 @@
         <span>— Faith, Kisumu</span>
       </div>
     </div>
+    <div class="mc-testi-dots" id="mcTestiDots"></div>
   </section>
 
   <!-- CONTACT -->
@@ -559,6 +581,77 @@
       }
       if (btnRight) btnRight.addEventListener("click", () => slideBy(1));
       if (btnLeft) btnLeft.addEventListener("click", () => slideBy(-1));
+    })();
+
+    // Testimonials: on small devices, show one at a time and auto-slide
+    // to the next every 5s. Desktop/tablet keep the normal multi-column grid.
+    (function () {
+      const container = document.getElementById("mcTestimonials");
+      const dotsWrap = document.getElementById("mcTestiDots");
+      if (!container || !dotsWrap) return;
+
+      const slides = Array.from(container.children);
+      if (!slides.length) return;
+
+      slides.forEach((_, i) => {
+        const dot = document.createElement("button");
+        dot.type = "button";
+        dot.className = "mc-testi-dots__dot" + (i === 0 ? " active" : "");
+        dot.setAttribute("aria-label", "Go to testimonial " + (i + 1));
+        dot.addEventListener("click", () => goTo(i));
+        dotsWrap.appendChild(dot);
+      });
+      const dots = Array.from(dotsWrap.children);
+
+      const mq = window.matchMedia("(max-width: 760px)");
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      let index = 0;
+      let timer = null;
+      let paused = false;
+
+      function setActive(i) {
+        index = i;
+        dots.forEach((d, di) => d.classList.toggle("active", di === i));
+      }
+
+      function goTo(i) {
+        const wrapped = (i + slides.length) % slides.length;
+        container.scrollTo({ left: slides[wrapped].offsetLeft, behavior: "smooth" });
+        setActive(wrapped);
+      }
+
+      function startAuto() {
+        stopAuto();
+        if (!mq.matches || reduceMotion) return;
+        timer = setInterval(() => {
+          if (!paused) goTo(index + 1);
+        }, 5000);
+      }
+      function stopAuto() {
+        if (timer) clearInterval(timer);
+        timer = null;
+      }
+
+      let resumeTimeout = null;
+      container.addEventListener("touchstart", () => { paused = true; }, { passive: true });
+      container.addEventListener("touchend", () => {
+        clearTimeout(resumeTimeout);
+        resumeTimeout = setTimeout(() => { paused = false; }, 4000);
+      });
+
+      let scrollDebounce = null;
+      container.addEventListener("scroll", () => {
+        clearTimeout(scrollDebounce);
+        scrollDebounce = setTimeout(() => {
+          const width = container.clientWidth;
+          if (!width) return;
+          const i = Math.round(container.scrollLeft / width);
+          setActive(Math.min(Math.max(i, 0), slides.length - 1));
+        }, 100);
+      }, { passive: true });
+
+      mq.addEventListener("change", startAuto);
+      startAuto();
     })();
   </script>
   <!-- Forms submit via EmailJS (same account/service used across the site) -->
