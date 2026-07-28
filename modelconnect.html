@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="imgfallback.js"></script>
-  <title>L&C Model Connect — Find Modeling Instructors Across Kenya</title>
+  <title>L&C Model Connect — Modeling Instructors in Kenya &amp; Worldwide</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
@@ -77,7 +77,12 @@
       z-index: 1;
       background: linear-gradient(135deg, rgba(138,31,102,.26) 0%, rgba(58,141,255,.18) 100%);
     }
-    .mc-hero__content { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; }
+    .mc-hero__content { position: relative; z-index: 2; max-width: 820px; margin: 0 auto; }
+    .mc-hero__badge {
+      display: inline-block; background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.4);
+      color: #fff; font-size: .8rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      padding: 7px 16px; border-radius: 30px; margin-bottom: 18px; backdrop-filter: blur(4px);
+    }
     .mc-hero h1 { font-size: clamp(2.2rem, 4.5vw, 3.4rem); margin: 0 0 18px; line-height: 1.15; text-shadow: 0 2px 6px rgba(0,0,0,.55), 0 8px 26px rgba(0,0,0,.4); }
     .mc-hero p { font-size: clamp(1.05rem, 1.6vw, 1.35rem); max-width: 720px; margin: 0 auto 34px; opacity: .97; text-shadow: 0 2px 10px rgba(0,0,0,.45); }
     .mc-hero__btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
@@ -89,6 +94,23 @@
     .mc-btn:hover { transform: translateY(-2px); }
     .mc-btn--solid { background: #fff; color: var(--mc-brand); }
     .mc-btn--ghost { background: transparent; color: #fff; }
+
+    /* Bold statement band */
+    .mc-pitch { background: linear-gradient(135deg, #1c1420, #3a1030); color: #fff; text-align: center; padding: 40px 20px 48px; }
+    .mc-pitch__eyebrow { text-transform: uppercase; letter-spacing: .14em; font-weight: 800; font-size: .8rem; color: #ff9fd6; margin: 0 0 12px; }
+    .mc-pitch__text { max-width: 800px; margin: 0 auto; font-size: 1.08rem; line-height: 1.65; opacity: .95; }
+    .mc-pitch__text strong { color: #fff; }
+    .mc-pitch__photos { display: flex; justify-content: center; gap: 16px; margin: 30px auto 0; max-width: 820px; flex-wrap: wrap; }
+    .mc-pitch__photo { width: 190px; height: 240px; border-radius: 18px; overflow: hidden; box-shadow: 0 16px 34px rgba(0,0,0,.4); flex: 0 1 190px; }
+    .mc-pitch__photo img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .45s ease; }
+    .mc-pitch__photo:hover img { transform: scale(1.08); }
+    @media (max-width: 620px) {
+      .mc-pitch__photos { gap: 10px; }
+      .mc-pitch__photo { width: 30%; height: 150px; border-radius: 12px; flex-basis: 30%; }
+    }
+
+    /* Flags */
+    .mc-flag { width: 20px; height: auto; border-radius: 2px; vertical-align: middle; margin-right: 2px; box-shadow: 0 0 0 1px rgba(0,0,0,.08); }
 
     /* Gallery slider */
     .mc-gallery { padding: 54px 0 60px; background: #fff; }
@@ -169,6 +191,7 @@
     .mc-section { max-width: 1150px; margin: 0 auto; padding: 60px 20px; }
     .mc-section h2 { text-align: center; font-size: 2rem; margin: 0 0 8px; }
     .mc-section .mc-sub { text-align: center; color: var(--mc-soft); margin: 0 auto 40px; max-width: 640px; }
+    .mc-section .mc-intro { text-align: center; color: var(--mc-soft); max-width: 780px; margin: 0 auto 36px; font-size: 1rem; line-height: 1.65; }
 
     /* How it works */
     .mc-how { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
@@ -181,6 +204,12 @@
       width: 30px; height: 30px; border-radius: 50%; background: var(--mc-brand-2); color: #fff;
       display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .9rem;
     }
+    .mc-chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .mc-chip {
+      display: inline-flex; align-items: center; gap: 6px; background: #fff; border: 1px solid var(--mc-line);
+      border-radius: 30px; padding: 6px 12px; font-size: .8rem; font-weight: 600; color: var(--mc-brand);
+    }
+    .mc-chip i { color: var(--mc-brand-2); }
 
     /* Categories */
     .mc-cats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
@@ -191,6 +220,30 @@
     .mc-cat:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(0,0,0,.08); }
     .mc-cat i { font-size: 1.7rem; color: var(--mc-brand); margin-bottom: 10px; }
     .mc-cat span { display: block; font-weight: 600; }
+
+    /* Flexible training locations */
+    .mc-loc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+    .mc-loc-card { background: #fff; border: 1px solid var(--mc-line); border-radius: 16px; padding: 26px 20px; text-align: center; transition: transform .15s, box-shadow .2s; }
+    .mc-loc-card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(0,0,0,.08); }
+    .mc-loc-card i { font-size: 1.8rem; color: var(--mc-brand); margin-bottom: 12px; }
+    .mc-loc-card h3 { margin: 0 0 8px; font-size: 1.05rem; }
+    .mc-loc-card p { margin: 0; color: var(--mc-soft); font-size: .88rem; line-height: 1.55; }
+
+    /* Countries we serve */
+    .mc-countries { background: var(--mc-bg); }
+    .mc-continent { margin-bottom: 28px; }
+    .mc-continent:last-of-type { margin-bottom: 0; }
+    .mc-continent h3 { font-size: .92rem; text-transform: uppercase; letter-spacing: .07em; color: var(--mc-brand); margin: 0 0 12px; }
+    .mc-country-list { display: flex; flex-wrap: wrap; gap: 10px; }
+    .mc-country-pill { display: inline-flex; align-items: center; gap: 7px; background: #fff; border: 1px solid var(--mc-line); border-radius: 30px; padding: 7px 14px; font-size: .85rem; }
+    .mc-countries__note { text-align: center; margin-top: 32px; color: var(--mc-soft); font-size: .92rem; }
+
+    /* How matching works */
+    .mc-match-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+    .mc-match-card { background: #fff; border: 1px solid var(--mc-line); border-radius: 16px; padding: 24px; }
+    .mc-match-card i { font-size: 1.5rem; color: var(--mc-brand-2); margin-bottom: 10px; display: block; }
+    .mc-match-card h3 { margin: 0 0 6px; font-size: 1rem; }
+    .mc-match-card p { margin: 0; color: var(--mc-soft); font-size: .88rem; line-height: 1.55; }
 
     /* Instructor directory */
     #instructors { background: var(--mc-bg); }
@@ -214,6 +267,16 @@
     }
     .instructor-card__book:hover { background: #6c1750; }
     .mc-empty { text-align: center; color: var(--mc-soft); grid-column: 1 / -1; padding: 30px; }
+
+    /* Payments */
+    .mc-pay-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
+    .mc-pay-step { text-align: center; padding: 10px; }
+    .mc-pay-step__num {
+      width: 42px; height: 42px; border-radius: 50%; background: var(--mc-brand); color: #fff;
+      display: flex; align-items: center; justify-content: center; font-weight: 700; margin: 0 auto 14px; font-size: 1.05rem;
+    }
+    .mc-pay-step h3 { margin: 0 0 8px; font-size: 1.02rem; }
+    .mc-pay-step p { margin: 0; color: var(--mc-soft); font-size: .9rem; line-height: 1.55; }
 
     /* Forms */
     .mc-forms { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
@@ -259,6 +322,15 @@
       .mc-testi-dots { display: flex; }
     }
 
+    /* Coming soon */
+    .mc-soon { background: var(--mc-bg); text-align: center; }
+    .mc-soon-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+    .mc-soon-chip {
+      display: inline-flex; align-items: center; gap: 8px; background: #fff; border: 1px dashed var(--mc-line);
+      border-radius: 30px; padding: 9px 16px; font-size: .88rem; color: var(--mc-ink); font-weight: 600;
+    }
+    .mc-soon-chip i { color: var(--mc-brand-2); }
+
     /* Contact / socials */
     .mc-contact { background: linear-gradient(135deg, #3a8dff, #8a1f66); color: #fff; text-align: center; }
     .mc-contact h2 { color: #fff; }
@@ -290,6 +362,7 @@
           <li><a href="index.html">Home</a></li>
           <li><a href="#instructors">Instructors</a></li>
           <li><a href="#categories">Training</a></li>
+          <li><a href="#countries">Countries</a></li>
           <li><a href="#become-instructor">Become an Instructor</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
@@ -309,12 +382,28 @@
     </div>
     <div class="mc-hero__overlay"></div>
     <div class="mc-hero__content">
-      <h1>Find Professional Modeling Instructors Across Kenya</h1>
-      <p>Book catwalk, runway, pageantry, posing, and grooming classes online or in person.</p>
+      <span class="mc-hero__badge">Kenya &amp; Worldwide</span>
+      <h1>Find Professional Modeling Instructors, Anywhere You Are</h1>
+      <p>Book catwalk, runway, pageantry, posing, and grooming classes online or in person — starting in Kenya, now training students around the world.</p>
       <div class="mc-hero__btns">
         <a href="#book-training" class="mc-btn mc-btn--solid"><i class="fa-solid fa-calendar-check"></i> Book Training</a>
         <a href="#become-instructor" class="mc-btn mc-btn--ghost"><i class="fa-solid fa-chalkboard-user"></i> Become an Instructor</a>
       </div>
+    </div>
+  </section>
+
+  <!-- BOLD STATEMENT BAND -->
+  <section class="mc-pitch">
+    <p class="mc-pitch__eyebrow">Do You Have What It Takes?</p>
+    <p class="mc-pitch__text">
+      <strong>L&amp;C Models Connect</strong> welcomes fresh faces from every background — beginners taking their first class,
+      parents seeking training for their kids, working models sharpening their craft, and instructors ready to coach the
+      next generation. <strong>No experience required to start.</strong>
+    </p>
+    <div class="mc-pitch__photos" aria-hidden="true">
+      <div class="mc-pitch__photo"><img src="connect2.jpg" alt="" loading="lazy"></div>
+      <div class="mc-pitch__photo"><img src="connect5.jpg" alt="" loading="lazy"></div>
+      <div class="mc-pitch__photo"><img src="connect9.jpg" alt="" loading="lazy"></div>
     </div>
   </section>
 
@@ -350,7 +439,11 @@
   <!-- HOW IT WORKS -->
   <section class="mc-section" id="how-it-works">
     <h2>How It Works</h2>
-    <p class="mc-sub">A simple path whether you're learning or teaching.</p>
+    <p class="mc-intro">
+      L&amp;C Models Connect is a global platform connecting aspiring models with verified professional modeling
+      instructors — from Nairobi to New York. Our mission is to make modeling education accessible, convenient,
+      and reliable for everyone with a dream of becoming a model.
+    </p>
     <div class="mc-how">
       <div class="mc-how__col">
         <h3><i class="fa-solid fa-graduation-cap"></i> For Students</h3>
@@ -360,6 +453,11 @@
           <li>Attend training online or physically</li>
           <li>Grow your modeling career</li>
         </ol>
+        <div class="mc-chip-row">
+          <span class="mc-chip"><i class="fa-solid fa-earth-africa"></i> Train from anywhere</span>
+          <span class="mc-chip"><i class="fa-solid fa-shield-halved"></i> Verified instructors only</span>
+          <span class="mc-chip"><i class="fa-solid fa-clock"></i> Book on your schedule</span>
+        </div>
       </div>
       <div class="mc-how__col">
         <h3><i class="fa-solid fa-chalkboard-user"></i> For Instructors</h3>
@@ -369,6 +467,39 @@
           <li>Receive student bookings</li>
           <li>Earn income from training</li>
         </ol>
+        <div class="mc-chip-row">
+          <span class="mc-chip"><i class="fa-solid fa-earth-africa"></i> Coach worldwide</span>
+          <span class="mc-chip"><i class="fa-solid fa-house-laptop"></i> Online or physical</span>
+          <span class="mc-chip"><i class="fa-solid fa-sack-dollar"></i> Earn per session</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLEXIBLE TRAINING LOCATIONS -->
+  <section class="mc-section" id="flexible-training">
+    <h2>Flexible Training, Anywhere You Are</h2>
+    <p class="mc-sub">Once a student books an instructor, training is arranged wherever is most convenient for both.</p>
+    <div class="mc-loc-grid">
+      <div class="mc-loc-card">
+        <i class="fa-solid fa-house"></i>
+        <h3>Home Coaching</h3>
+        <p>Personalized one-on-one training at the student's home.</p>
+      </div>
+      <div class="mc-loc-card">
+        <i class="fa-solid fa-city"></i>
+        <h3>Estate Coaching</h3>
+        <p>Training sessions within residential estates or community facilities.</p>
+      </div>
+      <div class="mc-loc-card">
+        <i class="fa-solid fa-building"></i>
+        <h3>Studio or Venue Coaching</h3>
+        <p>Training at approved studios, parks, halls, or other agreed locations.</p>
+      </div>
+      <div class="mc-loc-card">
+        <i class="fa-solid fa-laptop"></i>
+        <h3>Online Coaching</h3>
+        <p>Live virtual sessions for students anywhere in Kenya or around the world.</p>
       </div>
     </div>
   </section>
@@ -385,6 +516,141 @@
       <div class="mc-cat"><i class="fa-solid fa-spa"></i><span>Grooming &amp; Etiquette</span></div>
       <div class="mc-cat"><i class="fa-solid fa-face-smile"></i><span>Confidence Building</span></div>
       <div class="mc-cat"><i class="fa-solid fa-child-reaching"></i><span>Kids Modeling</span></div>
+      <div class="mc-cat"><i class="fa-solid fa-briefcase"></i><span>Portfolio &amp; Personal Branding</span></div>
+    </div>
+  </section>
+
+  <!-- COUNTRIES WE SERVE -->
+  <section class="mc-section mc-countries" id="countries">
+    <h2>Countries We Serve</h2>
+    <p class="mc-sub">L&amp;C Models Connect welcomes aspiring models and professional instructors from around the world.</p>
+
+    <div class="mc-continent">
+      <h3>Africa</h3>
+      <div class="mc-country-list">
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/ke.png" srcset="https://flagcdn.com/w40/ke.png 2x" alt="" loading="lazy"> Kenya</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/ug.png" srcset="https://flagcdn.com/w40/ug.png 2x" alt="" loading="lazy"> Uganda</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/tz.png" srcset="https://flagcdn.com/w40/tz.png 2x" alt="" loading="lazy"> Tanzania</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/rw.png" srcset="https://flagcdn.com/w40/rw.png 2x" alt="" loading="lazy"> Rwanda</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/bi.png" srcset="https://flagcdn.com/w40/bi.png 2x" alt="" loading="lazy"> Burundi</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/ss.png" srcset="https://flagcdn.com/w40/ss.png 2x" alt="" loading="lazy"> South Sudan</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/et.png" srcset="https://flagcdn.com/w40/et.png 2x" alt="" loading="lazy"> Ethiopia</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/so.png" srcset="https://flagcdn.com/w40/so.png 2x" alt="" loading="lazy"> Somalia</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/ng.png" srcset="https://flagcdn.com/w40/ng.png 2x" alt="" loading="lazy"> Nigeria</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/gh.png" srcset="https://flagcdn.com/w40/gh.png 2x" alt="" loading="lazy"> Ghana</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/za.png" srcset="https://flagcdn.com/w40/za.png 2x" alt="" loading="lazy"> South Africa</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/zm.png" srcset="https://flagcdn.com/w40/zm.png 2x" alt="" loading="lazy"> Zambia</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/zw.png" srcset="https://flagcdn.com/w40/zw.png 2x" alt="" loading="lazy"> Zimbabwe</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/bw.png" srcset="https://flagcdn.com/w40/bw.png 2x" alt="" loading="lazy"> Botswana</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/na.png" srcset="https://flagcdn.com/w40/na.png 2x" alt="" loading="lazy"> Namibia</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/mw.png" srcset="https://flagcdn.com/w40/mw.png 2x" alt="" loading="lazy"> Malawi</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/mz.png" srcset="https://flagcdn.com/w40/mz.png 2x" alt="" loading="lazy"> Mozambique</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/eg.png" srcset="https://flagcdn.com/w40/eg.png 2x" alt="" loading="lazy"> Egypt</span>
+      </div>
+    </div>
+
+    <div class="mc-continent">
+      <h3>Asia</h3>
+      <div class="mc-country-list">
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/ae.png" srcset="https://flagcdn.com/w40/ae.png 2x" alt="" loading="lazy"> United Arab Emirates</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/sa.png" srcset="https://flagcdn.com/w40/sa.png 2x" alt="" loading="lazy"> Saudi Arabia</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/qa.png" srcset="https://flagcdn.com/w40/qa.png 2x" alt="" loading="lazy"> Qatar</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/kw.png" srcset="https://flagcdn.com/w40/kw.png 2x" alt="" loading="lazy"> Kuwait</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/om.png" srcset="https://flagcdn.com/w40/om.png 2x" alt="" loading="lazy"> Oman</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/bh.png" srcset="https://flagcdn.com/w40/bh.png 2x" alt="" loading="lazy"> Bahrain</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/in.png" srcset="https://flagcdn.com/w40/in.png 2x" alt="" loading="lazy"> India</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/pk.png" srcset="https://flagcdn.com/w40/pk.png 2x" alt="" loading="lazy"> Pakistan</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/bd.png" srcset="https://flagcdn.com/w40/bd.png 2x" alt="" loading="lazy"> Bangladesh</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/cn.png" srcset="https://flagcdn.com/w40/cn.png 2x" alt="" loading="lazy"> China</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/jp.png" srcset="https://flagcdn.com/w40/jp.png 2x" alt="" loading="lazy"> Japan</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/kr.png" srcset="https://flagcdn.com/w40/kr.png 2x" alt="" loading="lazy"> South Korea</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/sg.png" srcset="https://flagcdn.com/w40/sg.png 2x" alt="" loading="lazy"> Singapore</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/my.png" srcset="https://flagcdn.com/w40/my.png 2x" alt="" loading="lazy"> Malaysia</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/th.png" srcset="https://flagcdn.com/w40/th.png 2x" alt="" loading="lazy"> Thailand</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/id.png" srcset="https://flagcdn.com/w40/id.png 2x" alt="" loading="lazy"> Indonesia</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/ph.png" srcset="https://flagcdn.com/w40/ph.png 2x" alt="" loading="lazy"> Philippines</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/vn.png" srcset="https://flagcdn.com/w40/vn.png 2x" alt="" loading="lazy"> Vietnam</span>
+      </div>
+    </div>
+
+    <div class="mc-continent">
+      <h3>Europe</h3>
+      <div class="mc-country-list">
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/gb.png" srcset="https://flagcdn.com/w40/gb.png 2x" alt="" loading="lazy"> United Kingdom</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/fr.png" srcset="https://flagcdn.com/w40/fr.png 2x" alt="" loading="lazy"> France</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/de.png" srcset="https://flagcdn.com/w40/de.png 2x" alt="" loading="lazy"> Germany</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/it.png" srcset="https://flagcdn.com/w40/it.png 2x" alt="" loading="lazy"> Italy</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/es.png" srcset="https://flagcdn.com/w40/es.png 2x" alt="" loading="lazy"> Spain</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/nl.png" srcset="https://flagcdn.com/w40/nl.png 2x" alt="" loading="lazy"> Netherlands</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/be.png" srcset="https://flagcdn.com/w40/be.png 2x" alt="" loading="lazy"> Belgium</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/ch.png" srcset="https://flagcdn.com/w40/ch.png 2x" alt="" loading="lazy"> Switzerland</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/se.png" srcset="https://flagcdn.com/w40/se.png 2x" alt="" loading="lazy"> Sweden</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/no.png" srcset="https://flagcdn.com/w40/no.png 2x" alt="" loading="lazy"> Norway</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/dk.png" srcset="https://flagcdn.com/w40/dk.png 2x" alt="" loading="lazy"> Denmark</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/ie.png" srcset="https://flagcdn.com/w40/ie.png 2x" alt="" loading="lazy"> Ireland</span>
+      </div>
+    </div>
+
+    <div class="mc-continent">
+      <h3>North America</h3>
+      <div class="mc-country-list">
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/us.png" srcset="https://flagcdn.com/w40/us.png 2x" alt="" loading="lazy"> United States</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/ca.png" srcset="https://flagcdn.com/w40/ca.png 2x" alt="" loading="lazy"> Canada</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/mx.png" srcset="https://flagcdn.com/w40/mx.png 2x" alt="" loading="lazy"> Mexico</span>
+      </div>
+    </div>
+
+    <div class="mc-continent">
+      <h3>South America</h3>
+      <div class="mc-country-list">
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/br.png" srcset="https://flagcdn.com/w40/br.png 2x" alt="" loading="lazy"> Brazil</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/ar.png" srcset="https://flagcdn.com/w40/ar.png 2x" alt="" loading="lazy"> Argentina</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/cl.png" srcset="https://flagcdn.com/w40/cl.png 2x" alt="" loading="lazy"> Chile</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/co.png" srcset="https://flagcdn.com/w40/co.png 2x" alt="" loading="lazy"> Colombia</span>
+      </div>
+    </div>
+
+    <div class="mc-continent">
+      <h3>Oceania</h3>
+      <div class="mc-country-list">
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/au.png" srcset="https://flagcdn.com/w40/au.png 2x" alt="" loading="lazy"> Australia</span>
+        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/nz.png" srcset="https://flagcdn.com/w40/nz.png 2x" alt="" loading="lazy"> New Zealand</span>
+      </div>
+    </div>
+
+    <p class="mc-countries__note">Expanding worldwide — don't see your country? <a href="#contact" style="color: var(--mc-brand); font-weight: 600;">Reach out</a>, we're growing every day.</p>
+  </section>
+
+  <!-- HOW MATCHING WORKS -->
+  <section class="mc-section" id="matching">
+    <h2>How We Match You With an Instructor</h2>
+    <p class="mc-sub">A fair, quality-first system that grows with L&amp;C Models Connect.</p>
+    <div class="mc-match-grid">
+      <div class="mc-match-card">
+        <i class="fa-solid fa-shield-halved"></i>
+        <h3>Verified Instructors</h3>
+        <p>Every instructor is reviewed and approved by L&amp;C Models Management before joining the platform.</p>
+      </div>
+      <div class="mc-match-card">
+        <i class="fa-solid fa-map-location-dot"></i>
+        <h3>Smart Matching</h3>
+        <p>We match you by location, training type, instructor expertise, and availability.</p>
+      </div>
+      <div class="mc-match-card">
+        <i class="fa-solid fa-calendar-week"></i>
+        <h3>Fair Booking Limits</h3>
+        <p>Instructors take on a set number of students at a time, so you always get quality attention.</p>
+      </div>
+      <div class="mc-match-card">
+        <i class="fa-solid fa-hourglass-half"></i>
+        <h3>Waitlist Support</h3>
+        <p>Fully booked in your area? Join the waitlist and we'll confirm as soon as a slot opens.</p>
+      </div>
+      <div class="mc-match-card">
+        <i class="fa-solid fa-star"></i>
+        <h3>Continuous Quality Checks</h3>
+        <p>We track feedback, punctuality, and training outcomes to keep standards high.</p>
+      </div>
     </div>
   </section>
 
@@ -394,6 +660,29 @@
     <p class="mc-sub">Approved modeling instructors ready to train you. Tap <strong>Book Now</strong> to reach out.</p>
     <div id="instructor-directory" class="instructor-grid">
       <!-- Instructor cards are injected here from the database -->
+    </div>
+  </section>
+
+  <!-- HOW PAYMENTS WORK -->
+  <section class="mc-section" id="payments">
+    <h2>How Payments Work</h2>
+    <p class="mc-sub">Transparent and secure, protecting both students and instructors.</p>
+    <div class="mc-pay-steps">
+      <div class="mc-pay-step">
+        <div class="mc-pay-step__num">1</div>
+        <h3>Pay L&amp;C Models Management</h3>
+        <p>All student payments are made directly to L&amp;C Models Management — never to an individual instructor.</p>
+      </div>
+      <div class="mc-pay-step">
+        <div class="mc-pay-step__num">2</div>
+        <h3>Training Is Completed</h3>
+        <p>Once an instructor successfully delivers the agreed training program, payment is processed by us.</p>
+      </div>
+      <div class="mc-pay-step">
+        <div class="mc-pay-step__num">3</div>
+        <h3>A Transparent Commission</h3>
+        <p>A service commission is deducted before the instructor is paid, supporting verification, support, and platform growth — similar to how ride-sharing apps work.</p>
+      </div>
     </div>
   </section>
 
@@ -411,7 +700,9 @@
           <input type="tel" name="phone" required>
           <label>Email Address</label>
           <input type="email" name="email" required>
-          <label>Location / County</label>
+          <label>Country</label>
+          <input type="text" name="country" placeholder="e.g. Kenya" required>
+          <label>Location / County / City</label>
           <input type="text" name="location" required>
           <label>Years of Experience</label>
           <input type="number" name="experience" min="0">
@@ -424,6 +715,7 @@
             <option>Grooming &amp; Etiquette</option>
             <option>Confidence Building</option>
             <option>Kids Modeling</option>
+            <option>Portfolio &amp; Personal Branding</option>
           </select>
           <label>Social Media Links</label>
           <input type="text" name="socials" placeholder="Instagram, TikTok, etc.">
@@ -442,6 +734,8 @@
           <input type="tel" name="phone" required>
           <label>Email Address</label>
           <input type="email" name="email" required>
+          <label>Country</label>
+          <input type="text" name="country" placeholder="e.g. Kenya" required>
           <label>Location</label>
           <input type="text" name="location" required>
           <label>Type of Training Required</label>
@@ -453,13 +747,16 @@
             <option>Grooming &amp; Etiquette</option>
             <option>Confidence Building</option>
             <option>Kids Modeling</option>
+            <option>Portfolio &amp; Personal Branding</option>
           </select>
           <label>Preferred Instructor</label>
           <input type="text" name="instructor" placeholder="Optional">
           <label>Preferred Training Method</label>
           <select name="method">
             <option>Online</option>
-            <option>Physical</option>
+            <option>Home Coaching</option>
+            <option>Estate Coaching</option>
+            <option>Studio / Venue Coaching</option>
           </select>
           <button type="submit"><i class="fa-solid fa-paper-plane"></i> Send Booking Request</button>
         </form>
@@ -486,6 +783,21 @@
       </div>
     </div>
     <div class="mc-testi-dots" id="mcTestiDots"></div>
+  </section>
+
+  <!-- COMING SOON -->
+  <section class="mc-section mc-soon">
+    <h2>What's Coming Next</h2>
+    <p class="mc-sub">As L&amp;C Models Connect grows, we're building these features for a smoother experience.</p>
+    <div class="mc-soon-row">
+      <span class="mc-soon-chip"><i class="fa-solid fa-ranking-star"></i> Instructor Rankings</span>
+      <span class="mc-soon-chip"><i class="fa-solid fa-comment-dots"></i> Student Reviews</span>
+      <span class="mc-soon-chip"><i class="fa-solid fa-comments"></i> In-App Messaging</span>
+      <span class="mc-soon-chip"><i class="fa-solid fa-certificate"></i> Certificates</span>
+      <span class="mc-soon-chip"><i class="fa-solid fa-location-crosshairs"></i> GPS Check-In</span>
+      <span class="mc-soon-chip"><i class="fa-solid fa-chart-line"></i> Instructor Earnings Dashboard</span>
+      <span class="mc-soon-chip"><i class="fa-brands fa-cc-visa" style="color:var(--mc-brand);"></i> M-Pesa &amp; Online Payments</span>
+    </div>
   </section>
 
   <!-- CONTACT -->
