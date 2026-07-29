@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin.html
+Disallow: /admindash/
+Disallow: /loginform.html
+Disallow: /debug.html
+Disallow: /fetch.html
+Disallow: /how.html
+Disallow: /tests.html
+Disallow: /well.html
+
+Sitemap: https://lcmodelingschool.com/sitemap.xml

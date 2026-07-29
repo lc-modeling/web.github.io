@@ -49,7 +49,42 @@
   <link rel="stylesheet" href="modelsmanagement.css" />
 
   <!-- 8. Structured Data -->
-  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "L&C Modeling Academy",
+    "alternateName": "L&C Modeling School",
+    "url": "https://lcmodelingschool.com/",
+    "logo": "https://lcmodelingschool.com/apple-touch-icon.png",
+    "image": "https://res.cloudinary.com/dwlasndqv/image/upload/v1746270872/humdu12gzfuhwy8dzdp8.jpg",
+    "description": "L&C Modeling Academy is Nairobi's premier modeling school, offering runway, pageantry, and portfolio training led by industry experts.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Nairobi",
+      "addressCountry": "KE"
+    },
+    "telephone": "+254-702-066-492",
+    "email": "Linkosiclothing@gmail.com",
+    "sameAs": [
+      "https://www.facebook.com/profile.php?id=100088956974742",
+      "https://www.instagram.com/lc_modeling_school",
+      "https://www.youtube.com/@Lc_Modeling_Academy",
+      "http://tiktok.com/@lc.modeling.school",
+      "https://x.com/lcmodeling8",
+      "https://ke.linkedin.com/company/l-c-modeling-company-academy",
+      "https://pin.it/bCh9xEAnd"
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "L&C Modeling Academy",
+    "url": "https://lcmodelingschool.com/"
+  }
+  </script>
 
   <!-- 9. Sitemap & Analytics -->
   <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
@@ -404,7 +439,103 @@
   }
 }
 
-        
+/* Diversity & Inclusivity slider */
+.dv-sub {
+  text-align: center;
+  color: #667085;
+  max-width: 640px;
+  margin: -6px auto 26px;
+  padding: 0 20px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+}
+
+.dv-slider { position: relative; max-width: 1200px; margin: 0 auto; }
+
+.dv-track {
+  display: flex;
+  gap: 18px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 6px 50px 26px;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 40px, #000 calc(100% - 40px), transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 40px, #000 calc(100% - 40px), transparent 100%);
+}
+.dv-track::-webkit-scrollbar { display: none; }
+
+.dv-card {
+  flex: 0 0 auto;
+  width: 260px;
+  height: 320px;
+  border-radius: 18px;
+  overflow: hidden;
+  scroll-snap-align: start;
+  box-shadow: 0 10px 28px rgba(0,0,0,.16);
+  transition: transform .35s ease, box-shadow .35s ease;
+}
+.dv-card:hover { transform: translateY(-6px); box-shadow: 0 18px 36px rgba(0,0,0,.22); }
+.dv-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .5s ease;
+}
+.dv-card:hover img { transform: scale(1.08); }
+
+.dv-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,.92);
+  color: #1c1c22;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  cursor: pointer;
+  z-index: 5;
+  box-shadow: 0 8px 20px rgba(0,0,0,.2);
+  transition: background .2s, transform .2s;
+}
+.dv-arrow:hover { background: #fff; transform: translateY(-50%) scale(1.08); }
+.dv-arrow:active { transform: translateY(-50%) scale(.95); }
+.dv-arrow--left { left: 4px; }
+.dv-arrow--right { right: 4px; }
+
+.dv-dots { display: flex; justify-content: center; gap: 8px; margin-top: 6px; }
+.dv-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #d8d8e0;
+  cursor: pointer;
+  transition: all .3s ease;
+  border: none;
+  padding: 0;
+}
+.dv-dot.active { width: 24px; border-radius: 5px; background: rgb(130, 197, 255); }
+
+@media (max-width: 768px) {
+  .dv-card { width: 210px; height: 260px; }
+  .dv-arrow { width: 38px; height: 38px; font-size: 14px; }
+  .dv-track { padding: 6px 40px 22px; }
+}
+@media (max-width: 480px) {
+  .dv-card { width: 72vw; height: 240px; }
+  .dv-arrow--left { left: 2px; }
+  .dv-arrow--right { right: 2px; }
+}
+
+
     </style>
     <script>
       document.documentElement.className = "js";
@@ -562,10 +693,17 @@
   <h1 style="color: rgb(130, 197, 255); font-family: 'Outfit', sans-serif; font-optical-sizing: auto; font-weight: 700; font-style: normal;">
       DIVERSITY & INCLUSIVITY
   </h1>
-  <br>
-  <div class="blog-preview-container" id="blogPreviewContainer"></div>
-  <button class="arrow right" onclick="scrollRight()">&#10095;</button>
-  <div class="pagination-dots" id="paginationDots"></div>
+  <p class="dv-sub">A glimpse of the many faces, cultures, and stories that make our community.</p>
+  <div class="dv-slider" id="dvSlider">
+    <button class="dv-arrow dv-arrow--left" id="dvArrowLeft" type="button" aria-label="Scroll left">
+      <i class="fa-solid fa-chevron-left"></i>
+    </button>
+    <div class="dv-track" id="dvTrack" tabindex="0"></div>
+    <button class="dv-arrow dv-arrow--right" id="dvArrowRight" type="button" aria-label="Scroll right">
+      <i class="fa-solid fa-chevron-right"></i>
+    </button>
+  </div>
+  <div class="dv-dots" id="dvDots"></div>
 </section>
 <section class="about-us">
   <p class="oxygen-light" style="font-family: 'Outfit', sans-serif; color: rgb(247, 251, 255);">We don't have restrictions towards your body type. We are committed and devoted to helping you grow your talent in modeling to a top professional level. Enroll with L&C modeling school today!</p>
@@ -1144,69 +1282,7 @@ const header = document.querySelector('header');
 
 
 ///=========================================================================================
-
-  const container = document.getElementById('blogPreviewContainer');
-    const paginationDotsContainer = document.getElementById('paginationDots');
-    let scrollAmount = 0;
-
-    function createPaginationDots() {
-        const numberOfDots = Math.ceil(container.children.length / 3);
-        for (let i = 0; i < numberOfDots; i++) {
-            const dot = document.createElement('div');
-            dot.classList.add('pagination-dot');
-            dot.addEventListener('click', () => goToPage(i));
-            paginationDotsContainer.appendChild(dot);
-        }
-        updatePaginationDots();
-    }
-
-    function updatePaginationDots() {
-        const dots = paginationDotsContainer.children;
-        const activeIndex = Math.round(scrollAmount / container.clientWidth);
-        for (let i = 0; i < dots.length; i++) {
-            dots[i].classList.toggle('active', i === activeIndex);
-        }
-    }
-
-    function goToPage(pageIndex) {
-        const width = container.clientWidth;
-        scrollAmount = width * pageIndex;
-        container.style.transform = `translateX(-${scrollAmount}px)`;
-        updatePaginationDots();
-    }
-
-    function scrollLeft() {
-        const width = container.clientWidth;
-        scrollAmount = Math.max(scrollAmount - width, 0);
-        container.style.transform = `translateX(-${scrollAmount}px)`;
-        updatePaginationDots();
-    }
-
-    function scrollRight() {
-        const width = container.clientWidth;
-        const maxScroll = container.scrollWidth - width;
-        scrollAmount = Math.min(scrollAmount + width, maxScroll);
-        container.style.transform = `translateX(-${scrollAmount}px)`;
-        updatePaginationDots();
-    }
-
-    container.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].pageX;
-        scrollLeftPos = scrollAmount;
-    });
-
-    container.addEventListener('touchmove', (e) => {
-        const x = e.touches[0].pageX;
-        const walk = startX - x;
-        const width = container.clientWidth;
-        const maxScroll = container.scrollWidth - width;
-        scrollAmount = Math.max(0, Math.min(maxScroll, scrollLeftPos + walk));
-        container.style.transform = `translateX(-${scrollAmount}px)`;
-        updatePaginationDots();
-    });
-
-    createPaginationDots();
-
+// Diversity & Inclusivity slider logic now lives in inclu.js (module scope).
 ////////////////////////////////////////////////////////////////////////////
 
 
