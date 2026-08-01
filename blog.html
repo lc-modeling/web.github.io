@@ -72,48 +72,12 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Share Icon Styles */
-.share-icon {
-  display: inline-block;
-  margin-top: 15px;
- padding-left: 1cm;
-  color: #070707; /* Facebook-like blue */
-  font-size: 24px;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.share-icon:hover {
-  color: #8a1f66; /* Lighter blue on hover */
-}
-
-
-
-.created-on {
-    color: green;
-}
-
-.share-btn {
-  display: inline-block;
-  cursor: pointer;
-  color: #000;
-  font-size: 1.5em;
-  transition: color 0.3s;
-}
-
-.share-btn:hover {
-  color: blue;
-}
-
-.post img {
-  border-radius: 10px; /* Adjust the value to get the desired roundness */
-}
-
-
-
          .centered-large-text {
             text-align: center;
-            font-size: 48px; /* Adjust this value to make the text bigger */
+            font-size: clamp(1.6rem, 4.5vw, 2.6rem);
+            font-weight: 700;
+            color: #1a1a1a;
+            margin: 10px 0 20px;
         }
         .main-heading {
     font-size: 2rem;
@@ -180,15 +144,39 @@ html {
           </div>
         </nav>
       </header>
-      <div class="intro-text">
-        Welcome to L&C Modeling School Blog! Discover the latest trends in modeling, tips from industry experts, and stories from our talented students. Stay tuned for updates and insights into the glamorous world of modeling.
-      </div>
-      <br>
+      <section class="blog-hero" id="blog">
+        <div class="blog-hero__inner">
+          <span class="blog-hero__eyebrow">L&amp;C Modeling Blog</span>
+          <h1 class="blog-hero__title">Stories, tips &amp; trends from the runway</h1>
+          <p class="blog-hero__sub">Welcome to L&amp;C Modeling School Blog! Discover the latest trends in modeling, tips from industry experts, and stories from our talented students.</p>
 
-    <h1 class="centered-large-text" id="blog">Blog posts</h1>
+          <div class="blog-hero__stats" id="blogHeroStats">
+            <div class="blog-stat">
+              <span class="blog-stat__value" id="statPostCount">&ndash;</span>
+              <span class="blog-stat__label">Stories</span>
+            </div>
+            <div class="blog-stat">
+              <span class="blog-stat__value" id="statReadTime">&ndash;</span>
+              <span class="blog-stat__label">Min of reading</span>
+            </div>
+            <div class="blog-stat">
+              <span class="blog-stat__value" id="statUpdated">&ndash;</span>
+              <span class="blog-stat__label">Last updated</span>
+            </div>
+          </div>
+
+          <div class="blog-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="search" id="blogSearchInput" placeholder="Search stories&hellip;" aria-label="Search blog posts">
+          </div>
+        </div>
+      </section>
+
+      <p class="search-results-note" id="searchResultsNote" hidden></p>
+
     <div class="container" id="blog-container">
         <!-- Blog posts will be appended here -->
-         
+
       </div>
       
       <section style="background: linear-gradient(135deg, rgb(58, 141, 255), rgb(134, 185, 255), rgb(58, 255, 196)); color: white; padding: 20px;">
@@ -255,65 +243,7 @@ navLinks.forEach(link => {
 
     </script>
     <script type="module" src="blog.js"></script>
-    <script type="module" src="">
-
-      // Function to copy the shareable URL to the clipboard and show popup
-function copyToClipboard(url) {
-  const tempInput = document.createElement('input');
-  tempInput.value = url;
-  document.body.appendChild(tempInput);
-  tempInput.select();
-  document.execCommand('copy');
-  document.body.removeChild(tempInput);
-  
-  // Show popup
-  showPopup('URL copied to clipboard!');
-}
-
-// Function to show popup
-function showPopup(message) {
-  let popup = document.createElement('div');
-  popup.className = 'popup';
-  popup.innerHTML = `<span>${message}</span><i class="fa-solid fa-check-circle"></i>`;
-  document.body.appendChild(popup);
-
-  setTimeout(() => {
-    popup.classList.add('show');
-  }, 100);
-
-  setTimeout(() => {
-    popup.classList.remove('show');
-    setTimeout(() => {
-      document.body.removeChild(popup);
-    }, 400); // wait for transition to finish
-  }, 3000); // display for 3 seconds
-}
 
 
-document.querySelector('a.oxygen-light').addEventListener('click', function (event) {
-  event.preventDefault(); // Prevent the default anchor click behavior
-
-  const targetElement = document.querySelector('#blog-container');
-  const offset = 100; // Adjust this value based on your header height
-
-  if (targetElement) {
-    const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-    const offsetPosition = elementPosition - offset;
-
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: 'smooth'
-    });
-  } else {
-    // Fallback: navigate to the blog.html page if the element isn't found
-    window.location.href = 'blog.html#blog-container';
-  }
-});
-
-
-
-    </script>
-
-    
 </body>
 </html>
