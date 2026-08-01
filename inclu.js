@@ -1,131 +1,133 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+// Your Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyAxauEEtqkuJOWA9HRe1jpT_wCXH62nksM",
+    authDomain: "schoolcms-77713.firebaseapp.com",
+    projectId: "schoolcms-77713",
+    storageBucket: "schoolcms-77713.appspot.com",
+    messagingSenderId: "757700374571",
+    appId: "1:757700374571:web:a86b334d619cf160fa7a6e"
+};
 
-    // Your Firebase configuration
-    const firebaseConfig = {
-        apiKey: "AIzaSyAxauEEtqkuJOWA9HRe1jpT_wCXH62nksM",
-        authDomain: "schoolcms-77713.firebaseapp.com",
-        projectId: "schoolcms-77713",
-        storageBucket: "schoolcms-77713.appspot.com",
-        messagingSenderId: "757700374571",
-        appId: "1:757700374571:web:a86b334d619cf160fa7a6e"
-    };
+const app = initializeApp(firebaseConfig);
+const firestore = getFirestore(app);
 
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const firestore = getFirestore(app);
+const track = document.getElementById('dvTrack');
+const dotsContainer = document.getElementById('dvDots');
+const arrowLeft = document.getElementById('dvArrowLeft');
+const arrowRight = document.getElementById('dvArrowRight');
 
-    // Function to fetch and display the diversity and inclusivity images
-    async function displayDiversityImages() {
-        try {
-            const diversityRef = collection(firestore, "diversity_and_inclusivity");
-            const diversityQuery = query(diversityRef, orderBy("time", "desc"));
-            const diversitySnapshot = await getDocs(diversityQuery);
-            const container = document.getElementById('blogPreviewContainer');
+const AUTO_SCROLL_INTERVAL = 3500;
+const RESUME_DELAY = 4000;
+let autoScrollTimer = null;
+let resumeTimer = null;
 
-            // Clear the container to avoid duplication if running the function multiple times
-            container.innerHTML = '';
+function cardStep() {
+    const card = track.querySelector('.dv-card');
+    if (!card) return track.clientWidth;
+    const gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || 18);
+    return card.getBoundingClientRect().width + gap;
+}
 
-            // Insert elements from Firestore
-            diversitySnapshot.forEach(doc => {
-                const postData = doc.data();
-                const blogCard = document.createElement('div');
-                blogCard.className = 'blog-preview-card';
+function scrollByCards(direction) {
+    const maxScroll = track.scrollWidth - track.clientWidth;
+    if (direction > 0 && track.scrollLeft >= maxScroll - 4) {
+        track.scrollTo({ left: 0, behavior: 'smooth' });
+        return;
+    }
+    if (direction < 0 && track.scrollLeft <= 4) {
+        track.scrollTo({ left: maxScroll, behavior: 'smooth' });
+        return;
+    }
+    track.scrollBy({ left: direction * cardStep(), behavior: 'smooth' });
+}
 
-                blogCard.innerHTML = `
-                    <div class="image">
-                        <img src="${postData.header_image}" alt="Modeling Image">
-                    </div>
-                `;
-                container.appendChild(blogCard);
-            });
+function createDots() {
+    dotsContainer.innerHTML = '';
+    const count = track.children.length;
+    for (let i = 0; i < count; i++) {
+        const dot = document.createElement('button');
+        dot.className = 'dv-dot';
+        dot.type = 'button';
+        dot.setAttribute('aria-label', `Go to image ${i + 1}`);
+        dot.addEventListener('click', () => {
+            const card = track.children[i];
+            track.scrollTo({ left: card.offsetLeft - track.offsetLeft, behavior: 'smooth' });
+            restartAutoScroll();
+        });
+        dotsContainer.appendChild(dot);
+    }
+    updateActiveDot();
+}
 
-            // After fetching, create pagination dots
-            createPaginationDots();
-        } catch (error) {
-            console.error("Error fetching and displaying diversity images: ", error);
+function updateActiveDot() {
+    const dots = dotsContainer.children;
+    if (!dots.length) return;
+    let closestIndex = 0;
+    let closestDistance = Infinity;
+    Array.from(track.children).forEach((card, i) => {
+        const distance = Math.abs(card.offsetLeft - track.offsetLeft - track.scrollLeft);
+        if (distance < closestDistance) {
+            closestDistance = distance;
+            closestIndex = i;
         }
-    }
-
-    // Function to create pagination dots
-    function createPaginationDots() {
-        const container = document.getElementById('blogPreviewContainer');
-        const paginationDotsContainer = document.getElementById('paginationDots');
-        const numberOfDots = Math.ceil(container.children.length / 3);
-
-        // Clear existing dots before creating new ones
-        paginationDotsContainer.innerHTML = '';
-
-        for (let i = 0; i < numberOfDots; i++) {
-            const dot = document.createElement('div');
-            dot.classList.add('pagination-dot');
-            dot.addEventListener('click', () => goToPage(i));
-            paginationDotsContainer.appendChild(dot);
-        }
-        updatePaginationDots();
-    }
-
-    // Function to update pagination dots based on scroll position
-    function updatePaginationDots() {
-        const container = document.getElementById('blogPreviewContainer');
-        const paginationDotsContainer = document.getElementById('paginationDots');
-        const dots = paginationDotsContainer.children;
-        const activeIndex = Math.round(scrollAmount / container.clientWidth);
-
-        for (let i = 0; i < dots.length; i++) {
-            dots[i].classList.toggle('active', i === activeIndex);
-        }
-    }
-
-    // Function to scroll to a specific page based on index
-    function goToPage(pageIndex) {
-        const container = document.getElementById('blogPreviewContainer');
-        const width = container.clientWidth;
-        scrollAmount = width * pageIndex;
-        container.style.transform = `translateX(-${scrollAmount}px)`;
-        updatePaginationDots();
-    }
-
-    // Function to scroll left
-    function scrollLeft() {
-        const container = document.getElementById('blogPreviewContainer');
-        const width = container.clientWidth;
-        scrollAmount = Math.max(scrollAmount - width, 0);
-        container.style.transform = `translateX(-${scrollAmount}px)`;
-        updatePaginationDots();
-    }
-
-    // Function to scroll right
-    function scrollRight() {
-        const container = document.getElementById('blogPreviewContainer');
-        const width = container.clientWidth;
-        const maxScroll = container.scrollWidth - width;
-        scrollAmount = Math.min(scrollAmount + width, maxScroll);
-        container.style.transform = `translateX(-${scrollAmount}px)`;
-        updatePaginationDots();
-    }
-
-    // Add touch event listeners for mobile support
-    let startX = 0;
-    let scrollLeftPos = 0;
-    const container = document.getElementById('blogPreviewContainer');
-
-    container.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].pageX;
-        scrollLeftPos = scrollAmount;
     });
+    Array.from(dots).forEach((dot, i) => dot.classList.toggle('active', i === closestIndex));
+}
 
-    container.addEventListener('touchmove', (e) => {
-        const x = e.touches[0].pageX;
-        const walk = startX - x;
-        const width = container.clientWidth;
-        const maxScroll = container.scrollWidth - width;
-        scrollAmount = Math.max(0, Math.min(maxScroll, scrollLeftPos + walk));
-        container.style.transform = `translateX(-${scrollAmount}px)`;
-        updatePaginationDots();
-    });
+function startAutoScroll() {
+    stopAutoScroll();
+    autoScrollTimer = setInterval(() => scrollByCards(1), AUTO_SCROLL_INTERVAL);
+}
 
-    // Fetch and display images on page load
-    displayDiversityImages();
+function stopAutoScroll() {
+    if (autoScrollTimer) clearInterval(autoScrollTimer);
+    autoScrollTimer = null;
+}
 
+function restartAutoScroll() {
+    stopAutoScroll();
+    if (resumeTimer) clearTimeout(resumeTimer);
+    resumeTimer = setTimeout(startAutoScroll, RESUME_DELAY);
+}
+
+async function displayDiversityImages() {
+    try {
+        const diversityRef = collection(firestore, "diversity_and_inclusivity");
+        const diversityQuery = query(diversityRef, orderBy("time", "desc"));
+        const diversitySnapshot = await getDocs(diversityQuery);
+
+        track.innerHTML = '';
+
+        diversitySnapshot.forEach(doc => {
+            const postData = doc.data();
+            const card = document.createElement('div');
+            card.className = 'dv-card';
+            card.innerHTML = `<img src="${postData.header_image}" alt="Modeling Image" loading="lazy">`;
+            track.appendChild(card);
+        });
+
+        createDots();
+        if (track.children.length > 1) startAutoScroll();
+    } catch (error) {
+        console.error("Error fetching and displaying diversity images: ", error);
+    }
+}
+
+arrowLeft.addEventListener('click', () => { scrollByCards(-1); restartAutoScroll(); });
+arrowRight.addEventListener('click', () => { scrollByCards(1); restartAutoScroll(); });
+
+track.addEventListener('scroll', () => {
+    window.requestAnimationFrame(updateActiveDot);
+});
+
+['mouseenter', 'touchstart', 'focusin'].forEach(evt =>
+    track.parentElement.addEventListener(evt, stopAutoScroll, { passive: true })
+);
+['mouseleave', 'touchend', 'focusout'].forEach(evt =>
+    track.parentElement.addEventListener(evt, restartAutoScroll, { passive: true })
+);
+
+displayDiversityImages();
