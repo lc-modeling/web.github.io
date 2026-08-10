@@ -1,5 +1,5 @@
 import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
-import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+import { getFirestore, collection, getDocs, getCountFromServer } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 
 // Firebase configuration (same project / collection as before — placeholders unchanged)
 const firebaseConfig = {
@@ -88,3 +88,66 @@ async function displayInstructors() {
 }
 
 displayInstructors();
+
+/* ============ Live statistics band ============ */
+
+// Real, not guessed: pulls the actual approved-instructor count from the
+// same collection the directory above renders from.
+async function loadInstructorCount() {
+  const el = document.getElementById("mcStatInstructors");
+  if (!el) return;
+  try {
+    const snap = await getCountFromServer(collection(firestore, "lc_model_connect_instructors"));
+    const count = snap.data().count;
+    if (count > 0) {
+      el.dataset.countTo = String(count);
+    } else {
+      // A "0+" stat undermines trust rather than building it — hide this
+      // card until at least one instructor has been approved.
+      el.closest(".mc-stat")?.style.setProperty("display", "none");
+    }
+  } catch (error) {
+    console.error("Error loading instructor count:", error);
+  }
+}
+
+function initStatCounters() {
+  const stats = document.querySelectorAll(".mc-stat__value");
+  if (!stats.length) return;
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function animate(el) {
+    const target = parseFloat(el.dataset.countTo) || 0;
+    const suffix = el.dataset.suffix || "";
+    if (reduceMotion || target === 0) {
+      el.textContent = target + suffix;
+      return;
+    }
+    const duration = 1400;
+    const start = performance.now();
+    function tick(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(target * eased) + suffix;
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  if (!("IntersectionObserver" in window)) {
+    stats.forEach(animate);
+    return;
+  }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animate(entry.target);
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.4 });
+  stats.forEach(el => io.observe(el));
+}
+
+loadInstructorCount();
+initStatCounters();

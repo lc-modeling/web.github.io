@@ -140,6 +140,46 @@
     .mc-btn--solid { background: #fff; color: var(--mc-brand); }
     .mc-btn--ghost { background: transparent; color: #fff; }
 
+    /* Live statistics band */
+    .mc-stats {
+      background: var(--mc-ink);
+      padding: 40px 20px;
+    }
+    .mc-stats__grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 24px;
+      text-align: center;
+    }
+    .mc-stat__value {
+      font-size: clamp(2rem, 5vw, 2.6rem);
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--mc-brand), var(--mc-brand-2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      line-height: 1.1;
+    }
+    .mc-stat__label {
+      margin-top: 6px;
+      color: rgba(255, 255, 255, .7);
+      font-size: .85rem;
+      letter-spacing: .02em;
+    }
+
+    /* Why choose L&C */
+    .mc-why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+    .mc-why-card {
+      background: #fff; border: 1px solid var(--mc-line); border-radius: 16px;
+      padding: 26px 20px; text-align: center; transition: transform .15s, box-shadow .2s;
+    }
+    .mc-why-card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(0,0,0,.08); }
+    .mc-why-card i { font-size: 1.8rem; color: var(--mc-brand); margin-bottom: 12px; }
+    .mc-why-card h3 { margin: 0 0 8px; font-size: 1.05rem; }
+    .mc-why-card p { margin: 0; color: var(--mc-soft); font-size: .88rem; line-height: 1.55; }
+
     /* Bold statement band */
     .mc-pitch { background: linear-gradient(135deg, #1c1420, #3a1030); color: #fff; text-align: center; padding: 40px 20px 48px; }
     .mc-pitch__eyebrow { text-transform: uppercase; letter-spacing: .14em; font-weight: 800; font-size: .8rem; color: #ff9fd6; margin: 0 0 12px; }
@@ -540,6 +580,28 @@
     </div>
   </section>
 
+  <!-- LIVE STATISTICS -->
+  <section class="mc-stats" id="stats">
+    <div class="mc-stats__grid">
+      <div class="mc-stat">
+        <div class="mc-stat__value" data-count-to="5000" data-suffix="+">0</div>
+        <div class="mc-stat__label">Models &amp; Students Reached</div>
+      </div>
+      <div class="mc-stat">
+        <div class="mc-stat__value" id="mcStatInstructors" data-count-to="0" data-suffix="+">0</div>
+        <div class="mc-stat__label">Verified Instructors</div>
+      </div>
+      <div class="mc-stat">
+        <div class="mc-stat__value" data-count-to="57" data-suffix="+">0</div>
+        <div class="mc-stat__label">Countries Served</div>
+      </div>
+      <div class="mc-stat">
+        <div class="mc-stat__value" data-count-to="8" data-suffix="">0</div>
+        <div class="mc-stat__label">Training Categories</div>
+      </div>
+    </div>
+  </section>
+
   <!-- BOLD STATEMENT BAND -->
   <section class="mc-pitch">
     <p class="mc-pitch__eyebrow">Do You Have What It Takes?</p>
@@ -757,6 +819,39 @@
         <div class="mc-pay-step__num">3</div>
         <h3>A Transparent Commission</h3>
         <p>A service commission is deducted before the instructor is paid, supporting verification, support, and platform growth — similar to how ride-sharing apps work.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE L&C -->
+  <section class="mc-section" id="why-choose">
+    <h2>Why Choose L&amp;C Models Connect</h2>
+    <p class="mc-sub">A platform built on trust, reach, and real training outcomes.</p>
+    <div class="mc-why-grid">
+      <div class="mc-why-card">
+        <i class="fa-solid fa-shield-halved"></i>
+        <h3>Verified Instructors</h3>
+        <p>Every instructor is personally reviewed and approved by L&amp;C Models Management before they can train students.</p>
+      </div>
+      <div class="mc-why-card">
+        <i class="fa-solid fa-earth-africa"></i>
+        <h3>Global Reach</h3>
+        <p>From Nairobi to New York — welcoming students and instructors across 57+ countries and growing.</p>
+      </div>
+      <div class="mc-why-card">
+        <i class="fa-solid fa-book"></i>
+        <h3>Professional Handbook</h3>
+        <p>Every student gets access to the L&amp;C Modeling School Handbook to guide their training journey.</p>
+      </div>
+      <div class="mc-why-card">
+        <i class="fa-solid fa-hand-holding-dollar"></i>
+        <h3>Affordable Training</h3>
+        <p>L&amp;C is built to be the most affordable, rewarding modeling training platform — no hidden fees.</p>
+      </div>
+      <div class="mc-why-card">
+        <i class="fa-solid fa-laptop-house"></i>
+        <h3>Flexible Learning</h3>
+        <p>Train online or in person — at home, in your estate, at a studio, or wherever suits you best.</p>
       </div>
     </div>
   </section>
