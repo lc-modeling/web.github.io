@@ -274,14 +274,117 @@
     .mc-loc-card h3 { margin: 0 0 8px; font-size: 1.05rem; }
     .mc-loc-card p { margin: 0; color: var(--mc-soft); font-size: .88rem; line-height: 1.55; }
 
-    /* Countries we serve */
-    .mc-countries { background: var(--mc-bg); }
-    .mc-continent { margin-bottom: 28px; }
-    .mc-continent:last-of-type { margin-bottom: 0; }
-    .mc-continent h3 { font-size: .92rem; text-transform: uppercase; letter-spacing: .07em; color: var(--mc-brand); margin: 0 0 12px; }
-    .mc-country-list { display: flex; flex-wrap: wrap; gap: 10px; }
-    .mc-country-pill { display: inline-flex; align-items: center; gap: 7px; background: #fff; border: 1px solid var(--mc-line); border-radius: 30px; padding: 7px 14px; font-size: .85rem; }
-    .mc-countries__note { text-align: center; margin-top: 32px; color: var(--mc-soft); font-size: .92rem; }
+    /* Countries we serve — Tesla-style searchable "Select your country/region" combobox */
+    .mc-countries { background: #0a0a0c; }
+    .mc-countries h2 { color: #fff; }
+    .mc-countries .mc-sub { color: rgba(255,255,255,.6); }
+
+    .mc-country-select {
+      position: relative;
+      max-width: 560px;
+      margin: 36px auto 0;
+    }
+    .mc-country-select__label {
+      display: block;
+      font-size: .82rem;
+      color: rgba(255,255,255,.55);
+      margin-bottom: 10px;
+      letter-spacing: .01em;
+    }
+    .mc-country-select__control {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid rgba(255,255,255,.3);
+      padding-bottom: 12px;
+      transition: border-color .2s ease;
+    }
+    .mc-country-select.is-open .mc-country-select__control,
+    .mc-country-select__control:focus-within {
+      border-color: var(--mc-brand-2);
+    }
+    .mc-country-select__input {
+      flex: 1;
+      width: 100%;
+      background: none;
+      border: none;
+      outline: none;
+      color: #fff;
+      font-family: inherit;
+      font-size: 1.05rem;
+    }
+    .mc-country-select__input::placeholder { color: rgba(255,255,255,.4); }
+    .mc-country-select__chevron {
+      color: rgba(255,255,255,.6);
+      font-size: .85rem;
+      flex-shrink: 0;
+      transition: transform .25s ease;
+    }
+    .mc-country-select.is-open .mc-country-select__chevron { transform: rotate(180deg); }
+
+    .mc-country-select__list {
+      list-style: none;
+      margin: 10px 0 0;
+      padding: 6px;
+      max-height: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      opacity: 0;
+      background: #131316;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.08);
+      box-shadow: 0 20px 50px rgba(0,0,0,.5);
+      transition: max-height .3s ease, opacity .2s ease;
+      scrollbar-width: thin;
+      scrollbar-color: var(--mc-brand-2) transparent;
+    }
+    .mc-country-select.is-open .mc-country-select__list {
+      max-height: 320px;
+      opacity: 1;
+    }
+    /* Fancy gradient scroll "blob" for the country dropdown (WebKit browsers) */
+    .mc-country-select__list::-webkit-scrollbar { width: 8px; }
+    .mc-country-select__list::-webkit-scrollbar-track { background: transparent; margin: 6px 0; }
+    .mc-country-select__list::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, var(--mc-brand), var(--mc-brand-2));
+      border-radius: 20px;
+      border: 2px solid #131316;
+      background-clip: padding-box;
+    }
+    .mc-country-select__list::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(180deg, #a5266f, #5aa0ff);
+      background-clip: padding-box;
+    }
+    .mc-country-select__group-label {
+      padding: 12px 12px 6px;
+      font-size: .72rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: rgba(255,255,255,.4);
+    }
+    .mc-country-select__option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      color: #f0f0f2;
+      font-size: .92rem;
+    }
+    .mc-country-select__option:hover,
+    .mc-country-select__option.is-active {
+      background: rgba(255,255,255,.08);
+    }
+    .mc-country-select__option .mc-flag { box-shadow: 0 0 0 1px rgba(255,255,255,.15); }
+    .mc-country-select__empty {
+      margin: 4px 0 0;
+      padding: 16px 12px;
+      color: rgba(255,255,255,.5);
+      font-size: .88rem;
+      text-align: center;
+    }
+    .mc-countries__note { text-align: center; margin-top: 24px; color: rgba(255,255,255,.55); font-size: .92rem; }
 
     /* How matching works */
     .mc-match-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
@@ -457,97 +560,24 @@
     <h2>Countries We Serve</h2>
     <p class="mc-sub">L&amp;C Models Connect welcomes aspiring models and professional instructors from around the world.</p>
 
-    <div class="mc-continent">
-      <h3>Africa</h3>
-      <div class="mc-country-list">
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/ke.png" srcset="https://flagcdn.com/w40/ke.png 2x" alt="" loading="lazy"> Kenya</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/ug.png" srcset="https://flagcdn.com/w40/ug.png 2x" alt="" loading="lazy"> Uganda</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/tz.png" srcset="https://flagcdn.com/w40/tz.png 2x" alt="" loading="lazy"> Tanzania</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/rw.png" srcset="https://flagcdn.com/w40/rw.png 2x" alt="" loading="lazy"> Rwanda</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/bi.png" srcset="https://flagcdn.com/w40/bi.png 2x" alt="" loading="lazy"> Burundi</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/ss.png" srcset="https://flagcdn.com/w40/ss.png 2x" alt="" loading="lazy"> South Sudan</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/et.png" srcset="https://flagcdn.com/w40/et.png 2x" alt="" loading="lazy"> Ethiopia</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/so.png" srcset="https://flagcdn.com/w40/so.png 2x" alt="" loading="lazy"> Somalia</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/ng.png" srcset="https://flagcdn.com/w40/ng.png 2x" alt="" loading="lazy"> Nigeria</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/gh.png" srcset="https://flagcdn.com/w40/gh.png 2x" alt="" loading="lazy"> Ghana</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/za.png" srcset="https://flagcdn.com/w40/za.png 2x" alt="" loading="lazy"> South Africa</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/zm.png" srcset="https://flagcdn.com/w40/zm.png 2x" alt="" loading="lazy"> Zambia</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/zw.png" srcset="https://flagcdn.com/w40/zw.png 2x" alt="" loading="lazy"> Zimbabwe</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/bw.png" srcset="https://flagcdn.com/w40/bw.png 2x" alt="" loading="lazy"> Botswana</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/na.png" srcset="https://flagcdn.com/w40/na.png 2x" alt="" loading="lazy"> Namibia</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/mw.png" srcset="https://flagcdn.com/w40/mw.png 2x" alt="" loading="lazy"> Malawi</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/mz.png" srcset="https://flagcdn.com/w40/mz.png 2x" alt="" loading="lazy"> Mozambique</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/eg.png" srcset="https://flagcdn.com/w40/eg.png 2x" alt="" loading="lazy"> Egypt</span>
+    <div class="mc-country-select" id="mcCountrySelect">
+      <label class="mc-country-select__label" for="mcCountrySearch">Select your country/region</label>
+      <div class="mc-country-select__control" id="mcCountryControl">
+        <input
+          type="text"
+          id="mcCountrySearch"
+          class="mc-country-select__input"
+          placeholder="Search or choose a country…"
+          autocomplete="off"
+          role="combobox"
+          aria-expanded="false"
+          aria-controls="mcCountryListbox"
+          aria-autocomplete="list"
+        >
+        <i class="fa-solid fa-chevron-down mc-country-select__chevron"></i>
       </div>
-    </div>
-
-    <div class="mc-continent">
-      <h3>Asia</h3>
-      <div class="mc-country-list">
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/ae.png" srcset="https://flagcdn.com/w40/ae.png 2x" alt="" loading="lazy"> United Arab Emirates</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/sa.png" srcset="https://flagcdn.com/w40/sa.png 2x" alt="" loading="lazy"> Saudi Arabia</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/qa.png" srcset="https://flagcdn.com/w40/qa.png 2x" alt="" loading="lazy"> Qatar</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/kw.png" srcset="https://flagcdn.com/w40/kw.png 2x" alt="" loading="lazy"> Kuwait</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/om.png" srcset="https://flagcdn.com/w40/om.png 2x" alt="" loading="lazy"> Oman</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/bh.png" srcset="https://flagcdn.com/w40/bh.png 2x" alt="" loading="lazy"> Bahrain</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/in.png" srcset="https://flagcdn.com/w40/in.png 2x" alt="" loading="lazy"> India</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/pk.png" srcset="https://flagcdn.com/w40/pk.png 2x" alt="" loading="lazy"> Pakistan</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/bd.png" srcset="https://flagcdn.com/w40/bd.png 2x" alt="" loading="lazy"> Bangladesh</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/cn.png" srcset="https://flagcdn.com/w40/cn.png 2x" alt="" loading="lazy"> China</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/jp.png" srcset="https://flagcdn.com/w40/jp.png 2x" alt="" loading="lazy"> Japan</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/kr.png" srcset="https://flagcdn.com/w40/kr.png 2x" alt="" loading="lazy"> South Korea</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/sg.png" srcset="https://flagcdn.com/w40/sg.png 2x" alt="" loading="lazy"> Singapore</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/my.png" srcset="https://flagcdn.com/w40/my.png 2x" alt="" loading="lazy"> Malaysia</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/th.png" srcset="https://flagcdn.com/w40/th.png 2x" alt="" loading="lazy"> Thailand</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/id.png" srcset="https://flagcdn.com/w40/id.png 2x" alt="" loading="lazy"> Indonesia</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/ph.png" srcset="https://flagcdn.com/w40/ph.png 2x" alt="" loading="lazy"> Philippines</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/vn.png" srcset="https://flagcdn.com/w40/vn.png 2x" alt="" loading="lazy"> Vietnam</span>
-      </div>
-    </div>
-
-    <div class="mc-continent">
-      <h3>Europe</h3>
-      <div class="mc-country-list">
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/gb.png" srcset="https://flagcdn.com/w40/gb.png 2x" alt="" loading="lazy"> United Kingdom</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/fr.png" srcset="https://flagcdn.com/w40/fr.png 2x" alt="" loading="lazy"> France</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/de.png" srcset="https://flagcdn.com/w40/de.png 2x" alt="" loading="lazy"> Germany</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/it.png" srcset="https://flagcdn.com/w40/it.png 2x" alt="" loading="lazy"> Italy</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/es.png" srcset="https://flagcdn.com/w40/es.png 2x" alt="" loading="lazy"> Spain</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/nl.png" srcset="https://flagcdn.com/w40/nl.png 2x" alt="" loading="lazy"> Netherlands</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/be.png" srcset="https://flagcdn.com/w40/be.png 2x" alt="" loading="lazy"> Belgium</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/ch.png" srcset="https://flagcdn.com/w40/ch.png 2x" alt="" loading="lazy"> Switzerland</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/se.png" srcset="https://flagcdn.com/w40/se.png 2x" alt="" loading="lazy"> Sweden</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/no.png" srcset="https://flagcdn.com/w40/no.png 2x" alt="" loading="lazy"> Norway</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/dk.png" srcset="https://flagcdn.com/w40/dk.png 2x" alt="" loading="lazy"> Denmark</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/ie.png" srcset="https://flagcdn.com/w40/ie.png 2x" alt="" loading="lazy"> Ireland</span>
-      </div>
-    </div>
-
-    <div class="mc-continent">
-      <h3>North America</h3>
-      <div class="mc-country-list">
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/us.png" srcset="https://flagcdn.com/w40/us.png 2x" alt="" loading="lazy"> United States</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/ca.png" srcset="https://flagcdn.com/w40/ca.png 2x" alt="" loading="lazy"> Canada</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/mx.png" srcset="https://flagcdn.com/w40/mx.png 2x" alt="" loading="lazy"> Mexico</span>
-      </div>
-    </div>
-
-    <div class="mc-continent">
-      <h3>South America</h3>
-      <div class="mc-country-list">
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/br.png" srcset="https://flagcdn.com/w40/br.png 2x" alt="" loading="lazy"> Brazil</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/ar.png" srcset="https://flagcdn.com/w40/ar.png 2x" alt="" loading="lazy"> Argentina</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/cl.png" srcset="https://flagcdn.com/w40/cl.png 2x" alt="" loading="lazy"> Chile</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/co.png" srcset="https://flagcdn.com/w40/co.png 2x" alt="" loading="lazy"> Colombia</span>
-      </div>
-    </div>
-
-    <div class="mc-continent">
-      <h3>Oceania</h3>
-      <div class="mc-country-list">
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/au.png" srcset="https://flagcdn.com/w40/au.png 2x" alt="" loading="lazy"> Australia</span>
-        <span class="mc-country-pill"><img class="mc-flag" src="https://flagcdn.com/w20/nz.png" srcset="https://flagcdn.com/w40/nz.png 2x" alt="" loading="lazy"> New Zealand</span>
-      </div>
+      <ul class="mc-country-select__list" id="mcCountryListbox" role="listbox"></ul>
+      <p class="mc-country-select__empty" id="mcCountryEmpty" hidden>No matching country — reach out below, we're expanding every day.</p>
     </div>
 
     <p class="mc-countries__note">Expanding worldwide — don't see your country? <a href="#contact" style="color: var(--mc-brand); font-weight: 600;">Reach out</a>, we're growing every day.</p>
@@ -874,6 +904,149 @@
     document.querySelectorAll(".navbar-links a").forEach(link => {
       link.addEventListener("click", () => document.getElementById("navbar-links").classList.remove("active"));
     });
+
+    // Countries We Serve: searchable "Select your country/region" combobox
+    (function () {
+      const COUNTRY_GROUPS = [
+        { continent: "Africa", countries: [
+          ["Kenya", "ke"], ["Uganda", "ug"], ["Tanzania", "tz"], ["Rwanda", "rw"], ["Burundi", "bi"],
+          ["South Sudan", "ss"], ["Ethiopia", "et"], ["Somalia", "so"], ["Nigeria", "ng"], ["Ghana", "gh"],
+          ["South Africa", "za"], ["Zambia", "zm"], ["Zimbabwe", "zw"], ["Botswana", "bw"], ["Namibia", "na"],
+          ["Malawi", "mw"], ["Mozambique", "mz"], ["Egypt", "eg"]
+        ]},
+        { continent: "Asia", countries: [
+          ["United Arab Emirates", "ae"], ["Saudi Arabia", "sa"], ["Qatar", "qa"], ["Kuwait", "kw"], ["Oman", "om"],
+          ["Bahrain", "bh"], ["India", "in"], ["Pakistan", "pk"], ["Bangladesh", "bd"], ["China", "cn"],
+          ["Japan", "jp"], ["South Korea", "kr"], ["Singapore", "sg"], ["Malaysia", "my"], ["Thailand", "th"],
+          ["Indonesia", "id"], ["Philippines", "ph"], ["Vietnam", "vn"]
+        ]},
+        { continent: "Europe", countries: [
+          ["United Kingdom", "gb"], ["France", "fr"], ["Germany", "de"], ["Italy", "it"], ["Spain", "es"],
+          ["Netherlands", "nl"], ["Belgium", "be"], ["Switzerland", "ch"], ["Sweden", "se"], ["Norway", "no"],
+          ["Denmark", "dk"], ["Ireland", "ie"]
+        ]},
+        { continent: "North America", countries: [
+          ["United States", "us"], ["Canada", "ca"], ["Mexico", "mx"]
+        ]},
+        { continent: "South America", countries: [
+          ["Brazil", "br"], ["Argentina", "ar"], ["Chile", "cl"], ["Colombia", "co"]
+        ]},
+        { continent: "Oceania", countries: [
+          ["Australia", "au"], ["New Zealand", "nz"]
+        ]}
+      ];
+
+      const wrap = document.getElementById("mcCountrySelect");
+      const control = document.getElementById("mcCountryControl");
+      const input = document.getElementById("mcCountrySearch");
+      const list = document.getElementById("mcCountryListbox");
+      const emptyEl = document.getElementById("mcCountryEmpty");
+      if (!wrap || !control || !input || !list || !emptyEl) return;
+
+      let activeIndex = -1;
+
+      function getOptions() {
+        return Array.from(list.querySelectorAll(".mc-country-select__option"));
+      }
+
+      function renderList(filter) {
+        const q = filter.trim().toLowerCase();
+        list.innerHTML = "";
+        let optionIndex = 0;
+
+        COUNTRY_GROUPS.forEach(group => {
+          const matches = group.countries.filter(([name]) => name.toLowerCase().includes(q));
+          if (!matches.length) return;
+
+          const groupLabel = document.createElement("li");
+          groupLabel.className = "mc-country-select__group-label";
+          groupLabel.setAttribute("role", "presentation");
+          groupLabel.textContent = group.continent;
+          list.appendChild(groupLabel);
+
+          matches.forEach(([name, code]) => {
+            const li = document.createElement("li");
+            li.className = "mc-country-select__option";
+            li.id = `mcCountryOpt-${optionIndex++}`;
+            li.setAttribute("role", "option");
+            li.innerHTML = `<img class="mc-flag" src="https://flagcdn.com/w20/${code}.png" srcset="https://flagcdn.com/w40/${code}.png 2x" alt="" loading="lazy"><span>${name}</span>`;
+            li.addEventListener("click", () => selectCountry(name));
+            list.appendChild(li);
+          });
+        });
+
+        emptyEl.hidden = optionIndex > 0;
+        activeIndex = -1;
+        input.removeAttribute("aria-activedescendant");
+      }
+
+      function updateActiveOption() {
+        const options = getOptions();
+        options.forEach((opt, i) => opt.classList.toggle("is-active", i === activeIndex));
+        if (activeIndex >= 0 && options[activeIndex]) {
+          options[activeIndex].scrollIntoView({ block: "nearest" });
+          input.setAttribute("aria-activedescendant", options[activeIndex].id);
+        } else {
+          input.removeAttribute("aria-activedescendant");
+        }
+      }
+
+      function openList() {
+        wrap.classList.add("is-open");
+        input.setAttribute("aria-expanded", "true");
+      }
+
+      function closeList() {
+        wrap.classList.remove("is-open");
+        input.setAttribute("aria-expanded", "false");
+        activeIndex = -1;
+        input.removeAttribute("aria-activedescendant");
+      }
+
+      function selectCountry(name) {
+        input.value = name;
+        closeList();
+      }
+
+      control.addEventListener("click", () => input.focus());
+
+      input.addEventListener("focus", () => {
+        renderList(input.value);
+        openList();
+      });
+
+      input.addEventListener("input", () => {
+        renderList(input.value);
+        openList();
+      });
+
+      input.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowDown") {
+          e.preventDefault();
+          if (!wrap.classList.contains("is-open")) { renderList(input.value); openList(); }
+          const options = getOptions();
+          activeIndex = Math.min(activeIndex + 1, options.length - 1);
+          updateActiveOption();
+        } else if (e.key === "ArrowUp") {
+          e.preventDefault();
+          activeIndex = Math.max(activeIndex - 1, 0);
+          updateActiveOption();
+        } else if (e.key === "Enter") {
+          const options = getOptions();
+          if (activeIndex >= 0 && options[activeIndex]) {
+            e.preventDefault();
+            selectCountry(options[activeIndex].querySelector("span").textContent);
+          }
+        } else if (e.key === "Escape") {
+          closeList();
+          input.blur();
+        }
+      });
+
+      document.addEventListener("click", (e) => {
+        if (!wrap.contains(e.target)) closeList();
+      });
+    })();
 
     // Gallery slider: continuous auto-scroll (left) with manual left/right
     // arrows layered on top of the same native scroll position.

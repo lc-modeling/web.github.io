@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Models Management Header · Admin</title>
+  <link rel="icon" type="image/png" href="../logo.png">
+  <link rel="stylesheet" href="../admin.css" />
+  <style>
+    body { padding: 26px 30px 60px; }
+    .header-bar { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 24px; }
+    .header-bar__left { display: flex; flex-direction: column; gap: 6px; }
+    .back-link { display: inline-flex; align-items: center; gap: 6px; color: var(--brand); text-decoration: none; font-weight: 600; font-size: 13.5px; }
+    .back-link svg { width: 16px; height: 16px; }
+    .back-link:hover { text-decoration: underline; }
+    .header-bar h1 { font-size: 24px; color: var(--ink); font-weight: 700; }
+    .header-bar p { color: var(--ink-soft); font-size: 13.5px; margin-top: 4px; max-width: 520px; }
+
+    .editor-grid {
+      display: grid;
+      grid-template-columns: minmax(280px, 420px) 1fr;
+      gap: 22px;
+      align-items: start;
+    }
+    @media (max-width: 760px) {
+      .editor-grid { grid-template-columns: 1fr; }
+    }
+
+    .preview-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      padding: 18px;
+    }
+    .preview-card h3 { margin: 0 0 12px; font-size: 15px; color: var(--ink); }
+    .preview-frame {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #f0f2f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .preview-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .preview-frame .empty { color: var(--muted); font-size: 13px; text-align: center; padding: 20px; }
+
+    .input, .textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 11px 13px;
+      font-family: inherit;
+      font-size: 14px;
+      background: var(--surface);
+      color: var(--ink);
+    }
+    .input:focus { outline: none; border-color: var(--brand); box-shadow: 0 0 0 3px rgba(31,143,78,.15); }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: none; border-radius: 10px; padding: 11px 20px;
+      font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;
+      transition: background .15s, opacity .15s;
+    }
+    .btn--primary { background: var(--brand); color: #fff; box-shadow: var(--shadow-sm); }
+    .btn--primary:hover { background: var(--brand-dark); }
+    .btn:disabled { opacity: .6; cursor: not-allowed; }
+    .btn svg { width: 17px; height: 17px; }
+
+    .toast-wrap { position: fixed; bottom: 22px; right: 22px; z-index: 80; display: flex; flex-direction: column; gap: 10px; }
+  </style>
+</head>
+<body>
+
+  <div class="header-bar">
+    <div class="header-bar__left">
+      <a class="back-link" href="../admin.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Dashboard
+      </a>
+      <h1>Models Management Header</h1>
+      <p>This is the banner photo shown under "L&amp;C Models Management Kenya" on the homepage, just above the "view more" button. Upload a new photo below to replace it — the change goes live on the homepage as soon as you save.</p>
+    </div>
+  </div>
+
+  <div class="editor-grid">
+    <div class="preview-card">
+      <h3>Current photo</h3>
+      <div class="preview-frame" id="previewFrame">
+        <span class="empty">No custom photo saved yet — the homepage is showing its default image.</span>
+      </div>
+    </div>
+
+    <div class="preview-card">
+      <h3>Replace photo</h3>
+      <form id="headerForm">
+        <div style="margin-bottom:14px;">
+          <label style="display:block;font-size:13px;font-weight:600;margin-bottom:7px;color:var(--ink);">New photo</label>
+          <input class="input" type="file" id="imageFile" accept="image/*" />
+        </div>
+        <button class="btn btn--primary" type="submit" id="saveBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg>
+          Save photo
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast-wrap" id="toasts"></div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+    import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAxauEEtqkuJOWA9HRe1jpT_wCXH62nksM",
+      authDomain: "schoolcms-77713.firebaseapp.com",
+      projectId: "schoolcms-77713",
+      storageBucket: "schoolcms-77713.appspot.com",
+      messagingSenderId: "757700374571",
+      appId: "1:757700374571:web:a86b334d619cf160fa7a6e"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const docRef = doc(db, "models_management_header", "banner");
+
+    // Cloudinary configuration (same account/preset used across the admin panel)
+    const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/dwlasndqv/upload";
+    const CLOUDINARY_UPLOAD_PRESET = "quranpilot";
+
+    const $ = (id) => document.getElementById(id);
+    const previewFrame = $("previewFrame");
+    const imageFileInput = $("imageFile");
+    const saveBtn = $("saveBtn");
+
+    let currentImageUrl = "";
+
+    function showPreview(url) {
+      previewFrame.innerHTML = url
+        ? `<img src="${url}" alt="Models management header preview">`
+        : `<span class="empty">No custom photo saved yet — the homepage is showing its default image.</span>`;
+    }
+
+    function toast(msg, type = "success") {
+      const el = document.createElement("div");
+      el.className = "toast toast--" + type;
+      const icon = type === "error"
+        ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>'
+        : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>';
+      el.innerHTML = icon + "<span>" + msg + "</span>";
+      $("toasts").appendChild(el);
+      setTimeout(() => { el.style.opacity = "0"; el.style.transition = "opacity .3s"; setTimeout(() => el.remove(), 300); }, 3200);
+    }
+
+    async function loadCurrentImage() {
+      try {
+        const snap = await getDoc(docRef);
+        if (snap.exists() && snap.data().image) {
+          currentImageUrl = snap.data().image;
+          showPreview(currentImageUrl);
+        }
+      } catch (error) {
+        console.error("Error loading current header image:", error);
+      }
+    }
+
+    // Live preview of the file the admin just picked, before saving
+    imageFileInput.addEventListener("change", () => {
+      const file = imageFileInput.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => showPreview(e.target.result);
+      reader.readAsDataURL(file);
+    });
+
+    async function uploadToCloudinary(file) {
+      const formData = new FormData();
+      formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+      formData.append("file", file);
+      const response = await fetch(CLOUDINARY_URL, { method: "POST", body: formData });
+      const data = await response.json();
+      if (response.ok) return data.secure_url;
+      throw new Error(data.error?.message || "Upload failed");
+    }
+
+    $("headerForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const file = imageFileInput.files[0];
+      if (!file) {
+        toast("Choose a photo to upload first", "error");
+        return;
+      }
+      saveBtn.disabled = true;
+      saveBtn.textContent = "Saving…";
+      try {
+        const url = await uploadToCloudinary(file);
+        await setDoc(docRef, { image: url, updated_at: new Date().toISOString() }, { merge: true });
+        currentImageUrl = url;
+        showPreview(url);
+        imageFileInput.value = "";
+        toast("Homepage photo updated");
+      } catch (error) {
+        console.error("Error saving header image:", error);
+        toast("Could not save photo. Please try again.", "error");
+      } finally {
+        saveBtn.disabled = false;
+        saveBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg> Save photo';
+      }
+    });
+
+    loadCurrentImage();
+  </script>
+</body>
+</html>
