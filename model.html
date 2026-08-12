@@ -5,6 +5,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <script src="imgfallback.js"></script>
+  <link rel="stylesheet" href="nav-component.css">
+  <link rel="stylesheet" href="skeleton.css">
+  <script src="nav-component.js" defer></script>
 
   <!-- Primary Meta Tags -->
   <title>L&C Models Management Kenya | Join 5000+ Aspiring Models</title>
@@ -390,95 +393,13 @@
       transition: color 0.3s;
     }
     .share-option:hover { color: #0056b3; }
-    /* Navbar Styling */
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 50px;
-      background-color: #1c1c1c;
-      color: #fff;
-      position: fixed;
-      width: 100%;
-      top: 0;
-      left: 0;
-      z-index: 1000;
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    }
-    .brand-title { font-size: 1.5rem; font-weight: 600; }
-    .navbar-links ul { list-style: none; display: flex; gap: 25px; }
-    .navbar-links ul li { display: inline; }
-    .navbar-links ul li a {
-      text-decoration: none;
-      color: #fff;
-      font-size: 1rem;
-      font-weight: 400;
-      transition: 0.3s ease-in-out;
-      padding: 8px 12px;
-      border-radius: 5px;
-    }
-    .navbar-links ul li a:hover {
-      background-color: #ff6b6b;
-      color: #fff;
-    }
-    .toggle-button {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-    }
-    .bar {
-      background-color: #fff;
-      height: 3px;
-      width: 25px;
-      margin: 4px 0;
-      transition: 0.3s ease-in-out;
-    }
-    @media (max-width: 768px) {
-      .toggle-button { display: flex; }
-      .navbar-links {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        background-color: #222020;
-        position: absolute;
-        top: 60px;
-        left: 0;
-        text-align: center;
-        padding: 20px 0;
-      }
-      .navbar-links ul { flex-direction: column; width: 100%; }
-      .navbar-links ul li { padding: 15px 0; }
-      .navbar-links.active { display: flex; }
-    }
+    /* Navbar styling now lives in nav-component.css (shared <site-nav> component). */
   </style>
 </head>
 <body>
   <!-- Navbar -->
-  <header>
-    <nav class="navbar">
-      <div class="brand-title">L&C MODELS MANAGEMENT</div>
-      <a href="javascript:void(0);" class="toggle-button" id="toggle-button">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </a>
-      <div class="navbar-links" id="navbar-links">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="modelconnect.html">L&amp;C Model Connect</a></li>
-        </ul>
-      </div>
-    </nav>
-  </header>
-  <br>
-  <script>
-    // Toggle menu functionality
-    document.getElementById("toggle-button").addEventListener("click", function () {
-      document.getElementById("navbar-links").classList.toggle("active");
-    });
-  </script>
-  
+  <site-nav></site-nav>
+
   <!-- L&C Container -->
   <div class="lc-container">
     <div class="lc-image-wrapper">
@@ -791,9 +712,25 @@
       return temp.innerHTML;
     }
 
+    function renderModelSkeletons() {
+      const allModels = document.getElementById('all-models');
+      allModels.innerHTML = '';
+      for (let i = 0; i < 3; i++) {
+        const card = document.createElement('div');
+        card.className = 'model-container skel-card';
+        card.innerHTML = `
+          <div class="skel-line skel-shimmer" style="height:28px;width:40%;margin-bottom:16px;"></div>
+          <div class="skel-shimmer" style="width:100%;height:260px;border-radius:12px;margin-bottom:16px;"></div>
+          <div class="skel-line skel-shimmer" style="width:90%;"></div>
+          <div class="skel-line skel-shimmer" style="width:75%;"></div>
+        `;
+        allModels.appendChild(card);
+      }
+    }
+
     async function displayModels() {
       const allModels = document.getElementById('all-models');
-      allModels.innerHTML = '<p>Loading models...</p>';
+      renderModelSkeletons();
       try {
         const modelsRef = collection(firestore, "lc_models_management");
         const modelsQuery = query(modelsRef, orderBy("publish_date", "desc"));

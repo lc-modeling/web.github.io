@@ -27,11 +27,28 @@ function isVideo(url) {
 //   header_image_stories -> Profile photo
 //   text_description     -> Location / specialization / experience / fee (free text)
 //   content_images       -> Portfolio photos
+function renderInstructorSkeletons(container, count) {
+  container.innerHTML = "";
+  for (let i = 0; i < count; i++) {
+    const card = document.createElement("div");
+    card.className = "instructor-card skel-card";
+    card.innerHTML = `
+      <div class="skel-shimmer" style="width:100%;height:240px;"></div>
+      <div class="instructor-card__body">
+        <div class="skel-line skel-shimmer" style="height:18px;width:60%;"></div>
+        <div class="skel-line skel-shimmer" style="width:90%;"></div>
+        <div class="skel-line skel-shimmer" style="width:80%;"></div>
+      </div>
+    `;
+    container.appendChild(card);
+  }
+}
+
 async function displayInstructors() {
   const container = document.getElementById("instructor-directory");
   if (!container) return;
 
-  container.innerHTML = `<p class="mc-empty">Loading instructors…</p>`;
+  renderInstructorSkeletons(container, 6);
 
   try {
     const snapshot = await getDocs(collection(firestore, "lc_model_connect_instructors"));

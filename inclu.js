@@ -93,7 +93,17 @@ function restartAutoScroll() {
     resumeTimer = setTimeout(startAutoScroll, RESUME_DELAY);
 }
 
+function renderSkeletonCards(count) {
+    track.innerHTML = '';
+    for (let i = 0; i < count; i++) {
+        const card = document.createElement('div');
+        card.className = 'dv-card skel-card skel-shimmer--dark skel-shimmer';
+        track.appendChild(card);
+    }
+}
+
 async function displayDiversityImages() {
+    renderSkeletonCards(6);
     try {
         const diversityRef = collection(firestore, "diversity_and_inclusivity");
         const diversityQuery = query(diversityRef, orderBy("time", "desc"));

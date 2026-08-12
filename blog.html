@@ -58,6 +58,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="blog.css">
+    <link rel="stylesheet" href="nav-component.css">
+    <script src="nav-component.js" defer></script>
     <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-V5PZ8ZZ4TS"></script>
 <script>
@@ -127,23 +129,7 @@ html {
 
 </head>
 <body>
-    <header>
-        <nav class="navbar">
-          <div class="brand-title">LC Blog</div>
-          <a href="javascript:void(0);" class="toggle-button" id="toggle-button">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-          </a>
-          <div class="navbar-links" id="navbar-links">
-            <ul>
-              <li><a href="index.html">Home</a></li>
-              <li><a href="#blog-container">Blog</a></li>
-              <li><a href="modelconnect.html">L&amp;C Model Connect</a></li>
-            </ul>
-          </div>
-        </nav>
-      </header>
+    <site-nav></site-nav>
       <section class="blog-hero" id="blog">
         <div class="blog-hero__inner">
           <span class="blog-hero__eyebrow">L&amp;C Modeling Blog</span>
@@ -226,22 +212,7 @@ html {
         <p>&copy; L&C Modeling. All rights reserved.</p>
     </footer>
     <script type="module" src="script.js"></script>
-    <script>
-  document.getElementById("toggle-button").addEventListener("click", function() {
-  const navbarLinks = document.getElementById("navbar-links");
-  navbarLinks.classList.toggle("active");
-});
-
-// Close the menu when a navigation link is clicked
-const navLinks = document.querySelectorAll(".navbar-links a");
-navLinks.forEach(link => {
-  link.addEventListener("click", function() {
-    const navbarLinks = document.getElementById("navbar-links");
-    navbarLinks.classList.remove("active");
-  });
-});
-
-    </script>
+    <!-- Header/hamburger behavior now lives in the shared <site-nav> component (nav-component.js). -->
     <script type="module" src="blog.js"></script>
 
 
