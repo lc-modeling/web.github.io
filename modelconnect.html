@@ -537,6 +537,70 @@
     @media (max-width: 480px) {
       .mc-hero { min-height: 68vh; }
     }
+
+    /* Group Training */
+    .mc-group { background: linear-gradient(160deg, #1c1420 0%, #2a1030 55%, #1c1420 100%); color: #fff; padding: 70px 20px 80px; }
+    .mc-group__inner { max-width: 900px; margin: 0 auto; text-align: center; }
+    .mc-group__eyebrow {
+      display: inline-block; text-transform: uppercase; letter-spacing: .14em; font-weight: 800;
+      font-size: .8rem; color: #ff9fd6; margin: 0 0 14px;
+      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18);
+      padding: 7px 16px; border-radius: 30px;
+    }
+    .mc-group h2 { font-size: clamp(1.8rem, 4vw, 2.4rem); margin: 0 0 10px; }
+    .mc-group__lede { font-size: 1.1rem; color: rgba(255,255,255,.75); margin: 0 0 30px; }
+    .mc-group__text { max-width: 720px; margin: 0 auto 16px; color: rgba(255,255,255,.85); line-height: 1.7; font-size: .98rem; text-align: left; }
+    .mc-group__text:last-of-type { margin-bottom: 0; }
+
+    .mc-group__subhead { margin: 50px 0 28px; font-size: 1.4rem; }
+    .mc-group__steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 22px; text-align: left; }
+    .mc-group__step {
+      background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
+      border-radius: 16px; padding: 24px 20px; transition: transform .15s, background .2s;
+    }
+    .mc-group__step:hover { transform: translateY(-3px); background: rgba(255,255,255,.08); }
+    .mc-group__step-num {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--mc-brand), var(--mc-brand-2));
+      color: #fff; display: flex; align-items: center; justify-content: center;
+      font-weight: 700; margin-bottom: 14px;
+    }
+    .mc-group__step h4 { margin: 0 0 8px; font-size: 1rem; }
+    .mc-group__step p { margin: 0; color: rgba(255,255,255,.65); font-size: .88rem; line-height: 1.55; }
+
+    .mc-group__banner {
+      margin: 56px 0; padding: 32px 24px; border-radius: 20px;
+      background: linear-gradient(135deg, var(--mc-brand), var(--mc-brand-2));
+    }
+    .mc-group__banner h3 { margin: 0 0 8px; font-size: 1.3rem; }
+    .mc-group__banner p { margin: 0; opacity: .92; font-size: .95rem; }
+
+    .mc-group__closer h3 { font-size: 1.3rem; margin: 0 0 14px; }
+    .mc-group__closer p { max-width: 680px; margin: 0 auto 24px; color: rgba(255,255,255,.8); line-height: 1.65; }
+    .mc-group__points { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
+    .mc-group__points span {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.16);
+      padding: 10px 18px; border-radius: 30px; font-size: .88rem; font-weight: 600;
+    }
+    .mc-group__points i { color: #ff9fd6; }
+
+    .mc-group__cta { margin-top: 56px; }
+    .mc-group__cta h3 { font-size: 1.5rem; margin: 0 0 8px; }
+    .mc-group__cta p { color: rgba(255,255,255,.75); margin: 0 0 24px; }
+    .mc-group__btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: linear-gradient(135deg, var(--mc-brand), var(--mc-brand-2));
+      color: #fff; text-decoration: none; font-weight: 700; font-size: 1.02rem;
+      padding: 16px 32px; border-radius: 40px; box-shadow: 0 12px 30px rgba(138,31,102,.4);
+      transition: transform .15s, box-shadow .2s;
+    }
+    .mc-group__btn:hover { transform: translateY(-2px); box-shadow: 0 16px 36px rgba(138,31,102,.55); }
+
+    @media (max-width: 600px) {
+      .mc-group { padding: 56px 16px 64px; }
+      .mc-group__text { text-align: left; }
+    }
   </style>
 </head>
 <body class="mc">
@@ -722,6 +786,65 @@
         <i class="fa-solid fa-laptop"></i>
         <h3>Online Coaching</h3>
         <p>Live virtual sessions for students anywhere in Kenya or around the world.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- GROUP TRAINING -->
+  <section class="mc-group" id="group-training">
+    <div class="mc-group__inner">
+      <span class="mc-group__eyebrow">Group Training</span>
+      <h2>Learn Together as a Group</h2>
+      <p class="mc-group__lede">At L&amp;C Models Connect — why learn alone when you can grow together?</p>
+
+      <p class="mc-group__text">L&amp;C Models Connect makes professional modeling training more accessible by bringing aspiring models from the same neighbourhood or nearby locations together for group training.</p>
+      <p class="mc-group__text">Simply contact L&amp;C Models Connect and let us know your location, preferred training area and the modeling skills you want to learn. We will handle the planning for you.</p>
+      <p class="mc-group__text">We connect you with other aspiring models in your area, match your group with a suitable professional instructor, and coordinate the schedule, training location and classes on your behalf.</p>
+
+      <h3 class="mc-group__subhead">How It Works</h3>
+      <div class="mc-group__steps">
+        <div class="mc-group__step">
+          <div class="mc-group__step-num">1</div>
+          <h4>Tell Us What You Need</h4>
+          <p>Share your location, preferred training and availability with L&amp;C Models Connect.</p>
+        </div>
+        <div class="mc-group__step">
+          <div class="mc-group__step-num">2</div>
+          <h4>We Build Your Group</h4>
+          <p>We connect you with up to 6 aspiring models from the same or nearby area with similar training interests.</p>
+        </div>
+        <div class="mc-group__step">
+          <div class="mc-group__step-num">3</div>
+          <h4>We Match Your Instructor</h4>
+          <p>Our team selects a suitable instructor based on your location, training needs, experience and availability.</p>
+        </div>
+        <div class="mc-group__step">
+          <div class="mc-group__step-num">4</div>
+          <h4>We Arrange Everything</h4>
+          <p>From scheduling to the training location, L&amp;C Models Connect coordinates the details so you can focus on learning.</p>
+        </div>
+      </div>
+
+      <div class="mc-group__banner">
+        <h3>Learn. Practise. Grow Together.</h3>
+        <p>Train as a group, build confidence, develop your modeling skills and support each other throughout your journey.</p>
+      </div>
+
+      <div class="mc-group__closer">
+        <h3>Professional Training, Closer to You.</h3>
+        <p>Whether you are interested in runway, posing, pageantry, commercial modeling, grooming, confidence building or personal branding, you can learn alongside other aspiring models near you.</p>
+        <div class="mc-group__points">
+          <span><i class="fa-solid fa-location-dot"></i> You tell us where you are.</span>
+          <span><i class="fa-solid fa-people-group"></i> We bring the right people and instructor together.</span>
+        </div>
+      </div>
+
+      <div class="mc-group__cta">
+        <h3>Ready to Learn Together?</h3>
+        <p>Contact L&amp;C Models Connect and request group training today.</p>
+        <a class="mc-group__btn" href="https://wa.me/254702066492?text=Hi%2C%20I%27d%20like%20to%20request%20group%20training%20with%20L%26C%20Models%20Connect." target="_blank" rel="noopener">
+          <i class="fa-solid fa-people-group"></i> Request Group Training
+        </a>
       </div>
     </div>
   </section>
