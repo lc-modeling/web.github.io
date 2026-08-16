@@ -69,6 +69,15 @@
   font-style: normal;
 }
 
+        /* Belt-and-suspenders: body already has overflow-x:hidden from
+           base.css, but html (the actual scrolling element in most
+           browsers) doesn't, so anything that slips past body's clipping
+           can still open a page-level horizontal scrollbar. */
+        html {
+            overflow-x: hidden;
+            max-width: 100%;
+        }
+
         /* General Styles */
         body {
             font-family: "Outfit", sans-serif;
@@ -479,6 +488,8 @@
     .gs-scope .gs-field input,
     .gs-scope .gs-field select,
     .gs-scope .gs-field textarea {
+        width: 100%;
+        min-width: 0;
         font-family: "Outfit", sans-serif;
         font-size: 15px;
         font-weight: 400;
@@ -660,6 +671,21 @@
     .gs-scope #before-you-apply,
     .gs-scope #apply-form {
         scroll-margin-top: 84px;
+    }
+
+    /* CSS Grid tracks default to minmax(auto, 1fr): a track won't shrink
+       below its item's min-content width. Form controls, images and long
+       words have real min-content widths, so without this reset a narrow
+       viewport forces the grid (and the whole page) wider than the screen
+       instead of the item shrinking - the actual cause of the sideways
+       scroll on phones. min-width:0 on every grid item removes that floor. */
+    .gs-scope .gs-grid > *,
+    .gs-scope .gs-height-grid > *,
+    .gs-scope .gs-checklist > *,
+    .gs-scope .gs-photo-strip > *,
+    .gs-scope .gs-upload-grid > *,
+    .gs-scope .gs-feature-grid > * {
+        min-width: 0;
     }
 
     /* ---------- feature cards (Why Choose Us) ---------- */
