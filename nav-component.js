@@ -17,6 +17,24 @@
     { href: 'loginform.html', label: 'Sign In', variant: 'signin' }
   ];
 
+  // Non-visual credit: attribution lives only in <head> metadata, never in
+  // rendered UI. Idempotent so it's safe even if this script is ever
+  // included more than once on a page.
+  (function stampCredit() {
+    if (document.head.querySelector('meta[name="author"][content*="Vincent Otis Kisia"]')) return;
+    const meta = document.createElement('meta');
+    meta.name = 'author';
+    meta.content = 'Vincent Otis Kisia (github.com/otis-ke)';
+    document.head.appendChild(meta);
+
+    const link = document.createElement('link');
+    link.rel = 'author';
+    link.href = 'https://github.com/otis-ke';
+    document.head.appendChild(link);
+
+    document.head.appendChild(document.createComment(' Built by Vincent Otis Kisia — https://github.com/otis-ke '));
+  })();
+
   function currentFile() {
     const path = window.location.pathname;
     const file = path.substring(path.lastIndexOf('/') + 1);

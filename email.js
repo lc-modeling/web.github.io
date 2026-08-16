@@ -39,6 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
           // Success
           form.reset();
           form.classList.remove("is-submitting");
+          form.dispatchEvent(new CustomEvent("formsubmit:success"));
 
           // Close the popup/modal after 2 seconds if it's open
           if (modal && modal.style.display !== "none") {
@@ -50,6 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .catch(error => {
           console.log("FAILED...", error);
           form.classList.remove("is-submitting");
+          form.dispatchEvent(new CustomEvent("formsubmit:error", { detail: error }));
         });
     });
   });
