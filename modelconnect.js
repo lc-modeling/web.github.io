@@ -107,11 +107,17 @@ function renderLightboxMedia() {
 
 initLightbox();
 
-// Instagram-style verified badge markup, shared by the card and the
-// profile popup. Every instructor here has already been through the admin
-// approval editor (see the collection comment below), so this is accurate
-// on every card, not decorative.
-const VERIFIED_BADGE_HTML = `<span class="mc-verified-badge" title="Verified instructor"><i class="fa-solid fa-check"></i></span>`;
+// Instagram/Twitter-style verified badge markup, shared by the card and
+// the profile popup. The 12-lobe scalloped seal is generated (not hand-
+// typed) from a small script that places outer bump / inner valley points
+// around a circle and connects them with quadratic curves - guaranteed
+// valid, symmetric geometry - then rendered and visually checked against
+// the reference badge before use. The checkmark is a separate rounded
+// white stroke on top (not a cutout), so it stays white on any background.
+// Every instructor here has already been through the admin approval
+// editor (see the collection comment below), so the badge is accurate on
+// every card, not decorative.
+const VERIFIED_BADGE_HTML = `<span class="mc-verified-badge" title="Verified instructor"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M 12.00 1.80 Q 13.47 0.80 14.12 4.08 Q 16.32 1.56 17.10 3.17 Q 18.88 3.04 17.80 6.20 Q 20.96 5.12 20.83 6.90 Q 22.44 7.68 19.92 9.88 Q 23.20 10.53 22.20 12.00 Q 23.20 13.47 19.92 14.12 Q 22.44 16.32 20.83 17.10 Q 20.96 18.88 17.80 17.80 Q 18.88 20.96 17.10 20.83 Q 16.32 22.44 14.12 19.92 Q 13.47 23.20 12.00 22.20 Q 10.53 23.20 9.88 19.92 Q 7.68 22.44 6.90 20.83 Q 5.12 20.96 6.20 17.80 Q 3.04 18.88 3.17 17.10 Q 1.56 16.32 4.08 14.12 Q 0.80 13.47 1.80 12.00 Q 0.80 10.53 4.08 9.88 Q 1.56 7.68 3.17 6.90 Q 3.04 5.12 6.20 6.20 Q 5.12 3.04 6.90 3.17 Q 7.68 1.56 9.88 4.08 Q 10.53 0.80 12.00 1.80 Z" fill="#4fade7"/><path d="M7.5 12.5 L10.3 15.3 L16.5 8.7" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg></span>`;
 
 /* ============ Instructor full-profile popup ============
    The card only shows a 3-line bio preview and a few thumbnails so it

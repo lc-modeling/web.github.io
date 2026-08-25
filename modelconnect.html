@@ -476,14 +476,16 @@
     .instructor-card__body { padding: 18px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
     .instructor-card__name-row { display: flex; align-items: center; gap: 6px; margin: 0; }
     .instructor-card__name { margin: 0; font-size: 1.2rem; }
-    /* Instagram-style verified badge: every card shown here is, by
-       definition, an admin-approved instructor (see the comment above
-       displayInstructors in modelconnect.js), so the badge is accurate on
-       every card, not decorative. */
+    /* Instagram-style verified badge: a scalloped seal (not just a plain
+       dot) with a bold rounded checkmark on top, like the real thing.
+       Every card shown here is, by definition, an admin-approved
+       instructor (see the comment above displayInstructors in
+       modelconnect.js), so the badge is accurate on every card, not
+       decorative. */
     .mc-verified-badge {
-      flex: 0 0 auto; width: 17px; height: 17px; display: inline-flex; align-items: center; justify-content: center;
-      border-radius: 50%; background: var(--mc-brand-2); color: #fff; font-size: 10px;
+      flex: 0 0 auto; width: 18px; height: 18px; display: inline-flex; align-items: center; justify-content: center;
     }
+    .mc-verified-badge svg { width: 100%; height: 100%; display: block; filter: drop-shadow(0 1px 1.5px rgba(0,0,0,.16)); }
     .instructor-card__details {
       margin: 0; color: var(--mc-soft); font-size: .95rem; white-space: pre-line;
       display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
