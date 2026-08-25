@@ -539,29 +539,50 @@
       display: flex; align-items: center; justify-content: center; transition: background .2s;
     }
     .mc-profile-panel__close:hover { background: rgba(0,0,0,.65); }
-    .mc-profile-panel__photo { width: 100%; height: 280px; object-fit: cover; object-position: top center; display: block; background: #eee; }
-    .mc-profile-panel__body { padding: 22px 24px 26px; }
-    .mc-profile-panel__name { display: flex; align-items: center; gap: 7px; margin: 0 0 12px; font-size: 1.35rem; }
-    .mc-profile-panel__details { margin: 0 0 18px; color: var(--mc-soft); font-size: .96rem; line-height: 1.65; white-space: pre-line; }
-    .mc-profile-panel__gallery-label {
-      display: flex; align-items: center; gap: 6px; font-size: .78rem; font-weight: 700;
-      text-transform: uppercase; letter-spacing: .04em; color: var(--mc-brand); margin: 0 0 10px;
+    /* Every upload has a different aspect ratio (portrait, landscape,
+       square), so the profile slider uses one uniform-size frame for every
+       slide (same look for all of them) and object-fit:contain inside it
+       (the whole photo always visible, nothing cropped off) - the same
+       language the single-photo lightbox already uses, just inline and
+       swipeable like the "Style Showcase" slider elsewhere on this page. */
+    .mc-profile-slider { position: relative; background: #0e0e12; }
+    .mc-profile-slider__track {
+      display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch; scrollbar-width: none; -ms-overflow-style: none;
     }
-    .mc-profile-panel__gallery {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 20px;
+    .mc-profile-slider__track::-webkit-scrollbar { display: none; }
+    .mc-profile-slider__slide {
+      flex: 0 0 100%; scroll-snap-align: center; aspect-ratio: 4 / 5;
+      display: flex; align-items: center; justify-content: center;
+      padding: 0; border: none; background: none; cursor: pointer; position: relative;
     }
-    .mc-profile-panel__gallery button {
-      position: relative; padding: 0; border: none; border-radius: 10px; overflow: hidden; cursor: pointer;
-      aspect-ratio: 1; background: #eee;
+    .mc-profile-slider__slide img, .mc-profile-slider__slide video {
+      max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; display: block;
     }
-    .mc-profile-panel__gallery img, .mc-profile-panel__gallery video { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .mc-profile-panel__gallery .fa-circle-play {
-      position: absolute; inset: 0; margin: auto; color: #fff; font-size: 22px;
+    .mc-profile-slider__slide .fa-circle-play {
+      position: absolute; inset: 0; margin: auto; color: #fff; font-size: 30px; width: 30px; height: 30px;
       text-shadow: 0 1px 4px rgba(0,0,0,.6); display: flex; align-items: center; justify-content: center;
     }
+    .mc-profile-slider__arrow {
+      position: absolute; top: 50%; transform: translateY(-50%); width: 38px; height: 38px; border-radius: 50%;
+      border: none; background: rgba(255,255,255,.92); color: var(--mc-brand); display: flex; align-items: center; justify-content: center;
+      font-size: 15px; cursor: pointer; z-index: 2; box-shadow: 0 6px 16px rgba(0,0,0,.25); transition: background .2s, transform .2s;
+    }
+    .mc-profile-slider__arrow:hover { background: #fff; transform: translateY(-50%) scale(1.08); }
+    .mc-profile-slider__arrow--prev { left: 10px; }
+    .mc-profile-slider__arrow--next { right: 10px; }
+    .mc-profile-slider__arrow[hidden] { display: none; }
+    .mc-profile-slider__count {
+      position: absolute; right: 10px; bottom: 10px; z-index: 2; padding: 4px 10px; border-radius: 999px;
+      background: rgba(0,0,0,.55); color: #fff; font-size: .78rem; font-weight: 600;
+    }
+    .mc-profile-panel__body { padding: 22px 24px 26px; }
+    .mc-profile-panel__name { display: flex; align-items: center; gap: 7px; margin: 0 0 12px; font-size: 1.35rem; }
+    .mc-profile-panel__details { margin: 0 0 20px; color: var(--mc-soft); font-size: .96rem; line-height: 1.65; white-space: pre-line; }
     @media (max-width: 480px) {
       .mc-profile-modal { padding: 0; }
       .mc-profile-panel { max-width: 100%; min-height: 100%; border-radius: 0; margin: 0; }
+      .mc-profile-slider__slide { aspect-ratio: 1 / 1; }
     }
 
     /* Instructor photo lightbox */
@@ -1071,19 +1092,29 @@
   </div>
 
   <!-- Instructor full-profile popup: opened from a card's "Read more" link
-       or its "+N" photo tile. Shows the full bio and every photo; clicking
-       a photo here opens the single-photo lightbox above. -->
+       or its "+N" photo tile. Every one of the instructor's photos (main +
+       portfolio) is one slide in a swipeable slider - same-size frame for
+       every slide, object-fit:contain so each upload shows in full no
+       matter its own aspect ratio. Tapping the current slide opens it
+       full-screen in the lightbox above. -->
   <div class="mc-profile-modal" id="mcProfileModal" role="dialog" aria-modal="true" aria-label="Instructor profile">
     <div class="mc-profile-panel">
       <button type="button" class="mc-profile-panel__close" id="mcProfileClose" aria-label="Close">
         <i class="fa-solid fa-xmark"></i>
       </button>
-      <img class="mc-profile-panel__photo" id="mcProfilePhoto" src="" alt="">
+      <div class="mc-profile-slider" id="mcProfileSlider">
+        <div class="mc-profile-slider__track" id="mcProfileSliderTrack"></div>
+        <button type="button" class="mc-profile-slider__arrow mc-profile-slider__arrow--prev" id="mcProfileSliderPrev" aria-label="Previous photo">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button type="button" class="mc-profile-slider__arrow mc-profile-slider__arrow--next" id="mcProfileSliderNext" aria-label="Next photo">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+        <span class="mc-profile-slider__count" id="mcProfileSliderCount"></span>
+      </div>
       <div class="mc-profile-panel__body">
         <h3 class="mc-profile-panel__name" id="mcProfileName"></h3>
         <p class="mc-profile-panel__details" id="mcProfileDetails"></p>
-        <p class="mc-profile-panel__gallery-label" id="mcProfileGalleryLabel"><i class="fa-solid fa-images"></i> Photos</p>
-        <div class="mc-profile-panel__gallery" id="mcProfileGallery"></div>
         <a class="instructor-card__book" id="mcProfileBook" href="#" target="_blank" rel="noopener">
           <i class="fa-solid fa-calendar-check"></i> Book Now
         </a>

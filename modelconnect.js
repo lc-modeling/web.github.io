@@ -123,26 +123,41 @@ function registerInstructor(idx, data) {
   instructors.set(idx, data);
 }
 
-let profileModal, profilePhoto, profileName, profileDetails, profileGallery, profileBook, profileClose;
+let profileModal, profileName, profileDetails, profileBook, profileClose;
+let profileSliderTrack, profileSliderPrev, profileSliderNext, profileSliderCount;
 
 function initProfileModal() {
   profileModal = document.getElementById("mcProfileModal");
   if (!profileModal) return;
-  profilePhoto = document.getElementById("mcProfilePhoto");
   profileName = document.getElementById("mcProfileName");
   profileDetails = document.getElementById("mcProfileDetails");
-  profileGallery = document.getElementById("mcProfileGallery");
   profileBook = document.getElementById("mcProfileBook");
   profileClose = document.getElementById("mcProfileClose");
+  profileSliderTrack = document.getElementById("mcProfileSliderTrack");
+  profileSliderPrev = document.getElementById("mcProfileSliderPrev");
+  profileSliderNext = document.getElementById("mcProfileSliderNext");
+  profileSliderCount = document.getElementById("mcProfileSliderCount");
 
   profileClose.addEventListener("click", closeProfileModal);
   profileModal.addEventListener("click", (e) => { if (e.target === profileModal) closeProfileModal(); });
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && profileModal.classList.contains("is-open")) closeProfileModal();
+    if (e.key !== "Escape" || !profileModal.classList.contains("is-open")) return;
+    closeProfileModal();
   });
 
-  // The popup's own photo grid opens the single-photo lightbox on top of it.
-  profileGallery.addEventListener("click", (event) => {
+  profileSliderPrev.addEventListener("click", () => stepProfileSlider(-1));
+  profileSliderNext.addEventListener("click", () => stepProfileSlider(1));
+
+  // Swiping updates the counter/arrows too, not just the buttons.
+  let scrollTick = false;
+  profileSliderTrack.addEventListener("scroll", () => {
+    if (scrollTick) return;
+    scrollTick = true;
+    requestAnimationFrame(() => { updateProfileSliderState(); scrollTick = false; });
+  }, { passive: true });
+
+  // Tapping the current slide opens it full-screen in the lightbox.
+  profileSliderTrack.addEventListener("click", (event) => {
     const trigger = event.target.closest("[data-instructor]");
     if (!trigger) return;
     openLightbox(Number(trigger.dataset.instructor), Number(trigger.dataset.photo));
@@ -153,21 +168,22 @@ function openProfileModal(idx) {
   const data = instructors.get(idx);
   if (!data) return;
 
-  profilePhoto.src = data.photo || data.gallery[0] || "";
-  profilePhoto.alt = data.name;
-  profilePhoto.style.display = data.photo ? "" : "none";
   profileName.innerHTML = `${data.name} ${VERIFIED_BADGE_HTML}`;
   profileDetails.textContent = data.details;
   profileBook.href = data.bookUrl;
 
-  profileGallery.innerHTML = data.gallery.map((url, i) => `
-    <button type="button" data-instructor="${idx}" data-photo="${i}" aria-label="View photo ${i + 1}">
+  profileSliderTrack.innerHTML = data.gallery.map((url, i) => `
+    <button type="button" class="mc-profile-slider__slide" data-instructor="${idx}" data-photo="${i}" aria-label="View photo ${i + 1} full-screen">
       ${isVideo(url)
         ? `<video src="${url}" muted playsinline></video><i class="fa-solid fa-circle-play"></i>`
         : `<img src="${url}" alt="${data.name} photo ${i + 1}" loading="lazy">`}
     </button>`).join("");
-
+  // The modal (and therefore the track) has display:none until "is-open"
+  // is added, so clientWidth would still read 0 - and the counter would
+  // show "NaN / N" - if it were computed before this.
   profileModal.classList.add("is-open");
+  profileSliderTrack.scrollLeft = 0;
+  updateProfileSliderState();
   syncBodyScrollLock();
 }
 
@@ -175,6 +191,19 @@ function closeProfileModal() {
   if (!profileModal) return;
   profileModal.classList.remove("is-open");
   syncBodyScrollLock();
+}
+
+function stepProfileSlider(delta) {
+  profileSliderTrack.scrollBy({ left: delta * profileSliderTrack.clientWidth, behavior: "smooth" });
+}
+
+function updateProfileSliderState() {
+  const count = profileSliderTrack.children.length;
+  if (!count) return;
+  const index = Math.min(count - 1, Math.round(profileSliderTrack.scrollLeft / profileSliderTrack.clientWidth));
+  profileSliderCount.textContent = count > 1 ? `${index + 1} / ${count}` : "";
+  profileSliderPrev.hidden = index <= 0;
+  profileSliderNext.hidden = index >= count - 1;
 }
 
 initProfileModal();
