@@ -439,28 +439,105 @@
     .mc-match-card h3 { margin: 0 0 6px; font-size: 1rem; }
     .mc-match-card p { margin: 0; color: var(--mc-soft); font-size: .88rem; line-height: 1.55; }
 
-    /* Instructor directory */
+    /* Instructor directory - photo/card treatment matches the Style
+       Showcase slider above (.mc-slider__slide): generous radius, soft
+       lifted shadow, image zoom on hover. */
     #instructors { background: var(--mc-bg); }
-    .instructor-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; }
+    .instructor-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 28px; }
     .instructor-card {
-      background: #fff; border: 1px solid var(--mc-line); border-radius: 16px; overflow: hidden;
-      display: flex; flex-direction: column; box-shadow: 0 4px 14px rgba(0,0,0,.05);
+      background: #fff; border: 1px solid var(--mc-line); border-radius: 20px; overflow: hidden;
+      display: flex; flex-direction: column; box-shadow: 0 10px 28px rgba(20,17,30,.08);
+      transition: transform .25s ease, box-shadow .25s ease;
     }
-    .instructor-card__photo { width: 100%; height: 240px; object-fit: cover; display: block; background: #eee; }
+    .instructor-card:hover { transform: translateY(-5px); box-shadow: 0 18px 40px rgba(20,17,30,.16); }
+    .instructor-card__photo-frame { position: relative; width: 100%; height: 260px; overflow: hidden; background: #eee; cursor: pointer; }
+    .instructor-card__photo {
+      width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block;
+      transition: transform .5s ease;
+    }
+    .instructor-card:hover .instructor-card__photo { transform: scale(1.07); }
+    .instructor-card__photo-frame::after {
+      content: ""; position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,.35) 100%);
+      opacity: 0; transition: opacity .25s ease;
+    }
+    .instructor-card:hover .instructor-card__photo-frame::after { opacity: 1; }
+    .instructor-card__photo-frame .instructor-card__zoom-hint {
+      position: absolute; right: 12px; bottom: 12px; width: 34px; height: 34px; border-radius: 50%;
+      background: rgba(255,255,255,.92); color: var(--mc-brand); display: flex; align-items: center; justify-content: center;
+      font-size: 14px; opacity: 0; transform: translateY(6px); transition: opacity .25s ease, transform .25s ease;
+    }
+    .instructor-card:hover .instructor-card__zoom-hint { opacity: 1; transform: translateY(0); }
     .instructor-card__photo--placeholder {
-      display: flex; align-items: center; justify-content: center; font-size: 3rem; color: #bbb;
+      width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+      font-size: 3rem; color: #fff; cursor: default;
+      background: linear-gradient(135deg, var(--mc-brand), var(--mc-brand-2));
     }
     .instructor-card__body { padding: 18px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
     .instructor-card__name { margin: 0; font-size: 1.2rem; }
     .instructor-card__details { margin: 0; color: var(--mc-soft); font-size: .95rem; white-space: pre-line; }
-    .instructor-card__portfolio { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; }
-    .instructor-card__thumb { width: 64px; height: 64px; object-fit: cover; border-radius: 8px; flex: 0 0 auto; }
+    .instructor-card__portfolio-label {
+      display: flex; align-items: center; gap: 6px; font-size: .78rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .04em; color: var(--mc-brand); margin: 2px 0 -2px;
+    }
+    .instructor-card__portfolio { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; }
+    .instructor-card__thumb-btn {
+      flex: 0 0 auto; width: 64px; height: 64px; padding: 0; border: none; border-radius: 10px;
+      overflow: hidden; cursor: pointer; position: relative; background: #eee;
+      box-shadow: 0 2px 8px rgba(0,0,0,.12); transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .instructor-card__thumb-btn:hover { transform: translateY(-2px) scale(1.04); box-shadow: 0 6px 16px rgba(0,0,0,.22); }
+    .instructor-card__thumb-btn:focus-visible { outline: 2px solid var(--mc-brand); outline-offset: 2px; }
+    .instructor-card__thumb { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .instructor-card__thumb-btn .fa-circle-play {
+      position: absolute; inset: 0; margin: auto; color: #fff; font-size: 18px;
+      text-shadow: 0 1px 4px rgba(0,0,0,.6); display: flex; align-items: center; justify-content: center;
+    }
     .instructor-card__book {
       margin-top: auto; text-align: center; background: var(--mc-brand); color: #fff; text-decoration: none;
       padding: 12px; border-radius: 10px; font-weight: 600; transition: background .2s;
     }
     .instructor-card__book:hover { background: #6c1750; }
     .mc-empty { text-align: center; color: var(--mc-soft); grid-column: 1 / -1; padding: 30px; }
+
+    /* Instructor photo lightbox */
+    .mc-lightbox {
+      position: fixed; inset: 0; z-index: 4000; display: none;
+      align-items: center; justify-content: center; padding: 60px 16px;
+      background: rgba(10, 9, 14, .88); backdrop-filter: blur(6px);
+    }
+    .mc-lightbox.is-open { display: flex; }
+    .mc-lightbox__stage { position: relative; width: 100%; max-width: 720px; max-height: 82vh; display: flex; flex-direction: column; align-items: center; }
+    .mc-lightbox__media-wrap {
+      width: 100%; max-height: 68vh; border-radius: 16px; overflow: hidden;
+      background: #000; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 24px 60px rgba(0,0,0,.5);
+    }
+    .mc-lightbox__media-wrap img, .mc-lightbox__media-wrap video {
+      max-width: 100%; max-height: 68vh; display: block; object-fit: contain;
+    }
+    .mc-lightbox__caption { color: #fff; text-align: center; margin-top: 14px; font-size: .95rem; opacity: .9; }
+    .mc-lightbox__close {
+      position: absolute; top: -46px; right: 0; width: 40px; height: 40px; border-radius: 50%;
+      border: none; background: rgba(255,255,255,.12); color: #fff; font-size: 17px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; transition: background .2s;
+    }
+    .mc-lightbox__close:hover { background: rgba(255,255,255,.25); }
+    .mc-lightbox__nav {
+      position: absolute; top: 50%; transform: translateY(-50%); width: 46px; height: 46px; border-radius: 50%;
+      border: none; background: rgba(255,255,255,.14); color: #fff; font-size: 18px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; transition: background .2s, transform .2s;
+    }
+    .mc-lightbox__nav:hover { background: rgba(255,255,255,.28); }
+    .mc-lightbox__nav--prev { left: -8px; }
+    .mc-lightbox__nav--next { right: -8px; }
+    .mc-lightbox__nav[hidden] { display: none; }
+    @media (max-width: 640px) {
+      .mc-lightbox { padding: 70px 44px 24px; }
+      .mc-lightbox__nav--prev { left: -34px; width: 38px; height: 38px; }
+      .mc-lightbox__nav--next { right: -34px; width: 38px; height: 38px; }
+      .mc-lightbox__close { top: -50px; }
+    }
 
     /* Payments */
     .mc-pay-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
@@ -909,6 +986,25 @@
       <!-- Instructor cards are injected here from the database -->
     </div>
   </section>
+
+  <!-- Instructor photo lightbox: opened by clicking a card's main photo or
+       one of its "More Information" portfolio thumbnails. One shared
+       instance, repopulated per instructor by modelconnect.js. -->
+  <div class="mc-lightbox" id="mcLightbox" role="dialog" aria-modal="true" aria-label="Instructor photo viewer">
+    <div class="mc-lightbox__stage">
+      <button type="button" class="mc-lightbox__close" id="mcLightboxClose" aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <button type="button" class="mc-lightbox__nav mc-lightbox__nav--prev" id="mcLightboxPrev" aria-label="Previous photo">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <div class="mc-lightbox__media-wrap" id="mcLightboxMedia"></div>
+      <button type="button" class="mc-lightbox__nav mc-lightbox__nav--next" id="mcLightboxNext" aria-label="Next photo">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+      <p class="mc-lightbox__caption" id="mcLightboxCaption"></p>
+    </div>
+  </div>
 
   <!-- HOW PAYMENTS WORK -->
   <section class="mc-section" id="payments">
