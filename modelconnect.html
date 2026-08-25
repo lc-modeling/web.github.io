@@ -474,8 +474,25 @@
       background: linear-gradient(135deg, var(--mc-brand), var(--mc-brand-2));
     }
     .instructor-card__body { padding: 18px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+    .instructor-card__name-row { display: flex; align-items: center; gap: 6px; margin: 0; }
     .instructor-card__name { margin: 0; font-size: 1.2rem; }
-    .instructor-card__details { margin: 0; color: var(--mc-soft); font-size: .95rem; white-space: pre-line; }
+    /* Instagram-style verified badge: every card shown here is, by
+       definition, an admin-approved instructor (see the comment above
+       displayInstructors in modelconnect.js), so the badge is accurate on
+       every card, not decorative. */
+    .mc-verified-badge {
+      flex: 0 0 auto; width: 17px; height: 17px; display: inline-flex; align-items: center; justify-content: center;
+      border-radius: 50%; background: var(--mc-brand-2); color: #fff; font-size: 10px;
+    }
+    .instructor-card__details {
+      margin: 0; color: var(--mc-soft); font-size: .95rem; white-space: pre-line;
+      display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .instructor-card__more-btn {
+      align-self: flex-start; margin: -4px 0 0; padding: 0; border: none; background: none;
+      color: var(--mc-brand); font-weight: 700; font-size: .85rem; cursor: pointer; font-family: inherit;
+    }
+    .instructor-card__more-btn:hover { text-decoration: underline; }
     .instructor-card__portfolio-label {
       display: flex; align-items: center; gap: 6px; font-size: .78rem; font-weight: 700;
       text-transform: uppercase; letter-spacing: .04em; color: var(--mc-brand); margin: 2px 0 -2px;
@@ -493,12 +510,59 @@
       position: absolute; inset: 0; margin: auto; color: #fff; font-size: 18px;
       text-shadow: 0 1px 4px rgba(0,0,0,.6); display: flex; align-items: center; justify-content: center;
     }
+    .instructor-card__thumb-btn--more::after {
+      content: attr(data-more); position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+      background: rgba(0,0,0,.55); color: #fff; font-weight: 700; font-size: .85rem;
+    }
     .instructor-card__book {
       margin-top: auto; text-align: center; background: var(--mc-brand); color: #fff; text-decoration: none;
       padding: 12px; border-radius: 10px; font-weight: 600; transition: background .2s;
     }
     .instructor-card__book:hover { background: #6c1750; }
     .mc-empty { text-align: center; color: var(--mc-soft); grid-column: 1 / -1; padding: 30px; }
+
+    /* Instructor full-profile popup - the "more photos, more text" view
+       between the compact card and the single-photo lightbox. */
+    .mc-profile-modal {
+      position: fixed; inset: 0; z-index: 3900; display: none;
+      align-items: flex-start; justify-content: center; padding: 40px 16px;
+      background: rgba(10, 9, 14, .72); backdrop-filter: blur(4px); overflow-y: auto;
+    }
+    .mc-profile-modal.is-open { display: flex; }
+    .mc-profile-panel {
+      position: relative; width: 100%; max-width: 560px; background: #fff; border-radius: 22px;
+      overflow: hidden; box-shadow: 0 30px 70px rgba(0,0,0,.4); margin: auto 0;
+    }
+    .mc-profile-panel__close {
+      position: absolute; top: 14px; right: 14px; z-index: 2; width: 38px; height: 38px; border-radius: 50%;
+      border: none; background: rgba(0,0,0,.45); color: #fff; font-size: 16px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; transition: background .2s;
+    }
+    .mc-profile-panel__close:hover { background: rgba(0,0,0,.65); }
+    .mc-profile-panel__photo { width: 100%; height: 280px; object-fit: cover; object-position: top center; display: block; background: #eee; }
+    .mc-profile-panel__body { padding: 22px 24px 26px; }
+    .mc-profile-panel__name { display: flex; align-items: center; gap: 7px; margin: 0 0 12px; font-size: 1.35rem; }
+    .mc-profile-panel__details { margin: 0 0 18px; color: var(--mc-soft); font-size: .96rem; line-height: 1.65; white-space: pre-line; }
+    .mc-profile-panel__gallery-label {
+      display: flex; align-items: center; gap: 6px; font-size: .78rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .04em; color: var(--mc-brand); margin: 0 0 10px;
+    }
+    .mc-profile-panel__gallery {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 20px;
+    }
+    .mc-profile-panel__gallery button {
+      position: relative; padding: 0; border: none; border-radius: 10px; overflow: hidden; cursor: pointer;
+      aspect-ratio: 1; background: #eee;
+    }
+    .mc-profile-panel__gallery img, .mc-profile-panel__gallery video { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .mc-profile-panel__gallery .fa-circle-play {
+      position: absolute; inset: 0; margin: auto; color: #fff; font-size: 22px;
+      text-shadow: 0 1px 4px rgba(0,0,0,.6); display: flex; align-items: center; justify-content: center;
+    }
+    @media (max-width: 480px) {
+      .mc-profile-modal { padding: 0; }
+      .mc-profile-panel { max-width: 100%; min-height: 100%; border-radius: 0; margin: 0; }
+    }
 
     /* Instructor photo lightbox */
     .mc-lightbox {
@@ -1003,6 +1067,27 @@
         <i class="fa-solid fa-chevron-right"></i>
       </button>
       <p class="mc-lightbox__caption" id="mcLightboxCaption"></p>
+    </div>
+  </div>
+
+  <!-- Instructor full-profile popup: opened from a card's "Read more" link
+       or its "+N" photo tile. Shows the full bio and every photo; clicking
+       a photo here opens the single-photo lightbox above. -->
+  <div class="mc-profile-modal" id="mcProfileModal" role="dialog" aria-modal="true" aria-label="Instructor profile">
+    <div class="mc-profile-panel">
+      <button type="button" class="mc-profile-panel__close" id="mcProfileClose" aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <img class="mc-profile-panel__photo" id="mcProfilePhoto" src="" alt="">
+      <div class="mc-profile-panel__body">
+        <h3 class="mc-profile-panel__name" id="mcProfileName"></h3>
+        <p class="mc-profile-panel__details" id="mcProfileDetails"></p>
+        <p class="mc-profile-panel__gallery-label" id="mcProfileGalleryLabel"><i class="fa-solid fa-images"></i> Photos</p>
+        <div class="mc-profile-panel__gallery" id="mcProfileGallery"></div>
+        <a class="instructor-card__book" id="mcProfileBook" href="#" target="_blank" rel="noopener">
+          <i class="fa-solid fa-calendar-check"></i> Book Now
+        </a>
+      </div>
     </div>
   </div>
 
