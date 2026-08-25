@@ -117,11 +117,15 @@
 
   <!-- HERO SECTION -->
   <section class="hero">
-    <div class="hero-slider">
+    <!-- Fallback slides shown until initHeroSlider() (bottom of page) fetches
+         real images from the "programs_header" collection and replaces
+         them - kept as three distinct local photos, not one repeated
+         three times, so the crossfade still does something meaningful if
+         the fetch fails or no images have been added yet. -->
+    <div class="hero-slider" id="heroSlider">
       <div class="slide active" style="background-image: url('pp1.jpg');"></div>
-     <div class="slide active" style="background-image: url('pp1.jpg');"></div>
-     <div class="slide active" style="background-image: url('pp1.jpg');"></div>
-    
+      <div class="slide" style="background-image: url('pp2.jpg');"></div>
+      <div class="slide" style="background-image: url('pp3.jpg');"></div>
     </div>
     <div class="hero-content">
       <h1>Join L&C Modeling School Kenya</h1>
@@ -642,16 +646,11 @@
     <p>© 2025 L&C Modeling School Kenya | All Rights Reserved</p>
   </footer>
 
-  <!-- Slider Script -->
-  <script>
-    const slides = document.querySelectorAll('.slide');
-    let currentSlide = 0;
-    setInterval(() => {
-      slides[currentSlide].classList.remove('active');
-      currentSlide = (currentSlide + 1) % slides.length;
-      slides[currentSlide].classList.add('active');
-    }, 4000);
-  </script>
+  <!-- Hero slider rotation now starts inside initHeroSlider() further down
+       the page, after the real slide list (fetched or fallback) is final -
+       querying .slide here ran before that fetch resolved, so it only ever
+       rotated through the three static placeholders and could never pick
+       up images added through the admin panel. -->
  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script>
         (function() {
@@ -691,84 +690,7 @@
         }
 
         // Header/hamburger behavior now lives in the shared <site-nav> component (nav-component.js).
-
-        const container = document.getElementById('blogPreviewContainer');
-        const paginationDotsContainer = document.getElementById('paginationDots');
-        let scrollAmount = 0;
-        let startX;
-        let scrollLeftPos;
-
-        function createPaginationDots() {
-            const numberOfDots = Math.ceil(container.children.length / 3);
-            for (let i = 0; i < numberOfDots; i++) {
-                const dot = document.createElement('div');
-                dot.classList.add('pagination-dot');
-                dot.addEventListener('click', () => goToPage(i));
-                paginationDotsContainer.appendChild(dot);
-            }
-            updatePaginationDots();
-        }
-
-        function updatePaginationDots() {
-            const dots = paginationDotsContainer.children;
-            const activeIndex = Math.round(scrollAmount / container.clientWidth);
-            for (let i = 0; i < dots.length; i++) {
-                dots[i].classList.toggle('active', i === activeIndex);
-            }
-        }
-
-        function goToPage(pageIndex) {
-            const width = container.clientWidth;
-            scrollAmount = width * pageIndex;
-            container.style.transform = `translateX(-${scrollAmount}px)`;
-            updatePaginationDots();
-        }
-
-        function scrollLeft() {
-            const width = container.clientWidth;
-            scrollAmount = Math.max(scrollAmount - width, 0);
-            container.style.transform = `translateX(-${scrollAmount}px)`;
-            updatePaginationDots();
-        }
-
-        function scrollRight() {
-            const width = container.clientWidth;
-            const maxScroll = container.scrollWidth - width;
-            scrollAmount = Math.min(scrollAmount + width, maxScroll);
-            container.style.transform = `translateX(-${scrollAmount}px)`;
-            updatePaginationDots();
-        }
-
-        container.addEventListener('mousedown', (e) => {
-            startX = e.pageX;
-            scrollLeftPos = scrollAmount;
-            container.style.transition = 'none';
-            container.classList.add('active');
-        });
-
-        container.addEventListener('mouseleave', () => {
-            container.classList.remove('active');
-        });
-
-        container.addEventListener('mouseup', () => {
-            container.classList.remove('active');
-            container.style.transition = 'transform 0.3s ease-out';
-        });
-
-        container.addEventListener('mousemove', (e) => {
-            if (!container.classList.contains('active')) return;
-            const x = e.pageX - startX;
-            scrollAmount = scrollLeftPos - x;
-            const maxScroll = container.scrollWidth - container.clientWidth;
-            scrollAmount = Math.min(Math.max(scrollAmount, 0), maxScroll);
-            container.style.transform = `translateX(-${scrollAmount}px)`;
-        });
-
-        createPaginationDots();
     });
-
-
-    
    </script>
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
@@ -786,68 +708,46 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    async function fetchBackground(collectionName, imageField) {
+    // Fetches every image in "programs_header" (admindash/programsheader.html)
+    // and turns each one into a hero slide, then starts the crossfade
+    // rotation - only once the real slide list is known, so it can never
+    // rotate through a stale/empty node list the way the old separate
+    // rotation script did. Falls back to the three static local slides
+    // already in the markup if the collection is empty or the fetch fails.
+    async function initHeroSlider() {
+        const track = document.getElementById('heroSlider');
+        if (!track) return;
+
         try {
-            const querySnapshot = await getDocs(collection(db, collectionName));
+            const querySnapshot = await getDocs(collection(db, "programs_header"));
+            const urls = [];
+            querySnapshot.forEach((doc) => {
+                const url = doc.data().header_image;
+                if (url) urls.push(url);
+            });
 
-            if (!querySnapshot.empty) {
-                querySnapshot.forEach((doc) => {
-                    const data = doc.data();
-                    const backgroundContainer = document.getElementById('background-container');
-                    const mediaUrl = data[imageField];
-
-                    if (mediaUrl) {
-                        const videoExtensions = ['.mp4', '.webm'];
-                        const imageExtensions = ['.jpg', '.jpeg', '.png'];
-                        const isVideo = videoExtensions.some(ext => mediaUrl.includes(ext));
-                        const isImage = imageExtensions.some(ext => mediaUrl.includes(ext));
-
-                        if (isVideo) {
-                            const videoElement = document.createElement('video');
-                            videoElement.className = 'background-video';
-                            videoElement.autoplay = true;
-                            videoElement.loop = true;
-                            videoElement.muted = true;
-                            videoElement.playsInline = true;
-
-                            const sourceElement = document.createElement('source');
-                            sourceElement.src = mediaUrl;
-                            sourceElement.type = 'video/mp4'; // assuming mp4 format
-
-                            videoElement.appendChild(sourceElement);
-                            backgroundContainer.appendChild(videoElement);
-
-                            videoElement.addEventListener('loadeddata', () => {
-                                console.log('Video loaded successfully');
-                            });
-
-                            videoElement.addEventListener('error', (e) => {
-                                console.error('Error loading video:', e);
-                            });
-                        } else if (isImage) {
-                            const imageElement = document.createElement('img');
-                            imageElement.className = 'background-image';
-                            imageElement.src = mediaUrl;
-                            imageElement.alt = 'Background Image';
-
-                            backgroundContainer.appendChild(imageElement);
-                        } else {
-                            console.log("Unsupported media format");
-                        }
-                    } else {
-                        console.log("No media found in the database");
-                    }
-                });
+            if (urls.length) {
+                track.innerHTML = urls.map((url, i) =>
+                    `<div class="slide${i === 0 ? ' active' : ''}" style="background-image: url('${url}');"></div>`
+                ).join('');
             } else {
-                console.log(`No documents found in the ${collectionName} collection!`);
+                console.log('No documents found in the programs_header collection - using the static fallback slides.');
             }
         } catch (error) {
-            console.error(`Error fetching document from ${collectionName}:`, error);
+            console.error('Error fetching programs_header:', error);
         }
+
+        const slides = track.querySelectorAll('.slide');
+        if (slides.length < 2) return; // nothing to crossfade between
+        let currentSlide = 0;
+        setInterval(() => {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }, 4000);
     }
 
-   
-    fetchBackground("enroll_header", "header_image");
+    initHeroSlider();
 </script>
 <!-- Header/hamburger behavior now lives in the shared <site-nav> component (nav-component.js). -->
 

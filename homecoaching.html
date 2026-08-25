@@ -98,6 +98,13 @@
 
         .intro-section {
             position: relative;
+            /* Without an explicit z-index, a positioned element doesn't
+               establish its own stacking context, so its z-index:-1 media
+               child (.background-image/.background-video, injected by
+               fetchBackground()) can end up painted behind this element
+               instead of just behind the text inside it. Costs nothing to
+               fix defensively even where it isn't currently biting. */
+            z-index: 0;
             width: 100%;
             height: 100vh; /* Adjust the height as needed */
             overflow: hidden; /* Ensures the image doesn't overflow its container */
@@ -373,80 +380,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // Header/hamburger behavior now lives in the shared <site-nav> component (nav-component.js).
-
-        const container = document.getElementById('blogPreviewContainer');
-        const paginationDotsContainer = document.getElementById('paginationDots');
-        let scrollAmount = 0;
-        let startX;
-        let scrollLeftPos;
-
-        function createPaginationDots() {
-            const numberOfDots = Math.ceil(container.children.length / 3);
-            for (let i = 0; i < numberOfDots; i++) {
-                const dot = document.createElement('div');
-                dot.classList.add('pagination-dot');
-                dot.addEventListener('click', () => goToPage(i));
-                paginationDotsContainer.appendChild(dot);
-            }
-            updatePaginationDots();
-        }
-
-        function updatePaginationDots() {
-            const dots = paginationDotsContainer.children;
-            const activeIndex = Math.round(scrollAmount / container.clientWidth);
-            for (let i = 0; i < dots.length; i++) {
-                dots[i].classList.toggle('active', i === activeIndex);
-            }
-        }
-
-        function goToPage(pageIndex) {
-            const width = container.clientWidth;
-            scrollAmount = width * pageIndex;
-            container.style.transform = `translateX(-${scrollAmount}px)`;
-            updatePaginationDots();
-        }
-
-        function scrollLeft() {
-            const width = container.clientWidth;
-            scrollAmount = Math.max(scrollAmount - width, 0);
-            container.style.transform = `translateX(-${scrollAmount}px)`;
-            updatePaginationDots();
-        }
-
-        function scrollRight() {
-            const width = container.clientWidth;
-            const maxScroll = container.scrollWidth - width;
-            scrollAmount = Math.min(scrollAmount + width, maxScroll);
-            container.style.transform = `translateX(-${scrollAmount}px)`;
-            updatePaginationDots();
-        }
-
-        container.addEventListener('mousedown', (e) => {
-            startX = e.pageX;
-            scrollLeftPos = scrollAmount;
-            container.style.transition = 'none';
-            container.classList.add('active');
-        });
-
-        container.addEventListener('mouseleave', () => {
-            container.classList.remove('active');
-        });
-
-        container.addEventListener('mouseup', () => {
-            container.classList.remove('active');
-            container.style.transition = 'transform 0.3s ease-out';
-        });
-
-        container.addEventListener('mousemove', (e) => {
-            if (!container.classList.contains('active')) return;
-            const x = e.pageX - startX;
-            scrollAmount = scrollLeftPos - x;
-            const maxScroll = container.scrollWidth - container.clientWidth;
-            scrollAmount = Math.min(Math.max(scrollAmount, 0), maxScroll);
-            container.style.transform = `translateX(-${scrollAmount}px)`;
-        });
-
-        createPaginationDots();
     });
     </script>
      <script type="module">
