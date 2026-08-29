@@ -443,7 +443,12 @@
        Showcase slider above (.mc-slider__slide): generous radius, soft
        lifted shadow, image zoom on hover. */
     #instructors { background: var(--mc-bg); }
-    .instructor-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 28px; }
+    .instructor-grid {
+      display: grid; gap: 28px;
+      grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+    }
+    .instructor-card { max-width: 100%; }
+    .instructor-card__name { overflow-wrap: anywhere; }
     .instructor-card {
       background: #fff; border: 1px solid var(--mc-line); border-radius: 20px; overflow: hidden;
       display: flex; flex-direction: column; box-shadow: 0 10px 28px rgba(20,17,30,.08);
@@ -525,6 +530,24 @@
     }
     .instructor-card__book:hover { background: #6c1750; }
     .mc-empty { text-align: center; color: var(--mc-soft); grid-column: 1 / -1; padding: 30px; }
+
+    /* Instructor cards: tighten the grid gutter and shrink the IG header
+       (avatar, name, stats) as the viewport narrows so a single-column
+       card still reads comfortably on a phone. */
+    @media (max-width: 620px) {
+      .instructor-grid { gap: 20px; }
+      .instructor-card__ig-header { gap: 13px; padding: 16px 15px 12px; }
+      .instructor-card__avatar-ring { width: 76px; height: 76px; padding: 3px; }
+      .instructor-card__avatar { border-width: 2px; }
+      .instructor-card__name { font-size: 1.08rem; }
+      .instructor-card__ig-stats { gap: 16px; }
+      .instructor-card__body { padding: 0 15px 15px; }
+    }
+    @media (max-width: 380px) {
+      .instructor-card__ig-header { gap: 11px; }
+      .instructor-card__avatar-ring { width: 64px; height: 64px; }
+      .instructor-card__thumb-btn { width: 56px; height: 56px; }
+    }
 
     /* Instructor full-profile popup - the "more photos, more text" view
        between the compact card and the single-photo lightbox. */
