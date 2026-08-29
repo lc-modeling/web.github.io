@@ -226,9 +226,15 @@ function renderInstructorSkeletons(container, count) {
     const card = document.createElement("div");
     card.className = "instructor-card skel-card";
     card.innerHTML = `
-      <div class="skel-shimmer" style="width:100%;height:240px;"></div>
+      <div class="instructor-card__ig-header">
+        <div class="skel-shimmer" style="flex:0 0 auto;width:94px;height:94px;border-radius:50%;"></div>
+        <div class="instructor-card__ig-meta">
+          <div class="skel-line skel-shimmer" style="height:16px;width:40%;"></div>
+          <div class="skel-line skel-shimmer" style="height:16px;width:65%;"></div>
+          <div class="skel-line skel-shimmer" style="width:50%;"></div>
+        </div>
+      </div>
       <div class="instructor-card__body">
-        <div class="skel-line skel-shimmer" style="height:18px;width:60%;"></div>
         <div class="skel-line skel-shimmer" style="width:90%;"></div>
         <div class="skel-line skel-shimmer" style="width:80%;"></div>
       </div>
@@ -277,16 +283,34 @@ async function displayInstructors() {
       const card = document.createElement("article");
       card.className = "instructor-card";
 
-      // Everything on the compact card - photo, thumbnails, "Read more" -
+      // Everything on the compact card - avatar, thumbnails, "Read more" -
       // opens the full profile popup rather than jumping straight to a
       // zoomed single photo, since the card is intentionally a short
       // teaser now. The popup's own photo grid is what opens the lightbox.
-      const photoHTML = photo
-        ? `<button type="button" class="instructor-card__photo-frame" data-open-profile="${idx}" aria-label="View ${name}'s full profile">
-             <img src="${photo}" alt="${name}" class="instructor-card__photo" loading="lazy">
-             <span class="instructor-card__zoom-hint"><i class="fa-solid fa-expand"></i></span>
-           </button>`
-        : `<div class="instructor-card__photo-frame"><div class="instructor-card__photo--placeholder"><i class="fa-solid fa-user"></i></div></div>`;
+      //
+      // The header mimics an Instagram profile: a circular avatar in a
+      // rainbow gradient ring, the post count (every photo/video in this
+      // instructor's set), the name + verified badge, and a category line.
+      const postCount = gallery.length;
+      const avatarInner = photo
+        ? `<img src="${photo}" alt="${name}" class="instructor-card__avatar" loading="lazy">`
+        : `<span class="instructor-card__avatar instructor-card__avatar--placeholder"><i class="fa-solid fa-user"></i></span>`;
+      const headerHTML = `
+        <div class="instructor-card__ig-header">
+          <button type="button" class="instructor-card__avatar-ring" data-open-profile="${idx}" aria-label="View ${name}'s full profile">
+            ${avatarInner}
+          </button>
+          <div class="instructor-card__ig-meta">
+            <div class="instructor-card__ig-stats">
+              <span class="instructor-card__ig-stat"><strong>${postCount}</strong> ${postCount === 1 ? "post" : "posts"}</span>
+            </div>
+            <div class="instructor-card__name-row">
+              <h3 class="instructor-card__name">${name}</h3>
+              ${VERIFIED_BADGE_HTML}
+            </div>
+            <span class="instructor-card__ig-category">Modeling Instructor</span>
+          </div>
+        </div>`;
 
       const MAX_CARD_THUMBS = 3;
       const shown = portfolio.slice(0, MAX_CARD_THUMBS);
@@ -314,12 +338,8 @@ async function displayInstructors() {
         : "";
 
       card.innerHTML = `
-        ${photoHTML}
+        ${headerHTML}
         <div class="instructor-card__body">
-          <div class="instructor-card__name-row">
-            <h3 class="instructor-card__name">${name}</h3>
-            ${VERIFIED_BADGE_HTML}
-          </div>
           <p class="instructor-card__details">${details}</p>
           ${moreBtnHTML}
           ${portfolioHTML}
