@@ -1,7 +1,9 @@
 /* ==========================================================================
    partner.html — "Partner With Us"
-   Editorial layout: warm paper, charcoal ink, one brass accent, Playfair
-   display headings. Deliberately asymmetric — no icon-card grid.
+   Editorial layout: warm paper, charcoal ink, one brass accent. One
+   typeface throughout — 'Outfit' (same as the rest of the site);
+   hierarchy comes from weight, size and letter-spacing only.
+   Deliberately asymmetric — no icon-card grid.
    ========================================================================== */
 
 :root {
@@ -34,17 +36,17 @@ body {
 }
 
 .pp h1, .pp h2, .pp h3 {
-  /* Playfair Display for display headings — matches index.html's
-     .playfair-display-title section headings. */
-  font-family: 'Playfair Display', serif;
+  /* Same typeface as the body / the rest of the site — headings differ by
+     weight and tracking only. */
+  font-family: 'Outfit', sans-serif;
   font-weight: 700;
-  line-height: 1.12;
-  letter-spacing: -0.01em;
+  line-height: 1.14;
+  letter-spacing: -0.02em;
   margin: 0;
 }
 
 .pp-kicker {
-  font-family: "Outfit", sans-serif;
+  font-family: 'Outfit', sans-serif;
   font-weight: 600;
   font-size: 0.72rem;
   letter-spacing: 0.22em;
@@ -78,7 +80,7 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  font-family: "Outfit", sans-serif;
+  font-family: 'Outfit', sans-serif;
   font-weight: 600;
   font-size: 0.9rem;
   letter-spacing: 0.04em;
@@ -206,9 +208,10 @@ body {
 }
 .pp-track:last-child { border-bottom: 1px solid var(--pp-line); }
 .pp-track__no {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.9rem;
-  font-style: italic;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
   color: var(--pp-accent);
   line-height: 1;
 }
@@ -340,7 +343,7 @@ body {
   gap: 7px;
 }
 .pp-field label {
-  font-family: "Outfit", sans-serif;
+  font-family: 'Outfit', sans-serif;
   font-weight: 600;
   font-size: 0.74rem;
   letter-spacing: 0.12em;
@@ -371,7 +374,7 @@ body {
 .pp-submit {
   justify-self: start;
   margin-top: 6px;
-  font-family: "Outfit", sans-serif;
+  font-family: 'Outfit', sans-serif;
   font-weight: 600;
   font-size: 0.86rem;
   letter-spacing: 0.08em;
@@ -409,9 +412,10 @@ body {
 }
 .pp-footer p { margin: 0 0 6px; }
 .pp-footer__brand {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.25rem;
-  letter-spacing: 0.12em;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: 0.14em;
   color: var(--pp-ink);
 }
 .pp-footer__brand span { color: var(--pp-accent); }

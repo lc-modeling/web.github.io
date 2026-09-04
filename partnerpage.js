@@ -179,7 +179,7 @@ form?.addEventListener("submit", () => {
 
 form?.addEventListener("formsubmit:success", () => {
   form.innerHTML = `
-    <p style="font-family:'Playfair Display',serif;font-size:1.35rem;margin:0 0 8px;">Thank you.</p>
+    <p style="font-weight:700;letter-spacing:-0.02em;font-size:1.35rem;margin:0 0 8px;">Thank you.</p>
     <p style="color:var(--pp-ink-soft);margin:0;">Your proposal is in. We'll be in touch within two working days.</p>`;
   form.classList.add("is-done");
 });
