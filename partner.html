@@ -64,9 +64,18 @@
 
       <figure class="pp-hero__figure">
         <div class="pp-hero__frame"></div>
-        <img id="ppHeroImage"
-             src="https://res.cloudinary.com/dwlasndqv/image/upload/v1746270872/humdu12gzfuhwy8dzdp8.jpg"
-             alt="L&C Modeling students and partners at a runway event">
+        <div class="pp-slider pp-slider--single" id="ppHeroSlider"
+             aria-roledescription="carousel" aria-label="Partnership highlights">
+          <div class="pp-slider__track" id="ppHeroTrack">
+            <div class="pp-slider__slide">
+              <img src="https://res.cloudinary.com/dwlasndqv/image/upload/v1746270872/humdu12gzfuhwy8dzdp8.jpg"
+                   alt="L&C Modeling students and partners at a runway event" loading="eager">
+            </div>
+          </div>
+          <button class="pp-slider__arrow pp-slider__arrow--prev" id="ppHeroPrev" type="button" aria-label="Previous photo">&#8249;</button>
+          <button class="pp-slider__arrow pp-slider__arrow--next" id="ppHeroNext" type="button" aria-label="Next photo">&#8250;</button>
+          <div class="pp-slider__dots" id="ppHeroDots" aria-hidden="true"></div>
+        </div>
       </figure>
     </header>
 
@@ -85,7 +94,7 @@
     <section class="pp-tracks">
       <h2>Ways to partner</h2>
 
-      <div class="pp-track">
+      <div class="pp-track" id="ppTrack0">
         <span class="pp-track__no">01</span>
         <div class="pp-track__body">
           <h3>Sponsorship</h3>
@@ -95,9 +104,10 @@
             coverage the event earns.
           </p>
         </div>
+        <figure class="pp-track__media" hidden><img alt="" loading="lazy"></figure>
       </div>
 
-      <div class="pp-track">
+      <div class="pp-track" id="ppTrack1">
         <span class="pp-track__no">02</span>
         <div class="pp-track__body">
           <h3>Collaboration</h3>
@@ -107,9 +117,10 @@
             the walk and the room.
           </p>
         </div>
+        <figure class="pp-track__media" hidden><img alt="" loading="lazy"></figure>
       </div>
 
-      <div class="pp-track">
+      <div class="pp-track" id="ppTrack2">
         <span class="pp-track__no">03</span>
         <div class="pp-track__body">
           <h3>CSR &amp; community</h3>
@@ -119,6 +130,7 @@
             impact is documented, not assumed.
           </p>
         </div>
+        <figure class="pp-track__media" hidden><img alt="" loading="lazy"></figure>
       </div>
     </section>
 

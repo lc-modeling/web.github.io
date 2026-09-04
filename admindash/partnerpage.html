@@ -94,15 +94,17 @@
     </div>
 
     <div class="hint">
-      The <strong>hero</strong> is the large photo at the top of <em>partner.html</em>.
-      Keep just one — the newest is used and the rest are ignored, so delete the old one after adding a replacement.
-      The <strong>gallery</strong> images appear in the "In the room" strip further down the page; add as many as you like.
+      The <strong>hero</strong> is the rotating photo slider at the top of <em>partner.html</em>.
+      Add as many slides as you like — with one image it just shows as a still photo; with two or more it
+      auto-rotates with arrows and dots. Newest is shown first. Delete any slide you no longer want.
+      The <strong>gallery</strong> images appear in the "In the room" strip further down the page (and the
+      first three also illustrate the "Ways to partner" rows); add as many as you like.
     </div>
 
     <!-- ===== Hero ===== -->
     <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
-      <h2 class="panel-title">Hero image<p>The banner photo at the top of the Partner With Us page.</p></h2>
-      <button class="add-btn" id="addHeroBtn">+ Add / replace hero image</button>
+      <h2 class="panel-title">Hero slider<p>The rotating banner photos at the top of the Partner With Us page.</p></h2>
+      <button class="add-btn" id="addHeroBtn">+ Add hero slide</button>
     </div>
     <div class="table-container">
       <table id="heroTable">
@@ -127,7 +129,7 @@
     <div id="heroModal" class="modal-overlay">
       <div class="modal">
         <span class="close" data-close="heroModal">&times;</span>
-        <h2>Add hero image</h2>
+        <h2>Add hero slide</h2>
         <form id="heroForm">
           <label>Select image (landscape works best):</label>
           <input type="file" id="heroFile" accept="image/*" required />
@@ -229,18 +231,21 @@
         try {
           const snap = await getDocs(query(collection(db, HERO), orderBy("time", "desc")));
           if (snap.empty) {
-            body.innerHTML = "<tr><td colspan='3'>No hero image yet — the page is using its built-in default.</td></tr>";
+            body.innerHTML = "<tr><td colspan='3'>No hero slides yet — the page is using its built-in default photo.</td></tr>";
             return;
           }
-          snap.forEach((d, i) => {
+          // QuerySnapshot.forEach passes only the doc, not an index — count ourselves.
+          let n = 0;
+          snap.forEach((d) => {
+            const pos = ++n;
             const data = d.data();
             const tr = document.createElement("tr");
             tr.innerHTML =
-              `<td>${esc(d.id)}${i === 0 ? " <strong>(live)</strong>" : ""}</td>` +
+              `<td>Slide ${pos} <span style="color:var(--ink-soft);font-size:12px;">· ${esc(d.id)}</span></td>` +
               `<td>${data.header_image ? `<img class="thumbnail" src="${data.header_image}" alt="">` : ""}</td>` +
               `<td class="actions"><button class="deleteBtn">Delete</button></td>`;
             tr.querySelector(".deleteBtn").addEventListener("click", async () => {
-              if (!confirm("Delete this hero image?")) return;
+              if (!confirm("Delete this hero slide?")) return;
               await deleteDoc(doc(db, HERO, d.id));
               loadHero();
             });
@@ -248,7 +253,7 @@
           });
         } catch (err) {
           console.error(err);
-          body.innerHTML = "<tr><td colspan='3'>Error loading hero image.</td></tr>";
+          body.innerHTML = "<tr><td colspan='3'>Error loading hero slides.</td></tr>";
         }
       }
 
