@@ -442,7 +442,36 @@
     /* Instructor directory - photo/card treatment matches the Style
        Showcase slider above (.mc-slider__slide): generous radius, soft
        lifted shadow, image zoom on hover. */
-    #instructors { background: var(--mc-bg); }
+    /* The instructor directory runs a dark theme (matches the
+       Instagram-style card header): a full-bleed near-black canvas with
+       light text and subtle hairlines. CSS custom properties are
+       re-scoped here so the existing var()-based card rules adapt
+       automatically; a few hard-coded #fff / dark colors are overridden
+       explicitly below. */
+    #instructors {
+      --mc-ink: #f4f4f7;
+      --mc-soft: #a7a7b2;
+      --mc-line: #2c2c35;
+      --mc-bg: #1c1c22;
+      background: #0d0d11; color: var(--mc-ink);
+      max-width: none; padding: 60px max(20px, calc(50vw - 575px));
+    }
+    #instructors .mc-sub strong { color: #fff; }
+    #instructors .instructor-card { background: #17171d; }
+    #instructors .instructor-card:hover { box-shadow: 0 18px 40px rgba(0,0,0,.55); }
+    #instructors .instructor-card__avatar { border-color: #17171d; background: #2c2c35; }
+    #instructors .instructor-card__ig-stat strong { color: #f4f4f7; }
+    #instructors .instructor-card__portfolio-label,
+    #instructors .instructor-card__more-btn { color: #e879b9; }
+    #instructors .instructor-card__thumb-btn { background: #2c2c35; }
+    #instructors .instructor-card__book:hover { background: #a3266f; }
+    #instructors .skel-shimmer {
+      background: linear-gradient(100deg, #1c1c22 30%, #29292f 50%, #1c1c22 70%);
+      background-size: 200% 100%;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      #instructors .skel-shimmer { background: #232329; }
+    }
     .instructor-grid {
       display: grid; gap: 28px;
       grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
