@@ -1,0 +1,372 @@
+/* ==========================================================================
+   partner.html — "Partner With Us"
+   Editorial layout: warm paper, charcoal ink, one brass accent, Playfair
+   display headings. Deliberately asymmetric — no icon-card grid.
+   ========================================================================== */
+
+:root {
+  --pp-ink:      #1b1710;
+  --pp-ink-soft: #5f574a;
+  --pp-paper:    #f5f1e8;
+  --pp-paper-2:  #efe8d9;
+  --pp-line:     #d9cdb5;
+  --pp-accent:   #96602f;
+  --pp-accent-d: #6f4620;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--pp-paper);
+  color: var(--pp-ink);
+  font-family: "Outfit", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.pp {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 24px 10px;
+}
+
+.pp h1, .pp h2, .pp h3 {
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.pp-kicker {
+  font-family: "Outfit", sans-serif;
+  font-weight: 600;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--pp-accent);
+  margin: 0 0 22px;
+}
+
+/* ---------- Hero ---------- */
+.pp-hero {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 56px;
+  align-items: center;
+  padding: 72px 0 64px;
+  border-bottom: 1px solid var(--pp-line);
+}
+
+.pp-hero__text h1 {
+  font-size: clamp(2.3rem, 5.2vw, 3.6rem);
+}
+
+.pp-lead {
+  margin: 22px 0 30px;
+  font-size: 1.06rem;
+  max-width: 46ch;
+  color: var(--pp-ink-soft);
+}
+
+.pp-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "Outfit", sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--pp-ink);
+  text-decoration: none;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--pp-accent);
+  transition: gap 0.2s ease, color 0.2s ease;
+}
+.pp-cta:hover { gap: 16px; color: var(--pp-accent); }
+
+.pp-hero__figure {
+  position: relative;
+  margin: 0;
+  isolation: isolate;
+}
+.pp-hero__frame {
+  position: absolute;
+  inset: 18px -18px -18px 18px;
+  border: 1px solid var(--pp-accent);
+  z-index: -1;
+}
+.pp-hero__figure img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-height: 520px;
+  object-fit: cover;
+  filter: grayscale(0.15) contrast(1.02);
+}
+
+/* ---------- Intro ---------- */
+.pp-intro {
+  padding: 60px 0;
+  border-bottom: 1px solid var(--pp-line);
+}
+.pp-intro p {
+  margin: 0;
+  max-width: 62ch;
+  padding-left: 26px;
+  border-left: 3px solid var(--pp-accent);
+  font-size: 1.24rem;
+  line-height: 1.62;
+  font-weight: 300;
+}
+
+/* ---------- Ways to partner ---------- */
+.pp-tracks {
+  padding: 64px 0 24px;
+}
+.pp-tracks > h2 {
+  font-size: clamp(1.7rem, 3.4vw, 2.3rem);
+  margin-bottom: 14px;
+}
+.pp-track {
+  display: grid;
+  grid-template-columns: 92px 1fr;
+  gap: 24px;
+  padding: 34px 0;
+  border-top: 1px solid var(--pp-line);
+}
+.pp-track:last-child { border-bottom: 1px solid var(--pp-line); }
+.pp-track__no {
+  font-family: "Playfair Display", serif;
+  font-size: 1.9rem;
+  font-style: italic;
+  color: var(--pp-accent);
+  line-height: 1;
+}
+.pp-track__body h3 {
+  font-size: 1.4rem;
+  margin-bottom: 8px;
+}
+.pp-track__body p {
+  margin: 0;
+  max-width: 54ch;
+  color: var(--pp-ink-soft);
+}
+
+/* ---------- Gallery ---------- */
+.pp-gallery {
+  padding: 60px 0;
+  margin-top: 40px;
+  border-top: 1px solid var(--pp-line);
+}
+.pp-gallery__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 20px;
+  margin-bottom: 30px;
+}
+.pp-gallery__head h2 {
+  font-size: clamp(1.7rem, 3.4vw, 2.3rem);
+}
+.pp-gallery__head p {
+  margin: 0;
+  color: var(--pp-ink-soft);
+  font-size: 0.98rem;
+}
+.pp-gallery__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.pp-gallery__grid figure {
+  margin: 0;
+}
+.pp-gallery__grid img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  background: var(--pp-paper-2);
+  filter: grayscale(0.12);
+  transition: filter 0.3s ease;
+}
+.pp-gallery__grid figure:hover img { filter: grayscale(0); }
+.pp-gallery__grid figcaption {
+  margin-top: 10px;
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+  color: var(--pp-ink-soft);
+}
+
+/* ---------- Contact / form ---------- */
+.pp-contact {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 56px;
+  padding: 72px 0 80px;
+  border-top: 1px solid var(--pp-line);
+  scroll-margin-top: 90px;
+}
+.pp-contact__aside h2 {
+  font-size: clamp(1.7rem, 3.6vw, 2.4rem);
+  margin-bottom: 18px;
+}
+.pp-contact__aside p {
+  margin: 0 0 26px;
+  color: var(--pp-ink-soft);
+  max-width: 38ch;
+}
+.pp-contact__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+}
+.pp-contact__list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.96rem;
+}
+.pp-contact__list i {
+  width: 20px;
+  text-align: center;
+  color: var(--pp-accent);
+}
+.pp-contact__list a {
+  color: var(--pp-ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--pp-line);
+}
+.pp-contact__list a:hover { border-color: var(--pp-accent); }
+
+.pp-formwrap {
+  background: #fffdf7;
+  border: 1px solid var(--pp-line);
+  padding: 34px;
+}
+.pp-form {
+  display: grid;
+  gap: 18px;
+}
+.pp-field {
+  display: grid;
+  gap: 7px;
+}
+.pp-field label {
+  font-family: "Outfit", sans-serif;
+  font-weight: 600;
+  font-size: 0.74rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pp-ink-soft);
+}
+.pp-field input,
+.pp-field select,
+.pp-field textarea {
+  font: inherit;
+  color: var(--pp-ink);
+  background: var(--pp-paper);
+  border: 1px solid var(--pp-line);
+  border-radius: 0;
+  padding: 12px 14px;
+  width: 100%;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.pp-field textarea { resize: vertical; min-height: 120px; }
+.pp-field input:focus,
+.pp-field select:focus,
+.pp-field textarea:focus {
+  outline: none;
+  border-color: var(--pp-accent);
+  box-shadow: inset 0 -2px 0 var(--pp-accent);
+}
+
+.pp-submit {
+  justify-self: start;
+  margin-top: 6px;
+  font-family: "Outfit", sans-serif;
+  font-weight: 600;
+  font-size: 0.86rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pp-paper);
+  background: var(--pp-ink);
+  border: none;
+  padding: 14px 30px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.pp-submit:hover { background: var(--pp-accent-d); }
+.pp-submit:disabled { opacity: 0.6; cursor: default; }
+
+.pp-form__note {
+  margin: 4px 0 0;
+  font-size: 0.9rem;
+  min-height: 1.2em;
+}
+.pp-form__note.is-ok { color: var(--pp-accent-d); }
+.pp-form__note.is-err { color: #b23b2e; }
+.pp-form.is-done {
+  min-height: 160px;
+  place-content: center;
+  text-align: center;
+}
+
+/* ---------- Footer ---------- */
+.pp-footer {
+  border-top: 1px solid var(--pp-line);
+  text-align: center;
+  padding: 44px 24px 54px;
+  color: var(--pp-ink-soft);
+  font-size: 0.86rem;
+}
+.pp-footer p { margin: 0 0 6px; }
+.pp-footer__brand {
+  font-family: "Playfair Display", serif;
+  font-size: 1.25rem;
+  letter-spacing: 0.12em;
+  color: var(--pp-ink);
+}
+.pp-footer__brand span { color: var(--pp-accent); }
+.pp-footer__rights { margin-top: 12px; font-size: 0.78rem; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .pp-hero {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 56px 0 48px;
+  }
+  .pp-hero__figure { order: -1; }
+  .pp-hero__frame { inset: 12px -12px -12px 12px; }
+  .pp-contact {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding: 56px 0 64px;
+  }
+  .pp-gallery__grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 560px) {
+  .pp { padding: 0 18px 8px; }
+  .pp-intro p { font-size: 1.08rem; padding-left: 18px; }
+  .pp-track {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 26px 0;
+  }
+  .pp-track__no { font-size: 1.5rem; }
+  .pp-formwrap { padding: 22px; }
+  .pp-gallery__grid { grid-template-columns: 1fr; gap: 16px; }
+  .pp-gallery__grid img { aspect-ratio: 3 / 2; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pp-cta, .pp-gallery__grid img, .pp-submit { transition: none; }
+}

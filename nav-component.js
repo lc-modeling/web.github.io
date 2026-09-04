@@ -13,6 +13,7 @@
     { href: 'homecoaching.html', label: 'Home Coaching' },
     { href: 'models.html#online-classes', label: 'Online Classes' },
     { href: 'blog.html', label: 'Blog' },
+    { href: 'partner.html', label: 'Partner With Us' },
     { href: 'register.html', label: 'Enroll', variant: 'cta' },
     { href: 'loginform.html', label: 'Sign In', variant: 'signin' }
   ];
